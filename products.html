@@ -18,25 +18,20 @@
       --dark-gray: #2a2a2a;
       --blue-gray: #3a4a54;
       --white: #f5f5f5;
-      --light-gray: #e8e8e8;
       --graphite: #5a6a7a;
     }
 
     html, body {
-      height: 100%;
       background: var(--black);
       color: var(--white);
       font-family: 'Inter', sans-serif;
-      line-height: 1.6;
     }
 
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background: 
-        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(58, 74, 84, 0.03) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 40% at 100% 100%, rgba(58, 74, 84, 0.02) 0%, transparent 60%);
+      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(58, 74, 84, 0.03) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
@@ -70,10 +65,6 @@
       text-decoration: none;
     }
 
-    .nav-logo:hover {
-      color: rgba(245, 245, 245, 0.8);
-    }
-
     .nav-links {
       display: flex;
       gap: 48px;
@@ -89,10 +80,6 @@
       transition: color 0.3s ease;
     }
 
-    .nav-links a:hover {
-      color: var(--white);
-    }
-
     .nav-links a.active {
       color: var(--blue-gray);
     }
@@ -101,7 +88,6 @@
     main {
       position: relative;
       z-index: 1;
-      min-height: calc(100vh - 100px);
     }
 
     /* Hero */
@@ -133,13 +119,6 @@
       margin-bottom: 16px;
     }
 
-    .hero-desc {
-      font-size: 13px;
-      color: rgba(245, 245, 245, 0.5);
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
     /* Content */
     .content {
       max-width: 1400px;
@@ -152,22 +131,13 @@
       margin-bottom: 80px;
     }
 
-    .category-header {
-      margin-bottom: 48px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid rgba(245, 245, 245, 0.05);
-    }
-
     .category-title {
       font-family: 'EB Garamond', serif;
       font-size: 28px;
       font-weight: 400;
-      margin-bottom: 8px;
-    }
-
-    .category-desc {
-      font-size: 12px;
-      color: rgba(245, 245, 245, 0.45);
+      margin-bottom: 48px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(245, 245, 245, 0.05);
     }
 
     /* Product Grid */
@@ -177,11 +147,12 @@
       gap: 1px;
       background: rgba(245, 245, 245, 0.05);
       border: 1px solid rgba(245, 245, 245, 0.05);
+      margin-bottom: 40px;
     }
 
     .product-card {
       background: var(--charcoal);
-      padding: 32px;
+      padding: 24px;
       border-right: 1px solid rgba(245, 245, 245, 0.05);
       border-bottom: 1px solid rgba(245, 245, 245, 0.05);
       transition: background 0.4s ease;
@@ -195,10 +166,10 @@
 
     .product-image {
       width: 100%;
-      height: 280px;
+      height: 240px;
       background: var(--dark-gray);
-      border-radius: 4px;
-      margin-bottom: 20px;
+      border-radius: 2px;
+      margin-bottom: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -209,10 +180,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-    }
-
-    .product-header {
-      margin-bottom: 16px;
     }
 
     .product-category {
@@ -230,18 +197,15 @@
       font-size: 22px;
       font-weight: 400;
       color: var(--white);
-      margin: 0;
+      margin-bottom: 12px;
     }
 
-    .product-body {
-      flex: 1;
+    .product-desc {
+      font-size: 12px;
+      line-height: 1.7;
+      color: rgba(245, 245, 245, 0.45);
       margin-bottom: 20px;
-    }
-
-    .product-variants {
-      font-size: 11px;
-      color: rgba(245, 245, 245, 0.4);
-      margin-top: 12px;
+      flex: 1;
     }
 
     .product-footer {
@@ -258,20 +222,12 @@
       font-weight: 400;
     }
 
-    .product-price-note {
-      font-size: 10px;
-      color: rgba(245, 245, 245, 0.4);
-      display: block;
-      margin-top: 4px;
-    }
-
     .product-purity {
       font-size: 10px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: rgba(90, 106, 122, 0.8);
       font-weight: 500;
-      text-align: right;
     }
 
     /* Footer */
@@ -299,115 +255,16 @@
       line-height: 1.8;
     }
 
-    .footer-links {
-      display: flex;
-      gap: 32px;
-      justify-content: center;
-      list-style: none;
-      margin-bottom: 32px;
-    }
-
-    .footer-links a {
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(245, 245, 245, 0.35);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-links a:hover {
-      color: rgba(245, 245, 245, 0.6);
-    }
-
-    .footer-copy {
-      font-size: 10px;
-      color: rgba(245, 245, 245, 0.2);
-      letter-spacing: 0.08em;
-    }
-
     /* Responsive */
     @media (max-width: 768px) {
-      nav { 
-        padding: 16px 20px; 
-      }
-      .nav-content { 
-        flex-direction: column; 
-        gap: 16px;
-      }
-      .nav-logo {
-        font-size: 16px;
-      }
-      .nav-links { 
-        gap: 20px;
-        justify-content: center;
-      }
-      .nav-links a {
-        font-size: 10px;
-      }
-
-      .hero {
-        padding: 60px 20px;
-      }
-      .hero-title {
-        font-size: clamp(28px, 4vw, 36px);
-      }
-      .hero-desc {
-        font-size: 12px;
-      }
-
-      .content {
-        padding: 60px 20px;
-      }
-
-      .product-grid {
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      }
-      .product-card {
-        padding: 20px;
-      }
-      .product-name {
-        font-size: 18px;
-      }
-      .product-footer {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-      }
-      .product-purity {
-        text-align: left;
-      }
-
-      footer {
-        padding: 40px 20px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      nav { 
-        padding: 12px 16px; 
-      }
-      .nav-logo {
-        font-size: 14px;
-      }
-
-      .hero {
-        padding: 40px 16px;
-      }
-      .hero-title {
-        font-size: clamp(24px, 3vw, 32px);
-      }
-
-      .content {
-        padding: 40px 16px;
-      }
-
-      .product-grid {
-        grid-template-columns: 1fr;
-      }
-      .product-card {
-        padding: 16px;
-      }
+      nav { padding: 16px 20px; }
+      .nav-content { flex-direction: column; gap: 16px; }
+      .nav-links { gap: 20px; justify-content: center; }
+      .hero { padding: 60px 20px; }
+      .content { padding: 60px 20px; }
+      .product-grid { grid-template-columns: 1fr; }
+      .product-card { padding: 16px; }
+      .product-image { height: 200px; }
     }
   </style>
 </head>
@@ -429,496 +286,172 @@
     <div class="hero-content">
       <div class="hero-subtitle">Complete Catalog</div>
       <h1 class="hero-title">Research Compounds</h1>
-      <p class="hero-desc">Precision-synthesized peptides and research compounds. All products third-party tested, documented, and verified for laboratory research applications.</p>
     </div>
   </div>
 
   <div class="content">
-    <!-- GLP-1 & GIP Compounds -->
+    <!-- Featured GLP-1 -->
     <div class="category">
-      <div class="category-header">
-        <h2 class="category-title">GLP-1 & GIP Compounds</h2>
-        <p class="category-desc">Advanced peptide agonists for metabolic research</p>
-      </div>
+      <h2 class="category-title">GLP-1 & Metabolic Research</h2>
       <div class="product-grid">
         <div class="product-card">
           <div class="product-image">
             <img src="semaglutide.png" alt="Semaglutide vial" />
           </div>
-          <div class="product-header">
-            <span class="product-category">GLP-1 Agonist</span>
-            <h3 class="product-name">Semaglutide</h3>
-          </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">GLP-1 receptor agonist studied for metabolic pathways and glucose regulation research.</p>
-            <span class="product-variants">Multiple concentrations available</span>
-          </div>
+          <span class="product-category">GLP-1 Agonist</span>
+          <h3 class="product-name">Semaglutide</h3>
+          <p class="product-desc">GLP-1 receptor agonist studied for metabolic pathway research and glucose regulation mechanisms.</p>
           <div class="product-footer">
-            <div>
-              <div class="product-price">$89.99</div>
-              <span class="product-price-note">from</span>
-            </div>
+            <div class="product-price">From $89.99</div>
             <div class="product-purity">99.2%</div>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">GLP-1/GIP Compound</span>
-            <h3 class="product-name">Tirzepatide</h3>
+          <div class="product-image" style="background: var(--dark-gray); justify-content: center; align-items: center;">
+            <div style="font-size: 12px; color: rgba(245,245,245,0.3);">Coming Soon</div>
           </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Dual GLP-1/GIP receptor agonist for advanced metabolic research applications.</p>
-            <span class="product-variants">Multiple concentrations available</span>
-          </div>
+          <span class="product-category">GLP-1/GIP Compound</span>
+          <h3 class="product-name">Tirzepatide</h3>
+          <p class="product-desc">Dual GLP-1/GIP receptor agonist for advanced metabolic research applications.</p>
           <div class="product-footer">
-            <div>
-              <div class="product-price">$74.99 - $149.99</div>
-              <span class="product-price-note">concentration dependent</span>
-            </div>
+            <div class="product-price">From $74.99</div>
             <div class="product-purity">99.1%</div>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">GLP-3 Receptor Agonist</span>
-            <h3 class="product-name">GLP-3 (R)</h3>
+          <div class="product-image" style="background: var(--dark-gray); justify-content: center; align-items: center;">
+            <div style="font-size: 12px; color: rgba(245,245,245,0.3);">Coming Soon</div>
           </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Novel GLP-3 receptor agonist for emerging metabolic research.</p>
-            <span class="product-variants">Multiple concentrations available</span>
-          </div>
+          <span class="product-category">GLP-3 Agonist</span>
+          <h3 class="product-name">GLP-3 (R)</h3>
+          <p class="product-desc">Novel GLP-3 receptor agonist for emerging metabolic research.</p>
           <div class="product-footer">
-            <div>
-              <div class="product-price">$104.99 - $172.49</div>
-              <span class="product-price-note">concentration dependent</span>
-            </div>
+            <div class="product-price">From $104.99</div>
             <div class="product-purity">99.0%</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Peptide Blends -->
+    <!-- Tissue Repair -->
     <div class="category">
-      <div class="category-header">
-        <h2 class="category-title">Peptide Blends</h2>
-        <p class="category-desc">Formulated compound combinations for advanced research</p>
-      </div>
+      <h2 class="category-title">Tissue Repair & Recovery</h2>
       <div class="product-grid">
         <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">Multi-Component Blend</span>
-            <h3 class="product-name">Wolverine Blend</h3>
+          <div class="product-image">
+            <img src="bpc157.png" alt="BPC-157 vial" />
           </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Proprietary multi-peptide formulation for comprehensive research.</p>
-          </div>
+          <span class="product-category">Pentadecapeptide</span>
+          <h3 class="product-name">BPC-157</h3>
+          <p class="product-desc">Pentadecapeptide compound studied for tissue regeneration and angiogenesis research.</p>
           <div class="product-footer">
-            <div>
-              <div class="product-price">$74.99 - $119.99</div>
-              <span class="product-price-note">from</span>
-            </div>
-            <div class="product-purity">99.3%</div>
+            <div class="product-price">From $34.99</div>
+            <div class="product-purity">99.4%</div>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">Multi-Component Blend</span>
-            <h3 class="product-name">Glow Blend</h3>
+          <div class="product-image" style="background: var(--dark-gray); justify-content: center; align-items: center;">
+            <div style="font-size: 12px; color: rgba(245,245,245,0.3);">Coming Soon</div>
           </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Specialized peptide blend designed for targeted research applications.</p>
-          </div>
+          <span class="product-category">Thymosin Fragment</span>
+          <h3 class="product-name">TB-500</h3>
+          <p class="product-desc">Synthetic thymosin beta-4 fragment for cellular migration and repair research.</p>
           <div class="product-footer">
-            <div>
-              <div class="product-price">$89.99</div>
-              <span class="product-price-note">from</span>
-            </div>
-            <div class="product-purity">99.2%</div>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">Multi-Component Blend</span>
-            <h3 class="product-name">Klow Blend</h3>
-          </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Advanced formulation for specialized laboratory research.</p>
-          </div>
-          <div class="product-footer">
-            <div>
-              <div class="product-price">$104.99</div>
-              <span class="product-price-note">from</span>
-            </div>
+            <div class="product-price">From $59.99</div>
             <div class="product-purity">99.1%</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Growth Hormone Secretagogues -->
+    <!-- Metabolic -->
     <div class="category">
-      <div class="category-header">
-        <h2 class="category-title">Growth Hormone Secretagogues</h2>
-        <p class="category-desc">GH axis research compounds</p>
-      </div>
+      <h2 class="category-title">Cellular & Metabolic</h2>
       <div class="product-grid">
         <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">GHRH + Ipamorelin Combo</span>
-            <h3 class="product-name">CJC-1295 + Ipamorelin</h3>
+          <div class="product-image">
+            <img src="nadplus.png" alt="NAD+ vial" />
           </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Combined GH secretagogue research formulation.</p>
-          </div>
+          <span class="product-category">Coenzyme</span>
+          <h3 class="product-name">NAD+</h3>
+          <p class="product-desc">Nicotinamide adenine dinucleotide for cellular energy metabolism research and analysis.</p>
           <div class="product-footer">
-            <div>
-              <div class="product-price">$52.49</div>
-              <span class="product-price-note">from</span>
-            </div>
-            <div class="product-purity">99.4%</div>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">Selective GH Secretagogue</span>
-            <h3 class="product-name">Ipamorelin</h3>
-          </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Selective growth hormone secretagogue for GH pulse research.</p>
-          </div>
-          <div class="product-footer">
-            <div>
-              <div class="product-price">$52.49</div>
-              <span class="product-price-note">from</span>
-            </div>
-            <div class="product-purity">99.3%</div>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">Somatostatin Analog</span>
-            <h3 class="product-name">Tesamorelin</h3>
-          </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">GHRH analog for advanced growth hormone research.</p>
-          </div>
-          <div class="product-footer">
-            <div>
-              <div class="product-price">$74.99</div>
-              <span class="product-price-note">from</span>
-            </div>
-            <div class="product-purity">99.0%</div>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">GHRH Analog</span>
-            <h3 class="product-name">Sermorelin</h3>
-          </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Growth hormone releasing hormone analog for research.</p>
-          </div>
-          <div class="product-footer">
-            <div>
-              <div class="product-price">$37.49</div>
-              <span class="product-price-note">from</span>
-            </div>
-            <div class="product-purity">99.2%</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Tissue Repair & Recovery -->
-    <div class="category">
-      <div class="category-header">
-        <h2 class="category-title">Tissue Repair & Recovery</h2>
-        <p class="category-desc">Regeneration and repair peptides</p>
-      </div>
-      <div class="product-grid">
-        <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">Pentadecapeptide</span>
-            <h3 class="product-name">BPC-157</h3>
-          </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Pentadecapeptide compound for tissue regeneration research.</p>
-            <span class="product-variants">Multiple sizes available</span>
-          </div>
-          <div class="product-footer">
-            <div>
-              <div class="product-price">$29.99 - $59.99</div>
-              <span class="product-price-note">size dependent</span>
-            </div>
-            <div class="product-purity">99.4%</div>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">Thymosin Fragment</span>
-            <h3 class="product-name">TB-500</h3>
-          </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Synthetic thymosin beta-4 fragment for cellular research.</p>
-          </div>
-          <div class="product-footer">
-            <div>
-              <div class="product-price">$59.99</div>
-              <span class="product-price-note">from</span>
-            </div>
-            <div class="product-purity">99.1%</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Metabolic & Cellular -->
-    <div class="category">
-      <div class="category-header">
-        <h2 class="category-title">Metabolic & Cellular Research</h2>
-        <p class="category-desc">Energy metabolism and cellular function compounds</p>
-      </div>
-      <div class="product-grid">
-        <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">Coenzyme</span>
-            <h3 class="product-name">NAD+</h3>
-          </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Nicotinamide adenine dinucleotide for cellular energy research.</p>
-            <span class="product-variants">Multiple concentrations</span>
-          </div>
-          <div class="product-footer">
-            <div>
-              <div class="product-price">$59.99 - $97.49</div>
-              <span class="product-price-note">concentration dependent</span>
-            </div>
+            <div class="product-price">From $59.99</div>
             <div class="product-purity">99.5%</div>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">Mitochondrial Peptide</span>
-            <h3 class="product-name">MOTS-c</h3>
+          <div class="product-image" style="background: var(--dark-gray); justify-content: center; align-items: center;">
+            <div style="font-size: 12px; color: rgba(245,245,245,0.3);">Coming Soon</div>
           </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Mitochondrial-derived peptide for cellular research.</p>
-          </div>
+          <span class="product-category">Mitochondrial Peptide</span>
+          <h3 class="product-name">MOTS-c</h3>
+          <p class="product-desc">Mitochondrial-derived peptide for cellular research and energy pathway studies.</p>
           <div class="product-footer">
-            <div>
-              <div class="product-price">$37.49</div>
-              <span class="product-price-note">from</span>
-            </div>
+            <div class="product-price">From $37.49</div>
             <div class="product-purity">99.3%</div>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">Copper Peptide</span>
-            <h3 class="product-name">GHK-Cu</h3>
+          <div class="product-image" style="background: var(--dark-gray); justify-content: center; align-items: center;">
+            <div style="font-size: 12px; color: rgba(245,245,245,0.3);">Coming Soon</div>
           </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Copper-linked peptide for regeneration research applications.</p>
-            <span class="product-variants">Multiple concentrations</span>
-          </div>
+          <span class="product-category">Copper Peptide</span>
+          <h3 class="product-name">GHK-Cu</h3>
+          <p class="product-desc">Copper-linked peptide for regeneration and cellular research applications.</p>
           <div class="product-footer">
-            <div>
-              <div class="product-price">$37.49 - $67.49</div>
-              <span class="product-price-note">concentration dependent</span>
-            </div>
+            <div class="product-price">From $37.49</div>
             <div class="product-purity">99.2%</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Neuropeptides & Signaling -->
+    <!-- Growth Hormone -->
     <div class="category">
-      <div class="category-header">
-        <h2 class="category-title">Neuropeptides & Signaling</h2>
-        <p class="category-desc">Neurotransmitter and signal pathway research</p>
-      </div>
+      <h2 class="category-title">Growth Hormone Secretagogues</h2>
       <div class="product-grid">
         <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">Neuropeptide</span>
-            <h3 class="product-name">Semax</h3>
+          <div class="product-image" style="background: var(--dark-gray); justify-content: center; align-items: center;">
+            <div style="font-size: 12px; color: rgba(245,245,245,0.3);">Coming Soon</div>
           </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Synthetic neuropeptide for CNS research applications.</p>
-          </div>
+          <span class="product-category">GH Secretagogue</span>
+          <h3 class="product-name">Ipamorelin</h3>
+          <p class="product-desc">Selective growth hormone secretagogue for GH pulse research and secretion studies.</p>
           <div class="product-footer">
-            <div>
-              <div class="product-price">$44.99</div>
-              <span class="product-price-note">from</span>
-            </div>
-            <div class="product-purity">99.1%</div>
+            <div class="product-price">From $52.49</div>
+            <div class="product-purity">99.3%</div>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">Neuropeptide</span>
-            <h3 class="product-name">Selank</h3>
+          <div class="product-image" style="background: var(--dark-gray); justify-content: center; align-items: center;">
+            <div style="font-size: 12px; color: rgba(245,245,245,0.3);">Coming Soon</div>
           </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Synthetic peptide analog for neurotransmitter research.</p>
-          </div>
+          <span class="product-category">GHRH Analog</span>
+          <h3 class="product-name">Sermorelin</h3>
+          <p class="product-desc">Growth hormone releasing hormone analog for growth axis research applications.</p>
           <div class="product-footer">
-            <div>
-              <div class="product-price">$52.49</div>
-              <span class="product-price-note">from</span>
-            </div>
-            <div class="product-purity">99.0%</div>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">Melanocortin Agonist</span>
-            <h3 class="product-name">Melanotan II</h3>
-          </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Melanocortin receptor agonist for CNS and pigmentation research.</p>
-          </div>
-          <div class="product-footer">
-            <div>
-              <div class="product-price">$29.99</div>
-              <span class="product-price-note">from</span>
-            </div>
-            <div class="product-purity">99.0%</div>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">Kisspeptin Analog</span>
-            <h3 class="product-name">Kisspeptin-10</h3>
-          </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Kisspeptin decapeptide for reproductive research.</p>
-          </div>
-          <div class="product-footer">
-            <div>
-              <div class="product-price">$44.99</div>
-              <span class="product-price-note">from</span>
-            </div>
+            <div class="product-price">From $37.49</div>
             <div class="product-purity">99.2%</div>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">Sexual Signaling Peptide</span>
-            <h3 class="product-name">PT-141</h3>
+          <div class="product-image" style="background: var(--dark-gray); justify-content: center; align-items: center;">
+            <div style="font-size: 12px; color: rgba(245,245,245,0.3);">Coming Soon</div>
           </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Melanocortin analog for targeted research applications.</p>
-          </div>
+          <span class="product-category">GHRH + GH Secretagogue</span>
+          <h3 class="product-name">CJC-1295 + Ipamorelin</h3>
+          <p class="product-desc">Combined GH secretagogue research formulation for dual-axis studies.</p>
           <div class="product-footer">
-            <div>
-              <div class="product-price">$37.49</div>
-              <span class="product-price-note">from</span>
-            </div>
-            <div class="product-purity">99.1%</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Support Products -->
-    <div class="category">
-      <div class="category-header">
-        <h2 class="category-title">Support & Stabilization</h2>
-        <p class="category-desc">Solvents and preparation materials</p>
-      </div>
-      <div class="product-grid">
-        <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">Sterile Solvent</span>
-            <h3 class="product-name">Bacteriostatic Water</h3>
-          </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Pharmaceutical-grade sterile water for peptide reconstitution.</p>
-            <span class="product-variants">Multiple sizes available</span>
-          </div>
-          <div class="product-footer">
-            <div>
-              <div class="product-price">$5.99 - $18.74</div>
-              <span class="product-price-note">size dependent</span>
-            </div>
-            <div class="product-purity">Pharma Grade</div>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">Stabilization Agent</span>
-            <h3 class="product-name">Acetic Acid 0.6%</h3>
-          </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Laboratory-grade acetic acid for peptide preservation.</p>
-          </div>
-          <div class="product-footer">
-            <div>
-              <div class="product-price">$11.24</div>
-              <span class="product-price-note">from</span>
-            </div>
-            <div class="product-purity">Lab Grade</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Special Compounds -->
-    <div class="category">
-      <div class="category-header">
-        <h2 class="category-title">Specialized Compounds</h2>
-        <p class="category-desc">Advanced and emerging research peptides</p>
-      </div>
-      <div class="product-grid">
-        <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">AOD Peptide</span>
-            <h3 class="product-name">AOD-9604</h3>
-          </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Fragment of human growth hormone studied for metabolic research.</p>
-          </div>
-          <div class="product-footer">
-            <div>
-              <div class="product-price">$37.49</div>
-              <span class="product-price-note">from</span>
-            </div>
-            <div class="product-purity">99.1%</div>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-header">
-            <span class="product-category">Incretin Mimetic</span>
-            <h3 class="product-name">Cagrilintide</h3>
-          </div>
-          <div class="product-body">
-            <p style="font-size: 12px; color: rgba(245, 245, 245, 0.5); margin-bottom: 8px;">Novel amylin analog for metabolic pathway research.</p>
-          </div>
-          <div class="product-footer">
-            <div>
-              <div class="product-price">$74.99</div>
-              <span class="product-price-note">from</span>
-            </div>
-            <div class="product-purity">99.0%</div>
+            <div class="product-price">From $52.49</div>
+            <div class="product-purity">99.4%</div>
           </div>
         </div>
       </div>
@@ -931,13 +464,6 @@
   <div class="footer-disclaimer">
     All compounds are sold exclusively for in vitro research and laboratory use. Products have not been evaluated by regulatory agencies and are not intended for human consumption or clinical application. By accessing this site, you confirm compliance with all applicable laws and regulations governing research materials in your jurisdiction.
   </div>
-  <ul class="footer-links">
-    <li><a href="#">Research Terms</a></li>
-    <li><a href="#">Documentation</a></li>
-    <li><a href="#">Compliance</a></li>
-    <li><a href="#">Contact</a></li>
-  </ul>
-  <div class="footer-copy">© 2026 Aura Labs. All Rights Reserved. Research Use Only.</div>
 </footer>
 
 </body>
