@@ -644,6 +644,14 @@
     window.location.href = 'https://www.google.com';
   }
 
+  // Hide age gate if user already passed it
+  window.addEventListener('load', function() {
+    if (localStorage.getItem('auralabs_email')) {
+      document.getElementById('age-gate').style.display = 'none';
+      document.getElementById('site').style.display = 'block';
+    }
+  });
+
   // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
