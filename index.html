@@ -589,23 +589,37 @@
 </div>
 
 <script>
-  function enterSite() {
-    const email = document.getElementById('email-input').value.trim();
-    const checkbox = document.getElementById('confirm-checkbox');
-    if (!email || !email.includes('@')) { alert('Please enter your email address'); return; }
-    if (!checkbox.checked) { alert('Please confirm you are 21+ and authorized'); return; }
-    localStorage.setItem('auralabs_email', email);
-    document.getElementById('age-gate').style.opacity = '0';
-    document.getElementById('age-gate').style.transition = 'opacity 0.6s ease';
-    setTimeout(() => { document.getElementById('age-gate').style.display = 'none'; document.getElementById('site').style.display = 'block'; }, 600);
-  }
-  function denyEntry() { window.location.href = 'https://www.google.com'; }
-  window.addEventListener('load', function() {
+  // Check age gate on DOM ready
+  document.addEventListener('DOMContentLoaded', function() {
     if (localStorage.getItem('auralabs_email')) {
       document.getElementById('age-gate').style.display = 'none';
       document.getElementById('site').style.display = 'block';
     }
   });
+
+  function enterSite() {
+    const email = document.getElementById('email-input').value.trim();
+    const checkbox = document.getElementById('confirm-checkbox');
+    if (!email || !email.includes('@')) { 
+      alert('Please enter your email address'); 
+      return; 
+    }
+    if (!checkbox.checked) { 
+      alert('Please confirm you are 21+ and authorized'); 
+      return; 
+    }
+    localStorage.setItem('auralabs_email', email);
+    document.getElementById('age-gate').style.opacity = '0';
+    document.getElementById('age-gate').style.transition = 'opacity 0.6s ease';
+    setTimeout(() => { 
+      document.getElementById('age-gate').style.display = 'none'; 
+      document.getElementById('site').style.display = 'block'; 
+    }, 600);
+  }
+
+  function denyEntry() { 
+    window.location.href = 'https://www.google.com'; 
+  }
 </script>
 </body>
 </html>
