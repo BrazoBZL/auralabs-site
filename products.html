@@ -3,51 +3,190 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Products | Aura Labs</title>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <title>Compounds | Aura Labs</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
     :root {
-      --black: #0a0a0a;
-      --charcoal: #1a1a1a;
-      --dark-gray: #2a2a2a;
-      --blue-gray: #3a4a54;
-      --white: #f5f5f5;
-      --graphite: #5a6a7a;
+      --white: #ffffff;
+      --off-white: #f9f8f6;
+      --light-gray: #f0ede8;
+      --dark-text: #1a1a1a;
+      --muted-text: #666666;
+      --light-text: #888888;
+      --medical-blue: #0066b3;
+      --subtle-gray: #e2ddd8;
     }
 
     html, body {
-      background: var(--black);
-      color: var(--white);
+      background: var(--off-white);
+      color: var(--dark-text);
       font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
     }
 
-    body::before {
-      content: '';
+    /* AGE GATE */
+    #age-gate {
       position: fixed;
       inset: 0;
-      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(58, 74, 84, 0.03) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--off-white);
+      padding: 16px;
     }
 
-    /* Navigation */
+    .gate-box {
+      background: var(--white);
+      max-width: 500px;
+      width: 100%;
+      padding: 48px 40px;
+      border-radius: 6px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .gate-logo {
+      font-family: 'EB Garamond', serif;
+      font-size: 28px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dark-text);
+      margin-bottom: 24px;
+    }
+
+    .gate-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--medical-blue);
+      margin: 0 auto 28px;
+    }
+
+    .gate-notice {
+      font-size: 12px;
+      line-height: 1.8;
+      color: var(--muted-text);
+      margin-bottom: 28px;
+      padding: 20px 24px;
+      border-left: 3px solid var(--medical-blue);
+      background: var(--off-white);
+      text-align: left;
+    }
+
+    .gate-notice strong {
+      color: var(--dark-text);
+      font-weight: 600;
+    }
+
+    .gate-email {
+      margin-bottom: 16px;
+    }
+
+    .gate-email input {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--off-white);
+      border: 1px solid var(--subtle-gray);
+      color: var(--dark-text);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .gate-email input:focus {
+      outline: none;
+      border-color: var(--medical-blue);
+      background: var(--white);
+      box-shadow: 0 0 0 3px rgba(0,102,179,0.08);
+    }
+
+    .gate-email input::placeholder {
+      color: var(--light-text);
+    }
+
+    .gate-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .gate-check input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      cursor: pointer;
+      accent-color: var(--medical-blue);
+      flex-shrink: 0;
+    }
+
+    .gate-check label {
+      font-size: 13px;
+      color: var(--muted-text);
+      cursor: pointer;
+    }
+
+    .gate-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .gate-btn {
+      flex: 1;
+      max-width: 180px;
+      padding: 13px 20px;
+      border: 1px solid var(--subtle-gray);
+      background: var(--white);
+      color: var(--dark-text);
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .gate-btn:hover {
+      border-color: var(--medical-blue);
+      color: var(--medical-blue);
+    }
+
+    .gate-btn.primary {
+      background: var(--medical-blue);
+      border-color: var(--medical-blue);
+      color: var(--white);
+    }
+
+    .gate-btn.primary:hover {
+      background: #004f9a;
+    }
+
+    /* SITE */
+    #site {
+      display: none;
+      min-height: 100vh;
+    }
+
     nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      padding: 32px 48px;
-      border-bottom: 1px solid rgba(245, 245, 245, 0.05);
-      background: rgba(10, 10, 10, 0.95);
+      padding: 18px 48px;
+      background: rgba(255,255,255,0.98);
+      border-bottom: 1px solid var(--subtle-gray);
       backdrop-filter: blur(8px);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
     }
 
-    .nav-content {
+    .nav-inner {
       max-width: 1400px;
       margin: 0 auto;
       display: flex;
@@ -61,164 +200,151 @@
       font-weight: 400;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--white);
+      color: var(--dark-text);
       text-decoration: none;
     }
 
     .nav-links {
       display: flex;
-      gap: 48px;
+      gap: 36px;
       list-style: none;
     }
 
     .nav-links a {
       font-size: 11px;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(245, 245, 245, 0.45);
+      color: var(--muted-text);
       text-decoration: none;
-      transition: color 0.3s ease;
+      font-weight: 600;
+      transition: color 0.2s;
     }
 
+    .nav-links a:hover,
     .nav-links a.active {
-      color: var(--blue-gray);
+      color: var(--medical-blue);
     }
 
-    /* Main */
-    main {
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Hero */
     .hero {
-      padding: 80px 48px;
-      border-bottom: 1px solid rgba(245, 245, 245, 0.05);
-      background: var(--charcoal);
-    }
-
-    .hero-content {
-      max-width: 1400px;
-      margin: 0 auto;
+      background: var(--white);
+      padding: 60px 48px 40px;
       text-align: center;
+      border-bottom: 1px solid var(--subtle-gray);
     }
 
-    .hero-title {
-      font-family: 'EB Garamond', serif;
-      font-size: clamp(36px, 5vw, 56px);
-      font-weight: 400;
-      line-height: 1.15;
-      margin-bottom: 16px;
-    }
-
-    .hero-subtitle {
-      font-size: 12px;
-      letter-spacing: 0.12em;
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--blue-gray);
+      color: var(--medical-blue);
+      font-weight: 600;
       margin-bottom: 16px;
     }
 
-    /* Content */
+    h1 {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--dark-text);
+      margin-bottom: 0;
+    }
+
     .content {
       max-width: 1400px;
       margin: 0 auto;
       padding: 80px 48px;
     }
 
-    /* Category */
     .category {
-      margin-bottom: 80px;
+      margin-bottom: 72px;
     }
 
-    .category-title {
+    .cat-title {
       font-family: 'EB Garamond', serif;
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 400;
-      margin-bottom: 48px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid rgba(245, 245, 245, 0.05);
-    }
-
-    /* Product Grid */
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1px;
-      background: rgba(245, 245, 245, 0.05);
-      border: 1px solid rgba(245, 245, 245, 0.05);
+      color: var(--dark-text);
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--subtle-gray);
       margin-bottom: 40px;
     }
 
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1px;
+      background: var(--subtle-gray);
+      border: 1px solid var(--subtle-gray);
+    }
+
     .product-card {
-      background: var(--charcoal);
+      background: var(--white);
       padding: 24px;
-      border-right: 1px solid rgba(245, 245, 245, 0.05);
-      border-bottom: 1px solid rgba(245, 245, 245, 0.05);
-      transition: background 0.4s ease;
       display: flex;
       flex-direction: column;
+      transition: background 0.2s ease;
     }
 
     .product-card:hover {
-      background: var(--dark-gray);
+      background: var(--off-white);
     }
 
-    .product-image {
+    .product-img {
       width: 100%;
-      height: 240px;
-      background: var(--dark-gray);
-      border-radius: 2px;
+      height: 230px;
+      background: var(--light-gray);
+      border-radius: 4px;
       margin-bottom: 16px;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
     }
 
-    .product-image img {
+    .product-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .product-category {
+    .product-cat {
       font-size: 10px;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--blue-gray);
-      margin-bottom: 8px;
-      display: block;
-      font-weight: 500;
+      color: var(--medical-blue);
+      font-weight: 600;
+      margin-bottom: 6px;
     }
 
     .product-name {
       font-family: 'EB Garamond', serif;
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 400;
-      color: var(--white);
-      margin-bottom: 12px;
+      color: var(--dark-text);
+      margin-bottom: 10px;
     }
 
     .product-desc {
       font-size: 12px;
       line-height: 1.7;
-      color: rgba(245, 245, 245, 0.45);
-      margin-bottom: 20px;
+      color: var(--muted-text);
       flex: 1;
+      margin-bottom: 16px;
+      font-weight: 300;
     }
 
-    .product-footer {
+    .product-foot {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-top: 16px;
-      border-top: 1px solid rgba(245, 245, 245, 0.1);
+      padding-top: 14px;
+      border-top: 1px solid var(--subtle-gray);
     }
 
     .product-price {
-      font-size: 16px;
-      color: var(--white);
+      font-size: 15px;
+      color: var(--dark-text);
       font-weight: 400;
     }
 
@@ -226,350 +352,276 @@
       font-size: 10px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(90, 106, 122, 0.8);
-      font-weight: 500;
+      color: var(--medical-blue);
+      font-weight: 600;
     }
 
-    /* Footer */
     footer {
-      padding: 64px 48px;
-      border-top: 1px solid rgba(245, 245, 245, 0.05);
-      background: var(--black);
+      background: var(--white);
+      border-top: 1px solid var(--subtle-gray);
+      padding: 56px 48px;
       text-align: center;
     }
 
     .footer-logo {
       font-family: 'EB Garamond', serif;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 400;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 24px;
+      color: var(--dark-text);
+      margin-bottom: 20px;
     }
 
-    .footer-disclaimer {
+    .footer-disc {
       font-size: 11px;
-      color: rgba(245, 245, 245, 0.35);
-      max-width: 640px;
-      margin: 0 auto 32px;
+      color: var(--light-text);
       line-height: 1.8;
+      max-width: 600px;
+      margin: 0 auto 20px;
     }
 
-    /* Responsive */
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      list-style: none;
+      margin-bottom: 20px;
+    }
+
+    .footer-links a {
+      font-size: 11px;
+      color: var(--light-text);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--medical-blue);
+    }
+
+    .footer-copy {
+      font-size: 10px;
+      color: var(--light-text);
+      letter-spacing: 0.06em;
+    }
+
     @media (max-width: 768px) {
-      html, body { overflow-x: hidden; }
-      nav { padding: 12px 16px; overflow-x: hidden; }
-      .nav-content { flex-direction: column; gap: 12px; width: 100%; }
+      nav { padding: 12px 20px; }
+      .nav-inner { flex-direction: column; gap: 12px; }
       .nav-logo { font-size: 16px; }
-      .nav-links { gap: 12px; justify-content: center; flex-wrap: wrap; }
-      .nav-links a { font-size: 9px; }
+      .nav-links { gap: 16px; justify-content: center; flex-wrap: wrap; }
+      .nav-links a { font-size: 10px; }
       
-      .hero { padding: 40px 16px; }
-      .hero-title { font-size: clamp(24px, 4vw, 36px); margin-bottom: 24px; }
-      .hero-subtitle { font-size: 11px; margin-bottom: 12px; }
+      .hero { padding: 48px 20px 32px; }
+      h1 { font-size: clamp(28px, 4vw, 40px); }
       
-      .content { padding: 40px 16px; max-width: 100%; }
-      .category-title { font-size: 20px; margin-bottom: 24px; }
+      .content { padding: 48px 20px; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .product-card { padding: 14px; }
+      .product-img { height: 160px; }
+      .product-name { font-size: 16px; }
       
-      .product-grid { grid-template-columns: repeat(2, 1fr); gap: 0; margin-bottom: 24px; }
-      .product-card { padding: 12px; border-width: 0.5px; }
-      .product-image { height: 160px; margin-bottom: 8px; }
-      .product-name { font-size: 14px; margin-bottom: 4px; }
-      .product-category { font-size: 8px; margin-bottom: 4px; }
-      .product-desc { font-size: 10px; margin-bottom: 10px; line-height: 1.4; }
-      .product-footer { gap: 4px; font-size: 11px; }
-      .product-price { font-size: 13px; }
-      .product-purity { font-size: 9px; }
-      
-      footer { padding: 32px 16px; }
+      .gate-box { padding: 32px 24px; }
+      footer { padding: 40px 20px; }
     }
 
     @media (max-width: 480px) {
-      html, body { overflow-x: hidden; width: 100%; }
-      nav { padding: 10px 12px; }
-      .nav-content { gap: 8px; }
+      nav { padding: 10px 14px; }
       .nav-logo { font-size: 14px; }
-      .nav-links { gap: 8px; }
-      .nav-links a { font-size: 8px; }
+      .nav-links { gap: 10px; }
+      .nav-links a { font-size: 9px; }
       
-      .hero { padding: 30px 12px; min-height: auto; }
-      .hero-title { font-size: clamp(20px, 3vw, 28px); margin-bottom: 16px; }
-      .hero-subtitle { font-size: 10px; }
+      .hero { padding: 36px 16px 28px; }
+      h1 { font-size: clamp(24px, 3vw, 32px); }
       
-      .content { padding: 30px 12px; }
-      .category-title { font-size: 16px; margin-bottom: 16px; }
-      
-      .product-grid { grid-template-columns: 1fr; gap: 0; }
+      .content { padding: 36px 16px; }
+      .product-grid { grid-template-columns: 1fr; }
       .product-card { padding: 12px; }
-      .product-image { height: 200px; margin-bottom: 10px; }
-      .product-name { font-size: 13px; }
-      .product-category { font-size: 8px; }
-      .product-desc { font-size: 10px; margin-bottom: 10px; }
-      .product-footer { flex-direction: column; gap: 6px; align-items: flex-start; }
-      .product-price { font-size: 12px; }
+      .product-img { height: 200px; }
       
-      footer { padding: 24px 12px; font-size: 10px; }
-      .footer-logo { font-size: 16px; }
-      .footer-disclaimer { font-size: 9px; }
+      .gate-box { padding: 24px 18px; }
+      footer { padding: 32px 14px; }
     }
   </style>
 </head>
 <body>
 
-<!-- Age Gate (shared across all pages) -->
-<div id="age-gate" style="position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: #0a0a0a; padding: 16px; overflow-y: auto;">
-  <div style="position: relative; max-width: 520px; width: 100%; text-align: center; margin: auto;">
-    <div style="margin-bottom: 64px; font-family: 'EB Garamond', serif; font-size: 32px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: #f5f5f5;">Aura Labs</div>
-    <div style="width: 40px; height: 1px; background: #5a6a7a; margin: 32px auto;"></div>
-    
-    <div style="font-size: 12px; line-height: 1.8; color: rgba(245, 245, 245, 0.55); margin-bottom: 32px; padding: 32px; border: 1px solid rgba(245, 245, 245, 0.1); background: rgba(26, 26, 26, 0.8); text-align: left;">
-      <strong style="color: #f5f5f5; font-weight: 500;">Research Institute Notice:</strong> This site is restricted to authorized research professionals. All materials are for in vitro research and laboratory use only. Products are not approved for human consumption and are not intended for clinical application.
+<!-- AGE GATE -->
+<div id="age-gate">
+  <div class="gate-box">
+    <div class="gate-logo">Aura Labs</div>
+    <div class="gate-divider"></div>
+    <div class="gate-notice">
+      <strong>Research Institute Notice:</strong> This site is restricted to authorized research professionals. All materials are for in vitro research and laboratory use only.
     </div>
-
-    <div style="margin-bottom: 24px;">
-      <input type="email" id="email-input" placeholder="your@research-email.edu" required style="width: 100%; padding: 12px; background: rgba(26, 26, 26, 0.8); border: 1px solid rgba(245, 245, 245, 0.1); color: #f5f5f5; font-family: 'Inter', sans-serif; font-size: 12px; border-radius: 2px;" />
+    <div class="gate-email">
+      <input type="email" id="email-input" placeholder="your@research-email.edu" required />
     </div>
-
-    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 32px; padding: 16px; background: rgba(26, 26, 26, 0.8); border: 1px solid rgba(245, 245, 245, 0.1);">
-      <input type="checkbox" id="confirm-checkbox" style="width: 18px; height: 18px; cursor: pointer; accent-color: #3a4a54;" />
-      <label for="confirm-checkbox" style="flex: 1; font-size: 12px; color: rgba(245, 245, 245, 0.7); cursor: pointer; margin: 0;">I confirm I am 21+ and authorized to access research materials</label>
+    <div class="gate-check">
+      <input type="checkbox" id="confirm-checkbox" />
+      <label for="confirm-checkbox">I confirm I am 21+ and authorized to access research materials</label>
     </div>
-
-    <div style="display: flex; gap: 12px; justify-content: center;">
-      <button onclick="enterSite()" style="flex: 1; max-width: 200px; padding: 14px 24px; border: 1px solid #3a4a54; background: transparent; color: #3a4a54; font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;">Confirm Access</button>
-      <button onclick="denyEntry()" style="flex: 1; max-width: 200px; padding: 14px 24px; border: 1px solid rgba(245, 245, 245, 0.2); background: transparent; color: rgba(245, 245, 245, 0.7); font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;">Decline</button>
+    <div class="gate-btns">
+      <button class="gate-btn primary" onclick="enterSite()">Confirm Access</button>
+      <button class="gate-btn" onclick="denyEntry()">Decline</button>
     </div>
   </div>
 </div>
 
-<nav>
-  <div class="nav-content">
-    <a href="index.html" class="nav-logo">Aura Labs</a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="products.html" class="active">Compounds</a></li>
-      <li><a href="#">Documentation</a></li>
-    </ul>
-  </div>
-</nav>
-
-<main>
-  <div class="hero">
-    <div class="hero-content">
-      <div class="hero-subtitle">Complete Catalog</div>
-      <h1 class="hero-title">Research Compounds</h1>
+<!-- SITE -->
+<div id="site">
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Aura Labs</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html" class="active">Compounds</a></li>
+        <li><a href="#docs">Documentation</a></li>
+      </ul>
     </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-eyebrow">Complete Catalog</div>
+    <h1>Research Compounds</h1>
   </div>
 
   <div class="content">
-    <!-- Featured GLP-1 -->
     <div class="category">
-      <h2 class="category-title">GLP-1 & Metabolic Research</h2>
+      <h2 class="cat-title">GLP-1 & Metabolic Research</h2>
       <div class="product-grid">
         <div class="product-card">
-          <div class="product-image">
-            <img src="semaglutide.png" alt="Semaglutide vial" />
-          </div>
-          <span class="product-category">GLP-1 Agonist</span>
+          <div class="product-img"><img src="semaglutide.png" alt="Semaglutide" /></div>
+          <span class="product-cat">GLP-1 Agonist</span>
           <h3 class="product-name">Semaglutide</h3>
-          <p class="product-desc">GLP-1 receptor agonist studied for metabolic pathway research and glucose regulation mechanisms.</p>
-          <div class="product-footer">
-            <div class="product-price">From $89.99</div>
-            <div class="product-purity">99.2%</div>
-          </div>
+          <p class="product-desc">GLP-1 receptor agonist for metabolic pathway research.</p>
+          <div class="product-foot"><div class="product-price">From $89.99</div><div class="product-purity">99.2%</div></div>
         </div>
-
         <div class="product-card">
-          <div class="product-image">
-            <img src="tirzepatide.png" alt="Tirzepatide vial" />
-          </div>
-          <span class="product-category">GLP-1/GIP Compound</span>
+          <div class="product-img"><img src="tirzepatide.png" alt="Tirzepatide" /></div>
+          <span class="product-cat">GLP-1/GIP</span>
           <h3 class="product-name">Tirzepatide</h3>
-          <p class="product-desc">Dual GLP-1/GIP receptor agonist for advanced metabolic research applications.</p>
-          <div class="product-footer">
-            <div class="product-price">From $74.99</div>
-            <div class="product-purity">99.1%</div>
-          </div>
+          <p class="product-desc">Dual GLP-1/GIP receptor agonist for advanced research.</p>
+          <div class="product-foot"><div class="product-price">From $74.99</div><div class="product-purity">99.1%</div></div>
         </div>
-
         <div class="product-card">
-          <div class="product-image">
-            <img src="glp3.png" alt="GLP-3 vial" />
-          </div>
-          <span class="product-category">GLP-3 Agonist</span>
+          <div class="product-img"><img src="glp3.png" alt="GLP-3" /></div>
+          <span class="product-cat">GLP-3 Agonist</span>
           <h3 class="product-name">GLP-3 (R)</h3>
-          <p class="product-desc">Novel GLP-3 receptor agonist for emerging metabolic research.</p>
-          <div class="product-footer">
-            <div class="product-price">From $104.99</div>
-            <div class="product-purity">99.0%</div>
-          </div>
+          <p class="product-desc">Novel GLP-3 receptor agonist for emerging research.</p>
+          <div class="product-foot"><div class="product-price">From $104.99</div><div class="product-purity">99.0%</div></div>
         </div>
       </div>
     </div>
 
-    <!-- Tissue Repair -->
     <div class="category">
-      <h2 class="category-title">Tissue Repair & Recovery</h2>
+      <h2 class="cat-title">Tissue Repair & Recovery</h2>
       <div class="product-grid">
         <div class="product-card">
-          <div class="product-image">
-            <img src="bpc157.png" alt="BPC-157 vial" />
-          </div>
-          <span class="product-category">Pentadecapeptide</span>
+          <div class="product-img"><img src="bpc157.png" alt="BPC-157" /></div>
+          <span class="product-cat">Pentadecapeptide</span>
           <h3 class="product-name">BPC-157</h3>
-          <p class="product-desc">Pentadecapeptide compound studied for tissue regeneration and angiogenesis research.</p>
-          <div class="product-footer">
-            <div class="product-price">From $34.99</div>
-            <div class="product-purity">99.4%</div>
-          </div>
+          <p class="product-desc">Pentadecapeptide for tissue regeneration research.</p>
+          <div class="product-foot"><div class="product-price">From $34.99</div><div class="product-purity">99.4%</div></div>
         </div>
-
         <div class="product-card">
-          <div class="product-image">
-            <img src="tb500.png" alt="TB-500 vial" />
-          </div>
-          <span class="product-category">Thymosin Fragment</span>
+          <div class="product-img"><img src="tb500.png" alt="TB-500" /></div>
+          <span class="product-cat">Thymosin Fragment</span>
           <h3 class="product-name">TB-500</h3>
-          <p class="product-desc">Synthetic thymosin beta-4 fragment for cellular migration and repair research.</p>
-          <div class="product-footer">
-            <div class="product-price">From $59.99</div>
-            <div class="product-purity">99.1%</div>
-          </div>
+          <p class="product-desc">Synthetic thymosin beta-4 for cellular research.</p>
+          <div class="product-foot"><div class="product-price">From $59.99</div><div class="product-purity">99.1%</div></div>
         </div>
       </div>
     </div>
 
-    <!-- Metabolic -->
     <div class="category">
-      <h2 class="category-title">Cellular & Metabolic</h2>
+      <h2 class="cat-title">Cellular & Metabolic</h2>
       <div class="product-grid">
         <div class="product-card">
-          <div class="product-image">
-            <img src="nadplus.png" alt="NAD+ vial" />
-          </div>
-          <span class="product-category">Coenzyme</span>
+          <div class="product-img"><img src="nadplus.png" alt="NAD+" /></div>
+          <span class="product-cat">Coenzyme</span>
           <h3 class="product-name">NAD+</h3>
-          <p class="product-desc">Nicotinamide adenine dinucleotide for cellular energy metabolism research and analysis.</p>
-          <div class="product-footer">
-            <div class="product-price">From $59.99</div>
-            <div class="product-purity">99.5%</div>
-          </div>
+          <p class="product-desc">NAD+ for cellular energy metabolism research.</p>
+          <div class="product-foot"><div class="product-price">From $59.99</div><div class="product-purity">99.5%</div></div>
         </div>
-
         <div class="product-card">
-          <div class="product-image">
-            <img src="motsc.png" alt="MOTS-c vial" />
-          </div>
-          <span class="product-category">Mitochondrial Peptide</span>
+          <div class="product-img"><img src="motsc.png" alt="MOTS-c" /></div>
+          <span class="product-cat">Mitochondrial Peptide</span>
           <h3 class="product-name">MOTS-c</h3>
-          <p class="product-desc">Mitochondrial-derived peptide for cellular research and energy pathway studies.</p>
-          <div class="product-footer">
-            <div class="product-price">From $37.49</div>
-            <div class="product-purity">99.3%</div>
-          </div>
+          <p class="product-desc">Mitochondrial peptide for energy research.</p>
+          <div class="product-foot"><div class="product-price">From $37.49</div><div class="product-purity">99.3%</div></div>
         </div>
-
         <div class="product-card">
-          <div class="product-image">
-            <img src="ghkcu.png" alt="GHK-Cu vial" />
-          </div>
-          <span class="product-category">Copper Peptide</span>
+          <div class="product-img"><img src="ghkcu.png" alt="GHK-Cu" /></div>
+          <span class="product-cat">Copper Peptide</span>
           <h3 class="product-name">GHK-Cu</h3>
-          <p class="product-desc">Copper-linked peptide for regeneration and cellular research applications.</p>
-          <div class="product-footer">
-            <div class="product-price">From $37.49</div>
-            <div class="product-purity">99.2%</div>
-          </div>
+          <p class="product-desc">Copper-linked peptide for regeneration research.</p>
+          <div class="product-foot"><div class="product-price">From $37.49</div><div class="product-purity">99.2%</div></div>
         </div>
       </div>
     </div>
 
-    <!-- Growth Hormone -->
     <div class="category">
-      <h2 class="category-title">Growth Hormone Secretagogues</h2>
+      <h2 class="cat-title">Growth Hormone Secretagogues</h2>
       <div class="product-grid">
         <div class="product-card">
-          <div class="product-image">
-            <img src="ipamorelin.png" alt="Ipamorelin vial" />
-          </div>
-          <span class="product-category">GH Secretagogue</span>
+          <div class="product-img"><img src="ipamorelin.png" alt="Ipamorelin" /></div>
+          <span class="product-cat">GH Secretagogue</span>
           <h3 class="product-name">Ipamorelin</h3>
-          <p class="product-desc">Selective growth hormone secretagogue for GH pulse research and secretion studies.</p>
-          <div class="product-footer">
-            <div class="product-price">From $52.49</div>
-            <div class="product-purity">99.3%</div>
-          </div>
+          <p class="product-desc">Selective GH secretagogue for research.</p>
+          <div class="product-foot"><div class="product-price">From $52.49</div><div class="product-purity">99.3%</div></div>
         </div>
-
         <div class="product-card">
-          <div class="product-image">
-            <img src="sermorelin.png" alt="Sermorelin vial" />
-          </div>
-          <span class="product-category">GHRH Analog</span>
+          <div class="product-img"><img src="sermorelin.png" alt="Sermorelin" /></div>
+          <span class="product-cat">GHRH Analog</span>
           <h3 class="product-name">Sermorelin</h3>
-          <p class="product-desc">Growth hormone releasing hormone analog for growth axis research applications.</p>
-          <div class="product-footer">
-            <div class="product-price">From $37.49</div>
-            <div class="product-purity">99.2%</div>
-          </div>
+          <p class="product-desc">GHRH analog for growth axis research.</p>
+          <div class="product-foot"><div class="product-price">From $37.49</div><div class="product-purity">99.2%</div></div>
         </div>
-
         <div class="product-card">
-          <div class="product-image">
-            <img src="cjc1295_ipa.png" alt="CJC-1295 + Ipamorelin vial" />
-          </div>
-          <span class="product-category">GHRH + GH Secretagogue</span>
+          <div class="product-img"><img src="cjc1295_ipa.png" alt="CJC-1295 + Ipamorelin" /></div>
+          <span class="product-cat">GHRH + GH Secretagogue</span>
           <h3 class="product-name">CJC-1295 + Ipamorelin</h3>
-          <p class="product-desc">Combined GH secretagogue research formulation for dual-axis studies.</p>
-          <div class="product-footer">
-            <div class="product-price">From $52.49</div>
-            <div class="product-purity">99.4%</div>
-          </div>
+          <p class="product-desc">Combined GH secretagogue formulation.</p>
+          <div class="product-foot"><div class="product-price">From $52.49</div><div class="product-purity">99.4%</div></div>
         </div>
       </div>
     </div>
   </div>
-</main>
 
-<footer>
-  <div class="footer-logo">Aura Labs</div>
-  <div class="footer-disclaimer">
-    All compounds are sold exclusively for in vitro research and laboratory use. Products have not been evaluated by regulatory agencies and are not intended for human consumption or clinical application. By accessing this site, you confirm compliance with all applicable laws and regulations governing research materials in your jurisdiction.
-  </div>
-</footer>
+  <footer>
+    <div class="footer-logo">Aura Labs</div>
+    <div class="footer-disc">All compounds are sold exclusively for in vitro research and laboratory use. Products have not been evaluated by regulatory agencies and are not intended for human consumption or clinical application.</div>
+    <ul class="footer-links">
+      <li><a href="#">Research Terms</a></li>
+      <li><a href="#">Documentation</a></li>
+      <li><a href="#">Compliance</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Aura Labs. All Rights Reserved. Research Use Only.</div>
+  </footer>
+</div>
 
 <script>
   function enterSite() {
     const email = document.getElementById('email-input').value.trim();
     const checkbox = document.getElementById('confirm-checkbox');
-
-    if (!email || !email.includes('@')) {
-      alert('Please enter your email address');
-      return;
-    }
-
-    if (!checkbox.checked) {
-      alert('Please confirm you are 21+ and authorized');
-      return;
-    }
-
+    if (!email || !email.includes('@')) { alert('Please enter your email address'); return; }
+    if (!checkbox.checked) { alert('Please confirm you are 21+ and authorized'); return; }
     localStorage.setItem('auralabs_email', email);
     document.getElementById('age-gate').style.opacity = '0';
     document.getElementById('age-gate').style.transition = 'opacity 0.6s ease';
-    setTimeout(() => {
-      document.getElementById('age-gate').style.display = 'none';
-    }, 600);
+    setTimeout(() => { document.getElementById('age-gate').style.display = 'none'; document.getElementById('site').style.display = 'block'; }, 600);
   }
-
-  function denyEntry() {
-    window.location.href = 'https://www.google.com';
-  }
-
-  // Check if user already passed gate (in this session)
+  function denyEntry() { window.location.href = 'https://www.google.com'; }
   window.addEventListener('load', function() {
-    const gateElement = document.getElementById('age-gate');
-    if (gateElement && localStorage.getItem('auralabs_email')) {
-      gateElement.style.display = 'none';
+    if (localStorage.getItem('auralabs_email')) {
+      document.getElementById('age-gate').style.display = 'none';
+      document.getElementById('site').style.display = 'block';
     }
   });
 </script>

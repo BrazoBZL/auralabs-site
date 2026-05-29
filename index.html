@@ -3,42 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aura Labs | Premium Research Peptides</title>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <title>Aura Labs | Premium Research Compounds</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    
     :root {
-      --black: #0a0a0a;
-      --charcoal: #1a1a1a;
-      --dark-gray: #2a2a2a;
-      --blue-gray: #3a4a54;
-      --white: #f5f5f5;
-      --graphite: #5a6a7a;
+      --white: #ffffff;
+      --off-white: #f9f8f6;
+      --light-gray: #f0ede8;
+      --dark-text: #1a1a1a;
+      --muted-text: #666666;
+      --light-text: #888888;
+      --medical-blue: #0066b3;
+      --subtle-gray: #e2ddd8;
     }
 
     html, body {
-      height: 100%;
-      background: var(--black);
-      color: var(--white);
+      background: var(--off-white);
+      color: var(--dark-text);
       font-family: 'Inter', sans-serif;
-      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(58, 74, 84, 0.03) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Age Gate */
+    /* AGE GATE - FULLSCREEN */
     #age-gate {
       position: fixed;
       inset: 0;
@@ -46,105 +34,104 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--black);
-      padding: 24px;
+      background: var(--off-white);
+      padding: 16px;
     }
 
-    .gate-container {
-      position: relative;
-      max-width: 520px;
+    .gate-box {
+      background: var(--white);
+      max-width: 500px;
       width: 100%;
-    }
-
-    .gate-content {
-      position: relative;
-      z-index: 1;
+      padding: 48px 40px;
+      border-radius: 6px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
       text-align: center;
     }
 
     .gate-logo {
-      margin-bottom: 64px;
       font-family: 'EB Garamond', serif;
-      font-size: 32px;
+      font-size: 28px;
       font-weight: 400;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--white);
+      color: var(--dark-text);
+      margin-bottom: 24px;
     }
 
     .gate-divider {
       width: 40px;
       height: 1px;
-      background: var(--graphite);
-      margin: 32px auto;
+      background: var(--medical-blue);
+      margin: 0 auto 28px;
     }
 
-    .gate-disclaimer {
+    .gate-notice {
       font-size: 12px;
       line-height: 1.8;
-      color: rgba(245, 245, 245, 0.55);
-      margin-bottom: 32px;
-      padding: 32px;
-      border: 1px solid rgba(245, 245, 245, 0.1);
-      background: rgba(26, 26, 26, 0.8);
+      color: var(--muted-text);
+      margin-bottom: 28px;
+      padding: 20px 24px;
+      border-left: 3px solid var(--medical-blue);
+      background: var(--off-white);
       text-align: left;
     }
 
-    .gate-disclaimer strong {
-      color: var(--white);
-      font-weight: 500;
+    .gate-notice strong {
+      color: var(--dark-text);
+      font-weight: 600;
     }
 
     .gate-email {
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
 
     .gate-email input {
       width: 100%;
-      padding: 12px;
-      background: rgba(26, 26, 26, 0.8);
-      border: 1px solid rgba(245, 245, 245, 0.1);
-      color: var(--white);
+      padding: 12px 16px;
+      background: var(--off-white);
+      border: 1px solid var(--subtle-gray);
+      color: var(--dark-text);
       font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      border-radius: 2px;
-      transition: border-color 0.3s ease;
-    }
-
-    .gate-email input::placeholder {
-      color: rgba(245, 245, 245, 0.3);
+      font-size: 14px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
     }
 
     .gate-email input:focus {
       outline: none;
-      border-color: var(--blue-gray);
+      border-color: var(--medical-blue);
+      background: var(--white);
+      box-shadow: 0 0 0 3px rgba(0,102,179,0.08);
     }
 
-    .gate-confirmation {
+    .gate-email input::placeholder {
+      color: var(--light-text);
+    }
+
+    .gate-check {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 12px;
-      margin-bottom: 32px;
-      padding: 16px;
-      background: rgba(26, 26, 26, 0.8);
-      border: 1px solid rgba(245, 245, 245, 0.1);
+      margin-bottom: 24px;
+      text-align: left;
     }
 
-    .gate-confirmation input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
+    .gate-check input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin-top: 2px;
       cursor: pointer;
-      accent-color: var(--blue-gray);
+      accent-color: var(--medical-blue);
+      flex-shrink: 0;
     }
 
-    .gate-confirmation label {
-      flex: 1;
-      font-size: 12px;
-      color: rgba(245, 245, 245, 0.7);
+    .gate-check label {
+      font-size: 13px;
+      color: var(--muted-text);
       cursor: pointer;
     }
 
-    .gate-buttons {
+    .gate-btns {
       display: flex;
       gap: 12px;
       justify-content: center;
@@ -152,55 +139,54 @@
 
     .gate-btn {
       flex: 1;
-      max-width: 200px;
-      padding: 14px 24px;
-      border: 1px solid rgba(245, 245, 245, 0.2);
-      background: transparent;
-      color: rgba(245, 245, 245, 0.7);
+      max-width: 180px;
+      padding: 13px 20px;
+      border: 1px solid var(--subtle-gray);
+      background: var(--white);
+      color: var(--dark-text);
       font-family: 'Inter', sans-serif;
       font-size: 11px;
-      letter-spacing: 0.12em;
+      font-weight: 600;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       cursor: pointer;
-      transition: all 0.3s ease;
+      border-radius: 4px;
+      transition: all 0.2s ease;
     }
 
     .gate-btn:hover {
-      border-color: rgba(245, 245, 245, 0.4);
+      border-color: var(--medical-blue);
+      color: var(--medical-blue);
+    }
+
+    .gate-btn.primary {
+      background: var(--medical-blue);
+      border-color: var(--medical-blue);
       color: var(--white);
-      background: rgba(245, 245, 245, 0.03);
     }
 
-    .gate-btn.confirm {
-      border-color: var(--blue-gray);
-      color: var(--blue-gray);
+    .gate-btn.primary:hover {
+      background: #004f9a;
     }
 
-    .gate-btn.confirm:hover {
-      background: rgba(58, 74, 84, 0.1);
-    }
-
-    /* Main Site */
+    /* MAIN SITE */
     #site {
       display: none;
-      position: relative;
-      z-index: 1;
       min-height: 100vh;
-      overflow-y: auto;
     }
 
-    /* Navigation */
     nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      padding: 32px 48px;
-      border-bottom: 1px solid rgba(245, 245, 245, 0.05);
-      background: rgba(10, 10, 10, 0.95);
+      padding: 18px 48px;
+      background: rgba(255,255,255,0.98);
+      border-bottom: 1px solid var(--subtle-gray);
       backdrop-filter: blur(8px);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
     }
 
-    .nav-content {
+    .nav-inner {
       max-width: 1400px;
       margin: 0 auto;
       display: flex;
@@ -214,390 +200,384 @@
       font-weight: 400;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--white);
+      color: var(--dark-text);
+      text-decoration: none;
     }
 
     .nav-links {
       display: flex;
-      gap: 48px;
+      gap: 36px;
       list-style: none;
     }
 
     .nav-links a {
       font-size: 11px;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(245, 245, 245, 0.45);
+      color: var(--muted-text);
       text-decoration: none;
-      transition: color 0.3s ease;
+      font-weight: 600;
+      transition: color 0.2s;
     }
 
-    .nav-links a:hover {
-      color: var(--white);
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--medical-blue);
     }
 
-    /* Hero Section */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 120px 48px 80px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-content {
-      max-width: 900px;
-      width: 100%;
+      background: var(--white);
+      padding: 80px 48px 64px;
       text-align: center;
-      position: relative;
-      z-index: 1;
+      border-bottom: 1px solid var(--subtle-gray);
     }
 
-    .hero-title {
-      font-family: 'EB Garamond', serif;
-      font-size: clamp(48px, 6vw, 76px);
-      font-weight: 400;
-      line-height: 1.15;
-      letter-spacing: 0.02em;
-      margin-bottom: 48px;
-      color: var(--white);
-    }
-
-    .hero-subtitle {
-      font-size: 14px;
-      letter-spacing: 0.08em;
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--blue-gray);
-      margin-bottom: 32px;
-      font-weight: 500;
+      color: var(--medical-blue);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--dark-text);
+      margin-bottom: 24px;
     }
 
     .hero-text {
-      font-size: 14px;
-      line-height: 1.9;
-      color: rgba(245, 245, 245, 0.5);
-      max-width: 520px;
-      margin: 0 auto 64px;
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--muted-text);
       font-weight: 300;
+      max-width: 560px;
+      margin: 0 auto 40px;
     }
 
-    .hero-actions {
+    .btn-group {
       display: flex;
-      gap: 24px;
+      gap: 12px;
       justify-content: center;
       flex-wrap: wrap;
     }
 
     .btn {
-      padding: 14px 40px;
-      border: 1px solid rgba(245, 245, 245, 0.2);
-      background: transparent;
-      color: rgba(245, 245, 245, 0.7);
+      padding: 13px 36px;
+      border: 1.5px solid var(--subtle-gray);
+      background: var(--white);
+      color: var(--dark-text);
       font-family: 'Inter', sans-serif;
       font-size: 11px;
-      letter-spacing: 0.12em;
+      font-weight: 600;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       text-decoration: none;
       cursor: pointer;
-      transition: all 0.3s ease;
+      border-radius: 4px;
+      transition: all 0.2s ease;
       display: inline-block;
     }
 
     .btn:hover {
-      border-color: rgba(245, 245, 245, 0.4);
-      color: var(--white);
-      background: rgba(245, 245, 245, 0.03);
+      border-color: var(--medical-blue);
+      color: var(--medical-blue);
     }
 
     .btn.primary {
-      border-color: var(--blue-gray);
-      color: var(--blue-gray);
+      background: var(--medical-blue);
+      border-color: var(--medical-blue);
+      color: var(--white);
     }
 
     .btn.primary:hover {
-      background: rgba(58, 74, 84, 0.1);
+      background: #004f9a;
     }
 
-    /* Trust Bar */
     .trust-bar {
-      padding: 48px;
-      border-top: 1px solid rgba(245, 245, 245, 0.05);
-      border-bottom: 1px solid rgba(245, 245, 245, 0.05);
-      background: rgba(26, 26, 26, 0.4);
+      background: var(--off-white);
+      border-bottom: 1px solid var(--subtle-gray);
+      padding: 40px 48px;
     }
 
-    .trust-content {
+    .trust-grid {
       max-width: 1400px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 48px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
       text-align: center;
     }
 
     .trust-item {
-      font-size: 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .trust-label {
+      font-size: 10px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(245, 245, 245, 0.45);
+      color: var(--muted-text);
+      font-weight: 600;
     }
 
-    .trust-item-label {
-      display: block;
-      margin-top: 8px;
-      color: rgba(245, 245, 245, 0.6);
+    .trust-value {
+      font-size: 14px;
+      color: var(--medical-blue);
+      font-weight: 400;
     }
 
-    /* About Section */
-    .about-section {
-      padding: 120px 48px;
-      border-top: 1px solid rgba(245, 245, 245, 0.05);
-      background: var(--charcoal);
-    }
-
-    .about-content {
+    .content {
       max-width: 1400px;
       margin: 0 auto;
+      padding: 80px 48px;
+    }
+
+    .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
       align-items: center;
     }
 
-    .about-text-content h2 {
+    h2 {
       font-family: 'EB Garamond', serif;
-      font-size: clamp(32px, 4vw, 48px);
+      font-size: clamp(28px, 3.5vw, 44px);
       font-weight: 400;
       line-height: 1.2;
-      margin-bottom: 32px;
+      color: var(--dark-text);
+      margin-bottom: 20px;
     }
 
-    .about-text {
-      font-size: 13px;
+    .about-text p {
+      font-size: 14px;
       line-height: 1.8;
-      color: rgba(245, 245, 245, 0.5);
-      margin-bottom: 16px;
+      color: var(--muted-text);
+      margin-bottom: 12px;
       font-weight: 300;
     }
 
-    .stats-grid {
+    .stat-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-top: 48px;
+      gap: 16px;
+      margin-top: 40px;
     }
 
-    .stat-card {
-      padding: 32px;
-      border: 1px solid rgba(245, 245, 245, 0.1);
-      background: rgba(245, 245, 245, 0.02);
+    .stat-box {
+      padding: 28px 24px;
+      background: var(--white);
+      border: 1px solid var(--subtle-gray);
+      border-radius: 4px;
+      transition: all 0.2s ease;
     }
 
-    .stat-number {
+    .stat-box:hover {
+      border-color: var(--medical-blue);
+      box-shadow: 0 4px 12px rgba(0,102,179,0.08);
+    }
+
+    .stat-num {
       font-family: 'EB Garamond', serif;
-      font-size: 42px;
+      font-size: 40px;
       font-weight: 400;
-      color: var(--blue-gray);
-      margin-bottom: 12px;
+      color: var(--medical-blue);
+      margin-bottom: 8px;
     }
 
-    .stat-label {
+    .stat-lbl {
       font-size: 11px;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(245, 245, 245, 0.45);
-      font-weight: 500;
+      color: var(--muted-text);
+      font-weight: 600;
     }
 
-    /* Footer */
     footer {
-      padding: 64px 48px;
-      border-top: 1px solid rgba(245, 245, 245, 0.05);
-      background: var(--black);
+      background: var(--white);
+      border-top: 1px solid var(--subtle-gray);
+      padding: 56px 48px;
       text-align: center;
     }
 
     .footer-logo {
       font-family: 'EB Garamond', serif;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 400;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 24px;
+      color: var(--dark-text);
+      margin-bottom: 20px;
     }
 
-    .footer-disclaimer {
+    .footer-disc {
       font-size: 11px;
-      color: rgba(245, 245, 245, 0.35);
-      max-width: 640px;
-      margin: 0 auto 32px;
+      color: var(--light-text);
       line-height: 1.8;
+      max-width: 600px;
+      margin: 0 auto 20px;
     }
 
     .footer-links {
       display: flex;
-      gap: 32px;
+      gap: 24px;
       justify-content: center;
       list-style: none;
-      margin-bottom: 32px;
+      margin-bottom: 20px;
     }
 
     .footer-links a {
       font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(245, 245, 245, 0.35);
+      color: var(--light-text);
       text-decoration: none;
-      transition: color 0.3s ease;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: color 0.2s;
     }
 
     .footer-links a:hover {
-      color: rgba(245, 245, 245, 0.6);
+      color: var(--medical-blue);
     }
 
     .footer-copy {
       font-size: 10px;
-      color: rgba(245, 245, 245, 0.2);
-      letter-spacing: 0.08em;
+      color: var(--light-text);
+      letter-spacing: 0.06em;
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
-      nav { padding: 16px 20px; }
-      .nav-content { flex-direction: column; gap: 16px; }
+      nav { padding: 12px 20px; }
+      .nav-inner { flex-direction: column; gap: 12px; }
       .nav-logo { font-size: 16px; }
-      .nav-links { gap: 20px; justify-content: center; }
-      .hero { padding: 60px 20px 50px; }
-      .hero-title { font-size: clamp(32px, 5vw, 44px); }
-      .about-content { grid-template-columns: 1fr; gap: 40px; }
-      .trust-content { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .nav-links { gap: 16px; justify-content: center; flex-wrap: wrap; }
+      .nav-links a { font-size: 10px; }
+      
+      .hero { padding: 48px 20px 40px; }
+      h1 { font-size: clamp(28px, 4vw, 40px); }
+      .hero-text { font-size: 13px; }
+      
+      .content { padding: 48px 20px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .trust-bar { padding: 32px 20px; }
+      
+      .gate-box { padding: 32px 24px; }
       footer { padding: 40px 20px; }
     }
 
     @media (max-width: 480px) {
-      nav { padding: 12px 16px; }
-      .hero { padding: 40px 16px 40px; }
-      .gate-disclaimer { padding: 20px; }
-      .gate-logo { font-size: 24px; }
+      nav { padding: 10px 14px; }
+      .nav-logo { font-size: 14px; }
+      .nav-links { gap: 10px; }
+      .nav-links a { font-size: 9px; }
+      
+      .hero { padding: 36px 16px 32px; }
+      h1 { font-size: clamp(24px, 3vw, 32px); }
+      
+      .content { padding: 36px 16px; }
+      .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .trust-bar { padding: 28px 16px; }
+      
+      .stat-grid { grid-template-columns: 1fr; }
+      .gate-box { padding: 24px 18px; }
+      footer { padding: 32px 14px; }
     }
   </style>
 </head>
 <body>
 
-<!-- Age Gate -->
+<!-- AGE GATE -->
 <div id="age-gate">
-  <div class="gate-container">
-    <div class="gate-content">
-      <div class="gate-logo">Aura Labs</div>
-      <div class="gate-divider"></div>
-
-      <div class="gate-disclaimer">
-        <strong>Research Institute Notice:</strong> This site is restricted to authorized research professionals. All materials are for in vitro research and laboratory use only. Products are not approved for human consumption and are not intended for clinical application.
-      </div>
-
-      <div class="gate-email">
-        <input type="email" id="email-input" placeholder="your@research-email.edu" required />
-      </div>
-
-      <div class="gate-confirmation">
-        <input type="checkbox" id="confirm-checkbox" />
-        <label for="confirm-checkbox">I confirm I am 21+ and authorized to access research materials</label>
-      </div>
-
-      <div class="gate-buttons">
-        <button class="gate-btn confirm" onclick="enterSite()">Confirm Access</button>
-        <button class="gate-btn" onclick="denyEntry()">Decline</button>
-      </div>
+  <div class="gate-box">
+    <div class="gate-logo">Aura Labs</div>
+    <div class="gate-divider"></div>
+    <div class="gate-notice">
+      <strong>Research Institute Notice:</strong> This site is restricted to authorized research professionals. All materials are for in vitro research and laboratory use only. Products are not approved for human consumption.
+    </div>
+    <div class="gate-email">
+      <input type="email" id="email-input" placeholder="your@research-email.edu" required />
+    </div>
+    <div class="gate-check">
+      <input type="checkbox" id="confirm-checkbox" />
+      <label for="confirm-checkbox">I confirm I am 21+ and authorized to access research materials</label>
+    </div>
+    <div class="gate-btns">
+      <button class="gate-btn primary" onclick="enterSite()">Confirm Access</button>
+      <button class="gate-btn" onclick="denyEntry()">Decline</button>
     </div>
   </div>
 </div>
 
-<!-- Main Site -->
+<!-- MAIN SITE -->
 <div id="site">
-  <!-- Navigation -->
   <nav>
-    <div class="nav-content">
-      <div class="nav-logo">Aura Labs</div>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Aura Labs</a>
       <ul class="nav-links">
-        <li><a href="#about">About</a></li>
+        <li><a href="index.html" class="active">Home</a></li>
         <li><a href="products.html">Compounds</a></li>
-        <li><a href="#">Documentation</a></li>
+        <li><a href="#docs">Documentation</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-subtitle">Premium Research Institute</div>
-      <h1 class="hero-title">Laboratory-Grade Compounds</h1>
-      <p class="hero-text">Synthesized to pharmaceutical standards. Every batch documented. Every result verified. Scientific precision, environmental control, institutional discipline.</p>
-      <div class="hero-actions">
-        <a href="products.html" class="btn primary">View Catalog</a>
-        <a href="#" class="btn">Documentation</a>
-      </div>
+  <div class="hero">
+    <div class="hero-eyebrow">Premium Research Institute</div>
+    <h1>Laboratory-Grade Compounds</h1>
+    <p class="hero-text">Synthesized to pharmaceutical standards. Every batch documented. Every result verified. Scientific precision, institutional discipline, uncompromising quality.</p>
+    <div class="btn-group">
+      <a href="products.html" class="btn primary">View Catalog</a>
+      <a href="#docs" class="btn">Documentation</a>
     </div>
-  </section>
+  </div>
 
-  <!-- Trust Bar -->
   <div class="trust-bar">
-    <div class="trust-content">
+    <div class="trust-grid">
       <div class="trust-item">
-        Third-Party Testing
-        <span class="trust-item-label">Verified</span>
+        <span class="trust-label">Third-Party Testing</span>
+        <span class="trust-value">Verified</span>
       </div>
       <div class="trust-item">
-        99%+ Purity
-        <span class="trust-item-label">Guaranteed</span>
+        <span class="trust-label">Minimum Purity</span>
+        <span class="trust-value">99%+</span>
       </div>
       <div class="trust-item">
-        USA Synthesis
-        <span class="trust-item-label">Documented</span>
+        <span class="trust-label">USA Synthesis</span>
+        <span class="trust-value">Documented</span>
       </div>
       <div class="trust-item">
-        COA Library
-        <span class="trust-item-label">Available</span>
+        <span class="trust-label">COA Library</span>
+        <span class="trust-value">Available</span>
       </div>
     </div>
   </div>
 
-  <!-- About -->
-  <div class="about-section" id="about">
-    <div class="about-content">
-      <div class="about-text-content">
+  <div class="content">
+    <div class="about-grid">
+      <div>
         <h2>Precision Meets Discipline</h2>
-        <p class="about-text">Aura Labs operates as a private research institution dedicated to synthesizing compounds at pharmaceutical standards. We document everything. We verify everything. We believe research compounds should meet the same precision standard as the science they support.</p>
-        <p class="about-text">Our approach is institutional. Our process is disciplined. Our commitment is uncompromising.</p>
+        <p>Aura Labs operates as a private research institution dedicated to synthesizing compounds at pharmaceutical standards. We document everything. We verify everything.</p>
+        <p>Our approach is institutional. Our process is disciplined. Our commitment is uncompromising.</p>
       </div>
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number">99%</div>
-          <div class="stat-label">Minimum Purity Threshold</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">48h</div>
-          <div class="stat-label">Standard Fulfillment</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Documented COA</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">USA</div>
-          <div class="stat-label">Synthesis Location</div>
-        </div>
+      <div class="stat-grid">
+        <div class="stat-box"><div class="stat-num">99%</div><div class="stat-lbl">Minimum Purity</div></div>
+        <div class="stat-box"><div class="stat-num">48h</div><div class="stat-lbl">Standard Fulfillment</div></div>
+        <div class="stat-box"><div class="stat-num">100%</div><div class="stat-lbl">Documented COA</div></div>
+        <div class="stat-box"><div class="stat-num">USA</div><div class="stat-lbl">Synthesis Location</div></div>
       </div>
     </div>
   </div>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-logo">Aura Labs</div>
-    <div class="footer-disclaimer">
-      All compounds are sold exclusively for in vitro research and laboratory use. Products have not been evaluated by regulatory agencies and are not intended for human consumption or clinical application. By accessing this site, you confirm compliance with all applicable laws and regulations governing research materials in your jurisdiction.
-    </div>
+    <div class="footer-disc">All compounds are sold exclusively for in vitro research and laboratory use. Products have not been evaluated by regulatory agencies and are not intended for human consumption or clinical application.</div>
     <ul class="footer-links">
       <li><a href="#">Research Terms</a></li>
       <li><a href="#">Documentation</a></li>
@@ -612,53 +592,19 @@
   function enterSite() {
     const email = document.getElementById('email-input').value.trim();
     const checkbox = document.getElementById('confirm-checkbox');
-
-    if (!email || !email.includes('@')) {
-      alert('Please enter your email address');
-      return;
-    }
-
-    if (!checkbox.checked) {
-      alert('Please confirm you are 21+ and authorized');
-      return;
-    }
-
-    // Save email (would normally send to backend)
-    console.log('Email captured:', email);
+    if (!email || !email.includes('@')) { alert('Please enter your email address'); return; }
+    if (!checkbox.checked) { alert('Please confirm you are 21+ and authorized'); return; }
     localStorage.setItem('auralabs_email', email);
-
     document.getElementById('age-gate').style.opacity = '0';
     document.getElementById('age-gate').style.transition = 'opacity 0.6s ease';
-    setTimeout(() => {
-      document.getElementById('age-gate').style.display = 'none';
-      document.getElementById('site').style.display = 'block';
-    }, 600);
+    setTimeout(() => { document.getElementById('age-gate').style.display = 'none'; document.getElementById('site').style.display = 'block'; }, 600);
   }
-
-  function denyEntry() {
-    window.location.href = 'https://www.google.com';
-  }
-
-  // Hide age gate if user already passed it
+  function denyEntry() { window.location.href = 'https://www.google.com'; }
   window.addEventListener('load', function() {
     if (localStorage.getItem('auralabs_email')) {
       document.getElementById('age-gate').style.display = 'none';
       document.getElementById('site').style.display = 'block';
     }
-  });
-
-  // Smooth scroll for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      const href = this.getAttribute('href');
-      if (href !== '#') {
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-    });
   });
 </script>
 </body>
