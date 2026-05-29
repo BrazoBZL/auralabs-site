@@ -497,13 +497,8 @@
     const email = document.getElementById('email-input').value.trim();
     const checkbox = document.getElementById('confirm-checkbox');
 
-    if (!email) {
+    if (!email || !email.includes('@')) {
       alert('Please enter your email address');
-      return;
-    }
-
-    if (!email.includes('@')) {
-      alert('Please enter a valid email address');
       return;
     }
 
