@@ -1,658 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aura Labs | Premium Research Compounds</title>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --white: #ffffff;
-      --off-white: #f9f8f6;
-      --light-gray: #f0ede8;
-      --medium-gray: #e5dfd5;
-      --dark-text: #1a1a1a;
-      --muted-text: #666666;
-      --light-text: #888888;
-      --navy: #1e3a5f;
-      --medical-blue: #0066b3;
-      --accent-gold: #d4af6a;
-      --subtle-gray: #e8e8e8;
-    }
-
-    html, body {
-      height: 100%;
-      background: var(--off-white);
-      color: var(--dark-text);
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-    }
-
-    /* Subtle gradient overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(224,215,210,0.3) 100%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Age Gate */
-    #age-gate {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #ffffff 0%, #f9f8f6 100%);
-      padding: 16px;
-      overflow-y: auto;
-    }
-
-    .gate-container {
-      position: relative;
-      max-width: 520px;
-      width: 100%;
-    }
-
-    .gate-content {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      background: var(--white);
-      padding: 48px 40px;
-      border-radius: 8px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
-    }
-
-    .gate-logo {
-      margin-bottom: 32px;
-      font-family: 'EB Garamond', serif;
-      font-size: 32px;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--dark-text);
-    }
-
-    .gate-divider {
-      width: 40px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--medical-blue), transparent);
-      margin: 24px auto;
-    }
-
-    .gate-disclaimer {
-      font-size: 12px;
-      line-height: 1.8;
-      color: var(--muted-text);
-      margin-bottom: 32px;
-      padding: 24px;
-      border-left: 3px solid var(--medical-blue);
-      background: var(--off-white);
-      text-align: left;
-    }
-
-    .gate-disclaimer strong {
-      color: var(--dark-text);
-      font-weight: 600;
-    }
-
-    .gate-email {
-      margin-bottom: 20px;
-    }
-
-    .gate-email input {
-      width: 100%;
-      padding: 12px 16px;
-      background: var(--off-white);
-      border: 1px solid var(--subtle-gray);
-      color: var(--dark-text);
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      border-radius: 4px;
-      transition: all 0.3s ease;
-    }
-
-    .gate-email input::placeholder {
-      color: var(--light-text);
-    }
-
-    .gate-email input:focus {
-      outline: none;
-      border-color: var(--medical-blue);
-      background: var(--white);
-      box-shadow: 0 0 0 3px rgba(0,102,179,0.1);
-    }
-
-    .gate-confirmation {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 28px;
-      padding: 0;
-    }
-
-    .gate-confirmation input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      cursor: pointer;
-      margin-top: 2px;
-      accent-color: var(--medical-blue);
-    }
-
-    .gate-confirmation label {
-      font-size: 13px;
-      color: var(--muted-text);
-      cursor: pointer;
-      margin: 0;
-    }
-
-    .gate-buttons {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-    }
-
-    .gate-btn {
-      flex: 1;
-      max-width: 200px;
-      padding: 14px 24px;
-      border: 1px solid var(--subtle-gray);
-      background: var(--white);
-      color: var(--dark-text);
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      cursor: pointer;
-      border-radius: 4px;
-      transition: all 0.3s ease;
-    }
-
-    .gate-btn:hover {
-      border-color: var(--medical-blue);
-      color: var(--medical-blue);
-      background: rgba(0,102,179,0.02);
-    }
-
-    .gate-btn.confirm {
-      border-color: var(--medical-blue);
-      background: var(--medical-blue);
-      color: var(--white);
-    }
-
-    .gate-btn.confirm:hover {
-      background: #0052a3;
-      box-shadow: 0 4px 12px rgba(0,102,179,0.2);
-    }
-
-    /* Main Site */
-    #site {
-      display: none;
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-    }
-
-    /* Navigation */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      padding: 20px 48px;
-      border-bottom: 1px solid var(--subtle-gray);
-      background: rgba(255,255,255,0.98);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }
-
-    .nav-content {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-logo {
-      font-family: 'EB Garamond', serif;
-      font-size: 20px;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--dark-text);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 40px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted-text);
-      text-decoration: none;
-      transition: color 0.3s ease;
-      font-weight: 500;
-    }
-
-    .nav-links a:hover {
-      color: var(--medical-blue);
-    }
-
-    /* Hero Section */
-    .hero {
-      min-height: 80vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 80px 48px;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, var(--white) 0%, var(--off-white) 100%);
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,102,179,0.03) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-content {
-      max-width: 900px;
-      width: 100%;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-subtitle {
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--medical-blue);
-      margin-bottom: 24px;
-      font-weight: 600;
-    }
-
-    .hero-title {
-      font-family: 'EB Garamond', serif;
-      font-size: clamp(48px, 6vw, 72px);
-      font-weight: 400;
-      line-height: 1.15;
-      letter-spacing: 0.02em;
-      margin-bottom: 28px;
-      color: var(--dark-text);
-    }
-
-    .hero-text {
-      font-size: 16px;
-      line-height: 1.8;
-      color: var(--muted-text);
-      max-width: 580px;
-      margin: 0 auto 48px;
-      font-weight: 300;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 14px 40px;
-      border: 1px solid var(--subtle-gray);
-      background: var(--white);
-      color: var(--dark-text);
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      text-decoration: none;
-      cursor: pointer;
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      display: inline-block;
-    }
-
-    .btn:hover {
-      border-color: var(--medical-blue);
-      color: var(--medical-blue);
-      box-shadow: 0 4px 12px rgba(0,102,179,0.1);
-    }
-
-    .btn.primary {
-      border-color: var(--medical-blue);
-      background: var(--medical-blue);
-      color: var(--white);
-    }
-
-    .btn.primary:hover {
-      background: #0052a3;
-      box-shadow: 0 6px 16px rgba(0,102,179,0.2);
-    }
-
-    /* Trust Bar */
-    .trust-bar {
-      padding: 64px 48px;
-      border-top: 1px solid var(--subtle-gray);
-      border-bottom: 1px solid var(--subtle-gray);
-      background: var(--white);
-    }
-
-    .trust-content {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 40px;
-      text-align: center;
-    }
-
-    .trust-item {
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted-text);
-      font-weight: 600;
-    }
-
-    .trust-item-label {
-      display: block;
-      margin-top: 8px;
-      color: var(--medical-blue);
-      font-size: 14px;
-      font-weight: 400;
-      text-transform: none;
-      letter-spacing: normal;
-    }
-
-    /* About Section */
-    .about-section {
-      padding: 100px 48px;
-      border-top: 1px solid var(--subtle-gray);
-      background: var(--off-white);
-    }
-
-    .about-content {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .about-text-content h2 {
-      font-family: 'EB Garamond', serif;
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 400;
-      line-height: 1.2;
-      margin-bottom: 24px;
-      color: var(--dark-text);
-    }
-
-    .about-text {
-      font-size: 15px;
-      line-height: 1.8;
-      color: var(--muted-text);
-      margin-bottom: 16px;
-      font-weight: 300;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-top: 48px;
-    }
-
-    .stat-card {
-      padding: 32px;
-      border: 1px solid var(--subtle-gray);
-      background: var(--white);
-      border-radius: 4px;
-      transition: all 0.3s ease;
-    }
-
-    .stat-card:hover {
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      border-color: var(--medical-blue);
-    }
-
-    .stat-number {
-      font-family: 'EB Garamond', serif;
-      font-size: 42px;
-      font-weight: 400;
-      color: var(--medical-blue);
-      margin-bottom: 12px;
-    }
-
-    .stat-label {
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted-text);
-      font-weight: 600;
-    }
-
-    /* Footer */
-    footer {
-      padding: 64px 48px;
-      border-top: 1px solid var(--subtle-gray);
-      background: var(--white);
-      text-align: center;
-    }
-
-    .footer-logo {
-      font-family: 'EB Garamond', serif;
-      font-size: 24px;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 24px;
-      color: var(--dark-text);
-    }
-
-    .footer-disclaimer {
-      font-size: 12px;
-      color: var(--light-text);
-      max-width: 640px;
-      margin: 0 auto 24px;
-      line-height: 1.8;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 32px;
-      justify-content: center;
-      list-style: none;
-      margin-bottom: 24px;
-    }
-
-    .footer-links a {
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--light-text);
-      text-decoration: none;
-      transition: color 0.3s ease;
-      font-weight: 500;
-    }
-
-    .footer-links a:hover {
-      color: var(--medical-blue);
-    }
-
-    .footer-copy {
-      font-size: 11px;
-      color: var(--light-text);
-      letter-spacing: 0.05em;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      nav { padding: 12px 20px; }
-      .nav-content { flex-direction: column; gap: 12px; }
-      .nav-logo { font-size: 16px; }
-      .nav-links { gap: 20px; justify-content: center; }
-      
-      .hero { padding: 60px 20px; min-height: auto; }
-      .hero-title { font-size: clamp(32px, 5vw, 48px); margin-bottom: 20px; }
-      .hero-text { font-size: 14px; margin-bottom: 36px; }
-      
-      .about-content { grid-template-columns: 1fr; gap: 40px; }
-      .trust-content { grid-template-columns: repeat(2, 1fr); gap: 24px; }
-      
-      .gate-content { padding: 32px 24px; }
-      footer { padding: 40px 20px; }
-    }
-
-    @media (max-width: 480px) {
-      nav { padding: 10px 16px; }
-      .nav-logo { font-size: 14px; }
-      .nav-links { gap: 12px; }
-      .nav-links a { font-size: 10px; }
-      
-      .hero { padding: 40px 16px; }
-      .hero-title { font-size: clamp(24px, 4vw, 36px); }
-      .hero-text { font-size: 13px; }
-      
-      .trust-content { grid-template-columns: 1fr; }
-      .stats-grid { grid-template-columns: 1fr; }
-      
-      .gate-content { padding: 24px 20px; }
-      footer { padding: 32px 16px; font-size: 10px; }
-    }
-  </style>
+  <link rel="stylesheet" href="shared.css" />
 </head>
 <body>
 
-<!-- Age Gate -->
 <div id="age-gate">
-  <div class="gate-container">
-    <div class="gate-content">
-      <div class="gate-logo">Aura Labs</div>
-      <div class="gate-divider"></div>
-
-      <div class="gate-disclaimer">
-        <strong>Research Institute Notice:</strong> This site is restricted to authorized research professionals. All materials are for in vitro research and laboratory use only. Products are not approved for human consumption and are not intended for clinical application.
-      </div>
-
-      <div class="gate-email">
-        <input type="email" id="email-input" placeholder="your@research-email.edu" required />
-      </div>
-
-      <div class="gate-confirmation">
-        <input type="checkbox" id="confirm-checkbox" />
-        <label for="confirm-checkbox">I confirm I am 21+ and authorized to access research materials</label>
-      </div>
-
-      <div class="gate-buttons">
-        <button class="gate-btn confirm" onclick="enterSite()">Confirm Access</button>
-        <button class="gate-btn" onclick="denyEntry()">Decline</button>
-      </div>
+  <div class="gate-box">
+    <div class="gate-logo">Aura Labs</div>
+    <div class="gate-divider"></div>
+    <div class="gate-notice">
+      <strong>Research Institute Notice:</strong> This site is restricted to authorized research professionals. All materials are for in vitro research and laboratory use only. Products are not approved for human consumption and are not intended for clinical application.
+    </div>
+    <div class="gate-email">
+      <input type="email" id="email-input" placeholder="your@research-email.edu" required />
+    </div>
+    <div class="gate-check">
+      <input type="checkbox" id="confirm-checkbox" />
+      <label for="confirm-checkbox">I confirm I am 21+ and authorized to access research materials</label>
+    </div>
+    <div class="gate-btns">
+      <button class="gate-btn primary" onclick="enterSite()">Confirm Access</button>
+      <button class="gate-btn" onclick="denyEntry()">Decline</button>
     </div>
   </div>
 </div>
 
-<!-- Main Site -->
 <div id="site">
   <nav>
-    <div class="nav-content">
-      <div class="nav-logo">Aura Labs</div>
+    <div class="nav-inner">
+      <a href="index-test-3.html" class="nav-logo">Aura Labs</a>
       <ul class="nav-links">
-        <li><a href="#about">About</a></li>
+        <li><a href="index-test-3.html" class="active">Home</a></li>
         <li><a href="products-test-3.html">Compounds</a></li>
         <li><a href="#">Documentation</a></li>
       </ul>
     </div>
   </nav>
 
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-subtitle">Premium Research Institute</div>
-      <h1 class="hero-title">Laboratory-Grade Compounds</h1>
-      <p class="hero-text">Synthesized to pharmaceutical standards. Every batch documented. Every result verified. Scientific precision, institutional discipline, uncompromising quality.</p>
-      <div class="hero-actions">
-        <a href="products-test-3.html" class="btn primary">View Catalog</a>
-        <a href="#" class="btn">Documentation</a>
-      </div>
+  <div class="page-hero">
+    <div class="eyebrow">Premium Research Institute</div>
+    <h1>Laboratory-Grade Compounds</h1>
+    <p>Synthesized to pharmaceutical standards. Every batch documented. Every result verified. Scientific precision, institutional discipline, uncompromising quality.</p>
+    <div class="btn-group">
+      <a href="products-test-3.html" class="btn primary">View Catalog</a>
+      <a href="#" class="btn">Documentation</a>
     </div>
-  </section>
+  </div>
 
   <div class="trust-bar">
-    <div class="trust-content">
+    <div class="trust-grid">
       <div class="trust-item">
-        Third-Party Testing
-        <span class="trust-item-label">Verified</span>
+        <span class="trust-label">Third-Party Testing</span>
+        <span class="trust-value">Verified</span>
       </div>
       <div class="trust-item">
-        99%+ Purity
-        <span class="trust-item-label">Guaranteed</span>
+        <span class="trust-label">Minimum Purity</span>
+        <span class="trust-value">99%+</span>
       </div>
       <div class="trust-item">
-        USA Synthesis
-        <span class="trust-item-label">Documented</span>
+        <span class="trust-label">USA Synthesis</span>
+        <span class="trust-value">Documented</span>
       </div>
       <div class="trust-item">
-        COA Library
-        <span class="trust-item-label">Available</span>
+        <span class="trust-label">COA Library</span>
+        <span class="trust-value">Available</span>
       </div>
     </div>
   </div>
 
-  <div class="about-section" id="about">
-    <div class="about-content">
-      <div class="about-text-content">
+  <div class="content">
+    <div class="about-grid">
+      <div class="about-text">
         <h2>Precision Meets Discipline</h2>
-        <p class="about-text">Aura Labs operates as a private research institution dedicated to synthesizing compounds at pharmaceutical standards. We document everything. We verify everything. We believe research compounds should meet the same precision standard as the science they support.</p>
-        <p class="about-text">Our approach is institutional. Our process is disciplined. Our commitment is uncompromising.</p>
+        <p>Aura Labs operates as a private research institution dedicated to synthesizing compounds at pharmaceutical standards. We document everything. We verify everything.</p>
+        <p>Our approach is institutional. Our process is disciplined. Our commitment is uncompromising.</p>
       </div>
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number">99%</div>
-          <div class="stat-label">Minimum Purity Threshold</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">48h</div>
-          <div class="stat-label">Standard Fulfillment</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Documented COA</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">USA</div>
-          <div class="stat-label">Synthesis Location</div>
-        </div>
+      <div class="stat-grid">
+        <div class="stat-box"><div class="stat-num">99%</div><div class="stat-lbl">Minimum Purity</div></div>
+        <div class="stat-box"><div class="stat-num">48h</div><div class="stat-lbl">Standard Fulfillment</div></div>
+        <div class="stat-box"><div class="stat-num">100%</div><div class="stat-lbl">Documented COA</div></div>
+        <div class="stat-box"><div class="stat-num">USA</div><div class="stat-lbl">Synthesis Location</div></div>
       </div>
     </div>
   </div>
 
   <footer>
     <div class="footer-logo">Aura Labs</div>
-    <div class="footer-disclaimer">
-      All compounds are sold exclusively for in vitro research and laboratory use. Products have not been evaluated by regulatory agencies and are not intended for human consumption or clinical application. By accessing this site, you confirm compliance with all applicable laws and regulations governing research materials in your jurisdiction.
-    </div>
+    <div class="footer-disc">All compounds are sold exclusively for in vitro research and laboratory use. Products have not been evaluated by regulatory agencies and are not intended for human consumption or clinical application.</div>
     <ul class="footer-links">
       <li><a href="#">Research Terms</a></li>
       <li><a href="#">Documentation</a></li>
@@ -667,30 +105,14 @@
   function enterSite() {
     const email = document.getElementById('email-input').value.trim();
     const checkbox = document.getElementById('confirm-checkbox');
-
-    if (!email || !email.includes('@')) {
-      alert('Please enter your email address');
-      return;
-    }
-
-    if (!checkbox.checked) {
-      alert('Please confirm you are 21+ and authorized');
-      return;
-    }
-
+    if (!email || !email.includes('@')) { alert('Please enter your email address'); return; }
+    if (!checkbox.checked) { alert('Please confirm you are 21+ and authorized'); return; }
     localStorage.setItem('auralabs_email', email);
     document.getElementById('age-gate').style.opacity = '0';
     document.getElementById('age-gate').style.transition = 'opacity 0.6s ease';
-    setTimeout(() => {
-      document.getElementById('age-gate').style.display = 'none';
-      document.getElementById('site').style.display = 'block';
-    }, 600);
+    setTimeout(() => { document.getElementById('age-gate').style.display = 'none'; document.getElementById('site').style.display = 'block'; }, 600);
   }
-
-  function denyEntry() {
-    window.location.href = 'https://www.google.com';
-  }
-
+  function denyEntry() { window.location.href = 'https://www.google.com'; }
   window.addEventListener('load', function() {
     if (localStorage.getItem('auralabs_email')) {
       document.getElementById('age-gate').style.display = 'none';
