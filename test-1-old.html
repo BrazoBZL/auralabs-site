@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aura Labs | Premium Research Peptides</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #050709;
+      --deep: #080d14;
+      --navy: #0b1220;
+      --surface: #0f1824;
+      --border: rgba(255,255,255,0.07);
+      --gold: #c9a96e;
+      --gold-light: #e0c896;
+      --white: #f4f4f0;
+      --muted: rgba(244,244,240,0.45);
+      --accent: #4a9ebb;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+    }
+
+    /* ── AGE GATE ── */
+    #age-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--black);
+      padding: 24px;
+    }
+
+    .gate-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(74,158,187,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(201,169,110,0.05) 0%, transparent 60%);
+    }
+
+    .gate-box {
+      position: relative;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .gate-logo {
+      margin-bottom: 48px;
+    }
+
+    .gate-logo .logo-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .gate-logo .logo-icon {
+      width: 44px;
+      height: 44px;
+      border: 1.5px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gate-logo .logo-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .gate-logo .logo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+
+    .gate-logo .logo-sub {
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-top: 4px;
+      display: block;
+      text-align: right;
+    }
+
+    .gate-divider {
+      width: 48px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 36px;
+    }
+
+    .gate-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .gate-disclaimer {
+      font-size: 12px;
+      line-height: 1.8;
+      color: rgba(244,244,240,0.5);
+      margin-bottom: 40px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      border-radius: 2px;
+      text-align: left;
+    }
+
+    .gate-disclaimer strong {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .gate-question {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+
+    .gate-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    .btn-yes {
+      flex: 1;
+      max-width: 180px;
+      padding: 14px 24px;
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-yes:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-no {
+      flex: 1;
+      max-width: 180px;
+      padding: 14px 24px;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-no:hover {
+      border-color: rgba(255,255,255,0.2);
+      color: var(--white);
+    }
+
+    .gate-legal {
+      font-size: 10px;
+      color: rgba(244,244,240,0.25);
+      letter-spacing: 0.05em;
+      line-height: 1.6;
+    }
+
+    /* ── MAIN SITE ── */
+    #site {
+      display: none;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--deep);
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: rgba(8,13,20,0.92);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-logo .logo-icon {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-logo .logo-icon svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .nav-logo span {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      padding: 10px 24px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 30%, rgba(74,158,187,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 20% 80%, rgba(201,169,110,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 50% at 80% 20%, rgba(74,158,187,0.03) 0%, transparent 60%);
+    }
+
+    .hero-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 780px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 36px;
+    }
+
+    .hero-tag::before, .hero-tag::after {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 7vw, 88px);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: 0.02em;
+      margin-bottom: 28px;
+      color: var(--white);
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .hero-sub {
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      max-width: 520px;
+      margin: 0 auto 48px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 16px 40px;
+      background: var(--gold);
+      color: var(--black);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      padding: 16px 40px;
+      background: transparent;
+      color: var(--white);
+      border: 1px solid var(--border);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color 0.2s;
+      display: inline-block;
+    }
+
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.3); }
+
+    /* TRUST BAR */
+    .trust-bar {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 24px 48px;
+      display: flex;
+      justify-content: center;
+      gap: 64px;
+      background: rgba(255,255,255,0.01);
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .trust-item svg {
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* PRODUCTS */
+    .section {
+      padding: 100px 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .section-tag {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .product-card {
+      background: var(--surface);
+      padding: 32px;
+      transition: background 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .product-card:hover {
+      background: rgba(15,24,36,0.95);
+    }
+
+    .product-card:hover .product-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .product-cat {
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .product-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .product-desc {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .product-price {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--white);
+    }
+
+    .product-price span {
+      font-size: 11px;
+      color: var(--muted);
+      margin-right: 4px;
+    }
+
+    .product-purity {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .product-arrow {
+      position: absolute;
+      top: 32px;
+      right: 32px;
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity 0.2s, transform 0.2s;
+      color: var(--gold);
+      font-size: 18px;
+    }
+
+    /* ABOUT */
+    .about-section {
+      padding: 100px 48px;
+      border-top: 1px solid var(--border);
+      background: var(--navy);
+    }
+
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .about-text {
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .stat-item {
+      padding: 24px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 40px;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px;
+      text-align: center;
+      background: var(--black);
+    }
+
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .footer-disclaimer {
+      font-size: 11px;
+      color: rgba(244,244,240,0.25);
+      max-width: 640px;
+      margin: 0 auto 24px;
+      line-height: 1.8;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      list-style: none;
+      margin-bottom: 24px;
+    }
+
+    .footer-links a {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .footer-copy {
+      font-size: 10px;
+      color: rgba(244,244,240,0.2);
+      letter-spacing: 0.1em;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── AGE GATE ── -->
+<div id="age-gate">
+  <div class="gate-bg"></div>
+  <div class="gate-box">
+
+    <div class="gate-logo">
+      <div class="logo-mark">
+        <div class="logo-icon">
+          <svg viewBox="0 0 20 20" fill="none" stroke="#c9a96e" stroke-width="1.2">
+            <circle cx="10" cy="10" r="6"/>
+            <circle cx="10" cy="10" r="2.5" fill="#c9a96e" stroke="none"/>
+            <line x1="10" y1="2" x2="10" y2="4.5"/>
+            <line x1="10" y1="15.5" x2="10" y2="18"/>
+            <line x1="2" y1="10" x2="4.5" y2="10"/>
+            <line x1="15.5" y1="10" x2="18" y2="10"/>
+          </svg>
+        </div>
+        <div>
+          <div class="logo-text">Aura Labs</div>
+          <span class="logo-sub">Research Division</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="gate-divider"></div>
+
+    <div class="gate-title">Restricted Access</div>
+
+    <div class="gate-disclaimer">
+      <strong>Legal Notice:</strong> All products offered by Aura Labs are intended exclusively for <strong>in vitro research and laboratory use only</strong>. Products are not approved by the FDA, are not intended for human or veterinary use, and must not be used for self-administration or any clinical application.<br><br>
+      By proceeding, you confirm you are <strong>21 years of age or older</strong> and a <strong>licensed research professional</strong>, and you agree to use all products solely for lawful scientific research purposes.
+    </div>
+
+    <div class="gate-question">Are you 21+ and a licensed research professional?</div>
+
+    <div class="gate-buttons">
+      <button class="btn-yes" onclick="enterSite()">Yes, I Confirm</button>
+      <button class="btn-no" onclick="denyEntry()">No, Exit</button>
+    </div>
+
+    <div class="gate-legal">
+      © 2026 Aura Labs. All rights reserved. For research use only. Not for human consumption.
+    </div>
+
+  </div>
+</div>
+
+<!-- ── MAIN SITE ── -->
+<div id="site">
+
+  <nav>
+    <div class="nav-logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 20 20" fill="none" stroke="#c9a96e" stroke-width="1.2">
+          <circle cx="10" cy="10" r="6"/>
+          <circle cx="10" cy="10" r="2.5" fill="#c9a96e" stroke="none"/>
+          <line x1="10" y1="2" x2="10" y2="4.5"/>
+          <line x1="10" y1="15.5" x2="10" y2="18"/>
+          <line x1="2" y1="10" x2="4.5" y2="10"/>
+          <line x1="15.5" y1="10" x2="18" y2="10"/>
+        </svg>
+      </div>
+      <span>Aura Labs</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Catalog</a></li>
+      <li><a href="#">Research</a></li>
+      <li><a href="#">Purity Reports</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+    <a href="#" class="nav-cta">Order Now</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-lines"></div>
+    <div class="hero-content">
+      <div class="hero-tag">Premium Research Peptides</div>
+      <h1 class="hero-title">
+        Precision Formulated<br>
+        <em>For Advanced Research</em>
+      </h1>
+      <p class="hero-sub">
+        Third-party tested compounds synthesized to the highest purity standards. Every batch documented. Every result verifiable.
+      </p>
+      <div class="hero-actions">
+        <a href="#" class="btn-primary">View Catalog</a>
+        <a href="#" class="btn-secondary">Purity Reports</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      Third-Party Tested
+    </div>
+    <div class="trust-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      99%+ Purity
+    </div>
+    <div class="trust-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      USA Synthesized
+    </div>
+    <div class="trust-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      COA Available
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-tag">Research Catalog</span>
+      <h2 class="section-title">Featured Compounds</h2>
+      <p class="section-desc">Rigorously synthesized peptides for advanced laboratory research. All products include certificate of analysis.</p>
+    </div>
+
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-arrow">→</div>
+        <div class="product-cat">GLP-1 Agonist</div>
+        <div class="product-name">Semaglutide</div>
+        <div class="product-desc">GLP-1 receptor agonist. Research into metabolic pathways and glucose regulation.</div>
+        <div class="product-footer">
+          <div class="product-price"><span>from</span>$89.99</div>
+          <div class="product-purity">99.2% Pure</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-arrow">→</div>
+        <div class="product-cat">Tissue Repair</div>
+        <div class="product-name">BPC-157</div>
+        <div class="product-desc">Pentadecapeptide studied for its role in tissue regeneration and angiogenesis research.</div>
+        <div class="product-footer">
+          <div class="product-price"><span>from</span>$34.99</div>
+          <div class="product-purity">99.4% Pure</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-arrow">→</div>
+        <div class="product-cat">Thymosin</div>
+        <div class="product-name">TB-500</div>
+        <div class="product-desc">Synthetic thymosin beta-4 fragment. Studied for cellular migration and actin regulation.</div>
+        <div class="product-footer">
+          <div class="product-price"><span>from</span>$59.99</div>
+          <div class="product-purity">99.1% Pure</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-arrow">→</div>
+        <div class="product-cat">Coenzyme</div>
+        <div class="product-name">NAD+</div>
+        <div class="product-desc">Nicotinamide adenine dinucleotide. Key coenzyme in cellular energy metabolism research.</div>
+        <div class="product-footer">
+          <div class="product-price"><span>from</span>$59.99</div>
+          <div class="product-purity">99.5% Pure</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-arrow">→</div>
+        <div class="product-cat">Growth Hormone</div>
+        <div class="product-name">Ipamorelin</div>
+        <div class="product-desc">Selective GH secretagogue. Research applications in growth hormone pulse studies.</div>
+        <div class="product-footer">
+          <div class="product-price"><span>from</span>$52.49</div>
+          <div class="product-purity">99.3% Pure</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-arrow">→</div>
+        <div class="product-cat">Melanocortin</div>
+        <div class="product-name">Melanotan II</div>
+        <div class="product-desc">Melanocortin receptor agonist studied in pigmentation and CNS research models.</div>
+        <div class="product-footer">
+          <div class="product-price"><span>from</span>$29.99</div>
+          <div class="product-purity">99.0% Pure</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="about-section">
+    <div class="about-inner">
+      <div>
+        <span class="section-tag">Our Standard</span>
+        <h2 class="about-title">Built for Researchers Who Demand Precision</h2>
+        <p class="about-text">Every compound in our catalog undergoes rigorous third-party analysis before release. We document every batch, every result — because your research depends on it.</p>
+        <p class="about-text">Aura Labs was founded on a single principle: research compounds should meet the same standard as the science they support.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-item">
+          <div class="stat-num">99%</div>
+          <div class="stat-label">Minimum Purity</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">48h</div>
+          <div class="stat-label">Avg. Fulfillment</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">COA Documented</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">USA</div>
+          <div class="stat-label">Synthesized</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Aura Labs</div>
+    <div class="footer-disclaimer">
+      All products are sold for research and laboratory use only. Products are not intended for human or veterinary use and have not been evaluated by the FDA. By purchasing from Aura Labs, you confirm you are 21 years of age or older and agree to use products only for lawful research purposes.
+    </div>
+    <ul class="footer-links">
+      <li><a href="#">Research Disclaimer</a></li>
+      <li><a href="#">Terms & Conditions</a></li>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">COA Library</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Aura Labs. All rights reserved. For research use only.</div>
+  </footer>
+
+</div>
+
+<script>
+  function enterSite() {
+    document.getElementById('age-gate').style.opacity = '0';
+    document.getElementById('age-gate').style.transition = 'opacity 0.6s ease';
+    setTimeout(() => {
+      document.getElementById('age-gate').style.display = 'none';
+      document.getElementById('site').style.display = 'block';
+    }, 600);
+  }
+
+  function denyEntry() {
+    window.location.href = 'https://www.google.com';
+  }
+</script>
+</body>
+</html>
