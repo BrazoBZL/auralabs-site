@@ -38,6 +38,9 @@
     h2 { font-size: 2.5rem; margin-bottom: 2rem; }
     h3 { font-size: 1.5rem; margin-bottom: 0.75rem; }
     h4 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    h5 { font-size: 1rem; margin-bottom: 0.5rem; font-weight: 600; }
+
+    p { margin-bottom: 1rem; color: var(--muted); }
 
     /* ── LAYOUT ── */
     main {
@@ -100,10 +103,10 @@
       background: var(--medical-blue);
     }
 
-    /* ── PRODUCT GRID (ASYMMETRICAL) ── */
+    /* ── PRODUCT GRID ── */
     .products-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 48px;
       margin-bottom: 80px;
     }
@@ -116,7 +119,6 @@
       position: relative;
       overflow: hidden;
       transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-      cursor: pointer;
     }
 
     .product-card:hover {
@@ -125,34 +127,18 @@
       transform: translateY(-8px);
     }
 
-    .product-card::before {
-      content: '';
+    .featured-badge {
       position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(0, 102, 179, 0.05), transparent);
-      transition: left 0.6s ease;
-    }
-
-    .product-card:hover::before {
-      left: 100%;
-    }
-
-    /* ── PRODUCT CONTENT ── */
-    .product-header {
-      margin-bottom: 1.5rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .product-name {
-      font-family: 'EB Garamond', serif;
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
-      color: var(--dark);
-      font-weight: 600;
+      top: 20px;
+      right: 20px;
+      background: var(--medical-blue);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 2px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
     .product-category {
@@ -163,21 +149,41 @@
       margin-bottom: 1rem;
     }
 
+    .product-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: var(--dark);
+      font-weight: 600;
+    }
+
     .product-description {
       font-size: 0.95rem;
       color: var(--muted);
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       line-height: 1.6;
     }
 
-    /* ── PRICING SECTION ── */
-    .product-pricing {
-      background: var(--accent);
-      padding: 20px;
+    .mechanism-box {
+      background: rgba(0, 102, 179, 0.05);
+      padding: 1.25rem;
+      border-left: 3px solid var(--medical-blue);
       border-radius: 2px;
       margin-bottom: 1.5rem;
-      position: relative;
-      z-index: 1;
+    }
+
+    .mechanism-box p {
+      margin: 0;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .pricing-box {
+      background: var(--accent);
+      padding: 1.5rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
     }
 
     .price-label {
@@ -199,10 +205,7 @@
     .price-market {
       font-size: 0.9rem;
       color: var(--muted);
-    }
-
-    .price-market strong {
-      color: var(--dark);
+      margin-bottom: 0.75rem;
     }
 
     .market-position {
@@ -213,41 +216,102 @@
       font-size: 0.75rem;
       color: var(--medical-blue);
       font-weight: 600;
-      margin-top: 1rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
-    /* ── SPECS ── */
-    .product-specs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .spec {
+    .stack-section {
+      margin: 1.5rem 0;
+      padding-top: 1.5rem;
       border-top: 1px solid var(--border);
-      padding-top: 1rem;
     }
 
-    .spec-label {
-      font-size: 0.8rem;
+    .stack-title {
+      color: var(--medical-blue);
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .stack-item {
+      background: var(--accent);
+      padding: 1rem;
+      border-radius: 2px;
+      margin-bottom: 0.75rem;
+    }
+
+    .stack-product {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: var(--dark);
+    }
+
+    .stack-goal {
+      font-size: 0.9rem;
       color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
       margin-bottom: 0.5rem;
     }
 
-    .spec-value {
-      font-size: 0.95rem;
-      color: var(--dark);
-      font-weight: 500;
+    .stack-reason {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-style: italic;
     }
 
-    /* ── CTA ── */
+    .avoid-section {
+      margin: 1.5rem 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .avoid-title {
+      color: #cc3333;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .avoid-item {
+      background: rgba(204, 51, 51, 0.08);
+      padding: 1rem;
+      border-left: 3px solid #cc3333;
+      border-radius: 2px;
+      margin-bottom: 0.75rem;
+    }
+
+    .avoid-product {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: var(--dark);
+    }
+
+    .avoid-reason {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .research-notes {
+      background: var(--off-white);
+      padding: 1.25rem;
+      border-radius: 2px;
+      margin: 1.5rem 0;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .research-label {
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .research-text {
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .research-text:last-child {
+      margin-bottom: 0;
+    }
+
     .product-cta {
       background: var(--medical-blue);
       color: white;
@@ -260,8 +324,6 @@
       cursor: pointer;
       transition: all 0.3s ease;
       width: 100%;
-      position: relative;
-      z-index: 1;
     }
 
     .product-cta:hover {
@@ -269,40 +331,6 @@
       box-shadow: 0 8px 24px rgba(0, 102, 179, 0.3);
     }
 
-    /* ── FEATURED BADGE ── */
-    .featured-badge {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: var(--medical-blue);
-      color: white;
-      padding: 6px 12px;
-      border-radius: 2px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      main {
-        padding: 40px 24px;
-      }
-
-      .products-container {
-        gap: 24px;
-      }
-
-      .category-nav {
-        gap: 1rem;
-      }
-
-      h1 { font-size: 2.5rem; }
-      h2 { font-size: 1.75rem; }
-    }
-
-    /* ── FOOTER ── */
     .products-footer {
       border-top: 1px solid var(--border);
       padding-top: 40px;
@@ -326,38 +354,258 @@
     .back-to-home:hover {
       transform: translateX(-4px);
     }
+
+    @media (max-width: 768px) {
+      main {
+        padding: 40px 24px;
+      }
+
+      .products-container {
+        gap: 24px;
+      }
+
+      .category-nav {
+        gap: 1rem;
+      }
+
+      h1 { font-size: 2.5rem; }
+      h2 { font-size: 1.75rem; }
+    }
   </style>
 </head>
 <body>
   <main>
-    <!-- HEADER -->
     <div class="products-header">
       <h1>Our Peptide Catalog</h1>
-      <p>Premium research peptides organized by therapeutic category. Each product is sourced for quality and priced competitively. Select a category to explore.</p>
+      <p>Premium research peptides with full educational breakdowns. Understand what each peptide does, how to stack them for maximum efficacy, and what to avoid. Browse by category below.</p>
     </div>
 
-    <!-- CATEGORY NAVIGATION -->
     <div class="category-nav" id="categoryNav"></div>
-
-    <!-- PRODUCTS GRID -->
     <div class="products-container" id="productsContainer"></div>
 
-    <!-- FOOTER -->
     <div class="products-footer">
       <p><strong>⚠️ Research Use Only:</strong> All products on this site are intended for laboratory and research use only. Not for human consumption. Consult applicable regulations before purchase.</p>
       <a href="./test-1.html" class="back-to-home">← Back to Home</a>
     </div>
   </main>
 
-  <script src="./products-data.js"></script>
   <script>
-    // Convert product database to simplified format for rendering
-    const products = {};
-    for (const [category, items] of Object.entries(productDatabase)) {
-      products[category] = items;
-    }
+    const products = {
+      "Weight Loss": [
+        {
+          name: "Semaglutide 2mg",
+          price: 30,
+          market: "260–300",
+          position: "FAR BELOW MARKET",
+          format: "Lyophilized Powder",
+          description: "Semaglutide is a GLP-1 receptor agonist that mimics glucagon-like peptide-1, a hormone that regulates blood sugar and appetite. It works by slowing gastric emptying, increasing feelings of fullness, and reducing hunger signals.",
+          mechanism: "GLP-1 agonist → increases satiety → reduces appetite → supports weight management",
+          bestFor: ["Weight loss research", "Appetite suppression studies", "Metabolic health"],
+          stackWith: [
+            { product: "Tirzepatide 5mg", goal: "Enhanced weight loss (dual agonist + GLP-1)", reason: "Tirzepatide acts on GIP + GLP-1, creating synergistic appetite suppression" },
+            { product: "AOD-9604 5mg", goal: "Fat loss + muscle preservation", reason: "AOD-9604 targets fat mobilization while Semaglutide suppresses appetite" }
+          ],
+          avoidWith: [
+            { product: "Liraglutide (at same time)", reason: "Both are GLP-1 agonists; combining increases side effects without benefit" },
+            { product: "Dulaglutide", reason: "Similar mechanism; redundant and increases nausea risk" }
+          ],
+          researchNotes: "Most researched peptide for weight loss. Typical research: 0.25–2.4mg weekly over 16+ weeks shows 15–20% body weight reduction.",
+          safetyConsiderations: "Monitor for pancreatitis symptoms. Not for individuals with personal/family history of medullary thyroid cancer.",
+          featured: true
+        },
+        {
+          name: "Semaglutide 5mg",
+          price: 49,
+          market: "460–520",
+          position: "FAR BELOW MARKET",
+          format: "Lyophilized Powder",
+          description: "Higher concentration of Semaglutide for advanced research. 5mg provides stronger appetite suppression and metabolic effects compared to 2mg, suitable for continuation studies.",
+          mechanism: "GLP-1 agonist (higher dose) → pronounced satiety → potent appetite reduction",
+          bestFor: ["Advanced weight loss research", "Continuation studies"],
+          stackWith: [
+            { product: "BPC-157 10mg", goal: "Weight loss + tissue recovery", reason: "BPC-157 supports muscle healing during caloric deficit" }
+          ],
+          avoidWith: [],
+          researchNotes: "Research shows enhanced results at 5mg vs 2mg over 8+ week periods. Typical: 20–25% body weight reduction.",
+          safetyConsiderations: "Higher dose may increase GI side effects. Start lower, titrate up."
+        },
+        {
+          name: "Retatrutide 5mg",
+          price: 49,
+          market: "500–550",
+          position: "VERY LOW",
+          format: "Lyophilized Powder",
+          description: "Retatrutide is a triple GIP/GLP-1/GCG receptor agonist—next-generation weight loss peptide. Unlike GLP-1 only agonists, it activates three appetite/metabolism pathways simultaneously.",
+          mechanism: "GIP + GLP-1 + GCG agonist → multi-pathway appetite suppression + metabolic boost",
+          bestFor: ["Next-gen weight loss research", "Metabolic acceleration"],
+          stackWith: [
+            { product: "NAD+ 500mg", goal: "Weight loss + cellular energy optimization", reason: "NAD+ enhances mitochondrial function; Retatrutide suppresses appetite" }
+          ],
+          avoidWith: [
+            { product: "Semaglutide (concurrent)", reason: "Retatrutide is more potent; combining creates excessive GLP-1 signaling" }
+          ],
+          researchNotes: "Newest class of weight loss peptide. Early research: 20–25% weight reduction over 12 weeks.",
+          safetyConsiderations: "Triple agonist = stronger effects. Monitor closely."
+        }
+      ],
+      "Healing & Recovery": [
+        {
+          name: "BPC-157 2mg",
+          price: 30,
+          market: "260–310",
+          position: "VERY UNDER MARKET",
+          format: "Lyophilized Powder",
+          description: "BPC-157 (Body Protection Compound-157) is a pentadecapeptide discovered in gastric juice. It's one of the most researched healing peptides, promoting tissue repair across multiple systems: muscle, tendon, bone, gut, and nervous system.",
+          mechanism: "Growth factor upregulation (VEGF, FGF) → angiogenesis → tissue proliferation → accelerated healing",
+          bestFor: ["Injury recovery", "Tendon/ligament repair", "Muscle damage recovery"],
+          stackWith: [
+            { product: "TB-500 5mg", goal: "Synergistic tissue healing (stack)", reason: "BPC-157 + TB-500 = potent healing stack. BPC builds tissue, TB-500 extends it systemic-wide" },
+            { product: "GHK-CU 50mg", goal: "Collagen remodeling + structural healing", reason: "GHK-CU stimulates collagen synthesis; BPC-157 stimulates growth factors" }
+          ],
+          avoidWith: [],
+          researchNotes: "100+ peer-reviewed studies. Dosing: 250–500mcg daily. Typical timeline: 4–8 weeks shows tissue improvements.",
+          safetyConsiderations: "Well-tolerated. No major side effects in research. Can be used long-term.",
+          featured: true
+        },
+        {
+          name: "BPC-157 10mg",
+          price: 68,
+          market: "700–850",
+          position: "MAJOR PRICING ROOM",
+          format: "Lyophilized Powder",
+          description: "High-dose BPC-157 for intensive tissue repair research. 10mg provides sustained healing signaling for severe injuries, chronic conditions, or comprehensive systemic recovery.",
+          mechanism: "Enhanced growth factor cascade → accelerated tissue regeneration across systems",
+          bestFor: ["Major injury recovery", "Chronic pain research", "Post-surgical healing"],
+          stackWith: [
+            { product: "TB-500 10mg", goal: "Elite healing stack (advanced recovery)", reason: "Maximal synergy for severe injuries or post-operative rehab" }
+          ],
+          avoidWith: [],
+          researchNotes: "Research dosing: 10mcg/kg daily shows rapid healing. Typical: major injuries heal 30–50% faster.",
+          safetyConsiderations: "Extremely safe. Can be used indefinitely.",
+          featured: true
+        },
+        {
+          name: "TB-500 5mg",
+          price: 55,
+          market: "360–420",
+          position: "UNDER MARKET",
+          format: "Lyophilized Powder",
+          description: "TB-500 (Thymosin Beta 4) is a naturally occurring peptide that regulates cell migration, tissue repair, and inflammation. Unlike BPC-157 which concentrates locally, TB-500 works systemically.",
+          mechanism: "Cell migration + anti-inflammatory signaling → systemic tissue repair → inflammation reduction",
+          bestFor: ["Systemic healing", "Soft tissue repair", "Joint recovery"],
+          stackWith: [
+            { product: "BPC-157 5mg", goal: "Local + systemic healing synergy", reason: "BPC-157 = local, TB-500 = systemic. Combined = comprehensive recovery" }
+          ],
+          avoidWith: [],
+          researchNotes: "Dosing: 2mg weekly shows strong results over 4–8 weeks. Often used for joint, tendon, and muscle recovery.",
+          safetyConsiderations: "Very safe. Can enhance immune function slightly."
+        },
+        {
+          name: "GHK-CU 50mg",
+          price: 32,
+          market: "390–450",
+          position: "EXTREMELY LOW",
+          format: "Solution",
+          description: "GHK-Cu (Copper Peptide) is a collagen-boosting peptide that signals skin and tissue cells to increase collagen synthesis, reduce inflammation, and improve structural integrity.",
+          mechanism: "Collagen upregulation + copper-mediated cross-linking → tissue strength + structural repair",
+          bestFor: ["Collagen synthesis research", "Skin health", "Wound healing", "Anti-aging"],
+          stackWith: [
+            { product: "BPC-157 5mg", goal: "Healing + collagen integrity", reason: "BPC-157 drives growth factors; GHK-Cu optimizes collagen quality" }
+          ],
+          avoidWith: [],
+          researchNotes: "Topical + systemic research shows increased skin elasticity in 4–6 weeks. Oral/injection: 50–100mg weekly.",
+          safetyConsiderations: "Well-tolerated. Copper is essential; excess is rare with peptide dosing.",
+          featured: true
+        }
+      ],
+      "HGH Secretagogues": [
+        {
+          name: "Ipamorelin 2mg",
+          price: 24,
+          market: "170–200",
+          position: "VERY UNDER MARKET",
+          format: "Lyophilized Powder",
+          description: "Ipamorelin is a selective growth hormone secretagogue that stimulates the pituitary gland to release natural human growth hormone (HGH). Unlike exogenous HGH, it works with your body's natural feedback mechanisms.",
+          mechanism: "GHS receptor agonist → pituitary GH release → endogenous HGH elevation",
+          bestFor: ["Natural HGH stimulation", "Muscle growth research", "Recovery optimization"],
+          stackWith: [
+            { product: "CJC-1295 no DAC 5mg", goal: "Synergistic HGH elevation (stack)", reason: "Ipamorelin = pulse GH release; CJC-1295 = sustained baseline. Combined = optimal HGH curve" }
+          ],
+          avoidWith: [],
+          researchNotes: "Dosing: 100–200mcg daily shows 2–3x natural GH baseline elevation. Peak effects at 30–60 min post-injection.",
+          safetyConsiderations: "No suppression of natural GH axis. Very safe long-term.",
+          featured: true
+        },
+        {
+          name: "Ipamorelin 5mg",
+          price: 49,
+          market: "330–390",
+          position: "LARGE GAP",
+          format: "Lyophilized Powder",
+          description: "Higher-dose Ipamorelin for advanced GH research. 5mg provides stronger, more sustained HGH elevation compared to 2mg.",
+          mechanism: "Enhanced GHS signaling → pronounced GH pulses → optimized muscle growth + recovery",
+          bestFor: ["Advanced HGH research", "Muscle hypertrophy studies", "Athletic performance"],
+          stackWith: [
+            { product: "CJC-1295 w/DAC 5mg", goal: "Elite HGH protocol (professional stack)", reason: "Ipamorelin (pulsatile) + CJC-1295 w/DAC (baseline) = pharmaceutical-grade HGH curve" }
+          ],
+          avoidWith: [],
+          researchNotes: "Research shows 5mg yields 4–6x natural GH elevation. Often used in athletic performance research.",
+          safetyConsiderations: "Increased dosage may cause slight water retention."
+        },
+        {
+          name: "CJC-1295 no DAC 5mg",
+          price: 93,
+          market: "430–510",
+          position: "UNDER MARKET",
+          format: "Lyophilized Powder",
+          description: "CJC-1295 without DAC is a GHRH (growth hormone-releasing hormone) analog that rapidly stimulates pituitary GH release. It has a 30–60 minute duration, making it ideal for stacking with Ipamorelin.",
+          mechanism: "GHRH analog → rapid pituitary GH stimulation → short-duration GH spike",
+          bestFor: ["Rapid HGH elevation", "Ipamorelin stacking", "GH pulse optimization"],
+          stackWith: [
+            { product: "Ipamorelin 5mg", goal: "Dual-mechanism HGH elevation (elite stack)", reason: "CJC-1295 (GHRH) + Ipamorelin (GHS) = synergistic GH release" }
+          ],
+          avoidWith: [],
+          researchNotes: "Dosing: 100mcg daily. Often used with Ipamorelin for enhanced results.",
+          safetyConsiderations: "Very safe. No negative feedback on natural GH axis."
+        }
+      ],
+      "Nootropics & Cognitive": [
+        {
+          name: "Semax 5mg",
+          price: 54,
+          market: "260–310",
+          position: "BELOW MARKET",
+          format: "Lyophilized Powder",
+          description: "Semax is a neuroprotective peptide derived from ACTH that enhances cognitive function, stress resilience, and neural repair. It increases BDNF (brain-derived neurotrophic factor), promoting neuroplasticity.",
+          mechanism: "BDNF upregulation + neuroprotection → cognitive enhancement + stress resilience",
+          bestFor: ["Cognitive enhancement", "Stress management research", "Neuroprotection"],
+          stackWith: [
+            { product: "NAD+ 500mg", goal: "Neural energy + cognition optimization", reason: "NAD+ energizes brain; Semax enhances neural plasticity" }
+          ],
+          avoidWith: [],
+          researchNotes: "Dosing: 500mcg–1mg daily. Research shows improved memory consolidation in 2–4 weeks.",
+          safetyConsiderations: "Well-tolerated. Promotes neurogenesis. Can be used long-term."
+        },
+        {
+          name: "NAD+ 500mg",
+          price: 78,
+          market: "390–460",
+          position: "LOW",
+          format: "Lyophilized Powder",
+          description: "NAD+ (Nicotinamide Adenine Dinucleotide) is a coenzyme central to cellular energy production and DNA repair. It declines with age, contributing to aging and neurological decline.",
+          mechanism: "Mitochondrial NAD+ restoration → energy production → sirtuin activation → cellular repair",
+          bestFor: ["Cellular energy optimization", "Anti-aging research", "Mitochondrial health"],
+          stackWith: [
+            { product: "Semax 5mg", goal: "Brain energy + cognition", reason: "NAD+ energizes neurons; Semax enhances plasticity" }
+          ],
+          avoidWith: [],
+          researchNotes: "Dosing: 250–500mg daily. Research shows NAD+ restoration in 4–8 weeks.",
+          safetyConsiderations: "Very safe. Enhances cellular function. Can be used indefinitely."
+        }
+      ]
+    };
 
-    // RENDER CATEGORIES
+    // Render categories
     const categoryNav = document.getElementById('categoryNav');
     const categories = Object.keys(products);
     
@@ -369,106 +617,80 @@
       categoryNav.appendChild(btn);
     });
 
-    // SHOW CATEGORY
+    // Show category
     function showCategory(category) {
-      // Update active button
       document.querySelectorAll('.category-btn').forEach(btn => {
         btn.classList.toggle('active', btn.textContent === category);
       });
 
-      // Render products
       const container = document.getElementById('productsContainer');
       container.innerHTML = '';
 
-      products[category].forEach((product, idx) => {
+      products[category].forEach((product) => {
         const card = document.createElement('div');
-        card.className = 'product-card' + (idx === 0 ? ' featured-badge' : '');
+        card.className = 'product-card';
         
         let featured = '';
-        if (product.position.includes('FAR') || product.position.includes('VERY UNDER') || product.position.includes('MAJOR') || product.position.includes('EXTREMELY')) {
+        if (product.featured) {
           featured = '<div class="featured-badge">⭐ Featured</div>';
         }
 
-        // Build stack recommendations HTML
         let stackHtml = '';
         if (product.stackWith && product.stackWith.length > 0) {
           stackHtml = `
-            <div style="margin: 2rem 0; padding-top: 2rem; border-top: 1px solid var(--border);">
-              <h5 style="margin-bottom: 1rem; color: var(--medical-blue);">⚗️ Optimal Stacks</h5>
-              <div style="display: grid; gap: 1rem;">
-                ${product.stackWith.map(stack => `
-                  <div style="background: var(--accent); padding: 1rem; border-radius: 2px;">
-                    <div style="font-weight: 600; margin-bottom: 0.25rem;">+ ${stack.product}</div>
-                    <div style="font-size: 0.9rem; color: var(--muted);"><strong>Goal:</strong> ${stack.goal}</div>
-                    <div style="font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem;">${stack.reason}</div>
-                  </div>
-                `).join('')}
-              </div>
+            <div class="stack-section">
+              <div class="stack-title">⚗️ Optimal Stacks</div>
+              ${product.stackWith.map(stack => `
+                <div class="stack-item">
+                  <div class="stack-product">+ ${stack.product}</div>
+                  <div class="stack-goal"><strong>Goal:</strong> ${stack.goal}</div>
+                  <div class="stack-reason">${stack.reason}</div>
+                </div>
+              `).join('')}
             </div>
           `;
         }
 
-        // Build contraindications HTML
         let avoidHtml = '';
         if (product.avoidWith && product.avoidWith.length > 0) {
           avoidHtml = `
-            <div style="margin: 2rem 0; padding-top: 2rem; border-top: 1px solid var(--border);">
-              <h5 style="margin-bottom: 1rem; color: #cc3333;">⚠️ Do NOT Stack With</h5>
-              <div style="display: grid; gap: 1rem;">
-                ${product.avoidWith.map(avoid => `
-                  <div style="background: rgba(204, 51, 51, 0.08); padding: 1rem; border-left: 3px solid #cc3333; border-radius: 2px;">
-                    <div style="font-weight: 600; margin-bottom: 0.25rem;">✗ ${avoid.product}</div>
-                    <div style="font-size: 0.9rem; color: var(--muted);">${avoid.reason}</div>
-                  </div>
-                `).join('')}
-              </div>
+            <div class="avoid-section">
+              <div class="avoid-title">⚠️ Do NOT Stack With</div>
+              ${product.avoidWith.map(avoid => `
+                <div class="avoid-item">
+                  <div class="avoid-product">✗ ${avoid.product}</div>
+                  <div class="avoid-reason">${avoid.reason}</div>
+                </div>
+              `).join('')}
             </div>
           `;
         }
 
         card.innerHTML = `
           ${featured}
-          <div class="product-header">
-            <div class="product-category">${category}</div>
-            <div class="product-name">${product.name}</div>
+          <div class="product-category">${category}</div>
+          <div class="product-name">${product.name}</div>
+          <div class="product-description">${product.description}</div>
+          
+          <div class="mechanism-box">
+            <p><strong>How it works:</strong> ${product.mechanism}</p>
           </div>
 
-          <div style="margin-bottom: 2rem; padding: 1.5rem; background: var(--accent); border-radius: 2px;">
-            <h5 style="margin-bottom: 0.75rem; color: var(--dark);">What It Is</h5>
-            <p style="margin: 0; font-size: 0.95rem; line-height: 1.6;">${product.description}</p>
-          </div>
-
-          <div style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(0, 102, 179, 0.05); border-left: 3px solid var(--medical-blue); border-radius: 2px;">
-            <h5 style="margin-bottom: 0.75rem; color: var(--dark);">How It Works</h5>
-            <p style="margin: 0; font-size: 0.9rem; color: var(--muted); font-weight: 500;">${product.mechanism}</p>
-          </div>
-
-          <div class="product-pricing">
+          <div class="pricing-box">
             <div class="price-label">Your Price</div>
             <div class="price-main">$${product.price}</div>
-            <div class="price-market">
-              <strong>Market:</strong> $${product.market}
-            </div>
+            <div class="price-market"><strong>Market:</strong> $${product.market}</div>
             <div class="market-position">${product.position}</div>
-          </div>
-
-          <div class="product-specs">
-            <div class="spec">
-              <div class="spec-label">Format</div>
-              <div class="spec-value">${product.format}</div>
-            </div>
-            <div class="spec">
-              <div class="spec-label">Best For</div>
-              <div class="spec-value">${product.bestFor ? product.bestFor[0] : 'Research'}</div>
-            </div>
           </div>
 
           ${stackHtml}
           ${avoidHtml}
 
-          <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border);">
-            <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem;"><strong>Research Notes:</strong> ${product.researchNotes}</p>
-            <p style="font-size: 0.85rem; color: var(--muted);"><strong>Safety:</strong> ${product.safetyConsiderations}</p>
+          <div class="research-notes">
+            <div class="research-label">📊 Research Notes</div>
+            <div class="research-text">${product.researchNotes}</div>
+            <div class="research-label" style="margin-top: 1rem;">🛡️ Safety</div>
+            <div class="research-text">${product.safetyConsiderations}</div>
           </div>
 
           <button class="product-cta">Request Quote</button>
@@ -478,7 +700,7 @@
       });
     }
 
-    // LOAD FIRST CATEGORY
+    // Load first category
     showCategory(categories[0]);
   </script>
 </body>
