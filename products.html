@@ -349,50 +349,13 @@
     </div>
   </main>
 
+  <script src="./products-data.js"></script>
   <script>
-    // PRODUCT DATA
-    const products = {
-      "Weight Loss": [
-        { name: "Semaglutide 2mg", price: 30, market: "260–300", position: "FAR BELOW MARKET", description: "Gold standard for weight loss. GLP-1 agonist.", format: "Lyophilized Powder" },
-        { name: "Semaglutide 5mg", price: 49, market: "460–520", position: "FAR BELOW MARKET", description: "Increased dosage for enhanced results.", format: "Lyophilized Powder" },
-        { name: "Semaglutide 10mg", price: 73, market: "840–950", position: "FAR BELOW MARKET", description: "Premium dosage for research.", format: "Lyophilized Powder" },
-        { name: "Retatrutide 5mg", price: 49, market: "500–550", position: "VERY LOW", description: "Triple agonist. Next-gen weight loss peptide.", format: "Lyophilized Powder" },
-        { name: "Retatrutide 10mg", price: 73, market: "650–750", position: "VERY LOW", description: "Enhanced dosage for research studies.", format: "Lyophilized Powder" },
-        { name: "Ipamorelin 2mg", price: 24, market: "170–200", position: "VERY UNDER MARKET", description: "Growth hormone secretagogue. Fat loss & lean mass.", format: "Lyophilized Powder" }
-      ],
-      "Healing & Recovery": [
-        { name: "BPC-157 2mg", price: 30, market: "260–310", position: "VERY UNDER MARKET", description: "Tissue repair & recovery peptide. Healing accelerator.", format: "Lyophilized Powder" },
-        { name: "BPC-157 5mg", price: 46, market: "420–490", position: "LARGE GAP", description: "Enhanced concentration for intensive research.", format: "Lyophilized Powder" },
-        { name: "BPC-157 10mg", price: 68, market: "700–850", position: "MAJOR PRICING ROOM", description: "Premium research dosage.", format: "Lyophilized Powder" },
-        { name: "TB-500 5mg", price: 55, market: "360–420", position: "UNDER MARKET", description: "Tissue building & repair peptide.", format: "Lyophilized Powder" },
-        { name: "GHK-CU 50mg", price: 32, market: "390–450", position: "EXTREMELY LOW", description: "Collagen synthesis & skin health.", format: "Solution" },
-        { name: "GHK-CU 100mg", price: 44, market: "690–750", position: "LARGE GAP", description: "Advanced copper peptide compound.", format: "Solution" }
-      ],
-      "HGH Secretagogues": [
-        { name: "Ipamorelin 5mg", price: 49, market: "330–390", position: "LARGE GAP", description: "GHS for natural HGH stimulation.", format: "Lyophilized Powder" },
-        { name: "Ipamorelin 10mg", price: 71, market: "590–700", position: "MAJOR PRICING ROOM", description: "Premium research concentration.", format: "Lyophilized Powder" },
-        { name: "CJC-1295 w/DAC 2mg", price: 42, market: "230–260", position: "BELOW MARKET", description: "Long-acting GHRH analog.", format: "Lyophilized Powder" },
-        { name: "CJC-1295 no DAC 5mg", price: 93, market: "430–510", position: "UNDER MARKET", description: "Rapid-acting HGH secretagogue.", format: "Lyophilized Powder" },
-        { name: "GHRP-2 5mg", price: 49, market: "280–320", position: "UNDER MARKET", description: "Potent growth hormone releasing peptide.", format: "Lyophilized Powder" },
-        { name: "Hexarelin 5mg", price: 147, market: "500–560", position: "UNDER MARKET", description: "GHS with increased potency.", format: "Lyophilized Powder" }
-      ],
-      "Nootropics & Cognitive": [
-        { name: "Semax 5mg", price: 54, market: "260–310", position: "BELOW MARKET", description: "Cognitive enhancement & neuroprotection.", format: "Lyophilized Powder" },
-        { name: "Semax 10mg", price: 85, market: "470–560", position: "UNDER MARKET", description: "Advanced neural support research.", format: "Lyophilized Powder" },
-        { name: "NAD+ 100mg", price: 25, market: "130–160", position: "VERY LOW", description: "Energy & cellular repair molecule.", format: "Lyophilized Powder" },
-        { name: "NAD+ 500mg", price: 78, market: "390–460", position: "LOW", description: "Enhanced NAD+ for longevity research.", format: "Lyophilized Powder" },
-        { name: "NAD+ 1000mg", price: 145, market: "780–840", position: "UNDER MARKET", description: "Premium concentration for studies.", format: "Lyophilized Powder" },
-        { name: "DSIP 5mg", price: 61, market: "310–370", position: "LOW", description: "Sleep enhancement & stress reduction.", format: "Lyophilized Powder" }
-      ],
-      "Specialty & Rare": [
-        { name: "FOXO4-DRI 2mg", price: 92, market: "450–480", position: "UNDER MARKET", description: "Cellular senescence & aging research.", format: "Lyophilized Powder" },
-        { name: "FOXO4-DRI 10mg", price: 329, market: "1,450–1,600", position: "SIGNIFICANT PRICING ROOM", description: "Premium rare compound.", format: "Lyophilized Powder" },
-        { name: "Adamax 5mg", price: 64, market: "390", position: "UNDER MARKET", description: "Performance & strength research.", format: "Lyophilized Powder" },
-        { name: "ACE-031 1mg", price: 40, market: "280", position: "SPECIALTY", description: "Muscle growth activin receptor.", format: "Lyophilized Powder" },
-        { name: "ARA-290 10mg", price: 73, market: "410–450", position: "LOW", description: "Tissue protection & repair.", format: "Lyophilized Powder" },
-        { name: "FST-344 1mg", price: 199, market: "850–900", position: "LOW", description: "Myostatin inhibitor research.", format: "Lyophilized Powder" }
-      ]
-    };
+    // Convert product database to simplified format for rendering
+    const products = {};
+    for (const [category, items] of Object.entries(productDatabase)) {
+      products[category] = items;
+    }
 
     // RENDER CATEGORIES
     const categoryNav = document.getElementById('categoryNav');
@@ -426,12 +389,58 @@
           featured = '<div class="featured-badge">⭐ Featured</div>';
         }
 
+        // Build stack recommendations HTML
+        let stackHtml = '';
+        if (product.stackWith && product.stackWith.length > 0) {
+          stackHtml = `
+            <div style="margin: 2rem 0; padding-top: 2rem; border-top: 1px solid var(--border);">
+              <h5 style="margin-bottom: 1rem; color: var(--medical-blue);">⚗️ Optimal Stacks</h5>
+              <div style="display: grid; gap: 1rem;">
+                ${product.stackWith.map(stack => `
+                  <div style="background: var(--accent); padding: 1rem; border-radius: 2px;">
+                    <div style="font-weight: 600; margin-bottom: 0.25rem;">+ ${stack.product}</div>
+                    <div style="font-size: 0.9rem; color: var(--muted);"><strong>Goal:</strong> ${stack.goal}</div>
+                    <div style="font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem;">${stack.reason}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        }
+
+        // Build contraindications HTML
+        let avoidHtml = '';
+        if (product.avoidWith && product.avoidWith.length > 0) {
+          avoidHtml = `
+            <div style="margin: 2rem 0; padding-top: 2rem; border-top: 1px solid var(--border);">
+              <h5 style="margin-bottom: 1rem; color: #cc3333;">⚠️ Do NOT Stack With</h5>
+              <div style="display: grid; gap: 1rem;">
+                ${product.avoidWith.map(avoid => `
+                  <div style="background: rgba(204, 51, 51, 0.08); padding: 1rem; border-left: 3px solid #cc3333; border-radius: 2px;">
+                    <div style="font-weight: 600; margin-bottom: 0.25rem;">✗ ${avoid.product}</div>
+                    <div style="font-size: 0.9rem; color: var(--muted);">${avoid.reason}</div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        }
+
         card.innerHTML = `
           ${featured}
           <div class="product-header">
             <div class="product-category">${category}</div>
             <div class="product-name">${product.name}</div>
-            <div class="product-description">${product.description}</div>
+          </div>
+
+          <div style="margin-bottom: 2rem; padding: 1.5rem; background: var(--accent); border-radius: 2px;">
+            <h5 style="margin-bottom: 0.75rem; color: var(--dark);">What It Is</h5>
+            <p style="margin: 0; font-size: 0.95rem; line-height: 1.6;">${product.description}</p>
+          </div>
+
+          <div style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(0, 102, 179, 0.05); border-left: 3px solid var(--medical-blue); border-radius: 2px;">
+            <h5 style="margin-bottom: 0.75rem; color: var(--dark);">How It Works</h5>
+            <p style="margin: 0; font-size: 0.9rem; color: var(--muted); font-weight: 500;">${product.mechanism}</p>
           </div>
 
           <div class="product-pricing">
@@ -449,9 +458,17 @@
               <div class="spec-value">${product.format}</div>
             </div>
             <div class="spec">
-              <div class="spec-label">Availability</div>
-              <div class="spec-value">In Stock</div>
+              <div class="spec-label">Best For</div>
+              <div class="spec-value">${product.bestFor ? product.bestFor[0] : 'Research'}</div>
             </div>
+          </div>
+
+          ${stackHtml}
+          ${avoidHtml}
+
+          <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+            <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem;"><strong>Research Notes:</strong> ${product.researchNotes}</p>
+            <p style="font-size: 0.85rem; color: var(--muted);"><strong>Safety:</strong> ${product.safetyConsiderations}</p>
           </div>
 
           <button class="product-cta">Request Quote</button>
