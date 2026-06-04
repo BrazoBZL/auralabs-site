@@ -1,0 +1,22 @@
+# Sensitive files
+credentials/
+*.key
+*.pem
+.env
+.env.local
+.env.*.local
+MEMORY.md
+SOUL.md
+IDENTITY.md
+USER.md
+*.secret
+
+# System
+.DS_Store
+node_modules/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
