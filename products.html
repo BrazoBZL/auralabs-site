@@ -736,15 +736,22 @@
         let stackHtml = '';
         if (product.stackWith && product.stackWith.length > 0) {
           stackHtml = `
-            <div class="stack-section">
-              <div class="stack-title">⚗️ Optimal Stacks</div>
-              ${product.stackWith.map(stack => `
-                <div class="stack-item">
-                  <div class="stack-product">+ ${stack.product}</div>
-                  <div class="stack-goal"><strong>Goal:</strong> ${stack.goal}</div>
-                  <div class="stack-reason">${stack.reason}</div>
+            <div class="research-notes" style="margin-bottom:0.75rem;">
+              <div class="accordion-item" style="border:none;">
+                <button class="accordion-trigger" onclick="toggleAccordion(this)">
+                  <span>⚗️ Optimal Stacks</span>
+                  <span class="chevron">▼</span>
+                </button>
+                <div class="accordion-body">
+                  ${product.stackWith.map(stack => `
+                    <div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #eee;">
+                      <div style="font-weight:600;color:#1a1a1a;margin-bottom:4px;">+ ${stack.product}</div>
+                      <div style="font-size:11px;color:#0066b3;margin-bottom:2px;"><strong>Goal:</strong> ${stack.goal}</div>
+                      <div style="font-size:11px;color:#666;">${stack.reason}</div>
+                    </div>
+                  `).join('')}
                 </div>
-              `).join('')}
+              </div>
             </div>
           `;
         }
@@ -752,14 +759,21 @@
         let avoidHtml = '';
         if (product.avoidWith && product.avoidWith.length > 0) {
           avoidHtml = `
-            <div class="avoid-section">
-              <div class="avoid-title">⚠️ Do NOT Stack With</div>
-              ${product.avoidWith.map(avoid => `
-                <div class="avoid-item">
-                  <div class="avoid-product">✗ ${avoid.product}</div>
-                  <div class="avoid-reason">${avoid.reason}</div>
+            <div class="research-notes" style="margin-bottom:0.75rem;">
+              <div class="accordion-item" style="border:none;">
+                <button class="accordion-trigger" onclick="toggleAccordion(this)">
+                  <span>⚠️ Do Not Stack With</span>
+                  <span class="chevron">▼</span>
+                </button>
+                <div class="accordion-body">
+                  ${product.avoidWith.map(avoid => `
+                    <div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #eee;">
+                      <div style="font-weight:600;color:#c0392b;margin-bottom:4px;">✗ ${avoid.product}</div>
+                      <div style="font-size:11px;color:#666;">${avoid.reason}</div>
+                    </div>
+                  `).join('')}
                 </div>
-              `).join('')}
+              </div>
             </div>
           `;
         }
