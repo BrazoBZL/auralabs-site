@@ -336,28 +336,66 @@
       color: var(--muted);
     }
 
+    /* Accordion dropdowns */
     .research-notes {
-      background: var(--off-white);
-      padding: 1.25rem;
-      border-radius: 2px;
       margin: 1.5rem 0;
-      font-size: 0.85rem;
-      line-height: 1.6;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
     }
 
-    .research-label {
+    .accordion-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .accordion-item:last-child {
+      border-bottom: none;
+    }
+
+    .accordion-trigger {
+      width: 100%;
+      background: #fafafa;
+      border: none;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
       font-weight: 600;
       color: var(--dark);
-      margin-bottom: 0.5rem;
+      letter-spacing: 0.04em;
+      text-align: left;
+      transition: background 0.2s ease;
     }
 
-    .research-text {
+    .accordion-trigger:hover {
+      background: #f0f0f0;
+    }
+
+    .accordion-trigger .chevron {
+      font-size: 10px;
+      color: #999;
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .accordion-trigger.open .chevron {
+      transform: rotate(180deg);
+    }
+
+    .accordion-body {
+      display: none;
+      padding: 14px 16px;
+      font-size: 0.85rem;
+      line-height: 1.7;
       color: var(--muted);
-      margin-bottom: 1rem;
+      background: #fff;
     }
 
-    .research-text:last-child {
-      margin-bottom: 0;
+    .accordion-body.open {
+      display: block;
     }
 
     .product-cta {
@@ -747,10 +785,20 @@
           ${avoidHtml}
 
           <div class="research-notes">
-            <div class="research-label">📊 Research Notes</div>
-            <div class="research-text">${product.researchNotes}</div>
-            <div class="research-label" style="margin-top: 1rem;">🛡️ Safety</div>
-            <div class="research-text">${product.safetyConsiderations}</div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" onclick="toggleAccordion(this)">
+                <span>📊 Research Notes</span>
+                <span class="chevron">▼</span>
+              </button>
+              <div class="accordion-body">${product.researchNotes}</div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" onclick="toggleAccordion(this)">
+                <span>🛡️ Safety Considerations</span>
+                <span class="chevron">▼</span>
+              </button>
+              <div class="accordion-body">${product.safetyConsiderations}</div>
+            </div>
           </div>
 
           <button class="product-cta">Request Quote</button>
@@ -762,6 +810,14 @@
 
     // Load first category
     showCategory(categories[0]);
+
+    // Accordion toggle
+    function toggleAccordion(trigger) {
+      const body = trigger.nextElementSibling;
+      const isOpen = body.classList.contains('open');
+      trigger.classList.toggle('open', !isOpen);
+      body.classList.toggle('open', !isOpen);
+    }
   </script>
 </body>
 </html>
