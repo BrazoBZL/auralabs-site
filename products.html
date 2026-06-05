@@ -21,7 +21,7 @@
 
     html, body {
       height: 100%;
-      background: var(--off-white);
+      background: #ffffff;
       color: var(--dark);
       font-family: 'Inter', sans-serif;
       line-height: 1.6;
@@ -42,11 +42,59 @@
 
     p { margin-bottom: 1rem; color: var(--muted); }
 
+    /* ── NAVIGATION ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 32px 48px;
+      border-bottom: 1px solid var(--border);
+      background: #ffffff;
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'EB Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dark);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 48px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #666;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--dark);
+    }
+
     /* ── LAYOUT ── */
     main {
       max-width: 1400px;
       margin: 0 auto;
-      padding: 80px 48px;
+      padding: 60px 48px 80px 48px;
     }
 
     /* ── HEADER ── */
@@ -374,6 +422,18 @@
   </style>
 </head>
 <body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-content">
+      <div class="nav-logo">Aura Labs</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html" class="active">Compounds</a></li>
+        <li><a href="#">Documentation</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <main>
     <div class="products-header">
       <h1>Our Peptide Catalog</h1>
