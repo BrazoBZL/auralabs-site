@@ -192,6 +192,13 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--charcoal);
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .nav-logo:hover {
+      color: var(--medical-blue);
     }
 
     .nav-links {
@@ -969,7 +976,7 @@
   <!-- Navigation -->
   <nav style="position:relative;">
     <div class="nav-content">
-      <div class="nav-logo">Aura Labs</div>
+      <a href="index.html" class="nav-logo">Aura Labs</a>
       <button class="nav-hamburger" onclick="toggleMobileNav(this)" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
