@@ -9,21 +9,20 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --charcoal: #2a2a2a;
-      --warm-off-white: #f5f3f0;
-      --text-light: #e8e6e3;
+      --white: #f4f4f0;
+      --off-white: #f9f8f6;
+      --dark: #1a1a1a;
       --medical-blue: #0066b3;
       --blue-light: #0080d9;
-      --cream-accent: #d4c5b9;
-      --border: rgba(255,255,255,0.1);
-      --muted: rgba(232,230,227,0.7);
-      --accent: rgba(0,102,179,0.15);
+      --border: rgba(0,0,0,0.08);
+      --muted: rgba(26,26,26,0.6);
+      --accent: rgba(0,102,179,0.1);
     }
 
     html, body {
       height: 100%;
-      background: #2a2a2a;
-      color: var(--text-light);
+      background: #ffffff;
+      color: var(--dark);
       font-family: 'Inter', sans-serif;
       line-height: 1.6;
     }
@@ -50,7 +49,7 @@
       z-index: 100;
       padding: 32px 48px;
       border-bottom: 1px solid var(--border);
-      background: rgba(42, 42, 42, 0.95);
+      background: #ffffff;
       backdrop-filter: blur(8px);
     }
 
@@ -68,7 +67,7 @@
       font-weight: 400;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--cream-accent);
+      color: var(--dark);
       text-decoration: none;
       cursor: pointer;
       transition: color 0.3s ease;
@@ -88,14 +87,14 @@
       font-size: 11px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(232,230,227,0.6);
+      color: #666;
       text-decoration: none;
       transition: color 0.3s ease;
     }
 
     .nav-links a:hover,
     .nav-links a.active {
-      color: var(--cream-accent);
+      color: var(--dark);
     }
 
     /* Hamburger */
@@ -235,7 +234,7 @@
     }
 
     .product-card {
-      background: #3a3a3a;
+      background: white;
       border: 1px solid var(--border);
       border-radius: 2px;
       padding: 32px;
@@ -248,9 +247,8 @@
 
     .product-card:hover {
       border-color: var(--medical-blue);
-      box-shadow: 0 20px 60px rgba(0, 102, 179, 0.25);
+      box-shadow: 0 20px 60px rgba(0, 102, 179, 0.15);
       transform: translateY(-8px);
-      background: #404040;
     }
 
     .featured-badge {
@@ -279,7 +277,7 @@
       font-family: 'EB Garamond', serif;
       font-size: 1.4rem;
       margin-bottom: 1rem;
-      color: var(--warm-off-white);
+      color: var(--dark);
       font-weight: 600;
     }
 
@@ -291,7 +289,7 @@
     }
 
     .mechanism-box {
-      background: rgba(0, 102, 179, 0.12);
+      background: rgba(0, 102, 179, 0.05);
       padding: 1.25rem;
       border-left: 3px solid var(--medical-blue);
       border-radius: 2px;
@@ -302,11 +300,11 @@
       margin: 0;
       font-size: 0.9rem;
       font-weight: 500;
-      color: var(--text-light);
+      color: var(--muted);
     }
 
     .pricing-box {
-      background: rgba(0, 102, 179, 0.15);
+      background: var(--accent);
       padding: 1.5rem;
       border-radius: 2px;
       margin-bottom: 1.5rem;
@@ -323,24 +321,24 @@
     .price-main {
       font-family: 'EB Garamond', serif;
       font-size: 2rem;
-      color: var(--cream-accent);
+      color: var(--medical-blue);
       font-weight: 600;
       margin-bottom: 0.75rem;
     }
 
     .price-market {
       font-size: 0.9rem;
-      color: var(--text-light);
+      color: var(--muted);
       margin-bottom: 0.75rem;
     }
 
     .market-position {
       display: inline-block;
-      background: rgba(212, 197, 185, 0.15);
+      background: white;
       padding: 4px 12px;
       border-radius: 12px;
       font-size: 0.75rem;
-      color: var(--cream-accent);
+      color: var(--medical-blue);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
