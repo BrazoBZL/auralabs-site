@@ -13,19 +13,21 @@
     }
 
     :root {
-      --black: #0a0a0a;
-      --charcoal: #1a1a1a;
-      --dark-gray: #2a2a2a;
-      --blue-gray: #3a4a54;
-      --white: #f5f5f5;
-      --light-gray: #e8e8e8;
-      --graphite: #5a6a7a;
+      --charcoal: #2a2a2a;
+      --warm-off-white: #f5f3f0;
+      --text-light: #e8e6e3;
+      --medical-blue: #0066b3;
+      --blue-light: #0080d9;
+      --cream-accent: #d4c5b9;
+      --border: rgba(255,255,255,0.1);
+      --muted: rgba(232,230,227,0.7);
+      --accent: rgba(0,102,179,0.15);
     }
 
     html, body {
       height: 100%;
-      background: var(--white);
-      color: var(--charcoal);
+      background: #2a2a2a;
+      color: var(--text-light);
       font-family: 'Inter', sans-serif;
       line-height: 1.6;
     }
@@ -48,7 +50,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--white);
+      background: var(--charcoal);
       padding: 24px;
     }
 
@@ -71,7 +73,7 @@
       font-weight: 400;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--charcoal);
+      color: var(--warm-off-white);
     }
 
     .gate-divider {
@@ -84,16 +86,16 @@
     .gate-disclaimer {
       font-size: 12px;
       line-height: 1.8;
-      color: #666;
+      color: var(--muted);
       margin-bottom: 48px;
       padding: 32px;
-      border: 1px solid #ddd;
+      border-bottom: 1px solid var(--border);
       background: #fafafa;
       text-align: left;
     }
 
     .gate-disclaimer strong {
-      color: var(--charcoal);
+      color: var(--warm-off-white);
       font-weight: 500;
     }
 
@@ -104,7 +106,7 @@
       margin-bottom: 32px;
       padding: 16px;
       background: #fafafa;
-      border: 1px solid #ddd;
+      border-bottom: 1px solid var(--border);
     }
 
     .gate-confirmation input[type="checkbox"] {
@@ -117,7 +119,7 @@
     .gate-confirmation label {
       flex: 1;
       font-size: 12px;
-      color: var(--charcoal);
+      color: var(--warm-off-white);
       cursor: pointer;
     }
 
@@ -133,7 +135,7 @@
       padding: 14px 24px;
       border: 1px solid #ccc;
       background: transparent;
-      color: var(--charcoal);
+      color: var(--warm-off-white);
       font-family: 'Inter', sans-serif;
       font-size: 11px;
       letter-spacing: 0.12em;
@@ -143,8 +145,8 @@
     }
 
     .gate-btn:hover {
-      border-color: var(--charcoal);
-      color: var(--charcoal);
+      border-color: var(--warm-off-white);
+      color: var(--warm-off-white);
       background: #f5f5f5;
     }
 
@@ -172,8 +174,8 @@
       top: 0;
       z-index: 100;
       padding: 32px 48px;
-      border-bottom: 1px solid #ddd;
-      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      background: rgba(42, 42, 42, 0.95);
       backdrop-filter: blur(8px);
     }
 
@@ -191,7 +193,7 @@
       font-weight: 400;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--charcoal);
+      color: var(--cream-accent);
       text-decoration: none;
       cursor: pointer;
       transition: color 0.3s ease;
@@ -211,14 +213,14 @@
       font-size: 11px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #666;
+      color: rgba(232,230,227,0.6);
       text-decoration: none;
       transition: color 0.3s ease;
     }
 
     .nav-links a:hover,
     .nav-links a.active {
-      color: var(--charcoal);
+      color: var(--cream-accent);
     }
 
     /* Hero Section */
@@ -247,14 +249,14 @@
       line-height: 1.15;
       letter-spacing: 0.02em;
       margin-bottom: 48px;
-      color: var(--charcoal);
+      color: var(--warm-off-white);
     }
 
     .hero-subtitle {
       font-size: 14px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #0066b3;
+      color: var(--medical-blue);
       margin-bottom: 32px;
       font-weight: 500;
     }
@@ -262,7 +264,7 @@
     .hero-text {
       font-size: 14px;
       line-height: 1.9;
-      color: var(--graphite);
+      color: var(--muted);
       max-width: 520px;
       margin: 0 auto 64px;
       font-weight: 300;
@@ -279,7 +281,7 @@
       padding: 14px 40px;
       border: 1px solid #ccc;
       background: transparent;
-      color: var(--charcoal);
+      color: var(--warm-off-white);
       font-family: 'Inter', sans-serif;
       font-size: 11px;
       letter-spacing: 0.12em;
@@ -291,8 +293,8 @@
     }
 
     .btn:hover {
-      border-color: var(--charcoal);
-      color: var(--charcoal);
+      border-color: var(--warm-off-white);
+      color: var(--warm-off-white);
       background: #f0f0f0;
     }
 
@@ -323,7 +325,7 @@
 
     .email-popup-content {
       position: relative;
-      background: var(--white);
+      background: var(--charcoal);
       max-width: 420px;
       width: 100%;
       padding: 48px 40px;
@@ -351,20 +353,20 @@
     }
 
     .email-popup-close:hover {
-      color: var(--charcoal);
+      color: var(--warm-off-white);
     }
 
     .email-popup-content h2 {
       font-family: 'EB Garamond', serif;
       font-size: 28px;
       font-weight: 400;
-      color: var(--charcoal);
+      color: var(--warm-off-white);
       margin-bottom: 12px;
     }
 
     .email-popup-content > p {
       font-size: 13px;
-      color: #666;
+      color: var(--muted);
       margin-bottom: 24px;
     }
 
@@ -391,7 +393,7 @@
 
     .email-popup-form input {
       padding: 12px 16px;
-      border: 1px solid #ddd;
+      border-bottom: 1px solid var(--border);
       border-radius: 4px;
       font-family: 'Inter', sans-serif;
       font-size: 13px;
@@ -432,8 +434,8 @@
     /* Trust Bar */
     .trust-bar {
       padding: 48px;
-      border-top: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
       background: #fafafa;
     }
 
@@ -450,13 +452,13 @@
       font-size: 11px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #666;
+      color: var(--muted);
     }
 
     .trust-item-label {
       display: block;
       margin-top: 8px;
-      color: var(--charcoal);
+      color: var(--warm-off-white);
     }
 
     /* Products Section */
@@ -476,7 +478,7 @@
       font-size: 11px;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: #0066b3;
+      color: var(--medical-blue);
       margin-bottom: 20px;
       font-weight: 500;
     }
@@ -486,14 +488,14 @@
       font-size: clamp(32px, 4vw, 52px);
       font-weight: 400;
       line-height: 1.2;
-      color: var(--charcoal);
+      color: var(--warm-off-white);
       margin-bottom: 24px;
     }
 
     .section-desc {
       font-size: 13px;
       line-height: 1.8;
-      color: #666;
+      color: var(--muted);
       max-width: 480px;
       margin: 0 auto;
       font-weight: 300;
@@ -504,14 +506,14 @@
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 1px;
       background: #ddd;
-      border: 1px solid #ddd;
+      border-bottom: 1px solid var(--border);
     }
 
     .product-card {
-      background: var(--white);
+      background: var(--charcoal);
       padding: 40px;
-      border-right: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
       transition: background 0.4s ease;
       position: relative;
     }
@@ -534,14 +536,14 @@
       font-family: 'EB Garamond', serif;
       font-size: 24px;
       font-weight: 400;
-      color: var(--charcoal);
+      color: var(--warm-off-white);
       margin-bottom: 12px;
     }
 
     .product-desc {
       font-size: 12px;
       line-height: 1.7;
-      color: #666;
+      color: var(--muted);
       margin-bottom: 32px;
       font-weight: 300;
     }
@@ -569,8 +571,8 @@
     /* About Section */
     .about-section {
       padding: 120px 48px;
-      border-top: 1px solid #ddd;
-      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      background: var(--charcoal);
     }
 
     .about-content {
@@ -588,13 +590,13 @@
       font-weight: 400;
       line-height: 1.2;
       margin-bottom: 32px;
-      color: var(--charcoal);
+      color: var(--warm-off-white);
     }
 
     .about-text {
       font-size: 13px;
       line-height: 1.8;
-      color: #666;
+      color: var(--muted);
       margin-bottom: 16px;
       font-weight: 300;
     }
@@ -608,7 +610,7 @@
 
     .stat-card {
       padding: 32px;
-      border: 1px solid #ddd;
+      border-bottom: 1px solid var(--border);
       background: #fafafa;
     }
 
@@ -624,14 +626,14 @@
       font-size: 11px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #666;
+      color: var(--muted);
       font-weight: 500;
     }
 
     /* Footer */
     footer {
       padding: 64px 48px;
-      border-top: 1px solid #ddd;
+      border-bottom: 1px solid var(--border);
       background: #fafafa;
       text-align: center;
     }
@@ -643,12 +645,12 @@
       letter-spacing: 0.1em;
       text-transform: uppercase;
       margin-bottom: 24px;
-      color: var(--charcoal);
+      color: var(--warm-off-white);
     }
 
     .footer-disclaimer {
       font-size: 11px;
-      color: #666;
+      color: var(--muted);
       max-width: 640px;
       margin: 0 auto 32px;
       line-height: 1.8;
@@ -672,7 +674,7 @@
     }
 
     .footer-links a:hover {
-      color: var(--charcoal);
+      color: var(--warm-off-white);
     }
 
     .footer-copy {
@@ -721,8 +723,8 @@
         left: 0;
         right: 0;
         background: #fff;
-        border-top: 1px solid #ddd;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
         flex-direction: column;
         gap: 0;
         padding: 8px 0;
@@ -954,11 +956,11 @@
       <div class="gate-logo" style="color:#1a1a1a;">Aura Labs</div>
       <div class="gate-divider" style="background:#ccc;"></div>
 
-      <div class="gate-disclaimer" style="background:#fafafa;border:1px solid #ddd;color:#555;">
+      <div class="gate-disclaimer" style="background:#fafafa;border-bottom: 1px solid var(--border);color:#555;">
         <strong style="color:#1a1a1a;">Research Institute Notice:</strong> This site is restricted to authorized research professionals. All materials are for in vitro research and laboratory use only. Products are not approved for human consumption and are not intended for clinical application.
       </div>
 
-      <div class="gate-confirmation" style="background:#fafafa;border:1px solid #ddd;">
+      <div class="gate-confirmation" style="background:#fafafa;border-bottom: 1px solid var(--border);">
         <input type="checkbox" id="confirm-checkbox" />
         <label for="confirm-checkbox" style="color:#1a1a1a;">I confirm I am 21+ and authorized to access research materials</label>
       </div>
