@@ -6,51 +6,6 @@
   <title>Aura Labs | Research-Grade Peptides</title>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      /* Colors */
-      --color-ink: #17191c;
-      --color-pure-white: #ffffff;
-      --color-fog: #f7f7f8;
-      --color-ash: #4c4c4c;
-      --color-graphite: #777b86;
-      --color-dove: #a3a6af;
-      --color-slate: #8b8c8d;
-      --color-obsidian: #000000;
-      --color-medical-blue: #2563eb;
-      --color-blue-wash: #dbeafe;
-      --color-ice: #f0f9ff;
-
-      /* Typography */
-      --font-heading: 'EB Garamond', serif;
-      --font-body: 'Inter', sans-serif;
-
-      /* Spacing */
-      --spacing-4: 4px;
-      --spacing-8: 8px;
-      --spacing-12: 12px;
-      --spacing-16: 16px;
-      --spacing-20: 20px;
-      --spacing-24: 24px;
-      --spacing-32: 32px;
-      --spacing-40: 40px;
-      --spacing-64: 64px;
-      --spacing-80: 80px;
-      --spacing-96: 96px;
-
-      /* Border Radius */
-      --radius-card: 24px;
-      --radius-image: 12px;
-      --radius-input: 16px;
-      --radius-button: 9999px;
-      --radius-avatar: 9999px;
-      --radius-container: 8px;
-
-      /* Shadows */
-      --shadow-subtle: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.06);
-      --shadow-card: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 4px 12px rgba(0, 0, 0, 0.08);
-      --shadow-elevated: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 12px 32px rgba(0, 0, 0, 0.10);
-    }
-
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -59,202 +14,152 @@
 
     html, body {
       height: 100%;
-      background: var(--color-pure-white);
-      color: var(--color-ink);
-      font-family: var(--font-body);
+      background: #ffffff;
+      color: #1a1a1a;
+      font-family: 'Inter', sans-serif;
       line-height: 1.6;
     }
 
     /* ==================== HERO ==================== */
     .hero {
-      min-height: 100vh;
+      min-height: 85vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: var(--spacing-80) var(--spacing-40);
+      padding: 120px 48px;
       position: relative;
-      background: linear-gradient(135deg, var(--color-pure-white) 0%, var(--color-ice) 100%);
-      text-align: center;
+      background: #ffffff;
     }
 
     .hero-content {
-      max-width: 900px;
+      max-width: 800px;
       width: 100%;
+      text-align: center;
     }
 
     .hero-title {
-      font-family: var(--font-heading);
-      font-size: clamp(48px, 8vw, 84px);
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(54px, 8vw, 84px);
       font-weight: 400;
       line-height: 1.15;
-      letter-spacing: 0.01em;
-      margin-bottom: var(--spacing-32);
-      color: var(--color-ink);
+      letter-spacing: 0.02em;
+      margin-bottom: 64px;
+      color: #1a1a1a;
     }
 
-    .hero-subtitle {
-      font-family: var(--font-body);
-      font-size: clamp(16px, 2vw, 18px);
-      font-weight: 400;
-      line-height: 1.6;
-      color: var(--color-ash);
-      max-width: 600px;
-      margin: 0 auto var(--spacing-40);
-      letter-spacing: -0.009em;
-    }
-
-    .hero-cta-group {
-      display: flex;
-      justify-content: center;
-      gap: var(--spacing-16);
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
+    .hero-cta {
       display: inline-block;
-      padding: 12px 24px;
-      background: var(--color-medical-blue);
-      color: var(--color-pure-white);
-      border: none;
-      border-radius: var(--radius-button);
-      font-family: var(--font-body);
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: -0.009em;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .btn-primary:hover {
-      background: #1d4ed8;
-    }
-
-    .btn-secondary {
-      display: inline-block;
-      padding: 12px 24px;
+      padding: 16px 48px;
+      border: 1px solid #1a1a1a;
       background: transparent;
-      color: var(--color-medical-blue);
-      border: none;
-      border-radius: var(--radius-button);
-      font-family: var(--font-body);
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: -0.009em;
+      color: #1a1a1a;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       text-decoration: none;
       cursor: pointer;
       transition: all 0.3s ease;
     }
 
-    .btn-secondary:hover {
-      text-decoration: underline;
+    .hero-cta:hover {
+      background: #1a1a1a;
+      color: #ffffff;
     }
 
-    /* ==================== POSITION SECTION ==================== */
+    /* ==================== INSTITUTIONAL POSITION ==================== */
     .position-section {
-      padding: var(--spacing-96) var(--spacing-40);
-      background: var(--color-pure-white);
-      border-bottom: 1px solid var(--color-dove);
+      padding: 96px 48px;
+      background: #ffffff;
+      border-bottom: 1px solid #e8e8e8;
     }
 
     .position-content {
-      max-width: 800px;
+      max-width: 760px;
       margin: 0 auto;
-    }
-
-    .position-title {
-      font-family: var(--font-heading);
-      font-size: clamp(28px, 4vw, 36px);
-      font-weight: 400;
-      line-height: 1.2;
-      letter-spacing: 0.01em;
-      margin-bottom: var(--spacing-32);
-      color: var(--color-ink);
+      text-align: center;
     }
 
     .position-statement {
-      font-family: var(--font-body);
-      font-size: 16px;
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(20px, 2.5vw, 28px);
       font-weight: 400;
       line-height: 1.8;
-      color: var(--color-ash);
-      letter-spacing: -0.009em;
-      margin-bottom: var(--spacing-24);
+      color: #1a1a1a;
+      letter-spacing: 0.01em;
+      margin-bottom: 48px;
     }
 
     .position-statement strong {
       font-weight: 500;
-      color: var(--color-medical-blue);
     }
 
-    /* ==================== LIBRARY SECTION ==================== */
+    /* ==================== COMPOUND LIBRARY ==================== */
     .library-section {
-      padding: var(--spacing-96) var(--spacing-40);
+      padding: 96px 48px;
       max-width: 1200px;
       margin: 0 auto;
     }
 
     .library-header {
       text-align: center;
-      margin-bottom: var(--spacing-80);
+      margin-bottom: 80px;
     }
 
     .library-title {
-      font-family: var(--font-heading);
-      font-size: clamp(36px, 5vw, 48px);
+      font-family: 'EB Garamond', serif;
+      font-size: 42px;
       font-weight: 400;
-      line-height: 1.2;
-      letter-spacing: 0.01em;
-      color: var(--color-ink);
-      margin-bottom: var(--spacing-20);
+      color: #1a1a1a;
+      margin-bottom: 24px;
+      letter-spacing: 0.02em;
     }
 
     .library-intro {
-      font-family: var(--font-body);
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--color-graphite);
+      font-size: 14px;
+      color: #666;
       max-width: 600px;
       margin: 0 auto;
-      letter-spacing: -0.009em;
-      line-height: 1.6;
+      letter-spacing: 0.01em;
+      line-height: 1.7;
     }
 
-    /* ==================== CATEGORIES ==================== */
+    /* ==================== ACCORDION/DROPDOWN STRUCTURE ==================== */
     .categories-container {
       display: flex;
       flex-direction: column;
-      gap: var(--spacing-20);
+      gap: 32px;
     }
 
     .category-block {
-      border: 1px solid var(--color-dove);
-      background: var(--color-pure-white);
-      border-radius: var(--radius-container);
-      overflow: hidden;
-      box-shadow: var(--shadow-subtle);
+      border: 1px solid #e8e8e8;
+      background: #ffffff;
     }
 
     .category-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: var(--spacing-24);
+      padding: 24px 32px;
       cursor: pointer;
       user-select: none;
-      background: var(--color-pure-white);
+      background: #ffffff;
       border: none;
       width: 100%;
-      font-family: var(--font-heading);
+      font-family: 'EB Garamond', serif;
       font-size: 18px;
       font-weight: 400;
       letter-spacing: 0.01em;
-      color: var(--color-ink);
-      transition: background 0.2s ease;
+      color: #1a1a1a;
+      transition: background 0.3s ease;
     }
 
     .category-header:hover {
-      background: var(--color-fog);
+      background: #f9f9f9;
+    }
+
+    .category-header.open {
+      background: #f5f5f5;
     }
 
     .category-toggle {
@@ -264,21 +169,20 @@
       align-items: center;
       justify-content: center;
       font-size: 18px;
-      color: var(--color-graphite);
+      color: #1a1a1a;
       flex-shrink: 0;
-      transition: transform 0.3s ease, color 0.3s ease;
+      transition: transform 0.3s ease;
     }
 
     .category-toggle.open {
       transform: rotate(180deg);
-      color: var(--color-medical-blue);
     }
 
     .category-content {
       display: none;
-      padding: var(--spacing-24);
-      border-top: 1px solid var(--color-dove);
-      background: var(--color-fog);
+      padding: 32px;
+      border-top: 1px solid #e8e8e8;
+      background: #fafafa;
     }
 
     .category-content.open {
@@ -289,15 +193,15 @@
     .compound-list {
       display: flex;
       flex-direction: column;
-      gap: 0;
+      gap: 16px;
     }
 
     .compound-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: var(--spacing-12) 0;
-      border-bottom: 1px solid var(--color-dove);
+      padding: 12px 0;
+      border-bottom: 1px solid #e8e8e8;
     }
 
     .compound-item:last-child {
@@ -305,126 +209,114 @@
     }
 
     .compound-name {
-      font-family: var(--font-body);
       font-size: 15px;
-      font-weight: 500;
-      color: var(--color-ink);
-      letter-spacing: -0.009em;
+      font-weight: 400;
+      color: #1a1a1a;
+      letter-spacing: 0.005em;
     }
 
     .compound-dose {
-      font-family: var(--font-body);
       font-size: 13px;
-      color: var(--color-graphite);
-      font-weight: 400;
-      letter-spacing: -0.009em;
+      color: #666;
+      font-weight: 300;
+      letter-spacing: 0.01em;
     }
 
     /* ==================== ACCESS SECTION ==================== */
     .access-section {
-      padding: var(--spacing-96) var(--spacing-40);
-      background: var(--color-fog);
-      border-top: 1px solid var(--color-dove);
+      padding: 80px 48px;
+      background: #f9f9f9;
+      border-top: 1px solid #e8e8e8;
+      margin-top: 48px;
     }
 
     .access-content {
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 0 auto;
     }
 
     .access-title {
-      font-family: var(--font-heading);
-      font-size: clamp(28px, 4vw, 48px);
+      font-family: 'EB Garamond', serif;
+      font-size: 28px;
       font-weight: 400;
-      line-height: 1.2;
-      letter-spacing: 0.01em;
-      color: var(--color-ink);
+      color: #1a1a1a;
       text-align: center;
-      margin-bottom: var(--spacing-64);
+      margin-bottom: 48px;
+      letter-spacing: 0.02em;
     }
 
     .access-steps {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: var(--spacing-40);
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
     }
 
     .access-step {
       text-align: center;
-      padding: var(--spacing-32);
-      background: var(--color-pure-white);
-      border-radius: var(--radius-container);
-      border: 1px solid var(--color-dove);
-      box-shadow: var(--shadow-subtle);
     }
 
     .access-step-number {
-      font-family: var(--font-heading);
-      font-size: 36px;
+      font-family: 'EB Garamond', serif;
+      font-size: 32px;
       font-weight: 400;
-      line-height: 1.2;
-      letter-spacing: 0.01em;
-      color: var(--color-medical-blue);
-      margin-bottom: var(--spacing-12);
+      color: #1a1a1a;
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
     }
 
     .access-step-label {
-      font-family: var(--font-body);
       font-size: 12px;
-      font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--color-graphite);
-      margin-bottom: var(--spacing-12);
+      color: #666;
+      margin-bottom: 10px;
+      font-weight: 500;
     }
 
     .access-step-desc {
-      font-family: var(--font-body);
-      font-size: 14px;
+      font-size: 12px;
       line-height: 1.6;
-      color: var(--color-ash);
-      font-weight: 400;
-      letter-spacing: -0.009em;
+      color: #888;
+      font-weight: 300;
     }
 
     /* ==================== FOOTER ==================== */
     footer {
-      padding: var(--spacing-64) var(--spacing-40);
-      border-top: 1px solid var(--color-dove);
-      background: var(--color-pure-white);
+      padding: 64px 48px;
+      border-top: 1px solid #ddd;
+      background: #ffffff;
       text-align: center;
     }
 
     .footer-content {
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 0 auto;
     }
 
     .footer-logo {
-      font-family: var(--font-heading);
-      font-size: 18px;
+      font-family: 'EB Garamond', serif;
+      font-size: 20px;
       font-weight: 400;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: var(--spacing-32);
-      color: var(--color-ink);
+      margin-bottom: 32px;
+      color: #1a1a1a;
     }
 
     .footer-sections {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--spacing-48);
-      margin-bottom: var(--spacing-48);
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
       text-align: left;
     }
 
     .footer-section h4 {
-      font-family: var(--font-body);
       font-size: 11px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--color-ink);
-      margin-bottom: var(--spacing-16);
+      color: #1a1a1a;
+      margin-bottom: 16px;
       font-weight: 600;
     }
 
@@ -433,168 +325,154 @@
     }
 
     .footer-section a {
-      font-family: var(--font-body);
-      font-size: 14px;
-      color: var(--color-graphite);
+      font-size: 12px;
+      color: #666;
       text-decoration: none;
       line-height: 1.8;
       transition: color 0.3s ease;
-      letter-spacing: -0.009em;
     }
 
     .footer-section a:hover {
-      color: var(--color-medical-blue);
+      color: #1a1a1a;
     }
 
     .footer-divider {
       height: 1px;
-      background: var(--color-dove);
-      margin-bottom: var(--spacing-32);
+      background: #ddd;
+      margin-bottom: 32px;
     }
 
     .footer-disclaimer {
-      font-family: var(--font-body);
-      font-size: 12px;
-      color: var(--color-graphite);
+      font-size: 11px;
+      color: #999;
       line-height: 1.8;
-      max-width: 900px;
-      margin: 0 auto var(--spacing-24);
-      letter-spacing: -0.009em;
+      max-width: 800px;
+      margin: 0 auto 24px;
     }
 
     .footer-copy {
-      font-family: var(--font-body);
-      font-size: 11px;
-      color: var(--color-dove);
+      font-size: 10px;
+      color: #ccc;
       letter-spacing: 0.08em;
     }
 
     /* ==================== RESPONSIVE ==================== */
     @media (max-width: 768px) {
       .hero {
-        padding: var(--spacing-64) var(--spacing-24);
+        padding: 80px 24px;
         min-height: auto;
       }
 
       .hero-title {
-        font-size: clamp(32px, 6vw, 48px);
-        margin-bottom: var(--spacing-24);
-      }
-
-      .hero-subtitle {
-        margin-bottom: var(--spacing-32);
-      }
-
-      .hero-cta-group {
-        gap: var(--spacing-12);
+        font-size: clamp(40px, 6vw, 60px);
+        margin-bottom: 48px;
       }
 
       .position-section {
-        padding: var(--spacing-64) var(--spacing-24);
+        padding: 72px 24px;
       }
 
-      .position-title {
-        font-size: clamp(24px, 3vw, 28px);
-        margin-bottom: var(--spacing-24);
+      .position-statement {
+        font-size: clamp(16px, 2vw, 22px);
       }
 
       .library-section {
-        padding: var(--spacing-64) var(--spacing-24);
+        padding: 72px 24px;
       }
 
       .library-header {
-        margin-bottom: var(--spacing-64);
+        margin-bottom: 56px;
       }
 
       .library-title {
-        font-size: clamp(28px, 4vw, 36px);
-        margin-bottom: var(--spacing-16);
+        font-size: 32px;
+        margin-bottom: 16px;
       }
 
       .categories-container {
-        gap: var(--spacing-16);
+        gap: 24px;
       }
 
       .category-header {
-        padding: var(--spacing-20);
+        padding: 20px 24px;
         font-size: 16px;
       }
 
       .category-content {
-        padding: var(--spacing-20);
+        padding: 24px;
       }
 
       .access-section {
-        padding: var(--spacing-64) var(--spacing-24);
+        padding: 64px 24px;
       }
 
       .access-title {
-        font-size: clamp(24px, 3vw, 36px);
-        margin-bottom: var(--spacing-48);
+        font-size: 24px;
+        margin-bottom: 40px;
       }
 
       .access-steps {
-        gap: var(--spacing-32);
+        gap: 32px;
+      }
+
+      .access-step-number {
+        font-size: 28px;
       }
 
       .footer-sections {
         grid-template-columns: 1fr;
-        gap: var(--spacing-32);
+        gap: 32px;
         text-align: center;
       }
 
       footer {
-        padding: var(--spacing-48) var(--spacing-24);
+        padding: 48px 24px;
       }
     }
 
     @media (max-width: 480px) {
       .hero {
-        padding: var(--spacing-40) var(--spacing-16);
+        padding: 60px 16px;
       }
 
       .hero-title {
-        font-size: clamp(24px, 5vw, 36px);
-        margin-bottom: var(--spacing-20);
+        font-size: clamp(28px, 5vw, 42px);
+        margin-bottom: 32px;
       }
 
-      .hero-subtitle {
-        font-size: 14px;
-        margin-bottom: var(--spacing-24);
-      }
-
-      .btn-primary, .btn-secondary {
-        padding: 10px 20px;
-        font-size: 13px;
+      .hero-cta {
+        padding: 14px 32px;
+        font-size: 10px;
       }
 
       .position-section {
-        padding: var(--spacing-48) var(--spacing-16);
+        padding: 56px 16px;
       }
 
-      .position-title {
-        font-size: clamp(20px, 2.5vw, 24px);
+      .position-statement {
+        font-size: clamp(14px, 1.8vw, 18px);
+        margin-bottom: 32px;
       }
 
       .library-section {
-        padding: var(--spacing-48) var(--spacing-16);
+        padding: 56px 16px;
       }
 
       .library-title {
-        font-size: clamp(20px, 3.5vw, 28px);
+        font-size: 24px;
       }
 
       .categories-container {
-        gap: var(--spacing-12);
+        gap: 16px;
       }
 
       .category-header {
-        padding: var(--spacing-16);
+        padding: 16px 20px;
         font-size: 14px;
       }
 
       .category-content {
-        padding: var(--spacing-16);
+        padding: 20px;
       }
 
       .compound-name {
@@ -606,33 +484,28 @@
       }
 
       .access-section {
-        padding: var(--spacing-48) var(--spacing-16);
+        padding: 56px 16px;
       }
 
       .access-title {
-        font-size: clamp(20px, 2.5vw, 28px);
-        margin-bottom: var(--spacing-32);
+        font-size: 20px;
+        margin-bottom: 32px;
       }
 
       .access-steps {
-        gap: var(--spacing-24);
-        grid-template-columns: 1fr;
-      }
-
-      .access-step {
-        padding: var(--spacing-24);
+        gap: 24px;
       }
 
       footer {
-        padding: var(--spacing-32) var(--spacing-16);
+        padding: 32px 16px;
       }
 
       .footer-logo {
-        font-size: 14px;
+        font-size: 16px;
       }
 
       .footer-sections {
-        gap: var(--spacing-24);
+        gap: 24px;
       }
     }
   </style>
@@ -643,18 +516,13 @@
 <section class="hero">
   <div class="hero-content">
     <h1 class="hero-title">We offer what we're certain of. Nothing more.</h1>
-    <p class="hero-subtitle">Research-grade peptides with verified purity, documented sourcing, and transparent testing. Every batch tested. Every batch certified.</p>
-    <div class="hero-cta-group">
-      <a href="#library" class="btn-primary">View Selection</a>
-      <a href="mailto:research@auralabs.io" class="btn-secondary">Get in Touch</a>
-    </div>
+    <a href="#library" class="hero-cta">View Selection</a>
   </div>
 </section>
 
-<!-- ==================== POSITION SECTION ==================== -->
+<!-- ==================== INSTITUTIONAL POSITION ==================== -->
 <section class="position-section">
   <div class="position-content">
-    <h2 class="position-title">Our Approach</h2>
     <p class="position-statement">
       Aura Labs operates under one principle: <strong>research-grade means verified purity, documented sourcing, and known limitations.</strong> Every batch undergoes third-party testing. No exceptions. We document synthesis parameters, environmental controls, and verification results. Our supply chain is traceable. Our methodology is reproducible. We make no potency assertions. No storytelling. Just specification: what it is, what the data shows, and what we don't know.
     </p>
