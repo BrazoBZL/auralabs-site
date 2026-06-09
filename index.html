@@ -22,44 +22,34 @@
 
     /* ==================== HERO ==================== */
     .hero {
-      min-height: 60vh;
+      min-height: 85vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 80px 48px;
+      padding: 120px 48px;
       position: relative;
+      background: #ffffff;
     }
 
     .hero-content {
-      max-width: 700px;
+      max-width: 800px;
       width: 100%;
       text-align: center;
     }
 
     .hero-title {
       font-family: 'EB Garamond', serif;
-      font-size: clamp(48px, 6vw, 64px);
+      font-size: clamp(54px, 8vw, 84px);
       font-weight: 400;
-      line-height: 1.1;
+      line-height: 1.15;
       letter-spacing: 0.02em;
-      margin-bottom: 32px;
+      margin-bottom: 64px;
       color: #1a1a1a;
-    }
-
-    .hero-subtitle {
-      font-size: 16px;
-      line-height: 1.8;
-      color: #555;
-      font-weight: 300;
-      margin-bottom: 48px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
     .hero-cta {
       display: inline-block;
-      padding: 14px 40px;
+      padding: 16px 48px;
       border: 1px solid #1a1a1a;
       background: transparent;
       color: #1a1a1a;
@@ -77,193 +67,216 @@
       color: #ffffff;
     }
 
-    /* ==================== WHY THIS SECTION ==================== */
-    .standards-section {
-      padding: 80px 48px;
-      background: #f8f8f8;
-      border-top: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
+    /* ==================== INSTITUTIONAL POSITION ==================== */
+    .position-section {
+      padding: 96px 48px;
+      background: #ffffff;
+      border-bottom: 1px solid #e8e8e8;
     }
 
-    .standards-content {
-      max-width: 1200px;
+    .position-content {
+      max-width: 760px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 64px;
+      text-align: center;
     }
 
-    .standard-item h3 {
+    .position-statement {
       font-family: 'EB Garamond', serif;
-      font-size: 18px;
+      font-size: clamp(20px, 2.5vw, 28px);
       font-weight: 400;
-      color: #1a1a1a;
-      margin-bottom: 16px;
-      letter-spacing: 0.02em;
-    }
-
-    .standard-item p {
-      font-size: 13px;
       line-height: 1.8;
-      color: #555;
-      font-weight: 300;
+      color: #1a1a1a;
+      letter-spacing: 0.01em;
+      margin-bottom: 48px;
     }
 
-    .standard-item strong {
-      color: #1a1a1a;
+    .position-statement strong {
       font-weight: 500;
     }
 
-    /* ==================== PRODUCT GRID ==================== */
-    .products-section {
-      padding: 80px 48px;
-      max-width: 1400px;
+    /* ==================== COMPOUND LIBRARY ==================== */
+    .library-section {
+      padding: 96px 48px;
+      max-width: 1200px;
       margin: 0 auto;
     }
 
-    .products-header {
+    .library-header {
       text-align: center;
       margin-bottom: 80px;
     }
 
-    .products-title {
+    .library-title {
       font-family: 'EB Garamond', serif;
       font-size: 42px;
       font-weight: 400;
       color: #1a1a1a;
-      margin-bottom: 16px;
+      margin-bottom: 24px;
       letter-spacing: 0.02em;
     }
 
-    .products-desc {
-      font-size: 13px;
+    .library-intro {
+      font-size: 14px;
       color: #666;
-      max-width: 480px;
+      max-width: 600px;
       margin: 0 auto;
-      line-height: 1.8;
+      letter-spacing: 0.01em;
+      line-height: 1.7;
     }
 
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1px;
-      background: #ddd;
-      border: 1px solid #ddd;
+    /* ==================== ACCORDION/DROPDOWN STRUCTURE ==================== */
+    .categories-container {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
     }
 
-    .product-card {
+    .category-block {
+      border: 1px solid #e8e8e8;
       background: #ffffff;
-      padding: 48px;
-      border-right: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
     }
 
-    .product-card:last-child {
-      border-right: none;
-    }
-
-    .product-name {
+    .category-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 32px;
+      cursor: pointer;
+      user-select: none;
+      background: #ffffff;
+      border: none;
+      width: 100%;
       font-family: 'EB Garamond', serif;
-      font-size: 22px;
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      color: #1a1a1a;
+      transition: background 0.3s ease;
+    }
+
+    .category-header:hover {
+      background: #f9f9f9;
+    }
+
+    .category-header.open {
+      background: #f5f5f5;
+    }
+
+    .category-toggle {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #1a1a1a;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .category-toggle.open {
+      transform: rotate(180deg);
+    }
+
+    .category-content {
+      display: none;
+      padding: 32px;
+      border-top: 1px solid #e8e8e8;
+      background: #fafafa;
+    }
+
+    .category-content.open {
+      display: block;
+    }
+
+    /* ==================== COMPOUND LIST ==================== */
+    .compound-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .compound-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    .compound-item:last-child {
+      border-bottom: none;
+    }
+
+    .compound-name {
+      font-size: 15px;
       font-weight: 400;
       color: #1a1a1a;
-      margin-bottom: 16px;
+      letter-spacing: 0.005em;
+    }
+
+    .compound-dose {
+      font-size: 13px;
+      color: #666;
+      font-weight: 300;
       letter-spacing: 0.01em;
     }
 
-    .product-specs {
-      font-size: 12px;
-      line-height: 1.9;
-      color: #555;
-      margin-bottom: 24px;
-    }
-
-    .product-specs strong {
-      color: #1a1a1a;
-      font-weight: 500;
-    }
-
-    .product-specs-list {
-      list-style: none;
-    }
-
-    .product-specs-list li {
-      margin-bottom: 8px;
-      display: flex;
-      gap: 8px;
-    }
-
-    .product-specs-list li:before {
-      content: "•";
-      flex-shrink: 0;
-      color: #999;
-    }
-
-    .product-limitations {
-      font-size: 11px;
-      line-height: 1.7;
-      color: #999;
-      padding-top: 16px;
-      border-top: 1px solid #e8e8e8;
-      margin-top: 16px;
-      font-style: italic;
-    }
-
-    /* ==================== GETTING STARTED ==================== */
-    .process-section {
+    /* ==================== ACCESS SECTION ==================== */
+    .access-section {
       padding: 80px 48px;
-      background: #f8f8f8;
-      border-top: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
+      background: #f9f9f9;
+      border-top: 1px solid #e8e8e8;
+      margin-top: 48px;
     }
 
-    .process-content {
-      max-width: 900px;
+    .access-content {
+      max-width: 1000px;
       margin: 0 auto;
     }
 
-    .process-title {
+    .access-title {
       font-family: 'EB Garamond', serif;
-      font-size: 42px;
+      font-size: 28px;
       font-weight: 400;
       color: #1a1a1a;
       text-align: center;
-      margin-bottom: 64px;
+      margin-bottom: 48px;
       letter-spacing: 0.02em;
     }
 
-    .process-steps {
+    .access-steps {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 48px;
+      gap: 40px;
     }
 
-    .process-step {
+    .access-step {
       text-align: center;
     }
 
-    .process-step-number {
+    .access-step-number {
       font-family: 'EB Garamond', serif;
-      font-size: 48px;
+      font-size: 32px;
       font-weight: 400;
       color: #1a1a1a;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       letter-spacing: 0.02em;
     }
 
-    .process-step-label {
-      font-size: 13px;
+    .access-step-label {
+      font-size: 12px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #555;
-      margin-bottom: 12px;
+      color: #666;
+      margin-bottom: 10px;
       font-weight: 500;
     }
 
-    .process-step-desc {
+    .access-step-desc {
       font-size: 12px;
-      line-height: 1.7;
-      color: #999;
+      line-height: 1.6;
+      color: #888;
       font-weight: 300;
     }
 
@@ -346,84 +359,64 @@
     /* ==================== RESPONSIVE ==================== */
     @media (max-width: 768px) {
       .hero {
-        padding: 60px 24px;
+        padding: 80px 24px;
         min-height: auto;
       }
 
       .hero-title {
-        font-size: clamp(32px, 5vw, 48px);
-        margin-bottom: 24px;
+        font-size: clamp(40px, 6vw, 60px);
+        margin-bottom: 48px;
       }
 
-      .hero-subtitle {
-        font-size: 14px;
-        margin-bottom: 32px;
+      .position-section {
+        padding: 72px 24px;
       }
 
-      .standards-content {
-        grid-template-columns: 1fr;
-        gap: 48px;
+      .position-statement {
+        font-size: clamp(16px, 2vw, 22px);
       }
 
-      .standard-item h3 {
+      .library-section {
+        padding: 72px 24px;
+      }
+
+      .library-header {
+        margin-bottom: 56px;
+      }
+
+      .library-title {
+        font-size: 32px;
+        margin-bottom: 16px;
+      }
+
+      .categories-container {
+        gap: 24px;
+      }
+
+      .category-header {
+        padding: 20px 24px;
         font-size: 16px;
       }
 
-      .standard-item p {
-        font-size: 12px;
+      .category-content {
+        padding: 24px;
       }
 
-      .products-section {
-        padding: 60px 24px;
+      .access-section {
+        padding: 64px 24px;
       }
 
-      .products-header {
-        margin-bottom: 48px;
+      .access-title {
+        font-size: 24px;
+        margin-bottom: 40px;
       }
 
-      .products-title {
-        font-size: 32px;
-        margin-bottom: 12px;
-      }
-
-      .products-desc {
-        font-size: 12px;
-      }
-
-      .product-grid {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-
-      .product-card {
-        padding: 32px;
-        border-right: none;
-      }
-
-      .product-name {
-        font-size: 18px;
-      }
-
-      .product-specs {
-        font-size: 11px;
-      }
-
-      .process-section {
-        padding: 60px 24px;
-      }
-
-      .process-title {
-        font-size: 32px;
-        margin-bottom: 48px;
-      }
-
-      .process-steps {
-        grid-template-columns: 1fr;
+      .access-steps {
         gap: 32px;
       }
 
-      .process-step-number {
-        font-size: 36px;
+      .access-step-number {
+        font-size: 28px;
       }
 
       .footer-sections {
@@ -435,41 +428,72 @@
       footer {
         padding: 48px 24px;
       }
-
-      .footer-divider {
-        margin-bottom: 24px;
-      }
     }
 
     @media (max-width: 480px) {
       .hero {
-        padding: 40px 16px;
+        padding: 60px 16px;
       }
 
       .hero-title {
-        font-size: clamp(24px, 4vw, 36px);
-        margin-bottom: 20px;
+        font-size: clamp(28px, 5vw, 42px);
+        margin-bottom: 32px;
       }
 
-      .hero-subtitle {
-        font-size: 13px;
-        margin-bottom: 28px;
+      .hero-cta {
+        padding: 14px 32px;
+        font-size: 10px;
       }
 
-      .standards-section {
-        padding: 48px 16px;
+      .position-section {
+        padding: 56px 16px;
       }
 
-      .products-section {
-        padding: 48px 16px;
+      .position-statement {
+        font-size: clamp(14px, 1.8vw, 18px);
+        margin-bottom: 32px;
       }
 
-      .product-card {
-        padding: 24px;
+      .library-section {
+        padding: 56px 16px;
       }
 
-      .process-section {
-        padding: 48px 16px;
+      .library-title {
+        font-size: 24px;
+      }
+
+      .categories-container {
+        gap: 16px;
+      }
+
+      .category-header {
+        padding: 16px 20px;
+        font-size: 14px;
+      }
+
+      .category-content {
+        padding: 20px;
+      }
+
+      .compound-name {
+        font-size: 14px;
+      }
+
+      .compound-dose {
+        font-size: 12px;
+      }
+
+      .access-section {
+        padding: 56px 16px;
+      }
+
+      .access-title {
+        font-size: 20px;
+        margin-bottom: 32px;
+      }
+
+      .access-steps {
+        gap: 24px;
       }
 
       footer {
@@ -479,6 +503,10 @@
       .footer-logo {
         font-size: 16px;
       }
+
+      .footer-sections {
+        gap: 24px;
+      }
     }
   </style>
 </head>
@@ -487,183 +515,289 @@
 <!-- ==================== HERO ==================== -->
 <section class="hero">
   <div class="hero-content">
-    <h1 class="hero-title">Aura Labs: Research-Grade Peptides</h1>
-    <p class="hero-subtitle">We offer what we're certain of. Nothing more.</p>
-    <a href="#products" class="hero-cta">View Compounds</a>
+    <h1 class="hero-title">We offer what we're certain of. Nothing more.</h1>
+    <a href="#library" class="hero-cta">View Selection</a>
   </div>
 </section>
 
-<!-- ==================== WHY THIS SECTION ==================== -->
-<section class="standards-section">
-  <div class="standards-content">
-    <div class="standard-item">
-      <h3>How We Maintain Standards</h3>
-      <p>Every batch undergoes <strong>third-party testing</strong>. No exceptions. We document synthesis parameters, environmental controls, and verification results. Our supply chain is traceable. Our methodology is reproducible.</p>
-    </div>
-
-    <div class="standard-item">
-      <h3>What Research-Grade Means</h3>
-      <p><strong>Research-grade is not marketing.</strong> It means verified purity, known limitations, documented sourcing. No claims we can't back up. No potency assertions. No storytelling. Just specification: what it is, what the data shows, and what we don't know.</p>
-    </div>
-
-    <div class="standard-item">
-      <h3>Transparency on Sourcing</h3>
-      <p>Synthesized in <strong>regulated US laboratories</strong>. Batch-specific documentation included. Specifications available in our COA library. We tell you exactly what you're getting and how we know.</p>
-    </div>
+<!-- ==================== INSTITUTIONAL POSITION ==================== -->
+<section class="position-section">
+  <div class="position-content">
+    <p class="position-statement">
+      Aura Labs operates under one principle: <strong>research-grade means verified purity, documented sourcing, and known limitations.</strong> Every batch undergoes third-party testing. No exceptions. We document synthesis parameters, environmental controls, and verification results. Our supply chain is traceable. Our methodology is reproducible. We make no potency assertions. No storytelling. Just specification: what it is, what the data shows, and what we don't know.
+    </p>
   </div>
 </section>
 
-<!-- ==================== PRODUCT GRID ==================== -->
-<section class="products-section" id="products">
-  <div class="products-header">
-    <h2 class="products-title">Our Compounds</h2>
-    <p class="products-desc">Each compound lists verified data and known limitations. Use this information as you would peer-reviewed specifications.</p>
+<!-- ==================== COMPOUND LIBRARY ==================== -->
+<section class="library-section" id="library">
+  <div class="library-header">
+    <h2 class="library-title">Compound Library</h2>
+    <p class="library-intro">All available compounds organized by category. Expand each to view formulations and dosages.</p>
   </div>
 
-  <div class="product-grid">
-    <!-- BPC-157 -->
-    <div class="product-card">
-      <h3 class="product-name">BPC-157</h3>
-      <div class="product-specs">
-        <strong>Structure:</strong> Pentadecapeptide (15 amino acids)<br>
-        <strong>Molecular Weight:</strong> 1532.7 g/mol<br>
-        <strong>Purity:</strong> ≥99% (verified by HPLC)<br>
-        <strong>Format:</strong> Lyophilized powder
-      </div>
-      <ul class="product-specs-list">
-        <li>Stable at room temperature when stored dry</li>
-        <li>Soluble in sterile water (0.1% acetic acid recommended)</li>
-        <li>Certificate of Analysis included with order</li>
-      </ul>
-      <div class="product-limitations">
-        <strong>Limitations:</strong> In vitro data only. Long-term stability beyond 2 years undefined. Potency varies with storage conditions.
-      </div>
-    </div>
-
-    <!-- Selank -->
-    <div class="product-card">
-      <h3 class="product-name">Selank</h3>
-      <div class="product-specs">
-        <strong>Structure:</strong> Heptapeptide (7 amino acids)<br>
-        <strong>Molecular Weight:</strong> 821.9 g/mol<br>
-        <strong>Purity:</strong> ≥99% (verified by HPLC)<br>
-        <strong>Format:</strong> Lyophilized powder
-      </div>
-      <ul class="product-specs-list">
-        <li>Stable at room temperature when stored dry</li>
-        <li>Soluble in sterile saline or water</li>
-        <li>Batch-specific documentation provided</li>
-      </ul>
-      <div class="product-limitations">
-        <strong>Limitations:</strong> Research use only. In vitro stability studies limited. Reconstituted solutions should be used within 24 hours.
-      </div>
-    </div>
-
-    <!-- Cerebrolysin -->
-    <div class="product-card">
-      <h3 class="product-name">Cerebrolysin</h3>
-      <div class="product-specs">
-        <strong>Composition:</strong> Neuropeptide complex<br>
-        <strong>Molecular Profile:</strong> Amino acids (50%), peptides (30%), nucleotides (20%)<br>
-        <strong>Purity:</strong> ≥98% active fraction<br>
-        <strong>Format:</strong> Lyophilized concentrate
-      </div>
-      <ul class="product-specs-list">
-        <li>Complex formulation; full characterization in COA</li>
-        <li>Reconstitute in sterile medium</li>
-        <li>Batch consistency tested across multiple parameters</li>
-      </ul>
-      <div class="product-limitations">
-        <strong>Limitations:</strong> Multi-component mixture; individual component ratios may vary between batches (within specification). Long-term in vivo studies incomplete.
+  <div class="categories-container">
+    
+    <!-- WEIGHT LOSS / GLP-1 -->
+    <div class="category-block">
+      <button class="category-header" onclick="toggleCategory(this)">
+        <span>Weight Loss & Metabolism</span>
+        <span class="category-toggle">▼</span>
+      </button>
+      <div class="category-content">
+        <div class="compound-list">
+          <div class="compound-item">
+            <span class="compound-name">Semaglutide</span>
+            <span class="compound-dose">2mg, 5mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Retatrutide</span>
+            <span class="compound-dose">5mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Cagrilintide</span>
+            <span class="compound-dose">2.4mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">AOD-9604</span>
+            <span class="compound-dose">5mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">5-Amino-1MQ</span>
+            <span class="compound-dose">10mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Adipotide</span>
+            <span class="compound-dose">5mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">HGH Fragment 176-191</span>
+            <span class="compound-dose">5mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">L-Carnitine</span>
+            <span class="compound-dose">500mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Lipo-C</span>
+            <span class="compound-dose">5ml vial</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Tirzepatide</span>
+            <span class="compound-dose">5mg, 10mg</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- TB-500 -->
-    <div class="product-card">
-      <h3 class="product-name">TB-500</h3>
-      <div class="product-specs">
-        <strong>Structure:</strong> Synthetic thymosin beta-4 fragment<br>
-        <strong>Molecular Weight:</strong> 4963.1 g/mol<br>
-        <strong>Purity:</strong> ≥99% (verified by HPLC/LC-MS)<br>
-        <strong>Format:</strong> Lyophilized powder
-      </div>
-      <ul class="product-specs-list">
-        <li>Amino acid sequence verified by mass spectrometry</li>
-        <li>Soluble in sterile water</li>
-        <li>Full COA with LC-MS verification included</li>
-      </ul>
-      <div class="product-limitations">
-        <strong>Limitations:</strong> Peptide stability dependent on storage temperature. Freeze-thaw cycles reduce potency. Clinical applications undefined.
+    <!-- HEALING & RECOVERY -->
+    <div class="category-block">
+      <button class="category-header" onclick="toggleCategory(this)">
+        <span>Healing & Recovery</span>
+        <span class="category-toggle">▼</span>
+      </button>
+      <div class="category-content">
+        <div class="compound-list">
+          <div class="compound-item">
+            <span class="compound-name">BPC-157</span>
+            <span class="compound-dose">2mg, 10mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">TB-500</span>
+            <span class="compound-dose">5mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">GHK-Cu</span>
+            <span class="compound-dose">50mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">AHK-Cu</span>
+            <span class="compound-dose">50mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">KPV</span>
+            <span class="compound-dose">5mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">LL-37</span>
+            <span class="compound-dose">10mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">GLOW</span>
+            <span class="compound-dose">5mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">KLOW</span>
+            <span class="compound-dose">5mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Collagen Peptides</span>
+            <span class="compound-dose">500mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Matrixyl 3000</span>
+            <span class="compound-dose">100mg</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Mechano Growth Factor (MGF) -->
-    <div class="product-card">
-      <h3 class="product-name">MGF (Mechano Growth Factor)</h3>
-      <div class="product-specs">
-        <strong>Structure:</strong> IGF-1 Ec variant (synthetic)<br>
-        <strong>Molecular Weight:</strong> 8866 g/mol<br>
-        <strong>Purity:</strong> ≥98% (verified by HPLC)<br>
-        <strong>Format:</strong> Lyophilized powder
-      </div>
-      <ul class="product-specs-list">
-        <li>Sequence verified by peptide mass fingerprinting</li>
-        <li>Requires refrigeration (2-8°C recommended)</li>
-        <li>Full amino acid analysis in COA</li>
-      </ul>
-      <div class="product-limitations">
-        <strong>Limitations:</strong> Synthetic variant of endogenous protein. Receptor binding specificity not fully characterized. Requires strict cold chain storage.
+    <!-- HGH SECRETAGOGUES -->
+    <div class="category-block">
+      <button class="category-header" onclick="toggleCategory(this)">
+        <span>HGH Secretagogues</span>
+        <span class="category-toggle">▼</span>
+      </button>
+      <div class="category-content">
+        <div class="compound-list">
+          <div class="compound-item">
+            <span class="compound-name">Ipamorelin</span>
+            <span class="compound-dose">2mg, 5mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">CJC-1295 with DAC</span>
+            <span class="compound-dose">5mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">CJC-1295 no DAC</span>
+            <span class="compound-dose">5mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">GHRP-2</span>
+            <span class="compound-dose">5mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">GHRP-6</span>
+            <span class="compound-dose">5mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Hexarelin</span>
+            <span class="compound-dose">2mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">MK-677 (Ibutamoren)</span>
+            <span class="compound-dose">10mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Sermorelin</span>
+            <span class="compound-dose">15mg</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Ipamorelin -->
-    <div class="product-card">
-      <h3 class="product-name">Ipamorelin</h3>
-      <div class="product-specs">
-        <strong>Structure:</strong> Pentapeptide (5 amino acids)<br>
-        <strong>Molecular Weight:</strong> 711.8 g/mol<br>
-        <strong>Purity:</strong> ≥99% (verified by HPLC)<br>
-        <strong>Format:</strong> Lyophilized powder
-      </div>
-      <ul class="product-specs-list">
-        <li>Stable at room temperature when stored dry</li>
-        <li>Soluble in sterile water</li>
-        <li>Batch-specific retention time documented</li>
-      </ul>
-      <div class="product-limitations">
-        <strong>Limitations:</strong> In vitro research only. Receptor binding studies incomplete. Stability in solution limited to 24 hours.
+    <!-- NOOTROPICS & COGNITIVE -->
+    <div class="category-block">
+      <button class="category-header" onclick="toggleCategory(this)">
+        <span>Nootropics & Cognitive</span>
+        <span class="category-toggle">▼</span>
+      </button>
+      <div class="category-content">
+        <div class="compound-list">
+          <div class="compound-item">
+            <span class="compound-name">Semax</span>
+            <span class="compound-dose">5mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">NAD+</span>
+            <span class="compound-dose">500mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">DSIP</span>
+            <span class="compound-dose">5mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Noopept</span>
+            <span class="compound-dose">10mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Phenylpiracetam</span>
+            <span class="compound-dose">100mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Aniracetam</span>
+            <span class="compound-dose">750mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Coluracetam</span>
+            <span class="compound-dose">5mg</span>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- SPECIALTY & RARE -->
+    <div class="category-block">
+      <button class="category-header" onclick="toggleCategory(this)">
+        <span>Specialty & Rare</span>
+        <span class="category-toggle">▼</span>
+      </button>
+      <div class="category-content">
+        <div class="compound-list">
+          <div class="compound-item">
+            <span class="compound-name">FOXO4-DRI</span>
+            <span class="compound-dose">10mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Epithalon</span>
+            <span class="compound-dose">10mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Pinealon</span>
+            <span class="compound-dose">5mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Thymosin Alpha 1</span>
+            <span class="compound-dose">10mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Goserelin</span>
+            <span class="compound-dose">3.6mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Triptorelin</span>
+            <span class="compound-dose">100mcg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Selank</span>
+            <span class="compound-dose">5mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Deltasleep</span>
+            <span class="compound-dose">5mg</span>
+          </div>
+          <div class="compound-item">
+            <span class="compound-name">Cerebrolysin</span>
+            <span class="compound-dose">10ml vial</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- ==================== GETTING STARTED ==================== -->
-<section class="process-section">
-  <div class="process-content">
-    <h2 class="process-title">Getting Started</h2>
-    <div class="process-steps">
-      <div class="process-step">
-        <div class="process-step-number">1</div>
-        <div class="process-step-label">Select</div>
-        <p class="process-step-desc">Choose a compound. Review specifications. Confirm requirements.</p>
+<!-- ==================== ACCESS SECTION ==================== -->
+<section class="access-section">
+  <div class="access-content">
+    <h2 class="access-title">How to Access</h2>
+    <div class="access-steps">
+      <div class="access-step">
+        <div class="access-step-number">1</div>
+        <div class="access-step-label">Select</div>
+        <p class="access-step-desc">Choose compounds from our library based on your research needs.</p>
       </div>
 
-      <div class="process-step">
-        <div class="process-step-number">2</div>
-        <div class="process-step-label">Request</div>
-        <p class="process-step-desc">Submit order with institutional verification. We validate researcher status.</p>
+      <div class="access-step">
+        <div class="access-step-number">2</div>
+        <div class="access-step-label">Request</div>
+        <p class="access-step-desc">Submit order with institutional verification. We validate researcher credentials.</p>
       </div>
 
-      <div class="process-step">
-        <div class="process-step-number">3</div>
-        <div class="process-step-label">Verify</div>
-        <p class="process-step-desc">Review batch documentation. Confirm batch-specific COA and synthesis parameters.</p>
-      </div>
-
-      <div class="process-step">
-        <div class="process-step-number">4</div>
-        <div class="process-step-label">Proceed</div>
-        <p class="process-step-desc">Compound ships with full documentation. Use as specified in research protocol.</p>
+      <div class="access-step">
+        <div class="access-step-number">3</div>
+        <div class="access-step-label">Receive</div>
+        <p class="access-step-desc">Full documentation and COA included with every shipment.</p>
       </div>
     </div>
   </div>
@@ -711,6 +845,32 @@
     <div class="footer-copy">© 2026 Aura Labs. Research Use Only.</div>
   </div>
 </footer>
+
+<script>
+  function toggleCategory(element) {
+    const header = element;
+    const content = header.nextElementSibling;
+    const toggle = header.querySelector('.category-toggle');
+    
+    // Close all other categories
+    document.querySelectorAll('.category-block').forEach(block => {
+      const h = block.querySelector('.category-header');
+      const c = block.querySelector('.category-content');
+      const t = h.querySelector('.category-toggle');
+      
+      if (h !== header) {
+        h.classList.remove('open');
+        c.classList.remove('open');
+        t.classList.remove('open');
+      }
+    });
+    
+    // Toggle current category
+    header.classList.toggle('open');
+    content.classList.toggle('open');
+    toggle.classList.toggle('open');
+  }
+</script>
 
 </body>
 </html>
