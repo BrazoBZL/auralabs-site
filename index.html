@@ -13,11 +13,9 @@
       --color-ash: #4c4c4c;
       --color-graphite: #777b86;
       --color-dove: #a3a6af;
-      --color-obsidian: #000000;
       --color-medical-blue: #2563eb;
       --color-blue-wash: #dbeafe;
       --color-ice: #f0f9ff;
-
       --font-heading: 'EB Garamond', serif;
       --font-body: 'Inter', sans-serif;
     }
@@ -37,16 +35,16 @@
       overflow-x: hidden;
     }
 
-    /* ==================== SCROLL REVEAL ==================== */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
+    /* ==================== SCROLL PROGRESS BAR ==================== */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-medical-blue), #1d4ed8);
+      width: 0%;
+      z-index: 1000;
+      transition: width 0.1s ease-out;
     }
 
     /* ==================== HERO ==================== */
@@ -60,30 +58,31 @@
       background: linear-gradient(135deg, var(--color-pure-white) 0%, var(--color-ice) 100%);
     }
 
-    .hero::before {
-      content: '';
+    .hero-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .hero-glow {
       position: absolute;
       width: 1200px;
       height: 1200px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(37, 99, 235, 0.12) 0%, rgba(37, 99, 235, 0.04) 50%, transparent 100%);
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, rgba(37, 99, 235, 0.05) 50%, transparent 100%);
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      z-index: 0;
-      animation: pulse-glow 8s ease-in-out infinite;
       will-change: transform;
+      animation: glow-pulse 8s ease-in-out infinite;
     }
 
-    @keyframes pulse-glow {
-      0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.8;
-      }
-      50% {
-        transform: translate(-50%, -50%) scale(1.1);
-        opacity: 1;
-      }
+    @keyframes glow-pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+      50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
     }
 
     .hero-content {
@@ -102,17 +101,31 @@
       letter-spacing: -0.025em;
       margin-bottom: 24px;
       color: var(--color-ink);
-      animation: title-reveal 1s ease-out;
+      min-height: 120px;
     }
 
-    @keyframes title-reveal {
+    .word {
+      display: inline-block;
+      opacity: 0;
+      animation: word-reveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      margin: 0 0.15em;
+    }
+
+    .word:nth-child(1) { animation-delay: 0s; }
+    .word:nth-child(2) { animation-delay: 0.1s; }
+    .word:nth-child(3) { animation-delay: 0.2s; }
+    .word:nth-child(4) { animation-delay: 0.3s; }
+    .word:nth-child(5) { animation-delay: 0.4s; }
+    .word:nth-child(6) { animation-delay: 0.5s; }
+
+    @keyframes word-reveal {
       from {
         opacity: 0;
-        transform: translateY(40px) scale(0.95);
+        transform: translateY(30px) rotateX(-90deg);
       }
       to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translateY(0) rotateX(0);
       }
     }
 
@@ -125,9 +138,7 @@
       max-width: 600px;
       margin: 0 auto 48px;
       letter-spacing: -0.009em;
-      animation: fade-in 1.2s ease-out;
-      animation-delay: 0.2s;
-      animation-fill-mode: both;
+      animation: fade-in 1s ease-out 0.6s both;
     }
 
     @keyframes fade-in {
@@ -141,13 +152,13 @@
       gap: 16px;
       flex-wrap: wrap;
       margin-bottom: 80px;
-      animation: fade-in 1.2s ease-out 0.4s both;
+      animation: fade-in 1s ease-out 0.8s both;
     }
 
     .btn-primary {
       display: inline-block;
       padding: 14px 32px;
-      background: var(--color-medical-blue);
+      background: linear-gradient(135deg, var(--color-medical-blue), #1d4ed8);
       color: var(--color-pure-white);
       border: none;
       border-radius: 9999px;
@@ -158,7 +169,7 @@
       text-decoration: none;
       cursor: pointer;
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 4px 12px rgba(0, 0, 0, 0.08);
+      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 4px 12px rgba(37, 99, 235, 0.2);
       position: relative;
       overflow: hidden;
     }
@@ -170,8 +181,8 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: rgba(255, 255, 255, 0.2);
-      transition: left 0.5s ease;
+      background: rgba(255, 255, 255, 0.3);
+      transition: left 0.6s ease;
     }
 
     .btn-primary:hover::before {
@@ -179,9 +190,8 @@
     }
 
     .btn-primary:hover {
-      background: #1d4ed8;
-      transform: translateY(-4px);
-      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 12px 32px rgba(0, 0, 0, 0.15);
+      transform: translateY(-6px);
+      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 20px 40px rgba(37, 99, 235, 0.3);
     }
 
     .btn-secondary {
@@ -209,8 +219,8 @@
       background: var(--color-medical-blue);
       z-index: -1;
       transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform-origin: right;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .btn-secondary:hover::before {
@@ -219,6 +229,7 @@
 
     .btn-secondary:hover {
       color: var(--color-pure-white);
+      transform: translateY(-6px);
     }
 
     /* ==================== FLOATING CARDS ==================== */
@@ -235,19 +246,21 @@
     .float-card {
       position: absolute;
       background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(20px);
       border-radius: 24px;
       padding: 24px;
-      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 12px 32px rgba(0, 0, 0, 0.10);
-      border: 1px solid rgba(163, 166, 175, 0.5);
+      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 12px 32px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(163, 166, 175, 0.3);
       max-width: 240px;
       animation: float-in 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
     }
 
     @keyframes float-in {
       from {
         opacity: 0;
-        transform: translateY(40px) scale(0.9);
+        transform: translateY(50px) scale(0.85);
       }
       to {
         opacity: 1;
@@ -256,40 +269,30 @@
     }
 
     .float-card:nth-child(1) {
-      top: 15%;
+      top: 12%;
       left: 5%;
       width: 180px;
       animation-delay: 0.6s;
     }
 
-    .float-card:nth-child(1) {
-      animation: float-in 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s both, float 5s ease-in-out 1.8s infinite;
-    }
-
     .float-card:nth-child(2) {
       top: 55%;
-      right: 8%;
+      right: 5%;
       width: 200px;
-      animation-delay: 0.8s;
-      animation: float-in 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.8s both, float 5s ease-in-out 2s infinite;
+      animation-delay: 0.9s;
     }
 
     .float-card:nth-child(3) {
-      bottom: 12%;
+      bottom: 10%;
       left: 8%;
       width: 190px;
-      animation-delay: 1s;
-      animation: float-in 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 1s both, float 5s ease-in-out 2.2s infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-25px); }
+      animation-delay: 1.2s;
     }
 
     .float-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 20px 40px rgba(37, 99, 235, 0.15);
+      transform: scale(1.1) translateY(-10px);
+      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 30px 60px rgba(37, 99, 235, 0.25);
+      background: rgba(255, 255, 255, 1);
     }
 
     .float-card-label {
@@ -341,6 +344,19 @@
       color: var(--color-ink);
       margin-bottom: 32px;
       text-align: center;
+      opacity: 0;
+      animation: slide-in-title 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes slide-in-title {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
     .position-statement {
@@ -351,11 +367,63 @@
       color: var(--color-ash);
       letter-spacing: -0.009em;
       margin-bottom: 24px;
+      opacity: 0;
+      animation: fade-in 0.8s ease-out 0.3s forwards;
     }
 
     .position-statement strong {
       font-weight: 600;
       color: var(--color-medical-blue);
+    }
+
+    /* ==================== STATS SECTION ==================== */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .stat-box {
+      text-align: center;
+      padding: 24px;
+      background: var(--color-fog);
+      border-radius: 16px;
+      border: 1px solid var(--color-dove);
+      opacity: 0;
+      animation: stat-reveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .stat-box:nth-child(1) { animation-delay: 0.4s; }
+    .stat-box:nth-child(2) { animation-delay: 0.5s; }
+    .stat-box:nth-child(3) { animation-delay: 0.6s; }
+
+    @keyframes stat-reveal {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .stat-number {
+      font-family: var(--font-heading);
+      font-size: 44px;
+      font-weight: 400;
+      color: var(--color-medical-blue);
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-graphite);
     }
 
     /* ==================== LIBRARY SECTION ==================== */
@@ -379,6 +447,36 @@
       margin: 0 auto;
       letter-spacing: -0.009em;
       line-height: 1.7;
+      opacity: 0;
+      animation: fade-in 0.8s ease-out 0.3s forwards;
+    }
+
+    .search-box {
+      max-width: 500px;
+      margin: 32px auto;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 20px;
+      border: 1px solid var(--color-dove);
+      border-radius: 16px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      background: var(--color-pure-white);
+      color: var(--color-ink);
+      letter-spacing: -0.009em;
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: fade-in 0.8s ease-out 0.4s forwards;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--color-medical-blue);
+      box-shadow: 0px 0px 0px 3px rgba(37, 99, 235, 0.1);
+      transform: scale(1.02);
     }
 
     /* ==================== CATEGORIES ==================== */
@@ -395,6 +493,25 @@
       overflow: hidden;
       box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.06);
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      opacity: 0;
+      animation: category-reveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .category-block:nth-child(1) { animation-delay: 0s; }
+    .category-block:nth-child(2) { animation-delay: 0.1s; }
+    .category-block:nth-child(3) { animation-delay: 0.2s; }
+    .category-block:nth-child(4) { animation-delay: 0.3s; }
+    .category-block:nth-child(5) { animation-delay: 0.4s; }
+
+    @keyframes category-reveal {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .category-block:hover {
@@ -457,14 +574,8 @@
     }
 
     @keyframes expand {
-      from {
-        max-height: 0;
-        opacity: 0;
-      }
-      to {
-        max-height: 1000px;
-        opacity: 1;
-      }
+      from { max-height: 0; opacity: 0; }
+      to { max-height: 1000px; opacity: 1; }
     }
 
     /* ==================== COMPOUND LIST ==================== */
@@ -481,14 +592,14 @@
       padding: 12px 0;
       border-bottom: 1px solid var(--color-dove);
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      animation: item-slide-in 0.4s ease-out both;
+      animation: item-slide 0.4s ease-out both;
     }
 
     .compound-item:last-child {
       border-bottom: none;
     }
 
-    @keyframes item-slide-in {
+    @keyframes item-slide {
       from {
         opacity: 0;
         transform: translateX(-20px);
@@ -500,12 +611,11 @@
     }
 
     .category-content.open .compound-item {
-      animation: item-slide-in 0.4s ease-out both;
+      animation: item-slide 0.4s ease-out both;
     }
 
     .compound-item:hover {
-      padding-left: 8px;
-      color: var(--color-medical-blue);
+      padding-left: 12px;
       background: rgba(37, 99, 235, 0.05);
       border-radius: 4px;
     }
@@ -529,6 +639,10 @@
       color: var(--color-graphite);
       font-weight: 400;
       letter-spacing: -0.009em;
+    }
+
+    .compound-item.hidden {
+      display: none;
     }
 
     /* ==================== ACCESS SECTION ==================== */
@@ -560,6 +674,23 @@
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       position: relative;
       overflow: hidden;
+      opacity: 0;
+      animation: step-reveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .access-step:nth-child(1) { animation-delay: 0.2s; }
+    .access-step:nth-child(2) { animation-delay: 0.3s; }
+    .access-step:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes step-reveal {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     .access-step::before {
@@ -596,7 +727,7 @@
     }
 
     .access-step:hover .access-step-number {
-      transform: scale(1.15);
+      transform: scale(1.2);
       color: #1d4ed8;
     }
 
@@ -625,6 +756,8 @@
       border-top: 1px solid var(--color-dove);
       background: var(--color-pure-white);
       text-align: center;
+      opacity: 0;
+      animation: fade-in 0.8s ease-out forwards;
     }
 
     .footer-content {
@@ -706,7 +839,7 @@
       color: var(--color-graphite);
       line-height: 1.8;
       max-width: 900px;
-      margin: 0 auto var(--spacing-24);
+      margin: 0 auto 24px;
       letter-spacing: -0.009em;
     }
 
@@ -719,146 +852,53 @@
 
     /* ==================== RESPONSIVE ==================== */
     @media (max-width: 768px) {
-      .hero-content {
-        padding: 48px 24px;
-      }
-
-      .hero-title {
-        font-size: clamp(32px, 6vw, 48px);
-        margin-bottom: 20px;
-      }
-
-      .hero-subtitle {
-        margin-bottom: 32px;
-      }
-
-      .hero-cta-group {
-        margin-bottom: 48px;
-      }
-
-      .floating-cards {
-        display: none;
-      }
-
-      .position-section {
-        padding: 64px 24px;
-      }
-
-      .section-title {
-        font-size: clamp(28px, 4vw, 44px);
-      }
-
-      .library-section {
-        padding: 64px 24px;
-      }
-
-      .library-header {
-        margin-bottom: 64px;
-      }
-
-      .access-section {
-        padding: 64px 24px;
-      }
-
-      .access-steps {
-        gap: 32px;
-      }
-
-      .footer-sections {
-        grid-template-columns: 1fr;
-        gap: 32px;
-        text-align: center;
-      }
-
-      footer {
-        padding: 48px 24px;
-      }
+      .hero-content { padding: 48px 24px; }
+      .hero-title { font-size: clamp(32px, 6vw, 48px); margin-bottom: 20px; }
+      .hero-subtitle { margin-bottom: 32px; }
+      .hero-cta-group { margin-bottom: 48px; }
+      .floating-cards { display: none; }
+      .position-section { padding: 64px 24px; }
+      .section-title { font-size: clamp(28px, 4vw, 44px); }
+      .library-section { padding: 64px 24px; }
+      .library-header { margin-bottom: 64px; }
+      .access-section { padding: 64px 24px; }
+      .access-steps { gap: 32px; }
+      .footer-sections { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+      footer { padding: 48px 24px; }
     }
 
     @media (max-width: 480px) {
-      .hero-content {
-        padding: 32px 16px;
-      }
-
-      .hero-title {
-        font-size: clamp(24px, 5vw, 36px);
-        margin-bottom: 16px;
-      }
-
-      .hero-subtitle {
-        font-size: 14px;
-        margin-bottom: 24px;
-      }
-
-      .btn-primary, .btn-secondary {
-        padding: 11px 24px;
-        font-size: 13px;
-      }
-
-      .hero-cta-group {
-        margin-bottom: 32px;
-      }
-
-      .position-section {
-        padding: 48px 16px;
-      }
-
-      .section-title {
-        font-size: clamp(20px, 3.5vw, 32px);
-      }
-
-      .library-section {
-        padding: 48px 16px;
-      }
-
-      .categories-container {
-        gap: 16px;
-      }
-
-      .category-header {
-        padding: 16px;
-        font-size: 14px;
-      }
-
-      .category-content {
-        padding: 16px;
-      }
-
-      .compound-name {
-        font-size: 14px;
-      }
-
-      .compound-dose {
-        font-size: 12px;
-      }
-
-      .access-section {
-        padding: 48px 16px;
-      }
-
-      .access-steps {
-        gap: 24px;
-        grid-template-columns: 1fr;
-      }
-
-      .access-step {
-        padding: 24px;
-      }
-
-      .access-step-number {
-        font-size: 36px;
-      }
-
-      footer {
-        padding: 32px 16px;
-      }
+      .hero-content { padding: 32px 16px; }
+      .hero-title { font-size: clamp(24px, 5vw, 36px); margin-bottom: 16px; }
+      .hero-subtitle { font-size: 14px; margin-bottom: 24px; }
+      .btn-primary, .btn-secondary { padding: 11px 24px; font-size: 13px; }
+      .hero-cta-group { margin-bottom: 32px; }
+      .position-section { padding: 48px 16px; }
+      .section-title { font-size: clamp(20px, 3.5vw, 32px); }
+      .library-section { padding: 48px 16px; }
+      .categories-container { gap: 16px; }
+      .category-header { padding: 16px; font-size: 14px; }
+      .category-content { padding: 16px; }
+      .compound-name { font-size: 14px; }
+      .compound-dose { font-size: 12px; }
+      .access-section { padding: 48px 16px; }
+      .access-steps { gap: 24px; grid-template-columns: 1fr; }
+      .access-step { padding: 24px; }
+      .access-step-number { font-size: 36px; }
+      footer { padding: 32px 16px; }
     }
   </style>
 </head>
 <body>
 
+<div class="scroll-progress"></div>
+
 <!-- ==================== HERO ==================== -->
-<section class="hero reveal">
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-glow"></div>
+  </div>
+
   <div class="floating-cards">
     <div class="float-card">
       <div class="float-card-label">Verified Purity</div>
@@ -878,7 +918,14 @@
   </div>
 
   <div class="hero-content">
-    <h1 class="hero-title">We offer what we're certain of. Nothing more.</h1>
+    <h1 class="hero-title">
+      <span class="word">We</span>
+      <span class="word">offer</span>
+      <span class="word">what</span>
+      <span class="word">we're</span>
+      <span class="word">certain</span>
+      <span class="word">of.</span>
+    </h1>
     <p class="hero-subtitle">Research-grade peptides with verified purity, documented sourcing, and transparent testing. Every batch tested. Every batch certified.</p>
     <div class="hero-cta-group">
       <a href="#library" class="btn-primary">View Selection</a>
@@ -888,20 +935,38 @@
 </section>
 
 <!-- ==================== POSITION SECTION ==================== -->
-<section class="position-section reveal">
+<section class="position-section">
   <div class="position-content">
     <h2 class="section-title">Our Approach</h2>
     <p class="position-statement">
-      Aura Labs operates under one principle: <strong>research-grade means verified purity, documented sourcing, and known limitations.</strong> Every batch undergoes third-party testing. No exceptions. We document synthesis parameters, environmental controls, and verification results. Our supply chain is traceable. Our methodology is reproducible. We make no potency assertions. No storytelling. Just specification: what it is, what the data shows, and what we don't know.
+      Aura Labs operates under one principle: <strong>research-grade means verified purity, documented sourcing, and known limitations.</strong> Every batch undergoes third-party testing. No exceptions. We document synthesis parameters, environmental controls, and verification results. Our supply chain is traceable. Our methodology is reproducible.
     </p>
+
+    <div class="stats-container">
+      <div class="stat-box">
+        <div class="stat-number" data-target="100">0</div>
+        <div class="stat-label">Purity Verification</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" data-target="50">0</div>
+        <div class="stat-label">Available Compounds</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number" data-target="100">0</div>
+        <div class="stat-label">Supply Traceability</div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ==================== COMPOUND LIBRARY ==================== -->
-<section class="library-section reveal" id="library">
+<section class="library-section" id="library">
   <div class="library-header">
     <h2 class="section-title">Compound Library</h2>
     <p class="library-intro">All available compounds organized by category. Expand each to view formulations and dosages.</p>
+    <div class="search-box">
+      <input type="text" class="search-input" id="searchInput" placeholder="Search compounds...">
+    </div>
   </div>
 
   <div class="categories-container">
@@ -1014,7 +1079,7 @@
 </section>
 
 <!-- ==================== ACCESS SECTION ==================== -->
-<section class="access-section reveal">
+<section class="access-section">
   <div class="access-content">
     <h2 class="section-title">How to Access</h2>
     <div class="access-steps">
@@ -1040,7 +1105,7 @@
 </section>
 
 <!-- ==================== FOOTER ==================== -->
-<footer class="reveal">
+<footer>
   <div class="footer-content">
     <div class="footer-logo">Aura Labs</div>
 
@@ -1083,55 +1148,108 @@
 </footer>
 
 <script>
-  // Scroll reveal animation
-  const reveals = document.querySelectorAll('.reveal');
-  
+  // Scroll progress bar
+  const scrollProgress = document.querySelector('.scroll-progress');
+  window.addEventListener('scroll', () => {
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = window.scrollY;
+    scrollProgress.style.width = (scrolled / scrollHeight) * 100 + '%';
+  });
+
+  // Scroll reveal & counter animation
+  const revealElements = document.querySelectorAll('.section-title, .position-statement, .library-intro, .search-input');
+  const statBoxes = document.querySelectorAll('.stat-box');
+
   const revealOnScroll = () => {
-    reveals.forEach(reveal => {
+    revealElements.forEach(el => {
       const windowHeight = window.innerHeight;
-      const elementTop = reveal.getBoundingClientRect().top;
-      const elementVisible = 150;
-      
-      if (elementTop < windowHeight - elementVisible) {
-        reveal.classList.add('active');
+      const elementTop = el.getBoundingClientRect().top;
+      if (elementTop < windowHeight - 100) {
+        el.style.opacity = '1';
+      }
+    });
+
+    statBoxes.forEach(box => {
+      const windowHeight = window.innerHeight;
+      const elementTop = box.getBoundingClientRect().top;
+      if (elementTop < windowHeight - 100 && !box.classList.contains('counted')) {
+        animateCounter(box);
+        box.classList.add('counted');
       }
     });
   };
-  
+
+  const animateCounter = (box) => {
+    const numberEl = box.querySelector('.stat-number');
+    const target = parseInt(numberEl.dataset.target);
+    let current = 0;
+    const increment = target / 60;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        numberEl.textContent = target + '%';
+        clearInterval(timer);
+      } else {
+        numberEl.textContent = Math.floor(current) + '%';
+      }
+    }, 16);
+  };
+
   window.addEventListener('scroll', revealOnScroll, { passive: true });
   revealOnScroll();
-  
+
+  // Search/filter compounds
+  const searchInput = document.getElementById('searchInput');
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase();
+    const items = document.querySelectorAll('.compound-item');
+    items.forEach(item => {
+      const name = item.querySelector('.compound-name').textContent.toLowerCase();
+      if (name.includes(query)) {
+        item.classList.remove('hidden');
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+  });
+
   // Category toggle
   function toggleCategory(element) {
     const header = element;
     const content = header.nextElementSibling;
     const toggle = header.querySelector('.category-toggle');
-    const list = content.querySelector('.compound-list');
-    
+
     document.querySelectorAll('.category-block').forEach(block => {
       const h = block.querySelector('.category-header');
       const c = block.querySelector('.category-content');
       const t = h.querySelector('.category-toggle');
-      
+
       if (h !== header) {
         h.classList.remove('open');
         c.classList.remove('open');
         t.classList.remove('open');
       }
     });
-    
+
     header.classList.toggle('open');
     content.classList.toggle('open');
     toggle.classList.toggle('open');
-    
-    // Stagger compound items
-    if (content.classList.contains('open')) {
-      const items = list.querySelectorAll('.compound-item');
-      items.forEach((item, index) => {
-        item.style.animationDelay = (index * 0.05) + 's';
-      });
-    }
   }
+
+  // Floating card mouse tracking
+  document.addEventListener('mousemove', (e) => {
+    const cards = document.querySelectorAll('.float-card');
+    cards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      const distance = Math.sqrt(x * x + y * y);
+      
+      if (distance < 200) {
+        card.style.transform = `scale(1.05) translate(${x * 0.1}px, ${y * 0.1}px)`;
+      }
+    });
+  });
 </script>
 
 </body>
