@@ -20,28 +20,6 @@
 
       --font-heading: 'EB Garamond', serif;
       --font-body: 'Inter', sans-serif;
-
-      --spacing-4: 4px;
-      --spacing-8: 8px;
-      --spacing-12: 12px;
-      --spacing-16: 16px;
-      --spacing-20: 20px;
-      --spacing-24: 24px;
-      --spacing-32: 32px;
-      --spacing-40: 40px;
-      --spacing-48: 48px;
-      --spacing-64: 64px;
-      --spacing-80: 80px;
-      --spacing-96: 96px;
-      --spacing-128: 128px;
-
-      --radius-card: 24px;
-      --radius-button: 9999px;
-      --radius-input: 16px;
-
-      --shadow-subtle: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.06);
-      --shadow-card: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 4px 12px rgba(0, 0, 0, 0.08);
-      --shadow-elevated: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 12px 32px rgba(0, 0, 0, 0.10);
     }
 
     * {
@@ -56,6 +34,19 @@
       color: var(--color-ink);
       font-family: var(--font-body);
       line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ==================== SCROLL REVEAL ==================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* ==================== HERO ==================== */
@@ -66,26 +57,33 @@
       justify-content: center;
       position: relative;
       overflow: hidden;
-      background: var(--color-pure-white);
+      background: linear-gradient(135deg, var(--color-pure-white) 0%, var(--color-ice) 100%);
     }
 
     .hero::before {
       content: '';
       position: absolute;
-      width: 800px;
-      height: 800px;
+      width: 1200px;
+      height: 1200px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, rgba(37, 99, 235, 0.02) 70%, transparent 100%);
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.12) 0%, rgba(37, 99, 235, 0.04) 50%, transparent 100%);
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       z-index: 0;
-      animation: soft-pulse 6s ease-in-out infinite;
+      animation: pulse-glow 8s ease-in-out infinite;
+      will-change: transform;
     }
 
-    @keyframes soft-pulse {
-      0%, 100% { transform: translate(-50%, -50%) scale(1); }
-      50% { transform: translate(-50%, -50%) scale(1.05); }
+    @keyframes pulse-glow {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 1;
+      }
     }
 
     .hero-content {
@@ -93,19 +91,7 @@
       z-index: 1;
       max-width: 900px;
       text-align: center;
-      padding: var(--spacing-80) var(--spacing-40);
-      animation: fade-in-up 0.8s ease-out;
-    }
-
-    @keyframes fade-in-up {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      padding: 80px 40px;
     }
 
     .hero-title {
@@ -114,8 +100,20 @@
       font-weight: 400;
       line-height: 1.1;
       letter-spacing: -0.025em;
-      margin-bottom: var(--spacing-24);
+      margin-bottom: 24px;
       color: var(--color-ink);
+      animation: title-reveal 1s ease-out;
+    }
+
+    @keyframes title-reveal {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     .hero-subtitle {
@@ -125,59 +123,102 @@
       line-height: 1.7;
       color: var(--color-ash);
       max-width: 600px;
-      margin: 0 auto var(--spacing-48);
+      margin: 0 auto 48px;
       letter-spacing: -0.009em;
+      animation: fade-in 1.2s ease-out;
+      animation-delay: 0.2s;
+      animation-fill-mode: both;
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .hero-cta-group {
       display: flex;
       justify-content: center;
-      gap: var(--spacing-16);
+      gap: 16px;
       flex-wrap: wrap;
-      margin-bottom: var(--spacing-96);
+      margin-bottom: 80px;
+      animation: fade-in 1.2s ease-out 0.4s both;
     }
 
     .btn-primary {
       display: inline-block;
-      padding: 12px 24px;
+      padding: 14px 32px;
       background: var(--color-medical-blue);
       color: var(--color-pure-white);
       border: none;
-      border-radius: var(--radius-button);
+      border-radius: 9999px;
       font-family: var(--font-body);
       font-size: 15px;
-      font-weight: 450;
+      font-weight: 500;
       letter-spacing: -0.009em;
       text-decoration: none;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: var(--shadow-subtle);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 4px 12px rgba(0, 0, 0, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: left 0.5s ease;
+    }
+
+    .btn-primary:hover::before {
+      left: 100%;
     }
 
     .btn-primary:hover {
       background: #1d4ed8;
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-card);
+      transform: translateY(-4px);
+      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 12px 32px rgba(0, 0, 0, 0.15);
     }
 
     .btn-secondary {
       display: inline-block;
       background: transparent;
       color: var(--color-medical-blue);
-      border: none;
+      border: 2px solid var(--color-medical-blue);
+      border-radius: 9999px;
+      padding: 12px 30px;
       font-family: var(--font-body);
       font-size: 15px;
-      font-weight: 450;
+      font-weight: 500;
       letter-spacing: -0.009em;
       text-decoration: none;
       cursor: pointer;
-      transition: all 0.3s ease;
-      padding: 12px 0;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-secondary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--color-medical-blue);
+      z-index: -1;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .btn-secondary:hover::before {
+      transform: scaleX(1);
     }
 
     .btn-secondary:hover {
-      text-decoration: underline;
-      color: #1d4ed8;
+      color: var(--color-pure-white);
     }
 
     /* ==================== FLOATING CARDS ==================== */
@@ -193,73 +234,97 @@
 
     .float-card {
       position: absolute;
-      background: var(--color-pure-white);
-      border-radius: var(--radius-card);
-      padding: var(--spacing-24);
-      box-shadow: var(--shadow-elevated);
-      border: 1px solid var(--color-dove);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 12px 32px rgba(0, 0, 0, 0.10);
+      border: 1px solid rgba(163, 166, 175, 0.5);
       max-width: 240px;
-      animation: float 4s ease-in-out infinite;
+      animation: float-in 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) both;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
+    @keyframes float-in {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     .float-card:nth-child(1) {
       top: 15%;
       left: 5%;
       width: 180px;
-      animation-delay: 0s;
+      animation-delay: 0.6s;
+    }
+
+    .float-card:nth-child(1) {
+      animation: float-in 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s both, float 5s ease-in-out 1.8s infinite;
     }
 
     .float-card:nth-child(2) {
-      top: 60%;
+      top: 55%;
       right: 8%;
       width: 200px;
-      animation-delay: 1s;
+      animation-delay: 0.8s;
+      animation: float-in 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.8s both, float 5s ease-in-out 2s infinite;
     }
 
     .float-card:nth-child(3) {
-      bottom: 15%;
-      left: 10%;
+      bottom: 12%;
+      left: 8%;
       width: 190px;
-      animation-delay: 2s;
+      animation-delay: 1s;
+      animation: float-in 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 1s both, float 5s ease-in-out 2.2s infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-25px); }
+    }
+
+    .float-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 20px 40px rgba(37, 99, 235, 0.15);
     }
 
     .float-card-label {
       font-family: var(--font-body);
       font-size: 11px;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--color-graphite);
-      margin-bottom: var(--spacing-8);
+      margin-bottom: 8px;
     }
 
     .float-card-value {
       font-family: var(--font-heading);
-      font-size: 32px;
+      font-size: 36px;
       font-weight: 400;
       color: var(--color-medical-blue);
       letter-spacing: -0.02em;
       line-height: 1.1;
+      margin-bottom: 8px;
     }
 
     .float-card-desc {
       font-family: var(--font-body);
       font-size: 12px;
       color: var(--color-graphite);
-      margin-top: var(--spacing-8);
       line-height: 1.5;
     }
 
     /* ==================== POSITION SECTION ==================== */
     .position-section {
-      padding: var(--spacing-96) var(--spacing-40);
+      padding: 96px 40px;
       background: var(--color-pure-white);
       border-top: 1px solid var(--color-dove);
+      position: relative;
     }
 
     .position-content {
@@ -274,7 +339,7 @@
       line-height: 1.1;
       letter-spacing: -0.025em;
       color: var(--color-ink);
-      margin-bottom: var(--spacing-32);
+      margin-bottom: 32px;
       text-align: center;
     }
 
@@ -285,24 +350,24 @@
       line-height: 1.8;
       color: var(--color-ash);
       letter-spacing: -0.009em;
-      margin-bottom: var(--spacing-24);
+      margin-bottom: 24px;
     }
 
     .position-statement strong {
-      font-weight: 500;
+      font-weight: 600;
       color: var(--color-medical-blue);
     }
 
     /* ==================== LIBRARY SECTION ==================== */
     .library-section {
-      padding: var(--spacing-96) var(--spacing-40);
+      padding: 96px 40px;
       max-width: 1200px;
       margin: 0 auto;
     }
 
     .library-header {
       text-align: center;
-      margin-bottom: var(--spacing-96);
+      margin-bottom: 96px;
     }
 
     .library-intro {
@@ -320,27 +385,28 @@
     .categories-container {
       display: flex;
       flex-direction: column;
-      gap: var(--spacing-24);
+      gap: 24px;
     }
 
     .category-block {
       border: 1px solid var(--color-dove);
       background: var(--color-pure-white);
-      border-radius: var(--radius-card);
+      border-radius: 24px;
       overflow: hidden;
-      box-shadow: var(--shadow-subtle);
-      transition: all 0.3s ease;
+      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.06);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .category-block:hover {
-      box-shadow: var(--shadow-card);
+      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 12px 32px rgba(0, 0, 0, 0.12);
+      transform: translateY(-4px);
     }
 
     .category-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: var(--spacing-24);
+      padding: 24px;
       cursor: pointer;
       user-select: none;
       background: var(--color-pure-white);
@@ -356,44 +422,49 @@
 
     .category-header:hover {
       background: var(--color-fog);
+      color: var(--color-medical-blue);
     }
 
     .category-toggle {
-      width: 20px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 14px;
       color: var(--color-graphite);
       flex-shrink: 0;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .category-toggle.open {
-      transform: rotate(180deg);
+      transform: rotate(180deg) scale(1.2);
       color: var(--color-medical-blue);
     }
 
     .category-content {
       display: none;
-      padding: var(--spacing-24);
+      padding: 24px;
       border-top: 1px solid var(--color-dove);
       background: var(--color-fog);
       max-height: 0;
       overflow: hidden;
-      animation: slide-down 0.3s ease forwards;
-    }
-
-    @keyframes slide-down {
-      to {
-        max-height: 1000px;
-      }
     }
 
     .category-content.open {
       display: block;
-      animation: slide-down 0.3s ease forwards;
+      animation: expand 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes expand {
+      from {
+        max-height: 0;
+        opacity: 0;
+      }
+      to {
+        max-height: 1000px;
+        opacity: 1;
+      }
     }
 
     /* ==================== COMPOUND LIST ==================== */
@@ -407,18 +478,36 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: var(--spacing-12) 0;
+      padding: 12px 0;
       border-bottom: 1px solid var(--color-dove);
-      transition: all 0.2s ease;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      animation: item-slide-in 0.4s ease-out both;
     }
 
     .compound-item:last-child {
       border-bottom: none;
     }
 
+    @keyframes item-slide-in {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .category-content.open .compound-item {
+      animation: item-slide-in 0.4s ease-out both;
+    }
+
     .compound-item:hover {
-      padding-left: var(--spacing-8);
+      padding-left: 8px;
       color: var(--color-medical-blue);
+      background: rgba(37, 99, 235, 0.05);
+      border-radius: 4px;
     }
 
     .compound-name {
@@ -427,7 +516,7 @@
       font-weight: 500;
       color: var(--color-ink);
       letter-spacing: -0.009em;
-      transition: color 0.2s ease;
+      transition: color 0.3s ease;
     }
 
     .compound-item:hover .compound-name {
@@ -444,7 +533,7 @@
 
     /* ==================== ACCESS SECTION ==================== */
     .access-section {
-      padding: var(--spacing-96) var(--spacing-40);
+      padding: 96px 40px;
       background: var(--color-fog);
       border-top: 1px solid var(--color-dove);
     }
@@ -457,32 +546,42 @@
     .access-steps {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: var(--spacing-40);
-      margin-top: var(--spacing-64);
+      gap: 40px;
+      margin-top: 64px;
     }
 
     .access-step {
       background: var(--color-pure-white);
-      padding: var(--spacing-32);
-      border-radius: var(--radius-card);
+      padding: 32px;
+      border-radius: 24px;
       border: 1px solid var(--color-dove);
-      box-shadow: var(--shadow-subtle);
+      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 4px 12px rgba(0, 0, 0, 0.08);
       text-align: center;
-      transition: all 0.3s ease;
-      animation: fade-in-up 0.6s ease-out;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      overflow: hidden;
     }
 
-    .access-step:nth-child(2) {
-      animation-delay: 0.1s;
+    .access-step::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-medical-blue), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .access-step:nth-child(3) {
-      animation-delay: 0.2s;
+    .access-step:hover::before {
+      transform: scaleX(1);
     }
 
     .access-step:hover {
-      box-shadow: var(--shadow-card);
-      transform: translateY(-4px);
+      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 20px 40px rgba(37, 99, 235, 0.15);
+      transform: translateY(-8px);
     }
 
     .access-step-number {
@@ -492,17 +591,23 @@
       line-height: 1;
       letter-spacing: -0.025em;
       color: var(--color-medical-blue);
-      margin-bottom: var(--spacing-16);
+      margin-bottom: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .access-step:hover .access-step-number {
+      transform: scale(1.15);
+      color: #1d4ed8;
     }
 
     .access-step-label {
       font-family: var(--font-body);
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--color-graphite);
-      margin-bottom: var(--spacing-12);
+      margin-bottom: 12px;
     }
 
     .access-step-desc {
@@ -516,7 +621,7 @@
 
     /* ==================== FOOTER ==================== */
     footer {
-      padding: var(--spacing-64) var(--spacing-40);
+      padding: 64px 40px;
       border-top: 1px solid var(--color-dove);
       background: var(--color-pure-white);
       text-align: center;
@@ -533,15 +638,15 @@
       font-weight: 400;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: var(--spacing-32);
+      margin-bottom: 32px;
       color: var(--color-ink);
     }
 
     .footer-sections {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: var(--spacing-48);
-      margin-bottom: var(--spacing-48);
+      gap: 48px;
+      margin-bottom: 48px;
       text-align: left;
     }
 
@@ -551,7 +656,7 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--color-ink);
-      margin-bottom: var(--spacing-16);
+      margin-bottom: 16px;
       font-weight: 600;
     }
 
@@ -565,8 +670,24 @@
       color: var(--color-graphite);
       text-decoration: none;
       line-height: 1.8;
-      transition: color 0.3s ease;
+      transition: all 0.3s ease;
       letter-spacing: -0.009em;
+      position: relative;
+    }
+
+    .footer-section a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--color-medical-blue);
+      transition: width 0.3s ease;
+    }
+
+    .footer-section a:hover::after {
+      width: 100%;
     }
 
     .footer-section a:hover {
@@ -576,7 +697,7 @@
     .footer-divider {
       height: 1px;
       background: var(--color-dove);
-      margin-bottom: var(--spacing-32);
+      margin-bottom: 32px;
     }
 
     .footer-disclaimer {
@@ -599,20 +720,20 @@
     /* ==================== RESPONSIVE ==================== */
     @media (max-width: 768px) {
       .hero-content {
-        padding: var(--spacing-48) var(--spacing-24);
+        padding: 48px 24px;
       }
 
       .hero-title {
         font-size: clamp(32px, 6vw, 48px);
-        margin-bottom: var(--spacing-20);
+        margin-bottom: 20px;
       }
 
       .hero-subtitle {
-        margin-bottom: var(--spacing-32);
+        margin-bottom: 32px;
       }
 
       .hero-cta-group {
-        margin-bottom: var(--spacing-48);
+        margin-bottom: 48px;
       }
 
       .floating-cards {
@@ -620,7 +741,7 @@
       }
 
       .position-section {
-        padding: var(--spacing-64) var(--spacing-24);
+        padding: 64px 24px;
       }
 
       .section-title {
@@ -628,58 +749,58 @@
       }
 
       .library-section {
-        padding: var(--spacing-64) var(--spacing-24);
+        padding: 64px 24px;
       }
 
       .library-header {
-        margin-bottom: var(--spacing-64);
+        margin-bottom: 64px;
       }
 
       .access-section {
-        padding: var(--spacing-64) var(--spacing-24);
+        padding: 64px 24px;
       }
 
       .access-steps {
-        gap: var(--spacing-32);
+        gap: 32px;
       }
 
       .footer-sections {
         grid-template-columns: 1fr;
-        gap: var(--spacing-32);
+        gap: 32px;
         text-align: center;
       }
 
       footer {
-        padding: var(--spacing-48) var(--spacing-24);
+        padding: 48px 24px;
       }
     }
 
     @media (max-width: 480px) {
       .hero-content {
-        padding: var(--spacing-32) var(--spacing-16);
+        padding: 32px 16px;
       }
 
       .hero-title {
         font-size: clamp(24px, 5vw, 36px);
-        margin-bottom: var(--spacing-16);
+        margin-bottom: 16px;
       }
 
       .hero-subtitle {
         font-size: 14px;
-        margin-bottom: var(--spacing-24);
+        margin-bottom: 24px;
       }
 
       .btn-primary, .btn-secondary {
-        padding: 10px 20px;
+        padding: 11px 24px;
         font-size: 13px;
       }
 
       .hero-cta-group {
-        margin-bottom: var(--spacing-32);
+        margin-bottom: 32px;
       }
 
       .position-section {
-        padding: var(--spacing-48) var(--spacing-16);
+        padding: 48px 16px;
       }
 
       .section-title {
@@ -687,20 +808,20 @@
       }
 
       .library-section {
-        padding: var(--spacing-48) var(--spacing-16);
+        padding: 48px 16px;
       }
 
       .categories-container {
-        gap: var(--spacing-16);
+        gap: 16px;
       }
 
       .category-header {
-        padding: var(--spacing-16);
+        padding: 16px;
         font-size: 14px;
       }
 
       .category-content {
-        padding: var(--spacing-16);
+        padding: 16px;
       }
 
       .compound-name {
@@ -712,16 +833,16 @@
       }
 
       .access-section {
-        padding: var(--spacing-48) var(--spacing-16);
+        padding: 48px 16px;
       }
 
       .access-steps {
-        gap: var(--spacing-24);
+        gap: 24px;
         grid-template-columns: 1fr;
       }
 
       .access-step {
-        padding: var(--spacing-24);
+        padding: 24px;
       }
 
       .access-step-number {
@@ -729,7 +850,7 @@
       }
 
       footer {
-        padding: var(--spacing-32) var(--spacing-16);
+        padding: 32px 16px;
       }
     }
   </style>
@@ -737,7 +858,7 @@
 <body>
 
 <!-- ==================== HERO ==================== -->
-<section class="hero">
+<section class="hero reveal">
   <div class="floating-cards">
     <div class="float-card">
       <div class="float-card-label">Verified Purity</div>
@@ -767,7 +888,7 @@
 </section>
 
 <!-- ==================== POSITION SECTION ==================== -->
-<section class="position-section">
+<section class="position-section reveal">
   <div class="position-content">
     <h2 class="section-title">Our Approach</h2>
     <p class="position-statement">
@@ -777,7 +898,7 @@
 </section>
 
 <!-- ==================== COMPOUND LIBRARY ==================== -->
-<section class="library-section" id="library">
+<section class="library-section reveal" id="library">
   <div class="library-header">
     <h2 class="section-title">Compound Library</h2>
     <p class="library-intro">All available compounds organized by category. Expand each to view formulations and dosages.</p>
@@ -793,46 +914,16 @@
       </button>
       <div class="category-content">
         <div class="compound-list">
-          <div class="compound-item">
-            <span class="compound-name">Semaglutide</span>
-            <span class="compound-dose">2mg, 5mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Retatrutide</span>
-            <span class="compound-dose">5mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Cagrilintide</span>
-            <span class="compound-dose">2.4mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">AOD-9604</span>
-            <span class="compound-dose">5mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">5-Amino-1MQ</span>
-            <span class="compound-dose">10mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Adipotide</span>
-            <span class="compound-dose">5mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">HGH Fragment 176-191</span>
-            <span class="compound-dose">5mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">L-Carnitine</span>
-            <span class="compound-dose">500mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Lipo-C</span>
-            <span class="compound-dose">5ml vial</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Tirzepatide</span>
-            <span class="compound-dose">5mg, 10mg</span>
-          </div>
+          <div class="compound-item"><span class="compound-name">Semaglutide</span><span class="compound-dose">2mg, 5mg</span></div>
+          <div class="compound-item"><span class="compound-name">Retatrutide</span><span class="compound-dose">5mg</span></div>
+          <div class="compound-item"><span class="compound-name">Cagrilintide</span><span class="compound-dose">2.4mg</span></div>
+          <div class="compound-item"><span class="compound-name">AOD-9604</span><span class="compound-dose">5mg</span></div>
+          <div class="compound-item"><span class="compound-name">5-Amino-1MQ</span><span class="compound-dose">10mg</span></div>
+          <div class="compound-item"><span class="compound-name">Adipotide</span><span class="compound-dose">5mg</span></div>
+          <div class="compound-item"><span class="compound-name">HGH Fragment 176-191</span><span class="compound-dose">5mg</span></div>
+          <div class="compound-item"><span class="compound-name">L-Carnitine</span><span class="compound-dose">500mg</span></div>
+          <div class="compound-item"><span class="compound-name">Lipo-C</span><span class="compound-dose">5ml vial</span></div>
+          <div class="compound-item"><span class="compound-name">Tirzepatide</span><span class="compound-dose">5mg, 10mg</span></div>
         </div>
       </div>
     </div>
@@ -845,46 +936,16 @@
       </button>
       <div class="category-content">
         <div class="compound-list">
-          <div class="compound-item">
-            <span class="compound-name">BPC-157</span>
-            <span class="compound-dose">2mg, 10mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">TB-500</span>
-            <span class="compound-dose">5mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">GHK-Cu</span>
-            <span class="compound-dose">50mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">AHK-Cu</span>
-            <span class="compound-dose">50mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">KPV</span>
-            <span class="compound-dose">5mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">LL-37</span>
-            <span class="compound-dose">10mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">GLOW</span>
-            <span class="compound-dose">5mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">KLOW</span>
-            <span class="compound-dose">5mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Collagen Peptides</span>
-            <span class="compound-dose">500mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Matrixyl 3000</span>
-            <span class="compound-dose">100mg</span>
-          </div>
+          <div class="compound-item"><span class="compound-name">BPC-157</span><span class="compound-dose">2mg, 10mg</span></div>
+          <div class="compound-item"><span class="compound-name">TB-500</span><span class="compound-dose">5mg</span></div>
+          <div class="compound-item"><span class="compound-name">GHK-Cu</span><span class="compound-dose">50mg</span></div>
+          <div class="compound-item"><span class="compound-name">AHK-Cu</span><span class="compound-dose">50mg</span></div>
+          <div class="compound-item"><span class="compound-name">KPV</span><span class="compound-dose">5mg</span></div>
+          <div class="compound-item"><span class="compound-name">LL-37</span><span class="compound-dose">10mg</span></div>
+          <div class="compound-item"><span class="compound-name">GLOW</span><span class="compound-dose">5mg</span></div>
+          <div class="compound-item"><span class="compound-name">KLOW</span><span class="compound-dose">5mg</span></div>
+          <div class="compound-item"><span class="compound-name">Collagen Peptides</span><span class="compound-dose">500mg</span></div>
+          <div class="compound-item"><span class="compound-name">Matrixyl 3000</span><span class="compound-dose">100mg</span></div>
         </div>
       </div>
     </div>
@@ -897,38 +958,14 @@
       </button>
       <div class="category-content">
         <div class="compound-list">
-          <div class="compound-item">
-            <span class="compound-name">Ipamorelin</span>
-            <span class="compound-dose">2mg, 5mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">CJC-1295 with DAC</span>
-            <span class="compound-dose">5mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">CJC-1295 no DAC</span>
-            <span class="compound-dose">5mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">GHRP-2</span>
-            <span class="compound-dose">5mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">GHRP-6</span>
-            <span class="compound-dose">5mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Hexarelin</span>
-            <span class="compound-dose">2mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">MK-677 (Ibutamoren)</span>
-            <span class="compound-dose">10mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Sermorelin</span>
-            <span class="compound-dose">15mg</span>
-          </div>
+          <div class="compound-item"><span class="compound-name">Ipamorelin</span><span class="compound-dose">2mg, 5mg</span></div>
+          <div class="compound-item"><span class="compound-name">CJC-1295 with DAC</span><span class="compound-dose">5mg</span></div>
+          <div class="compound-item"><span class="compound-name">CJC-1295 no DAC</span><span class="compound-dose">5mg</span></div>
+          <div class="compound-item"><span class="compound-name">GHRP-2</span><span class="compound-dose">5mg</span></div>
+          <div class="compound-item"><span class="compound-name">GHRP-6</span><span class="compound-dose">5mg</span></div>
+          <div class="compound-item"><span class="compound-name">Hexarelin</span><span class="compound-dose">2mg</span></div>
+          <div class="compound-item"><span class="compound-name">MK-677 (Ibutamoren)</span><span class="compound-dose">10mg</span></div>
+          <div class="compound-item"><span class="compound-name">Sermorelin</span><span class="compound-dose">15mg</span></div>
         </div>
       </div>
     </div>
@@ -941,34 +978,13 @@
       </button>
       <div class="category-content">
         <div class="compound-list">
-          <div class="compound-item">
-            <span class="compound-name">Semax</span>
-            <span class="compound-dose">5mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">NAD+</span>
-            <span class="compound-dose">500mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">DSIP</span>
-            <span class="compound-dose">5mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Noopept</span>
-            <span class="compound-dose">10mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Phenylpiracetam</span>
-            <span class="compound-dose">100mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Aniracetam</span>
-            <span class="compound-dose">750mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Coluracetam</span>
-            <span class="compound-dose">5mg</span>
-          </div>
+          <div class="compound-item"><span class="compound-name">Semax</span><span class="compound-dose">5mg</span></div>
+          <div class="compound-item"><span class="compound-name">NAD+</span><span class="compound-dose">500mg</span></div>
+          <div class="compound-item"><span class="compound-name">DSIP</span><span class="compound-dose">5mg</span></div>
+          <div class="compound-item"><span class="compound-name">Noopept</span><span class="compound-dose">10mg</span></div>
+          <div class="compound-item"><span class="compound-name">Phenylpiracetam</span><span class="compound-dose">100mg</span></div>
+          <div class="compound-item"><span class="compound-name">Aniracetam</span><span class="compound-dose">750mg</span></div>
+          <div class="compound-item"><span class="compound-name">Coluracetam</span><span class="compound-dose">5mg</span></div>
         </div>
       </div>
     </div>
@@ -981,42 +997,15 @@
       </button>
       <div class="category-content">
         <div class="compound-list">
-          <div class="compound-item">
-            <span class="compound-name">FOXO4-DRI</span>
-            <span class="compound-dose">10mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Epithalon</span>
-            <span class="compound-dose">10mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Pinealon</span>
-            <span class="compound-dose">5mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Thymosin Alpha 1</span>
-            <span class="compound-dose">10mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Goserelin</span>
-            <span class="compound-dose">3.6mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Triptorelin</span>
-            <span class="compound-dose">100mcg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Selank</span>
-            <span class="compound-dose">5mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Deltasleep</span>
-            <span class="compound-dose">5mg</span>
-          </div>
-          <div class="compound-item">
-            <span class="compound-name">Cerebrolysin</span>
-            <span class="compound-dose">10ml vial</span>
-          </div>
+          <div class="compound-item"><span class="compound-name">FOXO4-DRI</span><span class="compound-dose">10mg</span></div>
+          <div class="compound-item"><span class="compound-name">Epithalon</span><span class="compound-dose">10mg</span></div>
+          <div class="compound-item"><span class="compound-name">Pinealon</span><span class="compound-dose">5mg</span></div>
+          <div class="compound-item"><span class="compound-name">Thymosin Alpha 1</span><span class="compound-dose">10mg</span></div>
+          <div class="compound-item"><span class="compound-name">Goserelin</span><span class="compound-dose">3.6mg</span></div>
+          <div class="compound-item"><span class="compound-name">Triptorelin</span><span class="compound-dose">100mcg</span></div>
+          <div class="compound-item"><span class="compound-name">Selank</span><span class="compound-dose">5mg</span></div>
+          <div class="compound-item"><span class="compound-name">Deltasleep</span><span class="compound-dose">5mg</span></div>
+          <div class="compound-item"><span class="compound-name">Cerebrolysin</span><span class="compound-dose">10ml vial</span></div>
         </div>
       </div>
     </div>
@@ -1025,7 +1014,7 @@
 </section>
 
 <!-- ==================== ACCESS SECTION ==================== -->
-<section class="access-section">
+<section class="access-section reveal">
   <div class="access-content">
     <h2 class="section-title">How to Access</h2>
     <div class="access-steps">
@@ -1051,7 +1040,7 @@
 </section>
 
 <!-- ==================== FOOTER ==================== -->
-<footer>
+<footer class="reveal">
   <div class="footer-content">
     <div class="footer-logo">Aura Labs</div>
 
@@ -1094,10 +1083,30 @@
 </footer>
 
 <script>
+  // Scroll reveal animation
+  const reveals = document.querySelectorAll('.reveal');
+  
+  const revealOnScroll = () => {
+    reveals.forEach(reveal => {
+      const windowHeight = window.innerHeight;
+      const elementTop = reveal.getBoundingClientRect().top;
+      const elementVisible = 150;
+      
+      if (elementTop < windowHeight - elementVisible) {
+        reveal.classList.add('active');
+      }
+    });
+  };
+  
+  window.addEventListener('scroll', revealOnScroll, { passive: true });
+  revealOnScroll();
+  
+  // Category toggle
   function toggleCategory(element) {
     const header = element;
     const content = header.nextElementSibling;
     const toggle = header.querySelector('.category-toggle');
+    const list = content.querySelector('.compound-list');
     
     document.querySelectorAll('.category-block').forEach(block => {
       const h = block.querySelector('.category-header');
@@ -1114,6 +1123,14 @@
     header.classList.toggle('open');
     content.classList.toggle('open');
     toggle.classList.toggle('open');
+    
+    // Stagger compound items
+    if (content.classList.contains('open')) {
+      const items = list.querySelectorAll('.compound-item');
+      items.forEach((item, index) => {
+        item.style.animationDelay = (index * 0.05) + 's';
+      });
+    }
   }
 </script>
 
