@@ -7,24 +7,20 @@
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      /* Colors */
       --color-ink: #17191c;
       --color-pure-white: #ffffff;
       --color-fog: #f7f7f8;
       --color-ash: #4c4c4c;
       --color-graphite: #777b86;
       --color-dove: #a3a6af;
-      --color-slate: #8b8c8d;
       --color-obsidian: #000000;
       --color-medical-blue: #2563eb;
       --color-blue-wash: #dbeafe;
       --color-ice: #f0f9ff;
 
-      /* Typography */
       --font-heading: 'EB Garamond', serif;
       --font-body: 'Inter', sans-serif;
 
-      /* Spacing */
       --spacing-4: 4px;
       --spacing-8: 8px;
       --spacing-12: 12px;
@@ -33,25 +29,22 @@
       --spacing-24: 24px;
       --spacing-32: 32px;
       --spacing-40: 40px;
+      --spacing-48: 48px;
       --spacing-64: 64px;
       --spacing-80: 80px;
       --spacing-96: 96px;
+      --spacing-128: 128px;
 
-      /* Border Radius */
       --radius-card: 24px;
-      --radius-image: 12px;
-      --radius-input: 16px;
       --radius-button: 9999px;
-      --radius-avatar: 9999px;
-      --radius-container: 8px;
+      --radius-input: 16px;
 
-      /* Shadows */
       --shadow-subtle: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.06);
       --shadow-card: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 4px 12px rgba(0, 0, 0, 0.08);
       --shadow-elevated: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 12px 32px rgba(0, 0, 0, 0.10);
     }
 
-    *, *::before, *::after {
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -71,24 +64,57 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: var(--spacing-80) var(--spacing-40);
       position: relative;
-      background: linear-gradient(135deg, var(--color-pure-white) 0%, var(--color-ice) 100%);
-      text-align: center;
+      overflow: hidden;
+      background: var(--color-pure-white);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, rgba(37, 99, 235, 0.02) 70%, transparent 100%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      animation: soft-pulse 6s ease-in-out infinite;
+    }
+
+    @keyframes soft-pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.05); }
     }
 
     .hero-content {
+      position: relative;
+      z-index: 1;
       max-width: 900px;
-      width: 100%;
+      text-align: center;
+      padding: var(--spacing-80) var(--spacing-40);
+      animation: fade-in-up 0.8s ease-out;
+    }
+
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .hero-title {
       font-family: var(--font-heading);
-      font-size: clamp(48px, 8vw, 84px);
+      font-size: clamp(44px, 8vw, 90px);
       font-weight: 400;
-      line-height: 1.15;
-      letter-spacing: 0.01em;
-      margin-bottom: var(--spacing-32);
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      margin-bottom: var(--spacing-24);
       color: var(--color-ink);
     }
 
@@ -96,10 +122,10 @@
       font-family: var(--font-body);
       font-size: clamp(16px, 2vw, 18px);
       font-weight: 400;
-      line-height: 1.6;
+      line-height: 1.7;
       color: var(--color-ash);
       max-width: 600px;
-      margin: 0 auto var(--spacing-40);
+      margin: 0 auto var(--spacing-48);
       letter-spacing: -0.009em;
     }
 
@@ -108,6 +134,7 @@
       justify-content: center;
       gap: var(--spacing-16);
       flex-wrap: wrap;
+      margin-bottom: var(--spacing-96);
     }
 
     .btn-primary {
@@ -118,58 +145,137 @@
       border: none;
       border-radius: var(--radius-button);
       font-family: var(--font-body);
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: -0.009em;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .btn-primary:hover {
-      background: #1d4ed8;
-    }
-
-    .btn-secondary {
-      display: inline-block;
-      padding: 12px 24px;
-      background: transparent;
-      color: var(--color-medical-blue);
-      border: none;
-      border-radius: var(--radius-button);
-      font-family: var(--font-body);
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 15px;
+      font-weight: 450;
       letter-spacing: -0.009em;
       text-decoration: none;
       cursor: pointer;
       transition: all 0.3s ease;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--color-medical-blue);
+      border: none;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 450;
+      letter-spacing: -0.009em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 12px 0;
     }
 
     .btn-secondary:hover {
       text-decoration: underline;
+      color: #1d4ed8;
+    }
+
+    /* ==================== FLOATING CARDS ==================== */
+    .floating-cards {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .float-card {
+      position: absolute;
+      background: var(--color-pure-white);
+      border-radius: var(--radius-card);
+      padding: var(--spacing-24);
+      box-shadow: var(--shadow-elevated);
+      border: 1px solid var(--color-dove);
+      max-width: 240px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .float-card:nth-child(1) {
+      top: 15%;
+      left: 5%;
+      width: 180px;
+      animation-delay: 0s;
+    }
+
+    .float-card:nth-child(2) {
+      top: 60%;
+      right: 8%;
+      width: 200px;
+      animation-delay: 1s;
+    }
+
+    .float-card:nth-child(3) {
+      bottom: 15%;
+      left: 10%;
+      width: 190px;
+      animation-delay: 2s;
+    }
+
+    .float-card-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-graphite);
+      margin-bottom: var(--spacing-8);
+    }
+
+    .float-card-value {
+      font-family: var(--font-heading);
+      font-size: 32px;
+      font-weight: 400;
+      color: var(--color-medical-blue);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .float-card-desc {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--color-graphite);
+      margin-top: var(--spacing-8);
+      line-height: 1.5;
     }
 
     /* ==================== POSITION SECTION ==================== */
     .position-section {
       padding: var(--spacing-96) var(--spacing-40);
       background: var(--color-pure-white);
-      border-bottom: 1px solid var(--color-dove);
+      border-top: 1px solid var(--color-dove);
     }
 
     .position-content {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
     }
 
-    .position-title {
+    .section-title {
       font-family: var(--font-heading);
-      font-size: clamp(28px, 4vw, 36px);
+      font-size: clamp(44px, 5vw, 64px);
       font-weight: 400;
-      line-height: 1.2;
-      letter-spacing: 0.01em;
-      margin-bottom: var(--spacing-32);
+      line-height: 1.1;
+      letter-spacing: -0.025em;
       color: var(--color-ink);
+      margin-bottom: var(--spacing-32);
+      text-align: center;
     }
 
     .position-statement {
@@ -196,17 +302,7 @@
 
     .library-header {
       text-align: center;
-      margin-bottom: var(--spacing-80);
-    }
-
-    .library-title {
-      font-family: var(--font-heading);
-      font-size: clamp(36px, 5vw, 48px);
-      font-weight: 400;
-      line-height: 1.2;
-      letter-spacing: 0.01em;
-      color: var(--color-ink);
-      margin-bottom: var(--spacing-20);
+      margin-bottom: var(--spacing-96);
     }
 
     .library-intro {
@@ -214,25 +310,30 @@
       font-size: 16px;
       font-weight: 400;
       color: var(--color-graphite);
-      max-width: 600px;
+      max-width: 700px;
       margin: 0 auto;
       letter-spacing: -0.009em;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     /* ==================== CATEGORIES ==================== */
     .categories-container {
       display: flex;
       flex-direction: column;
-      gap: var(--spacing-20);
+      gap: var(--spacing-24);
     }
 
     .category-block {
       border: 1px solid var(--color-dove);
       background: var(--color-pure-white);
-      border-radius: var(--radius-container);
+      border-radius: var(--radius-card);
       overflow: hidden;
       box-shadow: var(--shadow-subtle);
+      transition: all 0.3s ease;
+    }
+
+    .category-block:hover {
+      box-shadow: var(--shadow-card);
     }
 
     .category-header {
@@ -250,7 +351,7 @@
       font-weight: 400;
       letter-spacing: 0.01em;
       color: var(--color-ink);
-      transition: background 0.2s ease;
+      transition: all 0.3s ease;
     }
 
     .category-header:hover {
@@ -263,10 +364,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 14px;
       color: var(--color-graphite);
       flex-shrink: 0;
-      transition: transform 0.3s ease, color 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     .category-toggle.open {
@@ -279,10 +380,20 @@
       padding: var(--spacing-24);
       border-top: 1px solid var(--color-dove);
       background: var(--color-fog);
+      max-height: 0;
+      overflow: hidden;
+      animation: slide-down 0.3s ease forwards;
+    }
+
+    @keyframes slide-down {
+      to {
+        max-height: 1000px;
+      }
     }
 
     .category-content.open {
       display: block;
+      animation: slide-down 0.3s ease forwards;
     }
 
     /* ==================== COMPOUND LIST ==================== */
@@ -298,10 +409,16 @@
       align-items: center;
       padding: var(--spacing-12) 0;
       border-bottom: 1px solid var(--color-dove);
+      transition: all 0.2s ease;
     }
 
     .compound-item:last-child {
       border-bottom: none;
+    }
+
+    .compound-item:hover {
+      padding-left: var(--spacing-8);
+      color: var(--color-medical-blue);
     }
 
     .compound-name {
@@ -310,6 +427,11 @@
       font-weight: 500;
       color: var(--color-ink);
       letter-spacing: -0.009em;
+      transition: color 0.2s ease;
+    }
+
+    .compound-item:hover .compound-name {
+      color: var(--color-medical-blue);
     }
 
     .compound-dose {
@@ -332,40 +454,45 @@
       margin: 0 auto;
     }
 
-    .access-title {
-      font-family: var(--font-heading);
-      font-size: clamp(28px, 4vw, 48px);
-      font-weight: 400;
-      line-height: 1.2;
-      letter-spacing: 0.01em;
-      color: var(--color-ink);
-      text-align: center;
-      margin-bottom: var(--spacing-64);
-    }
-
     .access-steps {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: var(--spacing-40);
+      margin-top: var(--spacing-64);
     }
 
     .access-step {
-      text-align: center;
-      padding: var(--spacing-32);
       background: var(--color-pure-white);
-      border-radius: var(--radius-container);
+      padding: var(--spacing-32);
+      border-radius: var(--radius-card);
       border: 1px solid var(--color-dove);
       box-shadow: var(--shadow-subtle);
+      text-align: center;
+      transition: all 0.3s ease;
+      animation: fade-in-up 0.6s ease-out;
+    }
+
+    .access-step:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    .access-step:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+
+    .access-step:hover {
+      box-shadow: var(--shadow-card);
+      transform: translateY(-4px);
     }
 
     .access-step-number {
       font-family: var(--font-heading);
-      font-size: 36px;
+      font-size: 48px;
       font-weight: 400;
-      line-height: 1.2;
-      letter-spacing: 0.01em;
+      line-height: 1;
+      letter-spacing: -0.025em;
       color: var(--color-medical-blue);
-      margin-bottom: var(--spacing-12);
+      margin-bottom: var(--spacing-16);
     }
 
     .access-step-label {
@@ -471,14 +598,13 @@
 
     /* ==================== RESPONSIVE ==================== */
     @media (max-width: 768px) {
-      .hero {
-        padding: var(--spacing-64) var(--spacing-24);
-        min-height: auto;
+      .hero-content {
+        padding: var(--spacing-48) var(--spacing-24);
       }
 
       .hero-title {
         font-size: clamp(32px, 6vw, 48px);
-        margin-bottom: var(--spacing-24);
+        margin-bottom: var(--spacing-20);
       }
 
       .hero-subtitle {
@@ -486,16 +612,19 @@
       }
 
       .hero-cta-group {
-        gap: var(--spacing-12);
+        margin-bottom: var(--spacing-48);
+      }
+
+      .floating-cards {
+        display: none;
       }
 
       .position-section {
         padding: var(--spacing-64) var(--spacing-24);
       }
 
-      .position-title {
-        font-size: clamp(24px, 3vw, 28px);
-        margin-bottom: var(--spacing-24);
+      .section-title {
+        font-size: clamp(28px, 4vw, 44px);
       }
 
       .library-section {
@@ -506,31 +635,8 @@
         margin-bottom: var(--spacing-64);
       }
 
-      .library-title {
-        font-size: clamp(28px, 4vw, 36px);
-        margin-bottom: var(--spacing-16);
-      }
-
-      .categories-container {
-        gap: var(--spacing-16);
-      }
-
-      .category-header {
-        padding: var(--spacing-20);
-        font-size: 16px;
-      }
-
-      .category-content {
-        padding: var(--spacing-20);
-      }
-
       .access-section {
         padding: var(--spacing-64) var(--spacing-24);
-      }
-
-      .access-title {
-        font-size: clamp(24px, 3vw, 36px);
-        margin-bottom: var(--spacing-48);
       }
 
       .access-steps {
@@ -549,13 +655,13 @@
     }
 
     @media (max-width: 480px) {
-      .hero {
-        padding: var(--spacing-40) var(--spacing-16);
+      .hero-content {
+        padding: var(--spacing-32) var(--spacing-16);
       }
 
       .hero-title {
         font-size: clamp(24px, 5vw, 36px);
-        margin-bottom: var(--spacing-20);
+        margin-bottom: var(--spacing-16);
       }
 
       .hero-subtitle {
@@ -568,24 +674,24 @@
         font-size: 13px;
       }
 
+      .hero-cta-group {
+        margin-bottom: var(--spacing-32);
+      }
+
       .position-section {
         padding: var(--spacing-48) var(--spacing-16);
       }
 
-      .position-title {
-        font-size: clamp(20px, 2.5vw, 24px);
+      .section-title {
+        font-size: clamp(20px, 3.5vw, 32px);
       }
 
       .library-section {
         padding: var(--spacing-48) var(--spacing-16);
       }
 
-      .library-title {
-        font-size: clamp(20px, 3.5vw, 28px);
-      }
-
       .categories-container {
-        gap: var(--spacing-12);
+        gap: var(--spacing-16);
       }
 
       .category-header {
@@ -609,11 +715,6 @@
         padding: var(--spacing-48) var(--spacing-16);
       }
 
-      .access-title {
-        font-size: clamp(20px, 2.5vw, 28px);
-        margin-bottom: var(--spacing-32);
-      }
-
       .access-steps {
         gap: var(--spacing-24);
         grid-template-columns: 1fr;
@@ -623,16 +724,12 @@
         padding: var(--spacing-24);
       }
 
+      .access-step-number {
+        font-size: 36px;
+      }
+
       footer {
         padding: var(--spacing-32) var(--spacing-16);
-      }
-
-      .footer-logo {
-        font-size: 14px;
-      }
-
-      .footer-sections {
-        gap: var(--spacing-24);
       }
     }
   </style>
@@ -641,6 +738,24 @@
 
 <!-- ==================== HERO ==================== -->
 <section class="hero">
+  <div class="floating-cards">
+    <div class="float-card">
+      <div class="float-card-label">Verified Purity</div>
+      <div class="float-card-value">100%</div>
+      <div class="float-card-desc">Third-party tested</div>
+    </div>
+    <div class="float-card">
+      <div class="float-card-label">Compounds</div>
+      <div class="float-card-value">50+</div>
+      <div class="float-card-desc">Rigorously selected</div>
+    </div>
+    <div class="float-card">
+      <div class="float-card-label">Traceability</div>
+      <div class="float-card-value">100%</div>
+      <div class="float-card-desc">Full documentation</div>
+    </div>
+  </div>
+
   <div class="hero-content">
     <h1 class="hero-title">We offer what we're certain of. Nothing more.</h1>
     <p class="hero-subtitle">Research-grade peptides with verified purity, documented sourcing, and transparent testing. Every batch tested. Every batch certified.</p>
@@ -654,7 +769,7 @@
 <!-- ==================== POSITION SECTION ==================== -->
 <section class="position-section">
   <div class="position-content">
-    <h2 class="position-title">Our Approach</h2>
+    <h2 class="section-title">Our Approach</h2>
     <p class="position-statement">
       Aura Labs operates under one principle: <strong>research-grade means verified purity, documented sourcing, and known limitations.</strong> Every batch undergoes third-party testing. No exceptions. We document synthesis parameters, environmental controls, and verification results. Our supply chain is traceable. Our methodology is reproducible. We make no potency assertions. No storytelling. Just specification: what it is, what the data shows, and what we don't know.
     </p>
@@ -664,7 +779,7 @@
 <!-- ==================== COMPOUND LIBRARY ==================== -->
 <section class="library-section" id="library">
   <div class="library-header">
-    <h2 class="library-title">Compound Library</h2>
+    <h2 class="section-title">Compound Library</h2>
     <p class="library-intro">All available compounds organized by category. Expand each to view formulations and dosages.</p>
   </div>
 
@@ -912,7 +1027,7 @@
 <!-- ==================== ACCESS SECTION ==================== -->
 <section class="access-section">
   <div class="access-content">
-    <h2 class="access-title">How to Access</h2>
+    <h2 class="section-title">How to Access</h2>
     <div class="access-steps">
       <div class="access-step">
         <div class="access-step-number">1</div>
@@ -984,7 +1099,6 @@
     const content = header.nextElementSibling;
     const toggle = header.querySelector('.category-toggle');
     
-    // Close all other categories
     document.querySelectorAll('.category-block').forEach(block => {
       const h = block.querySelector('.category-header');
       const c = block.querySelector('.category-content');
@@ -997,7 +1111,6 @@
       }
     });
     
-    // Toggle current category
     header.classList.toggle('open');
     content.classList.toggle('open');
     toggle.classList.toggle('open');
