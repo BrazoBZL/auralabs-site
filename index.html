@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aura Labs | Research Institute</title>
+  <title>Aura Labs | Research-Grade Peptides</title>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after {
@@ -12,285 +12,57 @@
       padding: 0;
     }
 
-    :root {
-      --black: #0a0a0a;
-      --charcoal: #1a1a1a;
-      --dark-gray: #2a2a2a;
-      --blue-gray: #3a4a54;
-      --white: #ffffff;
-      --light-gray: #e8e8e8;
-      --graphite: #5a6a7a;
-    }
-
     html, body {
       height: 100%;
       background: #ffffff;
-      color: var(--charcoal);
+      color: #1a1a1a;
       font-family: 'Inter', sans-serif;
       line-height: 1.6;
     }
 
-    /* Subtle atmospheric gradient */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: transparent;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Age Gate */
-    #age-gate {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #ffffff;
-      padding: 24px;
-    }
-
-    .gate-container {
-      position: relative;
-      max-width: 520px;
-      width: 100%;
-    }
-
-    .gate-content {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-    }
-
-    .gate-logo {
-      margin-bottom: 64px;
-      font-family: 'EB Garamond', serif;
-      font-size: 32px;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--charcoal);
-    }
-
-    .gate-divider {
-      width: 40px;
-      height: 1px;
-      background: #ccc;
-      margin: 32px auto;
-    }
-
-    .gate-disclaimer {
-      font-size: 12px;
-      line-height: 1.8;
-      color: #666;
-      margin-bottom: 48px;
-      padding: 32px;
-      border: 1px solid #ddd;
-      background: #ffffff;
-      text-align: left;
-    }
-
-    .gate-disclaimer strong {
-      color: var(--charcoal);
-      font-weight: 500;
-    }
-
-    .gate-confirmation {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 32px;
-      padding: 16px;
-      background: #ffffff;
-      border: 1px solid #ddd;
-    }
-
-    .gate-confirmation input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      cursor: pointer;
-      accent-color: #0066b3;
-    }
-
-    .gate-confirmation label {
-      flex: 1;
-      font-size: 12px;
-      color: var(--charcoal);
-      cursor: pointer;
-    }
-
-    .gate-buttons {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-    }
-
-    .gate-btn {
-      flex: 1;
-      max-width: 200px;
-      padding: 14px 24px;
-      border: 1px solid #ccc;
-      background: transparent;
-      color: var(--charcoal);
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .gate-btn:hover {
-      border-color: var(--charcoal);
-      color: var(--charcoal);
-      background: #ffffff;
-    }
-
-    .gate-btn.confirm {
-      border-color: #0066b3;
-      color: #0066b3;
-    }
-
-    .gate-btn.confirm:hover {
-      background: rgba(0, 102, 179, 0.1);
-    }
-
-    /* Main Site */
-    #site {
-      display: none;
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-      overflow-y: auto;
-    }
-
-    /* Navigation */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      padding: 32px 48px;
-      border-bottom: 1px solid #ddd;
-      background: #ffffff;
-      backdrop-filter: blur(8px);
-    }
-
-    .nav-content {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-logo {
-      font-family: 'EB Garamond', serif;
-      font-size: 20px;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--charcoal);
-      text-decoration: none;
-      cursor: pointer;
-      transition: color 0.3s ease;
-    }
-
-    .nav-logo:hover {
-      color: var(--medical-blue);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 48px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #666;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--charcoal);
-    }
-
-    /* Hero Section */
+    /* ==================== HERO ==================== */
     .hero {
-      min-height: 100vh;
+      min-height: 60vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 120px 48px 80px;
+      padding: 80px 48px;
       position: relative;
-      overflow: hidden;
     }
 
     .hero-content {
-      max-width: 900px;
+      max-width: 700px;
       width: 100%;
       text-align: center;
-      position: relative;
-      z-index: 1;
     }
 
     .hero-title {
       font-family: 'EB Garamond', serif;
-      font-size: clamp(48px, 6vw, 76px);
+      font-size: clamp(48px, 6vw, 64px);
       font-weight: 400;
-      line-height: 1.15;
+      line-height: 1.1;
       letter-spacing: 0.02em;
-      margin-bottom: 24px;
-      color: var(--charcoal);
+      margin-bottom: 32px;
+      color: #1a1a1a;
     }
 
     .hero-subtitle {
-      font-size: 14px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #0066b3;
-      margin-bottom: 16px;
-      font-weight: 500;
-    }
-
-    .hero-text {
-      font-size: 14px;
-      line-height: 1.9;
-      color: var(--graphite);
-      max-width: 520px;
-      margin: 0 auto 24px;
-      font-weight: 300;
-    }
-
-    .hero-standards {
-      font-size: 12px;
+      font-size: 16px;
       line-height: 1.8;
-      color: #0066b3;
-      max-width: 520px;
-      margin: 0 auto 32px;
-      font-weight: 500;
-      border-left: 2px solid #0066b3;
-      padding-left: 16px;
+      color: #555;
+      font-weight: 300;
+      margin-bottom: 48px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .hero-actions {
-      display: flex;
-      gap: 24px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
+    .hero-cta {
+      display: inline-block;
       padding: 14px 40px;
-      border: 1px solid #ccc;
+      border: 1px solid #1a1a1a;
       background: transparent;
-      color: var(--charcoal);
+      color: #1a1a1a;
       font-family: 'Inter', sans-serif;
       font-size: 11px;
       letter-spacing: 0.12em;
@@ -298,221 +70,82 @@
       text-decoration: none;
       cursor: pointer;
       transition: all 0.3s ease;
-      display: inline-block;
     }
 
-    .btn:hover {
-      border-color: var(--charcoal);
-      color: var(--charcoal);
-      background: #f0f0f0;
+    .hero-cta:hover {
+      background: #1a1a1a;
+      color: #ffffff;
     }
 
-    .btn.primary {
-      border-color: #0066b3;
-      color: #0066b3;
-    }
-
-    .btn.primary:hover {
-      background: rgba(0, 102, 179, 0.1);
-    }
-
-    /* Email Popup */
-    .email-popup {
-      position: fixed;
-      inset: 0;
-      z-index: 500;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 16px;
-    }
-
-    .email-popup.show {
-      display: flex;
-    }
-
-    .email-popup-content {
-      position: relative;
-      background: #ffffff;
-      max-width: 420px;
-      width: 100%;
-      padding: 48px 40px;
-      border-radius: 8px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    .email-popup-close {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: none;
-      border: none;
-      font-size: 28px;
-      color: #999;
-      cursor: pointer;
-      transition: color 0.3s ease;
-      padding: 0;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .email-popup-close:hover {
-      color: var(--charcoal);
-    }
-
-    .email-popup-content h2 {
-      font-family: 'EB Garamond', serif;
-      font-size: 28px;
-      font-weight: 400;
-      color: var(--charcoal);
-      margin-bottom: 12px;
-    }
-
-    .email-popup-content > p {
-      font-size: 13px;
-      color: #666;
-      margin-bottom: 24px;
-    }
-
-    .email-popup-offer {
-      font-family: 'EB Garamond', serif;
-      font-size: 48px;
-      font-weight: 400;
-      color: #0066b3;
-      margin-bottom: 8px;
-    }
-
-    .email-popup-subtext {
-      font-size: 12px;
-      color: #999;
-      margin-bottom: 32px !important;
-    }
-
-    .email-popup-form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .email-popup-form input {
-      padding: 12px 16px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      transition: border-color 0.3s ease;
-    }
-
-    .email-popup-form input:focus {
-      outline: none;
-      border-color: #0066b3;
-    }
-
-    .email-popup-btn {
-      padding: 14px 24px;
-      background: #0066b3;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .email-popup-btn:hover {
-      background: #0052a3;
-    }
-
-    .email-popup-disclaimer {
-      font-size: 10px;
-      color: #999;
-      line-height: 1.6;
-      margin-bottom: 0 !important;
-    }
-
-    /* Trust Bar */
-    .trust-bar {
-      padding: 48px;
+    /* ==================== WHY THIS SECTION ==================== */
+    .standards-section {
+      padding: 80px 48px;
+      background: #f8f8f8;
       border-top: 1px solid #ddd;
       border-bottom: 1px solid #ddd;
-      background: #ffffff;
     }
 
-    .trust-content {
-      max-width: 1400px;
+    .standards-content {
+      max-width: 1200px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 48px;
-      text-align: center;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 64px;
     }
 
-    .trust-item {
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #666;
+    .standard-item h3 {
+      font-family: 'EB Garamond', serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
     }
 
-    .trust-item-label {
-      display: block;
-      margin-top: 8px;
-      color: var(--charcoal);
+    .standard-item p {
+      font-size: 13px;
+      line-height: 1.8;
+      color: #555;
+      font-weight: 300;
     }
 
-    /* Products Section */
-    .section {
-      padding: 120px 48px;
+    .standard-item strong {
+      color: #1a1a1a;
+      font-weight: 500;
+    }
+
+    /* ==================== PRODUCT GRID ==================== */
+    .products-section {
+      padding: 80px 48px;
       max-width: 1400px;
       margin: 0 auto;
     }
 
-    .section-header {
+    .products-header {
       text-align: center;
       margin-bottom: 80px;
     }
 
-    .section-tag {
-      display: block;
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #0066b3;
-      margin-bottom: 20px;
-      font-weight: 500;
-    }
-
-    .section-title {
+    .products-title {
       font-family: 'EB Garamond', serif;
-      font-size: clamp(32px, 4vw, 52px);
+      font-size: 42px;
       font-weight: 400;
-      line-height: 1.2;
-      color: var(--charcoal);
-      margin-bottom: 24px;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
     }
 
-    .section-desc {
+    .products-desc {
       font-size: 13px;
-      line-height: 1.8;
       color: #666;
       max-width: 480px;
       margin: 0 auto;
-      font-weight: 300;
+      line-height: 1.8;
     }
 
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 1px;
       background: #ddd;
       border: 1px solid #ddd;
@@ -520,126 +153,121 @@
 
     .product-card {
       background: #ffffff;
-      padding: 40px;
+      padding: 48px;
       border-right: 1px solid #ddd;
       border-bottom: 1px solid #ddd;
-      transition: background 0.4s ease;
-      position: relative;
     }
 
-    .product-card:hover {
-      background: #ffffff;
-    }
-
-    .product-category {
-      font-size: 10px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #0066b3;
-      margin-bottom: 16px;
-      display: block;
-      font-weight: 500;
+    .product-card:last-child {
+      border-right: none;
     }
 
     .product-name {
       font-family: 'EB Garamond', serif;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 400;
-      color: var(--charcoal);
-      margin-bottom: 12px;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+      letter-spacing: 0.01em;
     }
 
-    .product-desc {
+    .product-specs {
       font-size: 12px;
-      line-height: 1.7;
-      color: #666;
-      margin-bottom: 32px;
-      font-weight: 300;
+      line-height: 1.9;
+      color: #555;
+      margin-bottom: 24px;
     }
 
-    .product-footer {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-    }
-
-    .product-price {
-      font-size: 16px;
-      color: #ffffff;
-      font-weight: 400;
-    }
-
-    .product-purity {
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(90, 106, 122, 0.8);
+    .product-specs strong {
+      color: #1a1a1a;
       font-weight: 500;
     }
 
-    /* About Section */
-    .about-section {
-      padding: 120px 48px;
+    .product-specs-list {
+      list-style: none;
+    }
+
+    .product-specs-list li {
+      margin-bottom: 8px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .product-specs-list li:before {
+      content: "•";
+      flex-shrink: 0;
+      color: #999;
+    }
+
+    .product-limitations {
+      font-size: 11px;
+      line-height: 1.7;
+      color: #999;
+      padding-top: 16px;
+      border-top: 1px solid #e8e8e8;
+      margin-top: 16px;
+      font-style: italic;
+    }
+
+    /* ==================== GETTING STARTED ==================== */
+    .process-section {
+      padding: 80px 48px;
+      background: #f8f8f8;
       border-top: 1px solid #ddd;
-      background: #ffffff;
+      border-bottom: 1px solid #ddd;
     }
 
-    .about-content {
-      max-width: 1400px;
+    .process-content {
+      max-width: 900px;
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
     }
 
-    .about-text-content h2 {
-      font-family: 'EB Garamond', serif;
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 400;
-      line-height: 1.2;
-      margin-bottom: 32px;
-      color: var(--charcoal);
-    }
-
-    .about-text {
-      font-size: 13px;
-      line-height: 1.8;
-      color: #666;
-      margin-bottom: 16px;
-      font-weight: 300;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-top: 48px;
-    }
-
-    .stat-card {
-      padding: 32px;
-      border: 1px solid #ddd;
-      background: #ffffff;
-    }
-
-    .stat-number {
+    .process-title {
       font-family: 'EB Garamond', serif;
       font-size: 42px;
       font-weight: 400;
-      color: #0066b3;
-      margin-bottom: 12px;
+      color: #1a1a1a;
+      text-align: center;
+      margin-bottom: 64px;
+      letter-spacing: 0.02em;
     }
 
-    .stat-label {
-      font-size: 11px;
-      letter-spacing: 0.12em;
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 48px;
+    }
+
+    .process-step {
+      text-align: center;
+    }
+
+    .process-step-number {
+      font-family: 'EB Garamond', serif;
+      font-size: 48px;
+      font-weight: 400;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    .process-step-label {
+      font-size: 13px;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #666;
+      color: #555;
+      margin-bottom: 12px;
       font-weight: 500;
     }
 
-    /* Footer */
+    .process-step-desc {
+      font-size: 12px;
+      line-height: 1.7;
+      color: #999;
+      font-weight: 300;
+    }
+
+    /* ==================== FOOTER ==================== */
     footer {
       padding: 64px 48px;
       border-top: 1px solid #ddd;
@@ -647,43 +275,66 @@
       text-align: center;
     }
 
+    .footer-content {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
     .footer-logo {
       font-family: 'EB Garamond', serif;
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 400;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 24px;
-      color: var(--charcoal);
+      margin-bottom: 32px;
+      color: #1a1a1a;
+    }
+
+    .footer-sections {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+      text-align: left;
+    }
+
+    .footer-section h4 {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section a {
+      font-size: 12px;
+      color: #666;
+      text-decoration: none;
+      line-height: 1.8;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: #1a1a1a;
+    }
+
+    .footer-divider {
+      height: 1px;
+      background: #ddd;
+      margin-bottom: 32px;
     }
 
     .footer-disclaimer {
       font-size: 11px;
-      color: #666;
-      max-width: 640px;
-      margin: 0 auto 32px;
-      line-height: 1.8;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 32px;
-      justify-content: center;
-      list-style: none;
-      margin-bottom: 32px;
-    }
-
-    .footer-links a {
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
       color: #999;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-links a:hover {
-      color: var(--charcoal);
+      line-height: 1.8;
+      max-width: 800px;
+      margin: 0 auto 24px;
     }
 
     .footer-copy {
@@ -692,496 +343,374 @@
       letter-spacing: 0.08em;
     }
 
-    /* Responsive */
-    /* Hamburger button - hidden on desktop */
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-    }
-
-    .nav-hamburger span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--charcoal);
-      transition: all 0.3s ease;
-      border-radius: 2px;
-    }
-
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    /* Mobile drawer */
+    /* ==================== RESPONSIVE ==================== */
     @media (max-width: 768px) {
-      nav { 
-        padding: 16px 20px;
-      }
-      .nav-hamburger {
-        display: flex;
-      }
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: #fff;
-        border-top: 1px solid #ddd;
-        border-bottom: 1px solid #ddd;
-        flex-direction: column;
-        gap: 0;
-        padding: 8px 0;
-        z-index: 999;
-      }
-      .nav-links.open {
-        display: flex;
-      }
-      .nav-links li {
-        width: 100%;
-      }
-      .nav-links a {
-        display: block;
-        padding: 14px 20px;
-        font-size: 12px;
-        letter-spacing: 0.1em;
-        border-bottom: 1px solid #f0f0f0;
-      }
-      .nav-links li:last-child a {
-        border-bottom: none;
-      }
-      .nav-logo {
-        font-size: 16px;
-      }
-      
-      .hero { 
-        padding: 60px 20px 50px;
+      .hero {
+        padding: 60px 24px;
         min-height: auto;
       }
-      .hero-content {
-        max-width: 100%;
-      }
+
       .hero-title {
-        font-size: clamp(32px, 5vw, 44px);
-        margin-bottom: 16px;
-      }
-      .hero-subtitle {
-        font-size: 10px;
-        margin-bottom: 12px;
-      }
-      .hero-text {
-        font-size: 13px;
-        margin-bottom: 16px;
-      }
-      .hero-standards {
-        font-size: 11px;
+        font-size: clamp(32px, 5vw, 48px);
         margin-bottom: 24px;
       }
-      .hero-actions {
-        gap: 12px;
-      }
-      .btn {
-        padding: 12px 24px;
-        font-size: 10px;
-        flex: 1;
-        max-width: none;
+
+      .hero-subtitle {
+        font-size: 14px;
+        margin-bottom: 32px;
       }
 
-      .trust-bar {
-        padding: 32px 20px;
-      }
-      .trust-content { 
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-      }
-      .trust-item {
-        font-size: 10px;
-      }
-      .trust-item-label {
-        font-size: 11px;
+      .standards-content {
+        grid-template-columns: 1fr;
+        gap: 48px;
       }
 
-      .section { 
-        padding: 60px 20px;
+      .standard-item h3 {
+        font-size: 16px;
       }
-      .section-header {
-        margin-bottom: 48px;
-      }
-      .section-title {
-        font-size: clamp(24px, 3vw, 32px);
-        margin-bottom: 16px;
-      }
-      .section-desc {
+
+      .standard-item p {
         font-size: 12px;
       }
-      .section-tag {
-        font-size: 10px;
+
+      .products-section {
+        padding: 60px 24px;
       }
-      
-      .product-grid { 
+
+      .products-header {
+        margin-bottom: 48px;
+      }
+
+      .products-title {
+        font-size: 32px;
+        margin-bottom: 12px;
+      }
+
+      .products-desc {
+        font-size: 12px;
+      }
+
+      .product-grid {
         grid-template-columns: 1fr;
         gap: 0;
       }
+
       .product-card {
-        padding: 24px;
+        padding: 32px;
         border-right: none;
       }
+
       .product-name {
-        font-size: 20px;
-        margin-bottom: 8px;
-      }
-      .product-desc {
-        font-size: 11px;
-        margin-bottom: 20px;
-      }
-      .product-category {
-        font-size: 9px;
-        margin-bottom: 12px;
-      }
-      .product-price {
-        font-size: 14px;
+        font-size: 18px;
       }
 
-      .about-section {
-        padding: 60px 20px;
+      .product-specs {
+        font-size: 11px;
       }
-      .about-content { 
-        grid-template-columns: 1fr;
-        gap: 40px;
+
+      .process-section {
+        padding: 60px 24px;
       }
-      .about-text-content h2 {
-        font-size: clamp(24px, 3vw, 32px);
-      }
-      .about-text {
-        font-size: 12px;
-      }
-      .stats-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        margin-top: 32px;
-      }
-      .stat-card {
-        padding: 20px;
-      }
-      .stat-number {
+
+      .process-title {
         font-size: 32px;
+        margin-bottom: 48px;
       }
-      .stat-label {
-        font-size: 10px;
+
+      .process-steps {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .process-step-number {
+        font-size: 36px;
+      }
+
+      .footer-sections {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        text-align: center;
       }
 
       footer {
-        padding: 40px 20px;
-      }
-      .footer-logo {
-        font-size: 18px;
-      }
-      .footer-disclaimer {
-        font-size: 10px;
-      }
-      .footer-links {
-        gap: 16px;
-        flex-wrap: wrap;
-      }
-      .footer-links a {
-        font-size: 10px;
-      }
-      .footer-copy {
-        font-size: 9px;
+        padding: 48px 24px;
       }
 
-      .gate-logo {
-        font-size: 24px;
-        margin-bottom: 40px;
-      }
-      .gate-divider {
-        margin: 24px auto;
-      }
-      .gate-disclaimer {
-        padding: 20px;
-        font-size: 11px;
-        margin-bottom: 32px;
-      }
-      .gate-confirmation {
-        padding: 12px;
-        font-size: 11px;
-      }
-      .gate-buttons {
-        flex-direction: column;
-      }
-      .gate-btn {
-        max-width: none;
+      .footer-divider {
+        margin-bottom: 24px;
       }
     }
 
     @media (max-width: 480px) {
-      
-      .hero { 
-        padding: 40px 16px 40px;
+      .hero {
+        padding: 40px 16px;
       }
+
       .hero-title {
         font-size: clamp(24px, 4vw, 36px);
-        margin-bottom: 16px;
-      }
-      .hero-text {
-        font-size: 12px;
-        margin-bottom: 24px;
+        margin-bottom: 20px;
       }
 
-      .section { 
-        padding: 40px 16px;
+      .hero-subtitle {
+        font-size: 13px;
+        margin-bottom: 28px;
       }
-      .section-header {
-        margin-bottom: 32px;
+
+      .standards-section {
+        padding: 48px 16px;
       }
-      
+
+      .products-section {
+        padding: 48px 16px;
+      }
+
       .product-card {
-        padding: 16px;
-      }
-      .product-name {
-        font-size: 18px;
-      }
-      .product-desc {
-        font-size: 10px;
+        padding: 24px;
       }
 
-      .about-section {
-        padding: 40px 16px;
+      .process-section {
+        padding: 48px 16px;
       }
-      
+
       footer {
         padding: 32px 16px;
+      }
+
+      .footer-logo {
+        font-size: 16px;
       }
     }
   </style>
 </head>
 <body>
 
-<!-- Age Gate -->
-<div id="age-gate" style="background:#ffffff;">
-  <div class="gate-container">
-    <div class="gate-content">
-      <div class="gate-logo" style="color:#1a1a1a;">Aura Labs</div>
-      <div class="gate-divider" style="background:#ccc;"></div>
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">Aura Labs: Research-Grade Peptides</h1>
+    <p class="hero-subtitle">We offer what we're certain of. Nothing more.</p>
+    <a href="#products" class="hero-cta">View Compounds</a>
+  </div>
+</section>
 
-      <div class="gate-disclaimer" style="background:#ffffff;border:1px solid #ddd;color:#555;">
-        <strong style="color:#1a1a1a;">Research Institute Notice:</strong> This site is restricted to authorized research professionals. All materials are for in vitro research and laboratory use only. Products are not approved for human consumption and are not intended for clinical application.
-      </div>
+<!-- ==================== WHY THIS SECTION ==================== -->
+<section class="standards-section">
+  <div class="standards-content">
+    <div class="standard-item">
+      <h3>How We Maintain Standards</h3>
+      <p>Every batch undergoes <strong>third-party testing</strong>. No exceptions. We document synthesis parameters, environmental controls, and verification results. Our supply chain is traceable. Our methodology is reproducible.</p>
+    </div>
 
-      <div class="gate-confirmation" style="background:#ffffff;border:1px solid #ddd;">
-        <input type="checkbox" id="confirm-checkbox" />
-        <label for="confirm-checkbox" style="color:#1a1a1a;">I confirm I am 21+ and authorized to access research materials</label>
-      </div>
+    <div class="standard-item">
+      <h3>What Research-Grade Means</h3>
+      <p><strong>Research-grade is not marketing.</strong> It means verified purity, known limitations, documented sourcing. No claims we can't back up. No potency assertions. No storytelling. Just specification: what it is, what the data shows, and what we don't know.</p>
+    </div>
 
-      <div class="gate-buttons">
-        <button class="gate-btn confirm" onclick="enterSite()">Confirm Access</button>
-        <button class="gate-btn" onclick="denyEntry()">Decline</button>
-      </div>
+    <div class="standard-item">
+      <h3>Transparency on Sourcing</h3>
+      <p>Synthesized in <strong>regulated US laboratories</strong>. Batch-specific documentation included. Specifications available in our COA library. We tell you exactly what you're getting and how we know.</p>
     </div>
   </div>
-</div>
+</section>
 
-<!-- Main Site -->
-<div id="site">
-  <!-- Navigation -->
-  <nav style="position:relative;">
-    <div class="nav-content">
-      <a href="index.html" class="nav-logo">Aura Labs</a>
-      <button class="nav-hamburger" onclick="toggleMobileNav(this)" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="products.html">Compounds</a></li>
-        <li><a href="#">Documentation</a></li>
+<!-- ==================== PRODUCT GRID ==================== -->
+<section class="products-section" id="products">
+  <div class="products-header">
+    <h2 class="products-title">Our Compounds</h2>
+    <p class="products-desc">Each compound lists verified data and known limitations. Use this information as you would peer-reviewed specifications.</p>
+  </div>
+
+  <div class="product-grid">
+    <!-- BPC-157 -->
+    <div class="product-card">
+      <h3 class="product-name">BPC-157</h3>
+      <div class="product-specs">
+        <strong>Structure:</strong> Pentadecapeptide (15 amino acids)<br>
+        <strong>Molecular Weight:</strong> 1532.7 g/mol<br>
+        <strong>Purity:</strong> ≥99% (verified by HPLC)<br>
+        <strong>Format:</strong> Lyophilized powder
+      </div>
+      <ul class="product-specs-list">
+        <li>Stable at room temperature when stored dry</li>
+        <li>Soluble in sterile water (0.1% acetic acid recommended)</li>
+        <li>Certificate of Analysis included with order</li>
       </ul>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-subtitle">Premium Research Institute</div>
-      <h1 class="hero-title">Laboratory-Grade Compounds</h1>
-      <p class="hero-text">Synthesized to pharmaceutical standards. Every batch documented. Every result verified. Scientific precision, environmental control, institutional discipline.</p>
-      <div class="hero-standards">Only compounds meeting research-grade criteria are included.</div>
-      <div class="hero-actions">
-        <a href="products.html" class="btn primary">View Catalog</a>
-        <a href="#" class="btn">Documentation</a>
+      <div class="product-limitations">
+        <strong>Limitations:</strong> In vitro data only. Long-term stability beyond 2 years undefined. Potency varies with storage conditions.
       </div>
     </div>
-  </section>
 
-  <!-- Email Popup -->
-  <div id="email-popup" class="email-popup">
-    <div class="email-popup-content">
-      <button class="email-popup-close" onclick="closeEmailPopup()">×</button>
-      <h2>Join Our Research Community</h2>
-      <p>Get exclusive access to peptide education & research updates</p>
-      <div class="email-popup-offer">15% OFF</div>
-      <p class="email-popup-subtext">Your first order on all research peptide supplies</p>
-      <div class="email-popup-form">
-        <input type="email" placeholder="Enter your email" id="email-input" />
-        <button class="email-popup-btn" onclick="submitEmail()">Get My Discount Code</button>
+    <!-- Selank -->
+    <div class="product-card">
+      <h3 class="product-name">Selank</h3>
+      <div class="product-specs">
+        <strong>Structure:</strong> Heptapeptide (7 amino acids)<br>
+        <strong>Molecular Weight:</strong> 821.9 g/mol<br>
+        <strong>Purity:</strong> ≥99% (verified by HPLC)<br>
+        <strong>Format:</strong> Lyophilized powder
       </div>
-      <p class="email-popup-disclaimer">Research Use Only. By subscribing, you acknowledge these products are for laboratory research purposes only and not for human consumption. We respect your privacy and will never share your data.</p>
+      <ul class="product-specs-list">
+        <li>Stable at room temperature when stored dry</li>
+        <li>Soluble in sterile saline or water</li>
+        <li>Batch-specific documentation provided</li>
+      </ul>
+      <div class="product-limitations">
+        <strong>Limitations:</strong> Research use only. In vitro stability studies limited. Reconstituted solutions should be used within 24 hours.
+      </div>
+    </div>
+
+    <!-- Cerebrolysin -->
+    <div class="product-card">
+      <h3 class="product-name">Cerebrolysin</h3>
+      <div class="product-specs">
+        <strong>Composition:</strong> Neuropeptide complex<br>
+        <strong>Molecular Profile:</strong> Amino acids (50%), peptides (30%), nucleotides (20%)<br>
+        <strong>Purity:</strong> ≥98% active fraction<br>
+        <strong>Format:</strong> Lyophilized concentrate
+      </div>
+      <ul class="product-specs-list">
+        <li>Complex formulation; full characterization in COA</li>
+        <li>Reconstitute in sterile medium</li>
+        <li>Batch consistency tested across multiple parameters</li>
+      </ul>
+      <div class="product-limitations">
+        <strong>Limitations:</strong> Multi-component mixture; individual component ratios may vary between batches (within specification). Long-term in vivo studies incomplete.
+      </div>
+    </div>
+
+    <!-- TB-500 -->
+    <div class="product-card">
+      <h3 class="product-name">TB-500</h3>
+      <div class="product-specs">
+        <strong>Structure:</strong> Synthetic thymosin beta-4 fragment<br>
+        <strong>Molecular Weight:</strong> 4963.1 g/mol<br>
+        <strong>Purity:</strong> ≥99% (verified by HPLC/LC-MS)<br>
+        <strong>Format:</strong> Lyophilized powder
+      </div>
+      <ul class="product-specs-list">
+        <li>Amino acid sequence verified by mass spectrometry</li>
+        <li>Soluble in sterile water</li>
+        <li>Full COA with LC-MS verification included</li>
+      </ul>
+      <div class="product-limitations">
+        <strong>Limitations:</strong> Peptide stability dependent on storage temperature. Freeze-thaw cycles reduce potency. Clinical applications undefined.
+      </div>
+    </div>
+
+    <!-- Mechano Growth Factor (MGF) -->
+    <div class="product-card">
+      <h3 class="product-name">MGF (Mechano Growth Factor)</h3>
+      <div class="product-specs">
+        <strong>Structure:</strong> IGF-1 Ec variant (synthetic)<br>
+        <strong>Molecular Weight:</strong> 8866 g/mol<br>
+        <strong>Purity:</strong> ≥98% (verified by HPLC)<br>
+        <strong>Format:</strong> Lyophilized powder
+      </div>
+      <ul class="product-specs-list">
+        <li>Sequence verified by peptide mass fingerprinting</li>
+        <li>Requires refrigeration (2-8°C recommended)</li>
+        <li>Full amino acid analysis in COA</li>
+      </ul>
+      <div class="product-limitations">
+        <strong>Limitations:</strong> Synthetic variant of endogenous protein. Receptor binding specificity not fully characterized. Requires strict cold chain storage.
+      </div>
+    </div>
+
+    <!-- Ipamorelin -->
+    <div class="product-card">
+      <h3 class="product-name">Ipamorelin</h3>
+      <div class="product-specs">
+        <strong>Structure:</strong> Pentapeptide (5 amino acids)<br>
+        <strong>Molecular Weight:</strong> 711.8 g/mol<br>
+        <strong>Purity:</strong> ≥99% (verified by HPLC)<br>
+        <strong>Format:</strong> Lyophilized powder
+      </div>
+      <ul class="product-specs-list">
+        <li>Stable at room temperature when stored dry</li>
+        <li>Soluble in sterile water</li>
+        <li>Batch-specific retention time documented</li>
+      </ul>
+      <div class="product-limitations">
+        <strong>Limitations:</strong> In vitro research only. Receptor binding studies incomplete. Stability in solution limited to 24 hours.
+      </div>
     </div>
   </div>
+</section>
 
-  <!-- Trust Bar -->
-  <div class="trust-bar">
-    <div class="trust-content">
-      <div class="trust-item">
-        Third-Party Testing
-        <span class="trust-item-label">Verified</span>
+<!-- ==================== GETTING STARTED ==================== -->
+<section class="process-section">
+  <div class="process-content">
+    <h2 class="process-title">Getting Started</h2>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="process-step-number">1</div>
+        <div class="process-step-label">Select</div>
+        <p class="process-step-desc">Choose a compound. Review specifications. Confirm requirements.</p>
       </div>
-      <div class="trust-item">
-        99%+ Purity
-        <span class="trust-item-label">Guaranteed</span>
-      </div>
-      <div class="trust-item">
-        USA Synthesis
-        <span class="trust-item-label">Documented</span>
-      </div>
-      <div class="trust-item">
-        COA Library
-        <span class="trust-item-label">Available</span>
-      </div>
-    </div>
-  </trust-bar>
 
-
-
-  <!-- About -->
-  <div class="about-section" id="about">
-    <div class="about-content">
-      <div class="about-text-content">
-        <h2>Precision Meets Discipline</h2>
-        <p class="about-text">Aura Labs operates as a private research institution dedicated to synthesizing compounds at pharmaceutical standards. We document everything. We verify everything. We believe research compounds should meet the same precision standard as the science they support.</p>
-        <p class="about-text">Our approach is institutional. Our process is disciplined. Our commitment is uncompromising.</p>
+      <div class="process-step">
+        <div class="process-step-number">2</div>
+        <div class="process-step-label">Request</div>
+        <p class="process-step-desc">Submit order with institutional verification. We validate researcher status.</p>
       </div>
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number">99%</div>
-          <div class="stat-label">Minimum Purity Threshold</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">48h</div>
-          <div class="stat-label">Standard Fulfillment</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">100%</div>
-          <div class="stat-label">Documented COA</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">USA</div>
-          <div class="stat-label">Synthesis Location</div>
-        </div>
+
+      <div class="process-step">
+        <div class="process-step-number">3</div>
+        <div class="process-step-label">Verify</div>
+        <p class="process-step-desc">Review batch documentation. Confirm batch-specific COA and synthesis parameters.</p>
+      </div>
+
+      <div class="process-step">
+        <div class="process-step-number">4</div>
+        <div class="process-step-label">Proceed</div>
+        <p class="process-step-desc">Compound ships with full documentation. Use as specified in research protocol.</p>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- Footer -->
-  <footer>
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-content">
     <div class="footer-logo">Aura Labs</div>
-    <div class="footer-disclaimer">
-      All compounds are sold exclusively for in vitro research and laboratory use. Products have not been evaluated by regulatory agencies and are not intended for human consumption or clinical application. By accessing this site, you confirm compliance with all applicable laws and regulations governing research materials in your jurisdiction.
+
+    <div class="footer-sections">
+      <div class="footer-section">
+        <h4>Compliance</h4>
+        <ul>
+          <li><a href="#">Research Use Only</a></li>
+          <li><a href="#">Legal Disclaimer</a></li>
+          <li><a href="#">Regulatory Status</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Documentation</h4>
+        <ul>
+          <li><a href="#">COA Library</a></li>
+          <li><a href="#">Specifications</a></li>
+          <li><a href="#">Sourcing</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:research@auralabs.io">research@auralabs.io</a></li>
+          <li><a href="#">Institutional Inquiry</a></li>
+        </ul>
+      </div>
     </div>
-    <ul class="footer-links">
-      <li><a href="#">Research Terms</a></li>
-      <li><a href="#">Documentation</a></li>
-      <li><a href="#">Compliance</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-    <div class="footer-copy">© 2026 Aura Labs. All Rights Reserved. Research Use Only.</div>
-  </footer>
-</div>
 
-<script>
-  // Check if user already confirmed age gate this session
-  function initPage() {
-    if (sessionStorage.getItem('ageConfirmed')) {
-      document.getElementById('age-gate').style.display = 'none';
-      document.getElementById('site').style.display = 'block';
-      showEmailPopup();
-    }
-  }
+    <div class="footer-divider"></div>
 
-  function enterSite() {
-    const checkbox = document.getElementById('confirm-checkbox');
-    if (!checkbox.checked) {
-      alert('Please confirm you are 21+ and authorized to access research materials');
-      return;
-    }
-    sessionStorage.setItem('ageConfirmed', 'true');
-    document.getElementById('age-gate').style.opacity = '0';
-    document.getElementById('age-gate').style.transition = 'opacity 0.6s ease';
-    setTimeout(() => {
-      document.getElementById('age-gate').style.display = 'none';
-      document.getElementById('site').style.display = 'block';
-      showEmailPopup();
-    }, 600);
-  }
+    <div class="footer-disclaimer">
+      All compounds are provided for in vitro research and laboratory use only. Products have not been evaluated by regulatory agencies and are not approved for human consumption or clinical application. Researchers using these materials must comply with all applicable laws and institutional review requirements.
+    </div>
 
-  function denyEntry() {
-    window.location.href = 'https://www.google.com';
-  }
+    <div class="footer-copy">© 2026 Aura Labs. Research Use Only.</div>
+  </div>
+</footer>
 
-  // Email popup - show once per session
-  function showEmailPopup() {
-    if (!sessionStorage.getItem('emailPopupShown')) {
-      setTimeout(() => {
-        document.getElementById('email-popup').classList.add('show');
-        sessionStorage.setItem('emailPopupShown', 'true');
-      }, 500);
-    }
-  }
-
-  function closeEmailPopup() {
-    document.getElementById('email-popup').classList.remove('show');
-  }
-
-  function submitEmail() {
-    const email = document.getElementById('email-input').value;
-    if (email && email.includes('@')) {
-      alert('Thank you! Check your email for your 15% discount code.');
-      closeEmailPopup();
-    } else {
-      alert('Please enter a valid email address');
-    }
-  }
-
-  // Run on load
-  window.addEventListener('load', initPage);
-
-  // Mobile nav toggle
-  function toggleMobileNav(btn) {
-    btn.classList.toggle('open');
-    document.getElementById('nav-links').classList.toggle('open');
-  }
-
-  // Smooth scroll for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      const href = this.getAttribute('href');
-      if (href !== '#') {
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-    });
-  });
-</script>
 </body>
 </html>
-<!-- Cache bust -->
-<!-- Deploy test -->
-<!-- Force deploy 1780673918 -->
-<!-- Deploy 1780674168 -->

@@ -3,722 +3,714 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aura Labs | Premium Research Peptides</title>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <title>Aura Labs | Research-Grade Peptides</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --white: #f4f4f0;
-      --off-white: #f9f8f6;
-      --dark: #1a1a1a;
-      --medical-blue: #0066b3;
-      --blue-light: #0080d9;
-      --border: rgba(0,0,0,0.08);
-      --muted: rgba(26,26,26,0.6);
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     html, body {
       height: 100%;
-      background: var(--off-white);
-      color: var(--dark);
+      background: #ffffff;
+      color: #1a1a1a;
       font-family: 'Inter', sans-serif;
       line-height: 1.6;
     }
 
-    /* ── TYPOGRAPHY ── */
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'EB Garamond', serif;
-      font-weight: 600;
-      line-height: 1.3;
-      color: var(--dark);
-    }
-
-    h1 { font-size: 3.5rem; margin-bottom: 1.5rem; }
-    h2 { font-size: 2.5rem; margin-bottom: 1.25rem; }
-    h3 { font-size: 1.75rem; margin-bottom: 1rem; }
-    h4 { font-size: 1.25rem; margin-bottom: 0.75rem; }
-
-    p { margin-bottom: 1rem; color: var(--muted); }
-
-    /* ── AGE GATE ── */
-    #age-gate {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
+    /* ==================== HERO ==================== */
+    .hero {
+      min-height: 60vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--off-white);
-      padding: 24px;
-    }
-
-    #age-gate.hidden { display: none; }
-
-    .gate-content {
-      max-width: 480px;
-      text-align: center;
-    }
-
-    .gate-content h2 {
-      margin-bottom: 1rem;
-      font-size: 2rem;
-    }
-
-    .gate-content p {
-      margin-bottom: 2rem;
-      font-size: 1.1rem;
-    }
-
-    .gate-buttons {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .gate-buttons button {
-      flex: 1;
-      padding: 1rem;
-      font-size: 1rem;
-      border: none;
-      cursor: pointer;
-      border-radius: 4px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .btn-yes {
-      background: var(--medical-blue);
-      color: white;
-    }
-
-    .btn-yes:hover { background: var(--blue-light); }
-
-    .btn-no {
-      background: white;
-      color: var(--dark);
-      border: 2px solid var(--medical-blue);
-    }
-
-    .btn-no:hover { background: var(--off-white); }
-
-    /* ── LAYOUT ── */
-    body > main { display: none; }
-    body > main.visible { display: block; }
-
-    section {
-      padding: 80px 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    @media (max-width: 768px) {
-      section { padding: 60px 24px; }
-      h1 { font-size: 2.5rem; }
-      h2 { font-size: 1.75rem; }
-    }
-
-    /* ── HERO ── */
-    .hero {
-      padding-top: 120px;
-      padding-bottom: 120px;
+      padding: 80px 48px;
       position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 800px;
-      height: 800px;
-      background: radial-gradient(ellipse at center, rgba(0,102,179,0.08) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
     }
 
     .hero-content {
-      position: relative;
-      z-index: 1;
       max-width: 700px;
+      width: 100%;
+      text-align: center;
     }
 
-    .hero h1 {
-      margin-bottom: 1.5rem;
-      font-size: 4rem;
-      line-height: 1.2;
+    .hero-title {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(48px, 6vw, 64px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: 0.02em;
+      margin-bottom: 32px;
+      color: #1a1a1a;
     }
 
     .hero-subtitle {
-      font-size: 1.3rem;
-      color: var(--muted);
-      margin-bottom: 2rem;
-      max-width: 600px;
-    }
-
-    .hero-cta {
-      display: inline-block;
-      padding: 16px 40px;
-      background: var(--medical-blue);
-      color: white;
-      text-decoration: none;
-      border-radius: 4px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      margin-right: 1rem;
-    }
-
-    .hero-cta:hover {
-      background: var(--blue-light);
-      transform: translateY(-2px);
-    }
-
-    .hero-secondary {
-      display: inline-block;
-      padding: 16px 40px;
-      background: white;
-      color: var(--medical-blue);
-      border: 2px solid var(--medical-blue);
-      text-decoration: none;
-      border-radius: 4px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .hero-secondary:hover {
-      background: var(--off-white);
-    }
-
-    /* ── DISCLAIMER ── */
-    .disclaimer {
-      background: white;
-      border-left: 4px solid var(--medical-blue);
-      padding: 24px;
-      margin: 40px 0;
-      border-radius: 4px;
-      font-size: 0.95rem;
-      color: var(--muted);
-    }
-
-    .disclaimer strong { color: var(--dark); }
-
-    /* ── FEATURES GRID ── */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 40px;
-      margin-top: 60px;
-    }
-
-    .feature {
-      padding: 0;
-    }
-
-    .feature h3 {
-      color: var(--medical-blue);
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-    }
-
-    .feature p {
-      color: var(--muted);
-      font-size: 1rem;
-    }
-
-    /* ── PRODUCTS SECTION ── */
-    .products {
-      background: white;
-      padding: 80px 40px;
-      margin: 60px 0;
-      border-radius: 8px;
-    }
-
-    .products h2 {
-      margin-bottom: 3rem;
-      text-align: center;
-    }
-
-    .product-categories {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 40px;
-    }
-
-    .category {
-      padding: 40px;
-      background: var(--off-white);
-      border-radius: 4px;
-      border: 1px solid var(--border);
-      transition: all 0.3s ease;
-    }
-
-    .category:hover {
-      border-color: var(--medical-blue);
-      box-shadow: 0 4px 12px rgba(0,102,179,0.1);
-    }
-
-    .category h3 {
-      color: var(--medical-blue);
-      margin-bottom: 1.5rem;
-      font-size: 1.5rem;
-    }
-
-    .category-description {
-      color: var(--muted);
-      margin-bottom: 2rem;
-      font-size: 0.95rem;
-      line-height: 1.7;
-    }
-
-    .product-list {
-      list-style: none;
-      margin-bottom: 2rem;
-    }
-
-    .product-list li {
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-      color: var(--dark);
-      font-weight: 500;
-    }
-
-    .product-list li:last-child {
-      border-bottom: none;
-    }
-
-    .category-link {
-      display: inline-block;
-      color: var(--medical-blue);
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .category-link:hover {
-      transform: translateX(4px);
-    }
-
-    /* ── CTA SECTION ── */
-    .cta {
-      text-align: center;
-      padding: 80px 40px;
-      background: linear-gradient(135deg, rgba(0,102,179,0.05) 0%, rgba(249,248,246,0) 100%);
-    }
-
-    .cta h2 {
-      margin-bottom: 1.5rem;
-    }
-
-    .cta p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-      max-width: 600px;
+      font-size: 16px;
+      line-height: 1.8;
+      color: #555;
+      font-weight: 300;
+      margin-bottom: 48px;
+      max-width: 500px;
       margin-left: auto;
       margin-right: auto;
     }
 
-    /* ── FOOTER ── */
-    footer {
-      background: var(--dark);
-      color: white;
-      padding: 60px 40px;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-
-    footer a {
-      color: var(--blue-light);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    .footer-disclaimer {
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255,255,255,0.2);
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.8);
-    }
-
-    /* ── EMAIL POPUP ── */
-    #email-popup {
-      position: fixed;
-      inset: 0;
-      z-index: 9998;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(4px);
-      padding: 24px;
-    }
-
-    #email-popup.show { display: flex; }
-
-    .popup-content {
-      background: white;
-      border-radius: 8px;
-      padding: 60px 40px;
-      max-width: 480px;
-      text-align: center;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-      animation: slideUp 0.4s ease;
-    }
-
-    @keyframes slideUp {
-      from { transform: translateY(40px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    .popup-close {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: none;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-      color: var(--muted);
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .popup-content h3 {
-      font-size: 1.75rem;
-      margin-bottom: 0.5rem;
-      color: var(--medical-blue);
-    }
-
-    .popup-subheading {
-      font-size: 1.1rem;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-    }
-
-    .popup-discount {
-      background: var(--off-white);
-      padding: 20px;
-      border-radius: 4px;
-      margin: 1.5rem 0;
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--medical-blue);
-    }
-
-    .popup-form {
-      margin: 2rem 0;
-    }
-
-    .popup-form input {
-      width: 100%;
-      padding: 12px;
-      border: 2px solid var(--border);
-      border-radius: 4px;
-      font-size: 1rem;
-      margin-bottom: 1rem;
+    .hero-cta {
+      display: inline-block;
+      padding: 14px 40px;
+      border: 1px solid #1a1a1a;
+      background: transparent;
+      color: #1a1a1a;
       font-family: 'Inter', sans-serif;
-    }
-
-    .popup-form input:focus {
-      outline: none;
-      border-color: var(--medical-blue);
-    }
-
-    .popup-cta {
-      display: block;
-      width: 100%;
-      padding: 16px;
-      background: var(--medical-blue);
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-size: 1rem;
-      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
       cursor: pointer;
       transition: all 0.3s ease;
     }
 
-    .popup-cta:hover {
-      background: var(--blue-light);
+    .hero-cta:hover {
+      background: #1a1a1a;
+      color: #ffffff;
     }
 
-    .popup-disclaimer {
-      margin-top: 1rem;
-      font-size: 0.8rem;
-      color: var(--muted);
+    /* ==================== WHY THIS SECTION ==================== */
+    .standards-section {
+      padding: 80px 48px;
+      background: #f8f8f8;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .standards-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 64px;
+    }
+
+    .standard-item h3 {
+      font-family: 'EB Garamond', serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    .standard-item p {
+      font-size: 13px;
+      line-height: 1.8;
+      color: #555;
+      font-weight: 300;
+    }
+
+    .standard-item strong {
+      color: #1a1a1a;
+      font-weight: 500;
+    }
+
+    /* ==================== PRODUCT GRID ==================== */
+    .products-section {
+      padding: 80px 48px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .products-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .products-title {
+      font-family: 'EB Garamond', serif;
+      font-size: 42px;
+      font-weight: 400;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    .products-desc {
+      font-size: 13px;
+      color: #666;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1px;
+      background: #ddd;
+      border: 1px solid #ddd;
+    }
+
+    .product-card {
+      background: #ffffff;
+      padding: 48px;
+      border-right: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .product-card:last-child {
+      border-right: none;
+    }
+
+    .product-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+      letter-spacing: 0.01em;
+    }
+
+    .product-specs {
+      font-size: 12px;
+      line-height: 1.9;
+      color: #555;
+      margin-bottom: 24px;
+    }
+
+    .product-specs strong {
+      color: #1a1a1a;
+      font-weight: 500;
+    }
+
+    .product-specs-list {
+      list-style: none;
+    }
+
+    .product-specs-list li {
+      margin-bottom: 8px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .product-specs-list li:before {
+      content: "•";
+      flex-shrink: 0;
+      color: #999;
+    }
+
+    .product-limitations {
+      font-size: 11px;
+      line-height: 1.7;
+      color: #999;
+      padding-top: 16px;
+      border-top: 1px solid #e8e8e8;
+      margin-top: 16px;
+      font-style: italic;
+    }
+
+    /* ==================== GETTING STARTED ==================== */
+    .process-section {
+      padding: 80px 48px;
+      background: #f8f8f8;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .process-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .process-title {
+      font-family: 'EB Garamond', serif;
+      font-size: 42px;
+      font-weight: 400;
+      color: #1a1a1a;
+      text-align: center;
+      margin-bottom: 64px;
+      letter-spacing: 0.02em;
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 48px;
+    }
+
+    .process-step {
+      text-align: center;
+    }
+
+    .process-step-number {
+      font-family: 'EB Garamond', serif;
+      font-size: 48px;
+      font-weight: 400;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    .process-step-label {
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    .process-step-desc {
+      font-size: 12px;
+      line-height: 1.7;
+      color: #999;
+      font-weight: 300;
+    }
+
+    /* ==================== FOOTER ==================== */
+    footer {
+      padding: 64px 48px;
+      border-top: 1px solid #ddd;
+      background: #ffffff;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      font-family: 'EB Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      color: #1a1a1a;
+    }
+
+    .footer-sections {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+      text-align: left;
+    }
+
+    .footer-section h4 {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section a {
+      font-size: 12px;
+      color: #666;
+      text-decoration: none;
+      line-height: 1.8;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: #1a1a1a;
+    }
+
+    .footer-divider {
+      height: 1px;
+      background: #ddd;
+      margin-bottom: 32px;
+    }
+
+    .footer-disclaimer {
+      font-size: 11px;
+      color: #999;
+      line-height: 1.8;
+      max-width: 800px;
+      margin: 0 auto 24px;
+    }
+
+    .footer-copy {
+      font-size: 10px;
+      color: #ccc;
+      letter-spacing: 0.08em;
+    }
+
+    /* ==================== RESPONSIVE ==================== */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 60px 24px;
+        min-height: auto;
+      }
+
+      .hero-title {
+        font-size: clamp(32px, 5vw, 48px);
+        margin-bottom: 24px;
+      }
+
+      .hero-subtitle {
+        font-size: 14px;
+        margin-bottom: 32px;
+      }
+
+      .standards-content {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .standard-item h3 {
+        font-size: 16px;
+      }
+
+      .standard-item p {
+        font-size: 12px;
+      }
+
+      .products-section {
+        padding: 60px 24px;
+      }
+
+      .products-header {
+        margin-bottom: 48px;
+      }
+
+      .products-title {
+        font-size: 32px;
+        margin-bottom: 12px;
+      }
+
+      .products-desc {
+        font-size: 12px;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .product-card {
+        padding: 32px;
+        border-right: none;
+      }
+
+      .product-name {
+        font-size: 18px;
+      }
+
+      .product-specs {
+        font-size: 11px;
+      }
+
+      .process-section {
+        padding: 60px 24px;
+      }
+
+      .process-title {
+        font-size: 32px;
+        margin-bottom: 48px;
+      }
+
+      .process-steps {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .process-step-number {
+        font-size: 36px;
+      }
+
+      .footer-sections {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        text-align: center;
+      }
+
+      footer {
+        padding: 48px 24px;
+      }
+
+      .footer-divider {
+        margin-bottom: 24px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 40px 16px;
+      }
+
+      .hero-title {
+        font-size: clamp(24px, 4vw, 36px);
+        margin-bottom: 20px;
+      }
+
+      .hero-subtitle {
+        font-size: 13px;
+        margin-bottom: 28px;
+      }
+
+      .standards-section {
+        padding: 48px 16px;
+      }
+
+      .products-section {
+        padding: 48px 16px;
+      }
+
+      .product-card {
+        padding: 24px;
+      }
+
+      .process-section {
+        padding: 48px 16px;
+      }
+
+      footer {
+        padding: 32px 16px;
+      }
+
+      .footer-logo {
+        font-size: 16px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- AGE GATE -->
-  <div id="age-gate">
-    <div class="gate-content">
-      <h2>Age Verification</h2>
-      <p>You must be 21 years or older to view this website.</p>
-      <div class="gate-buttons">
-        <button class="btn-yes" onclick="enterSite()">I am 21+</button>
-        <button class="btn-no" onclick="window.location.href='https://www.google.com'">I am Under 21</button>
-      </div>
-      <p style="margin-top: 2rem; font-size: 0.85rem; color: rgba(26,26,26,0.5); max-width: 400px; margin-left: auto; margin-right: auto;">
-        <strong>⚠️ Important:</strong> This website contains information about research peptides intended for laboratory use only. By entering, you acknowledge that you understand these products are "Research Use Only" and not intended for human consumption. All products must be handled in accordance with applicable laws and regulations.
-      </p>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">Aura Labs: Research-Grade Peptides</h1>
+    <p class="hero-subtitle">We offer what we're certain of. Nothing more.</p>
+    <a href="#products" class="hero-cta">View Compounds</a>
+  </div>
+</section>
+
+<!-- ==================== WHY THIS SECTION ==================== -->
+<section class="standards-section">
+  <div class="standards-content">
+    <div class="standard-item">
+      <h3>How We Maintain Standards</h3>
+      <p>Every batch undergoes <strong>third-party testing</strong>. No exceptions. We document synthesis parameters, environmental controls, and verification results. Our supply chain is traceable. Our methodology is reproducible.</p>
+    </div>
+
+    <div class="standard-item">
+      <h3>What Research-Grade Means</h3>
+      <p><strong>Research-grade is not marketing.</strong> It means verified purity, known limitations, documented sourcing. No claims we can't back up. No potency assertions. No storytelling. Just specification: what it is, what the data shows, and what we don't know.</p>
+    </div>
+
+    <div class="standard-item">
+      <h3>Transparency on Sourcing</h3>
+      <p>Synthesized in <strong>regulated US laboratories</strong>. Batch-specific documentation included. Specifications available in our COA library. We tell you exactly what you're getting and how we know.</p>
     </div>
   </div>
+</section>
 
-  <!-- MAIN CONTENT -->
-  <main>
-    <!-- HERO SECTION -->
-    <section class="hero">
-      <div class="hero-content">
-        <h1>Premium Research Peptides</h1>
-        <p class="hero-subtitle">Education-first peptide marketplace. Learn the science, understand the stacks, make informed decisions.</p>
-        
-        <a href="#peptides-101" class="hero-cta">Learn Peptides 101</a>
-        <a href="./products.html" class="hero-secondary">Browse Products</a>
-
-        <div class="disclaimer">
-          <strong>⚠️ RESEARCH USE ONLY</strong><br>
-          This product is for Research Use Only (RUO) and is NOT intended for human or animal consumption. The FDA has not evaluated this product for human use. This product does not diagnose, treat, cure, mitigate, or prevent any disease or medical condition. Consult a licensed healthcare provider before use. Purchaser assumes full responsibility for compliance with all applicable laws and regulations.
-        </div>
-      </div>
-    </section>
-
-    <!-- PEPTIDES 101 SECTION -->
-    <section id="peptides-101">
-      <h2>Peptides 101: What You Need to Know</h2>
-      
-      <div class="features">
-        <div class="feature">
-          <h3>What Are Peptides?</h3>
-          <p>Peptides are short chains of amino acids that act as signaling molecules in your body. They trigger specific biological responses — from muscle growth to tissue repair to fat loss.</p>
-        </div>
-
-        <div class="feature">
-          <h3>Why Peptides?</h3>
-          <p>Peptides work WITH your body's natural systems, triggering your own hormone production. They're reversible, selective, and far safer than synthetic alternatives.</p>
-        </div>
-
-        <div class="feature">
-          <h3>Peptides vs. Steroids</h3>
-          <p><strong>Peptides:</strong> Trigger natural production, reversible, fewer side effects.<br><strong>Steroids:</strong> Synthetic, permanent damage risk, broad unwanted effects.</p>
-        </div>
-
-        <div class="feature">
-          <h3>Safety First</h3>
-          <p>Always consult a healthcare provider. Individual responses vary. Cycling recommended. Never mix peptides without understanding compatibility.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRODUCTS SECTION -->
-    <section id="products" class="products">
-      <h2>Peptide Categories</h2>
-
-      <div class="product-categories">
-        <!-- WEIGHT LOSS -->
-        <div class="category">
-          <h3>Weight Loss & Metabolic</h3>
-          <p class="category-description">GLP-1 agonists and fat-loss peptides. Highest search volume. Results in 4-8 weeks.</p>
-          <ul class="product-list">
-            <li>Semaglutide (2mg - 50mg)</li>
-            <li>Retatrutide</li>
-            <li>Liraglutide</li>
-            <li>AOD-9604</li>
-            <li>L-Carnitine</li>
-          </ul>
-          <a href="#" class="category-link">View Weight Loss Stack →</a>
-        </div>
-
-        <!-- MUSCLE GROWTH -->
-        <div class="category">
-          <h3>Muscle Growth & Performance</h3>
-          <p class="category-description">Growth hormone secretagogues. The "gold standard" stack. Results in 8-12 weeks.</p>
-          <ul class="product-list">
-            <li>CJC-1295</li>
-            <li>Ipamorelin</li>
-            <li>CJC-1295 + Ipamorelin</li>
-            <li>GHRP-2, GHRP-6</li>
-            <li>Hexarelin</li>
-          </ul>
-          <a href="#" class="category-link">View Muscle Stack →</a>
-        </div>
-
-        <!-- RECOVERY -->
-        <div class="category">
-          <h3>Recovery & Healing</h3>
-          <p class="category-description">Tissue repair and injury recovery. The "Wolverine Stack." Results in 2-4 weeks.</p>
-          <ul class="product-list">
-            <li>BPC-157</li>
-            <li>TB-500</li>
-            <li>BPC-157 + TB-500</li>
-            <li>GHK-Cu</li>
-            <li>AHK-Cu</li>
-          </ul>
-          <a href="#" class="category-link">View Recovery Stack →</a>
-        </div>
-
-        <!-- ANTI-AGING -->
-        <div class="category">
-          <h3>Anti-Aging & Longevity</h3>
-          <p class="category-description">Premium compounds for cellular optimization. Results in 12+ weeks.</p>
-          <ul class="product-list">
-            <li>NAD+ (100mg - 1000mg)</li>
-            <li>GHK-Cu</li>
-            <li>HGH Secretagogues</li>
-            <li>Tesamorelin</li>
-            <li>Semax</li>
-          </ul>
-          <a href="#" class="category-link">View Anti-Aging Stack →</a>
-        </div>
-
-        <!-- COGNITIVE -->
-        <div class="category">
-          <h3>Cognitive & Sleep</h3>
-          <p class="category-description">Brain health and optimization. Niche but growing demand.</p>
-          <ul class="product-list">
-            <li>Semax</li>
-            <li>DSIP</li>
-            <li>Cerebrolysin</li>
-            <li>NAD+</li>
-            <li>Pinealon</li>
-          </ul>
-          <a href="#" class="category-link">View Cognitive Stack →</a>
-        </div>
-
-        <!-- SPECIALTY -->
-        <div class="category">
-          <h3>Specialty & Rare</h3>
-          <p class="category-description">Cutting-edge compounds. Limited availability, premium pricing.</p>
-          <ul class="product-list">
-            <li>FOXO4-DRI</li>
-            <li>FST-344</li>
-            <li>Bioregulators</li>
-            <li>ACE-031</li>
-            <li>ARA-290</li>
-          </ul>
-          <a href="#" class="category-link">View Specialty →</a>
-        </div>
-      </div>
-
-      <div class="disclaimer" style="margin-top: 60px;">
-        <strong>Important:</strong> All products on this site are for research purposes only. Always consult a healthcare provider before use. Individual responses vary. Some peptides have limited human clinical data. This information is educational only and does not constitute medical advice.
-      </div>
-    </section>
-
-    <!-- CTA SECTION -->
-    <section class="cta">
-      <h2>Ready to Start?</h2>
-      <p>Explore our comprehensive stacking guides, join our community, and get personalized recommendations based on your goals.</p>
-      <a href="#" class="hero-cta">Browse All Products</a>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-      <p>&copy; 2026 Aura Labs. Premium Research Peptides.</p>
-      
-      <div class="footer-disclaimer">
-        <p><strong>Research Use Only Notice:</strong> All products sold on this site are labeled and intended for laboratory research purposes only. They are not intended for human consumption or veterinary use. The FDA has not evaluated these statements. These products are not intended to diagnose, treat, cure, or prevent any disease. By purchasing, you acknowledge that you understand the RUO designation and agree to use these products only in compliance with all applicable federal, state, and local laws. Purchaser assumes full responsibility for safe handling, storage, and disposal.</p>
-        
-        <p style="margin-top: 1rem;"><a href="#">Terms & Conditions</a> | <a href="#">Privacy Policy</a> | <a href="#">Disclaimer</a></p>
-      </div>
-    </footer>
-  </main>
-
-  <!-- EMAIL POPUP -->
-  <div id="email-popup">
-    <div class="popup-content">
-      <button class="popup-close" onclick="closeEmailPopup()">×</button>
-      <h3>Join Our Research Community</h3>
-      <p class="popup-subheading">Get exclusive access to peptide education & research updates</p>
-      
-      <div class="popup-discount">15% OFF</div>
-      
-      <p style="color: var(--dark); margin-bottom: 1.5rem; font-size: 0.95rem;">
-        Your first order on all research peptide supplies
-      </p>
-
-      <form class="popup-form" onsubmit="handleEmailSubmit(event)">
-        <input type="email" placeholder="Enter your email" required>
-        <button type="submit" class="popup-cta">Get My Discount Code</button>
-      </form>
-
-      <p class="popup-disclaimer">
-        <strong>Research Use Only:</strong> By subscribing, you acknowledge these products are for laboratory research purposes only and not for human consumption. We respect your privacy and will never share your email.
-      </p>
-    </div>
+<!-- ==================== PRODUCT GRID ==================== -->
+<section class="products-section" id="products">
+  <div class="products-header">
+    <h2 class="products-title">Our Compounds</h2>
+    <p class="products-desc">Each compound lists verified data and known limitations. Use this information as you would peer-reviewed specifications.</p>
   </div>
 
-  <script>
-    // Age gate logic
-    function enterSite() {
-      localStorage.setItem('auraLabsAgeVerified', 'true');
-      document.getElementById('age-gate').classList.add('hidden');
-      document.querySelector('main').classList.add('visible');
-      
-      // Show email popup after 10 seconds
-      setTimeout(showEmailPopup, 10000);
-    }
+  <div class="product-grid">
+    <!-- BPC-157 -->
+    <div class="product-card">
+      <h3 class="product-name">BPC-157</h3>
+      <div class="product-specs">
+        <strong>Structure:</strong> Pentadecapeptide (15 amino acids)<br>
+        <strong>Molecular Weight:</strong> 1532.7 g/mol<br>
+        <strong>Purity:</strong> ≥99% (verified by HPLC)<br>
+        <strong>Format:</strong> Lyophilized powder
+      </div>
+      <ul class="product-specs-list">
+        <li>Stable at room temperature when stored dry</li>
+        <li>Soluble in sterile water (0.1% acetic acid recommended)</li>
+        <li>Certificate of Analysis included with order</li>
+      </ul>
+      <div class="product-limitations">
+        <strong>Limitations:</strong> In vitro data only. Long-term stability beyond 2 years undefined. Potency varies with storage conditions.
+      </div>
+    </div>
 
-    // Email popup logic
-    function showEmailPopup() {
-      if (localStorage.getItem('auraLabsEmailShown') !== 'true') {
-        document.getElementById('email-popup').classList.add('show');
-      }
-    }
+    <!-- Selank -->
+    <div class="product-card">
+      <h3 class="product-name">Selank</h3>
+      <div class="product-specs">
+        <strong>Structure:</strong> Heptapeptide (7 amino acids)<br>
+        <strong>Molecular Weight:</strong> 821.9 g/mol<br>
+        <strong>Purity:</strong> ≥99% (verified by HPLC)<br>
+        <strong>Format:</strong> Lyophilized powder
+      </div>
+      <ul class="product-specs-list">
+        <li>Stable at room temperature when stored dry</li>
+        <li>Soluble in sterile saline or water</li>
+        <li>Batch-specific documentation provided</li>
+      </ul>
+      <div class="product-limitations">
+        <strong>Limitations:</strong> Research use only. In vitro stability studies limited. Reconstituted solutions should be used within 24 hours.
+      </div>
+    </div>
 
-    function closeEmailPopup() {
-      document.getElementById('email-popup').classList.remove('show');
-    }
+    <!-- Cerebrolysin -->
+    <div class="product-card">
+      <h3 class="product-name">Cerebrolysin</h3>
+      <div class="product-specs">
+        <strong>Composition:</strong> Neuropeptide complex<br>
+        <strong>Molecular Profile:</strong> Amino acids (50%), peptides (30%), nucleotides (20%)<br>
+        <strong>Purity:</strong> ≥98% active fraction<br>
+        <strong>Format:</strong> Lyophilized concentrate
+      </div>
+      <ul class="product-specs-list">
+        <li>Complex formulation; full characterization in COA</li>
+        <li>Reconstitute in sterile medium</li>
+        <li>Batch consistency tested across multiple parameters</li>
+      </ul>
+      <div class="product-limitations">
+        <strong>Limitations:</strong> Multi-component mixture; individual component ratios may vary between batches (within specification). Long-term in vivo studies incomplete.
+      </div>
+    </div>
 
-    function handleEmailSubmit(event) {
-      event.preventDefault();
-      const email = event.target.querySelector('input[type="email"]').value;
-      
-      // Store submission (in real implementation, would send to backend)
-      localStorage.setItem('auraLabsEmail', email);
-      localStorage.setItem('auraLabsEmailShown', 'true');
-      
-      // Show confirmation and close
-      alert('Check your email for your 15% discount code! Code: AURARESERACH15');
-      closeEmailPopup();
-    }
+    <!-- TB-500 -->
+    <div class="product-card">
+      <h3 class="product-name">TB-500</h3>
+      <div class="product-specs">
+        <strong>Structure:</strong> Synthetic thymosin beta-4 fragment<br>
+        <strong>Molecular Weight:</strong> 4963.1 g/mol<br>
+        <strong>Purity:</strong> ≥99% (verified by HPLC/LC-MS)<br>
+        <strong>Format:</strong> Lyophilized powder
+      </div>
+      <ul class="product-specs-list">
+        <li>Amino acid sequence verified by mass spectrometry</li>
+        <li>Soluble in sterile water</li>
+        <li>Full COA with LC-MS verification included</li>
+      </ul>
+      <div class="product-limitations">
+        <strong>Limitations:</strong> Peptide stability dependent on storage temperature. Freeze-thaw cycles reduce potency. Clinical applications undefined.
+      </div>
+    </div>
 
-    // Check on page load
-    window.addEventListener('DOMContentLoaded', function() {
-      if (localStorage.getItem('auraLabsAgeVerified') === 'true') {
-        document.getElementById('age-gate').classList.add('hidden');
-        document.querySelector('main').classList.add('visible');
-        
-        // Show email popup if not shown before
-        if (localStorage.getItem('auraLabsEmailShown') !== 'true') {
-          setTimeout(showEmailPopup, 10000);
-        }
-      }
-    });
+    <!-- Mechano Growth Factor (MGF) -->
+    <div class="product-card">
+      <h3 class="product-name">MGF (Mechano Growth Factor)</h3>
+      <div class="product-specs">
+        <strong>Structure:</strong> IGF-1 Ec variant (synthetic)<br>
+        <strong>Molecular Weight:</strong> 8866 g/mol<br>
+        <strong>Purity:</strong> ≥98% (verified by HPLC)<br>
+        <strong>Format:</strong> Lyophilized powder
+      </div>
+      <ul class="product-specs-list">
+        <li>Sequence verified by peptide mass fingerprinting</li>
+        <li>Requires refrigeration (2-8°C recommended)</li>
+        <li>Full amino acid analysis in COA</li>
+      </ul>
+      <div class="product-limitations">
+        <strong>Limitations:</strong> Synthetic variant of endogenous protein. Receptor binding specificity not fully characterized. Requires strict cold chain storage.
+      </div>
+    </div>
 
-    // Exit intent popup trigger
-    document.addEventListener('mouseleave', function(e) {
-      if (e.clientY <= 0 && localStorage.getItem('auraLabsEmailShown') !== 'true' && localStorage.getItem('auraLabsAgeVerified') === 'true') {
-        showEmailPopup();
-      }
-    });
+    <!-- Ipamorelin -->
+    <div class="product-card">
+      <h3 class="product-name">Ipamorelin</h3>
+      <div class="product-specs">
+        <strong>Structure:</strong> Pentapeptide (5 amino acids)<br>
+        <strong>Molecular Weight:</strong> 711.8 g/mol<br>
+        <strong>Purity:</strong> ≥99% (verified by HPLC)<br>
+        <strong>Format:</strong> Lyophilized powder
+      </div>
+      <ul class="product-specs-list">
+        <li>Stable at room temperature when stored dry</li>
+        <li>Soluble in sterile water</li>
+        <li>Batch-specific retention time documented</li>
+      </ul>
+      <div class="product-limitations">
+        <strong>Limitations:</strong> In vitro research only. Receptor binding studies incomplete. Stability in solution limited to 24 hours.
+      </div>
+    </div>
+  </div>
+</section>
 
-    // Smooth scroll to sections
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
-  </script>
+<!-- ==================== GETTING STARTED ==================== -->
+<section class="process-section">
+  <div class="process-content">
+    <h2 class="process-title">Getting Started</h2>
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="process-step-number">1</div>
+        <div class="process-step-label">Select</div>
+        <p class="process-step-desc">Choose a compound. Review specifications. Confirm requirements.</p>
+      </div>
+
+      <div class="process-step">
+        <div class="process-step-number">2</div>
+        <div class="process-step-label">Request</div>
+        <p class="process-step-desc">Submit order with institutional verification. We validate researcher status.</p>
+      </div>
+
+      <div class="process-step">
+        <div class="process-step-number">3</div>
+        <div class="process-step-label">Verify</div>
+        <p class="process-step-desc">Review batch documentation. Confirm batch-specific COA and synthesis parameters.</p>
+      </div>
+
+      <div class="process-step">
+        <div class="process-step-number">4</div>
+        <div class="process-step-label">Proceed</div>
+        <p class="process-step-desc">Compound ships with full documentation. Use as specified in research protocol.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-logo">Aura Labs</div>
+
+    <div class="footer-sections">
+      <div class="footer-section">
+        <h4>Compliance</h4>
+        <ul>
+          <li><a href="#">Research Use Only</a></li>
+          <li><a href="#">Legal Disclaimer</a></li>
+          <li><a href="#">Regulatory Status</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Documentation</h4>
+        <ul>
+          <li><a href="#">COA Library</a></li>
+          <li><a href="#">Specifications</a></li>
+          <li><a href="#">Sourcing</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:research@auralabs.io">research@auralabs.io</a></li>
+          <li><a href="#">Institutional Inquiry</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-disclaimer">
+      All compounds are provided for in vitro research and laboratory use only. Products have not been evaluated by regulatory agencies and are not approved for human consumption or clinical application. Researchers using these materials must comply with all applicable laws and institutional review requirements.
+    </div>
+
+    <div class="footer-copy">© 2026 Aura Labs. Research Use Only.</div>
+  </div>
+</footer>
+
 </body>
 </html>

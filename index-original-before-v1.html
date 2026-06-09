@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aura Labs | Research Institute</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --black: #0a0a0a;
+      --charcoal: #1a1a1a;
+      --dark-gray: #2a2a2a;
+      --blue-gray: #3a4a54;
+      --white: #ffffff;
+      --light-gray: #e8e8e8;
+      --graphite: #5a6a7a;
+    }
+
+    html, body {
+      height: 100%;
+      background: #ffffff;
+      color: var(--charcoal);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+    }
+
+    /* Subtle atmospheric gradient */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: transparent;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Age Gate */
+    #age-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      padding: 24px;
+    }
+
+    .gate-container {
+      position: relative;
+      max-width: 520px;
+      width: 100%;
+    }
+
+    .gate-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .gate-logo {
+      margin-bottom: 64px;
+      font-family: 'EB Garamond', serif;
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+    }
+
+    .gate-divider {
+      width: 40px;
+      height: 1px;
+      background: #ccc;
+      margin: 32px auto;
+    }
+
+    .gate-disclaimer {
+      font-size: 12px;
+      line-height: 1.8;
+      color: #666;
+      margin-bottom: 48px;
+      padding: 32px;
+      border: 1px solid #ddd;
+      background: #ffffff;
+      text-align: left;
+    }
+
+    .gate-disclaimer strong {
+      color: var(--charcoal);
+      font-weight: 500;
+    }
+
+    .gate-confirmation {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+      padding: 16px;
+      background: #ffffff;
+      border: 1px solid #ddd;
+    }
+
+    .gate-confirmation input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: #0066b3;
+    }
+
+    .gate-confirmation label {
+      flex: 1;
+      font-size: 12px;
+      color: var(--charcoal);
+      cursor: pointer;
+    }
+
+    .gate-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .gate-btn {
+      flex: 1;
+      max-width: 200px;
+      padding: 14px 24px;
+      border: 1px solid #ccc;
+      background: transparent;
+      color: var(--charcoal);
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .gate-btn:hover {
+      border-color: var(--charcoal);
+      color: var(--charcoal);
+      background: #ffffff;
+    }
+
+    .gate-btn.confirm {
+      border-color: #0066b3;
+      color: #0066b3;
+    }
+
+    .gate-btn.confirm:hover {
+      background: rgba(0, 102, 179, 0.1);
+    }
+
+    /* Main Site */
+    #site {
+      display: none;
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      overflow-y: auto;
+    }
+
+    /* Navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 32px 48px;
+      border-bottom: 1px solid #ddd;
+      background: #ffffff;
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'EB Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .nav-logo:hover {
+      color: var(--medical-blue);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 48px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #666;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--charcoal);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(48px, 6vw, 76px);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+      margin-bottom: 24px;
+      color: var(--charcoal);
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0066b3;
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+
+    .hero-text {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--graphite);
+      max-width: 520px;
+      margin: 0 auto 24px;
+      font-weight: 300;
+    }
+
+    .hero-standards {
+      font-size: 12px;
+      line-height: 1.8;
+      color: #0066b3;
+      max-width: 520px;
+      margin: 0 auto 32px;
+      font-weight: 500;
+      border-left: 2px solid #0066b3;
+      padding-left: 16px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 40px;
+      border: 1px solid #ccc;
+      background: transparent;
+      color: var(--charcoal);
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      border-color: var(--charcoal);
+      color: var(--charcoal);
+      background: #f0f0f0;
+    }
+
+    .btn.primary {
+      border-color: #0066b3;
+      color: #0066b3;
+    }
+
+    .btn.primary:hover {
+      background: rgba(0, 102, 179, 0.1);
+    }
+
+    /* Email Popup */
+    .email-popup {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 16px;
+    }
+
+    .email-popup.show {
+      display: flex;
+    }
+
+    .email-popup-content {
+      position: relative;
+      background: #ffffff;
+      max-width: 420px;
+      width: 100%;
+      padding: 48px 40px;
+      border-radius: 8px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .email-popup-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: #999;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      padding: 0;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .email-popup-close:hover {
+      color: var(--charcoal);
+    }
+
+    .email-popup-content h2 {
+      font-family: 'EB Garamond', serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+    }
+
+    .email-popup-content > p {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 24px;
+    }
+
+    .email-popup-offer {
+      font-family: 'EB Garamond', serif;
+      font-size: 48px;
+      font-weight: 400;
+      color: #0066b3;
+      margin-bottom: 8px;
+    }
+
+    .email-popup-subtext {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 32px !important;
+    }
+
+    .email-popup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .email-popup-form input {
+      padding: 12px 16px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      transition: border-color 0.3s ease;
+    }
+
+    .email-popup-form input:focus {
+      outline: none;
+      border-color: #0066b3;
+    }
+
+    .email-popup-btn {
+      padding: 14px 24px;
+      background: #0066b3;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .email-popup-btn:hover {
+      background: #0052a3;
+    }
+
+    .email-popup-disclaimer {
+      font-size: 10px;
+      color: #999;
+      line-height: 1.6;
+      margin-bottom: 0 !important;
+    }
+
+    /* Trust Bar */
+    .trust-bar {
+      padding: 48px;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      background: #ffffff;
+    }
+
+    .trust-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 48px;
+      text-align: center;
+    }
+
+    .trust-item {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #666;
+    }
+
+    .trust-item-label {
+      display: block;
+      margin-top: 8px;
+      color: var(--charcoal);
+    }
+
+    /* Products Section */
+    .section {
+      padding: 120px 48px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-tag {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #0066b3;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .section-title {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--charcoal);
+      margin-bottom: 24px;
+    }
+
+    .section-desc {
+      font-size: 13px;
+      line-height: 1.8;
+      color: #666;
+      max-width: 480px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1px;
+      background: #ddd;
+      border: 1px solid #ddd;
+    }
+
+    .product-card {
+      background: #ffffff;
+      padding: 40px;
+      border-right: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      transition: background 0.4s ease;
+      position: relative;
+    }
+
+    .product-card:hover {
+      background: #ffffff;
+    }
+
+    .product-category {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #0066b3;
+      margin-bottom: 16px;
+      display: block;
+      font-weight: 500;
+    }
+
+    .product-name {
+      font-family: 'EB Garamond', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+    }
+
+    .product-desc {
+      font-size: 12px;
+      line-height: 1.7;
+      color: #666;
+      margin-bottom: 32px;
+      font-weight: 300;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .product-price {
+      font-size: 16px;
+      color: #ffffff;
+      font-weight: 400;
+    }
+
+    .product-purity {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(90, 106, 122, 0.8);
+      font-weight: 500;
+    }
+
+    /* About Section */
+    .about-section {
+      padding: 120px 48px;
+      border-top: 1px solid #ddd;
+      background: #ffffff;
+    }
+
+    .about-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-text-content h2 {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 32px;
+      color: var(--charcoal);
+    }
+
+    .about-text {
+      font-size: 13px;
+      line-height: 1.8;
+      color: #666;
+      margin-bottom: 16px;
+      font-weight: 300;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .stat-card {
+      padding: 32px;
+      border: 1px solid #ddd;
+      background: #ffffff;
+    }
+
+    .stat-number {
+      font-family: 'EB Garamond', serif;
+      font-size: 42px;
+      font-weight: 400;
+      color: #0066b3;
+      margin-bottom: 12px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #666;
+      font-weight: 500;
+    }
+
+    /* Footer */
+    footer {
+      padding: 64px 48px;
+      border-top: 1px solid #ddd;
+      background: #ffffff;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'EB Garamond', serif;
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      color: var(--charcoal);
+    }
+
+    .footer-disclaimer {
+      font-size: 11px;
+      color: #666;
+      max-width: 640px;
+      margin: 0 auto 32px;
+      line-height: 1.8;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      list-style: none;
+      margin-bottom: 32px;
+    }
+
+    .footer-links a {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #999;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--charcoal);
+    }
+
+    .footer-copy {
+      font-size: 10px;
+      color: #ccc;
+      letter-spacing: 0.08em;
+    }
+
+    /* Responsive */
+    /* Hamburger button - hidden on desktop */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--charcoal);
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile drawer */
+    @media (max-width: 768px) {
+      nav { 
+        padding: 16px 20px;
+      }
+      .nav-hamburger {
+        display: flex;
+      }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        flex-direction: column;
+        gap: 0;
+        padding: 8px 0;
+        z-index: 999;
+      }
+      .nav-links.open {
+        display: flex;
+      }
+      .nav-links li {
+        width: 100%;
+      }
+      .nav-links a {
+        display: block;
+        padding: 14px 20px;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        border-bottom: 1px solid #f0f0f0;
+      }
+      .nav-links li:last-child a {
+        border-bottom: none;
+      }
+      .nav-logo {
+        font-size: 16px;
+      }
+      
+      .hero { 
+        padding: 60px 20px 50px;
+        min-height: auto;
+      }
+      .hero-content {
+        max-width: 100%;
+      }
+      .hero-title {
+        font-size: clamp(32px, 5vw, 44px);
+        margin-bottom: 16px;
+      }
+      .hero-subtitle {
+        font-size: 10px;
+        margin-bottom: 12px;
+      }
+      .hero-text {
+        font-size: 13px;
+        margin-bottom: 16px;
+      }
+      .hero-standards {
+        font-size: 11px;
+        margin-bottom: 24px;
+      }
+      .hero-actions {
+        gap: 12px;
+      }
+      .btn {
+        padding: 12px 24px;
+        font-size: 10px;
+        flex: 1;
+        max-width: none;
+      }
+
+      .trust-bar {
+        padding: 32px 20px;
+      }
+      .trust-content { 
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      .trust-item {
+        font-size: 10px;
+      }
+      .trust-item-label {
+        font-size: 11px;
+      }
+
+      .section { 
+        padding: 60px 20px;
+      }
+      .section-header {
+        margin-bottom: 48px;
+      }
+      .section-title {
+        font-size: clamp(24px, 3vw, 32px);
+        margin-bottom: 16px;
+      }
+      .section-desc {
+        font-size: 12px;
+      }
+      .section-tag {
+        font-size: 10px;
+      }
+      
+      .product-grid { 
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .product-card {
+        padding: 24px;
+        border-right: none;
+      }
+      .product-name {
+        font-size: 20px;
+        margin-bottom: 8px;
+      }
+      .product-desc {
+        font-size: 11px;
+        margin-bottom: 20px;
+      }
+      .product-category {
+        font-size: 9px;
+        margin-bottom: 12px;
+      }
+      .product-price {
+        font-size: 14px;
+      }
+
+      .about-section {
+        padding: 60px 20px;
+      }
+      .about-content { 
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .about-text-content h2 {
+        font-size: clamp(24px, 3vw, 32px);
+      }
+      .about-text {
+        font-size: 12px;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 32px;
+      }
+      .stat-card {
+        padding: 20px;
+      }
+      .stat-number {
+        font-size: 32px;
+      }
+      .stat-label {
+        font-size: 10px;
+      }
+
+      footer {
+        padding: 40px 20px;
+      }
+      .footer-logo {
+        font-size: 18px;
+      }
+      .footer-disclaimer {
+        font-size: 10px;
+      }
+      .footer-links {
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .footer-links a {
+        font-size: 10px;
+      }
+      .footer-copy {
+        font-size: 9px;
+      }
+
+      .gate-logo {
+        font-size: 24px;
+        margin-bottom: 40px;
+      }
+      .gate-divider {
+        margin: 24px auto;
+      }
+      .gate-disclaimer {
+        padding: 20px;
+        font-size: 11px;
+        margin-bottom: 32px;
+      }
+      .gate-confirmation {
+        padding: 12px;
+        font-size: 11px;
+      }
+      .gate-buttons {
+        flex-direction: column;
+      }
+      .gate-btn {
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      
+      .hero { 
+        padding: 40px 16px 40px;
+      }
+      .hero-title {
+        font-size: clamp(24px, 4vw, 36px);
+        margin-bottom: 16px;
+      }
+      .hero-text {
+        font-size: 12px;
+        margin-bottom: 24px;
+      }
+
+      .section { 
+        padding: 40px 16px;
+      }
+      .section-header {
+        margin-bottom: 32px;
+      }
+      
+      .product-card {
+        padding: 16px;
+      }
+      .product-name {
+        font-size: 18px;
+      }
+      .product-desc {
+        font-size: 10px;
+      }
+
+      .about-section {
+        padding: 40px 16px;
+      }
+      
+      footer {
+        padding: 32px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Age Gate -->
+<div id="age-gate" style="background:#ffffff;">
+  <div class="gate-container">
+    <div class="gate-content">
+      <div class="gate-logo" style="color:#1a1a1a;">Aura Labs</div>
+      <div class="gate-divider" style="background:#ccc;"></div>
+
+      <div class="gate-disclaimer" style="background:#ffffff;border:1px solid #ddd;color:#555;">
+        <strong style="color:#1a1a1a;">Research Institute Notice:</strong> This site is restricted to authorized research professionals. All materials are for in vitro research and laboratory use only. Products are not approved for human consumption and are not intended for clinical application.
+      </div>
+
+      <div class="gate-confirmation" style="background:#ffffff;border:1px solid #ddd;">
+        <input type="checkbox" id="confirm-checkbox" />
+        <label for="confirm-checkbox" style="color:#1a1a1a;">I confirm I am 21+ and authorized to access research materials</label>
+      </div>
+
+      <div class="gate-buttons">
+        <button class="gate-btn confirm" onclick="enterSite()">Confirm Access</button>
+        <button class="gate-btn" onclick="denyEntry()">Decline</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Site -->
+<div id="site">
+  <!-- Navigation -->
+  <nav style="position:relative;">
+    <div class="nav-content">
+      <a href="index.html" class="nav-logo">Aura Labs</a>
+      <button class="nav-hamburger" onclick="toggleMobileNav(this)" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="products.html">Compounds</a></li>
+        <li><a href="#">Documentation</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-subtitle">Premium Research Institute</div>
+      <h1 class="hero-title">Laboratory-Grade Compounds</h1>
+      <p class="hero-text">Synthesized to pharmaceutical standards. Every batch documented. Every result verified. Scientific precision, environmental control, institutional discipline.</p>
+      <div class="hero-standards">Only compounds meeting research-grade criteria are included.</div>
+      <div class="hero-actions">
+        <a href="products.html" class="btn primary">View Catalog</a>
+        <a href="#" class="btn">Documentation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Email Popup -->
+  <div id="email-popup" class="email-popup">
+    <div class="email-popup-content">
+      <button class="email-popup-close" onclick="closeEmailPopup()">×</button>
+      <h2>Join Our Research Community</h2>
+      <p>Get exclusive access to peptide education & research updates</p>
+      <div class="email-popup-offer">15% OFF</div>
+      <p class="email-popup-subtext">Your first order on all research peptide supplies</p>
+      <div class="email-popup-form">
+        <input type="email" placeholder="Enter your email" id="email-input" />
+        <button class="email-popup-btn" onclick="submitEmail()">Get My Discount Code</button>
+      </div>
+      <p class="email-popup-disclaimer">Research Use Only. By subscribing, you acknowledge these products are for laboratory research purposes only and not for human consumption. We respect your privacy and will never share your data.</p>
+    </div>
+  </div>
+
+  <!-- Trust Bar -->
+  <div class="trust-bar">
+    <div class="trust-content">
+      <div class="trust-item">
+        Third-Party Testing
+        <span class="trust-item-label">Verified</span>
+      </div>
+      <div class="trust-item">
+        99%+ Purity
+        <span class="trust-item-label">Guaranteed</span>
+      </div>
+      <div class="trust-item">
+        USA Synthesis
+        <span class="trust-item-label">Documented</span>
+      </div>
+      <div class="trust-item">
+        COA Library
+        <span class="trust-item-label">Available</span>
+      </div>
+    </div>
+  </trust-bar>
+
+
+
+  <!-- About -->
+  <div class="about-section" id="about">
+    <div class="about-content">
+      <div class="about-text-content">
+        <h2>Precision Meets Discipline</h2>
+        <p class="about-text">Aura Labs operates as a private research institution dedicated to synthesizing compounds at pharmaceutical standards. We document everything. We verify everything. We believe research compounds should meet the same precision standard as the science they support.</p>
+        <p class="about-text">Our approach is institutional. Our process is disciplined. Our commitment is uncompromising.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">99%</div>
+          <div class="stat-label">Minimum Purity Threshold</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">48h</div>
+          <div class="stat-label">Standard Fulfillment</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Documented COA</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">USA</div>
+          <div class="stat-label">Synthesis Location</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">Aura Labs</div>
+    <div class="footer-disclaimer">
+      All compounds are sold exclusively for in vitro research and laboratory use. Products have not been evaluated by regulatory agencies and are not intended for human consumption or clinical application. By accessing this site, you confirm compliance with all applicable laws and regulations governing research materials in your jurisdiction.
+    </div>
+    <ul class="footer-links">
+      <li><a href="#">Research Terms</a></li>
+      <li><a href="#">Documentation</a></li>
+      <li><a href="#">Compliance</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Aura Labs. All Rights Reserved. Research Use Only.</div>
+  </footer>
+</div>
+
+<script>
+  // Check if user already confirmed age gate this session
+  function initPage() {
+    if (sessionStorage.getItem('ageConfirmed')) {
+      document.getElementById('age-gate').style.display = 'none';
+      document.getElementById('site').style.display = 'block';
+      showEmailPopup();
+    }
+  }
+
+  function enterSite() {
+    const checkbox = document.getElementById('confirm-checkbox');
+    if (!checkbox.checked) {
+      alert('Please confirm you are 21+ and authorized to access research materials');
+      return;
+    }
+    sessionStorage.setItem('ageConfirmed', 'true');
+    document.getElementById('age-gate').style.opacity = '0';
+    document.getElementById('age-gate').style.transition = 'opacity 0.6s ease';
+    setTimeout(() => {
+      document.getElementById('age-gate').style.display = 'none';
+      document.getElementById('site').style.display = 'block';
+      showEmailPopup();
+    }, 600);
+  }
+
+  function denyEntry() {
+    window.location.href = 'https://www.google.com';
+  }
+
+  // Email popup - show once per session
+  function showEmailPopup() {
+    if (!sessionStorage.getItem('emailPopupShown')) {
+      setTimeout(() => {
+        document.getElementById('email-popup').classList.add('show');
+        sessionStorage.setItem('emailPopupShown', 'true');
+      }, 500);
+    }
+  }
+
+  function closeEmailPopup() {
+    document.getElementById('email-popup').classList.remove('show');
+  }
+
+  function submitEmail() {
+    const email = document.getElementById('email-input').value;
+    if (email && email.includes('@')) {
+      alert('Thank you! Check your email for your 15% discount code.');
+      closeEmailPopup();
+    } else {
+      alert('Please enter a valid email address');
+    }
+  }
+
+  // Run on load
+  window.addEventListener('load', initPage);
+
+  // Mobile nav toggle
+  function toggleMobileNav(btn) {
+    btn.classList.toggle('open');
+    document.getElementById('nav-links').classList.toggle('open');
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href !== '#') {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  });
+</script>
+</body>
+</html>
+<!-- Cache bust -->
+<!-- Deploy test -->
+<!-- Force deploy 1780673918 -->
+<!-- Deploy 1780674168 -->
