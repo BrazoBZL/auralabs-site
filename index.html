@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   
   <style>
-    /* Reset */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
@@ -17,7 +16,6 @@
       overflow-x: hidden;
     }
 
-    /* Particle Canvas - Fixed Background */
     canvas {
       display: block;
       position: fixed;
@@ -26,15 +24,14 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
+      z-index: 0;
     }
 
-    /* Content Container */
-    .content {
+    .wrapper {
       position: relative;
-      z-index: 10;
+      z-index: 1;
     }
 
-    /* Navigation */
     nav {
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
@@ -72,7 +69,6 @@
       color: #2563eb;
     }
 
-    /* Hero */
     .hero {
       height: 100vh;
       display: flex;
@@ -80,6 +76,7 @@
       justify-content: center;
       text-align: center;
       padding: 40px 20px;
+      background: rgba(255, 255, 255, 0.7);
     }
 
     .hero-text h1 {
@@ -138,11 +135,11 @@
       background: #f0f9ff;
     }
 
-    /* Section */
     section {
       padding: 96px 40px;
       max-width: 1200px;
       margin: 0 auto;
+      background: rgba(255, 255, 255, 0.85);
     }
 
     section h2 {
@@ -154,7 +151,6 @@
       color: #17191c;
     }
 
-    /* Compounds Grid */
     .compounds-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -213,9 +209,8 @@
       background: #1d4ed8;
     }
 
-    /* Footer */
     footer {
-      background: #f7f7f8;
+      background: rgba(247, 247, 248, 0.9);
       padding: 40px;
       text-align: center;
       font-size: 13px;
@@ -223,38 +218,20 @@
       border-top: 1px solid #e5e5e5;
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
-      nav {
-        padding: 15px 20px;
-        font-size: 12px;
-      }
-
-      .nav-links {
-        gap: 15px;
-      }
-
-      .hero-text h1 {
-        font-size: 40px;
-      }
-
-      section {
-        padding: 60px 20px;
-      }
-
-      .compounds-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      }
+      nav { padding: 15px 20px; }
+      .nav-links { gap: 15px; }
+      .hero-text h1 { font-size: 40px; }
+      section { padding: 60px 20px; }
+      .compounds-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
     }
   </style>
 </head>
 <body>
 
-<!-- CANVAS FOR PARTICLES -->
 <canvas id="canvas"></canvas>
 
-<!-- CONTENT -->
-<div class="content">
+<div class="wrapper">
   <nav>
     <div class="logo">Aura Labs</div>
     <ul class="nav-links">
@@ -278,9 +255,7 @@
 
   <section id="compounds">
     <h2>Our Selection</h2>
-    <div class="compounds-grid" id="grid">
-      <!-- Populated by JavaScript -->
-    </div>
+    <div class="compounds-grid" id="grid"></div>
   </section>
 
   <footer>
@@ -289,8 +264,6 @@
 </div>
 
 <script>
-  // Build: 2026-06-09 17:14:00 UTC - Fresh particle system
-  // Compound data
   const compounds = [
     { name: 'Semaglutide', dose: '5mg', purity: '98.5%' },
     { name: 'Tirzepatide', dose: '10mg', purity: '99.2%' },
@@ -316,7 +289,6 @@
 
   let cartCount = 0;
 
-  // Render compounds
   const grid = document.getElementById('grid');
   compounds.forEach(c => {
     const div = document.createElement('div');
@@ -339,95 +311,451 @@
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   }
 
-  // PARTICLE SYSTEM
+  // ==================== PARTICLE SYSTEM WITH SHAPE FORMATION ====================
   const canvas = document.getElementById('canvas');
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d', { alpha: true });
 
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
   let particles = [];
+  let time = 0;
+  const shapes = ['dumbbell', 'lightning', 'cube', 'octahedron', 'icosahedron'];
+  let currentShape = 0;
+  let shapeTimer = 0;
+  const shapeChangeInterval = 300; // frames between shape changes (faster)
 
-  // Create particles
-  function initParticles() {
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-    const radius = Math.min(centerX, centerY) * 0.3;
+  class Particle {
+    constructor(x, y, z = 50) {
+      this.x = x;
+      this.y = y;
+      this.z = z;
+      this.size = 2.5 + Math.random() * 1.5;
+      this.opacity = 0.7;
+      // Gradient color based on position (yellow → white → blue)
+      this.hue = Math.random();
+    }
 
-    for (let i = 0; i < 800; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const distance = radius * (0.3 + Math.random() * 0.7);
+    getColor() {
+      // Yellow to white to blue gradient
+      if (this.hue < 0.33) {
+        // Yellow (warm)
+        return {r: 255, g: 220, b: 50};
+      } else if (this.hue < 0.66) {
+        // White
+        return {r: 255, g: 255, b: 255};
+      } else {
+        // Blue
+        return {r: 37, g: 99, b: 235};
+      }
+    }
 
-      particles.push({
-        x: centerX + Math.cos(angle) * distance,
-        y: centerY + Math.sin(angle) * distance,
-        vx: (Math.random() - 0.5) * 1,
-        vy: (Math.random() - 0.5) * 1,
-        size: 1 + Math.random() * 2,
-        color: Math.random() > 0.5 ? '#2563eb' : '#ffffff',
-        opacity: 0.3 + Math.random() * 0.3
+    draw() {
+      const scale = 0.5 + (this.z / 100) * 0.5;
+      const size = this.size * scale;
+      const color = this.getColor();
+
+      // Glow (outer)
+      ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${this.opacity * 0.2})`;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, size * 2, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Core particle
+      ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${this.opacity})`;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, size, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Bright highlight
+      ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity * 0.6})`;
+      ctx.beginPath();
+      ctx.arc(this.x - size * 0.3, this.y - size * 0.3, size * 0.25, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  class ParticleCluster {
+    constructor(x, y, shapePos = null) {
+      this.x = x;
+      this.y = y;
+      this.z = Math.random() * 100;
+      this.targetX = shapePos ? shapePos.x : x;
+      this.targetY = shapePos ? shapePos.y : y;
+      this.targetZ = this.z;
+      this.particles = [];
+      this.generateCluster();
+      this.opacity = 0.7;
+      this.isInShape = shapePos ? true : false;
+      this.shapeTimer = 0; // Time spent in current shape
+    }
+
+    generateCluster() {
+      // Dense particle cluster (like Dala's style)
+      const clusterSize = 15 + Math.random() * 15;
+      for (let i = 0; i < clusterSize; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const distance = Math.random() * 20;
+        const offsetX = Math.cos(angle) * distance;
+        const offsetY = Math.sin(angle) * distance;
+        
+        this.particles.push(new Particle(offsetX, offsetY, 50 + Math.random() * 50));
+      }
+    }
+
+    update() {
+      // Smoothly move toward target (faster)
+      this.x += (this.targetX - this.x) * 0.15;
+      this.y += (this.targetY - this.y) * 0.15;
+      this.z += (this.targetZ - this.z) * 0.15;
+
+      // Z-depth oscillation
+      if (!this.isInShape) {
+        this.z += Math.sin(time * 0.01 + this.x * 0.001) * 0.5;
+      }
+
+      // Drift if not in shape
+      if (!this.isInShape) {
+        this.targetY -= 0.5;
+        this.targetX += Math.sin(this.y * 0.01) * 0.3;
+        this.targetZ = 50 + Math.sin(time * 0.005 + this.x * 0.001) * 30;
+      }
+
+      // Reset when off screen
+      if (this.y < -100) {
+        this.y = canvas.height + 50;
+        this.targetY = canvas.height + 50;
+        this.x = Math.random() * canvas.width;
+        this.targetX = this.x;
+        this.z = Math.random() * 100;
+        this.targetZ = this.z;
+        this.generateCluster();
+      }
+    }
+
+    draw() {
+      // Draw all particles in cluster
+      this.particles.forEach(p => {
+        p.opacity = this.opacity;
+        p.z = this.z;
+        const absX = this.x + p.x;
+        const absY = this.y + p.y;
+        
+        const scale = 0.5 + (p.z / 100) * 0.5;
+        const size = p.size * scale;
+        const color = p.getColor();
+
+        // Glow
+        ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${p.opacity * 0.2})`;
+        ctx.beginPath();
+        ctx.arc(absX, absY, size * 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Core
+        ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${p.opacity})`;
+        ctx.beginPath();
+        ctx.arc(absX, absY, size, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Highlight
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity * 0.5})`;
+        ctx.beginPath();
+        ctx.arc(absX - size * 0.3, absY - size * 0.3, size * 0.25, 0, Math.PI * 2);
+        ctx.fill();
       });
     }
   }
 
-  // Animate
-  function animate() {
-    // Clear
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Shape position functions
+  function getDumbbellPositions(count, centerX, centerY) {
+    const positions = [];
+    const barbell = [
+      // Left weight (circle of orbs)
+      ...Array.from({length: 35}, (_, i) => {
+        const angle = (i / 35) * Math.PI * 2;
+        return {
+          x: centerX - 150 + Math.cos(angle) * 50,
+          y: centerY + Math.sin(angle) * 50
+        };
+      }),
+      // Bar (line of orbs)
+      ...Array.from({length: 50}, (_, i) => ({
+        x: centerX - 100 + (i / 50) * 200,
+        y: centerY
+      })),
+      // Right weight (circle of orbs)
+      ...Array.from({length: 35}, (_, i) => {
+        const angle = (i / 35) * Math.PI * 2;
+        return {
+          x: centerX + 150 + Math.cos(angle) * 50,
+          y: centerY + Math.sin(angle) * 50
+        };
+      })
+    ];
+    return positions.slice(0, count);
+  }
 
-    // Update particles
-    particles.forEach(p => {
-      p.vy += 0.03;
-      p.vx *= 0.98;
-      p.vy *= 0.98;
+  function getLightningPositions(count, centerX, centerY) {
+    const positions = [];
+    const points = [
+      {x: centerX, y: centerY - 200},
+      {x: centerX - 80, y: centerY - 100},
+      {x: centerX + 60, y: centerY + 0},
+      {x: centerX - 50, y: centerY + 100},
+      {x: centerX, y: centerY + 200}
+    ];
 
-      p.x += p.vx;
-      p.y += p.vy;
+    // Create zigzag line with more orbs
+    let currentPos = 0;
+    for (let i = 0; i < points.length - 1; i++) {
+      const p1 = points[i];
+      const p2 = points[i + 1];
+      const dist = Math.hypot(p2.x - p1.x, p2.y - p1.y);
+      const steps = Math.ceil(dist / 5);
 
-      if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+      for (let j = 0; j < steps && currentPos < count; j++) {
+        const t = j / steps;
+        positions.push({
+          x: p1.x + (p2.x - p1.x) * t,
+          y: p1.y + (p2.y - p1.y) * t
+        });
+        currentPos++;
+      }
+    }
 
-      p.x = Math.max(0, Math.min(canvas.width, p.x));
-      p.y = Math.max(0, Math.min(canvas.height, p.y));
+    return positions.slice(0, count);
+  }
 
-      // Draw
-      ctx.fillStyle = p.color === '#2563eb' 
-        ? `rgba(37, 99, 235, ${p.opacity})` 
-        : `rgba(255, 255, 255, ${p.opacity})`;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fill();
+  function getSpiralPositions(count, centerX, centerY) {
+    const positions = [];
+    for (let i = 0; i < count; i++) {
+      const angle = (i / count) * Math.PI * 6; // 3 full rotations
+      const radius = (i / count) * 150;
+      positions.push({
+        x: centerX + Math.cos(angle) * radius,
+        y: centerY + Math.sin(angle) * radius
+      });
+    }
+    return positions;
+  }
 
-      // Glow
-      if (p.color === '#2563eb') {
-        ctx.shadowColor = `rgba(37, 99, 235, ${p.opacity * 0.5})`;
-        ctx.shadowBlur = p.size * 3;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 0;
+  function getCubePositions(count, centerX, centerY) {
+    const positions = [];
+    const size = 120;
+    
+    // Cube edges
+    const edges = [
+      // Front face
+      [{x: -size, y: -size}, {x: size, y: -size}],
+      [{x: size, y: -size}, {x: size, y: size}],
+      [{x: size, y: size}, {x: -size, y: size}],
+      [{x: -size, y: size}, {x: -size, y: -size}],
+      // Back face (perspective)
+      [{x: -size * 0.7, y: -size * 0.7}, {x: size * 0.7, y: -size * 0.7}],
+      [{x: size * 0.7, y: -size * 0.7}, {x: size * 0.7, y: size * 0.7}],
+      [{x: size * 0.7, y: size * 0.7}, {x: -size * 0.7, y: size * 0.7}],
+      [{x: -size * 0.7, y: size * 0.7}, {x: -size * 0.7, y: -size * 0.7}],
+      // Connecting edges
+      [{x: -size, y: -size}, {x: -size * 0.7, y: -size * 0.7}],
+      [{x: size, y: -size}, {x: size * 0.7, y: -size * 0.7}],
+      [{x: size, y: size}, {x: size * 0.7, y: size * 0.7}],
+      [{x: -size, y: size}, {x: -size * 0.7, y: size * 0.7}]
+    ];
+
+    let idx = 0;
+    edges.forEach(edge => {
+      const steps = Math.ceil(count / edges.length);
+      for (let i = 0; i < steps && idx < count; i++) {
+        const t = i / steps;
+        const rotAngle = time * 0.01;
+        const x = edge[0].x + (edge[1].x - edge[0].x) * t;
+        const y = edge[0].y + (edge[1].y - edge[0].y) * t;
+        
+        // Apply 3D rotation
+        const rotX = x * Math.cos(rotAngle) - y * Math.sin(rotAngle);
+        const rotY = x * Math.sin(rotAngle) + y * Math.cos(rotAngle);
+        
+        positions.push({
+          x: centerX + rotX,
+          y: centerY + rotY
+        });
+        idx++;
       }
     });
+
+    return positions.slice(0, count);
+  }
+
+  function getOctahedronPositions(count, centerX, centerY) {
+    const positions = [];
+    const size = 140;
+    
+    // Octahedron edges (two pyramids base-to-base)
+    const edges = [
+      // Top pyramid
+      [{x: 0, y: -size}, {x: size, y: 0}],
+      [{x: size, y: 0}, {x: 0, y: size}],
+      [{x: 0, y: size}, {x: -size, y: 0}],
+      [{x: -size, y: 0}, {x: 0, y: -size}],
+      // Bottom pyramid (perspective)
+      [{x: 0, y: -size * 0.6}, {x: size * 0.6, y: 0}],
+      [{x: size * 0.6, y: 0}, {x: 0, y: size * 0.6}],
+      [{x: 0, y: size * 0.6}, {x: -size * 0.6, y: 0}],
+      [{x: -size * 0.6, y: 0}, {x: 0, y: -size * 0.6}],
+      // Vertical connections
+      [{x: size, y: 0}, {x: size * 0.6, y: 0}],
+      [{x: 0, y: size}, {x: 0, y: size * 0.6}],
+      [{x: -size, y: 0}, {x: -size * 0.6, y: 0}],
+      [{x: 0, y: -size}, {x: 0, y: -size * 0.6}]
+    ];
+
+    let idx = 0;
+    edges.forEach(edge => {
+      const steps = Math.ceil(count / edges.length);
+      for (let i = 0; i < steps && idx < count; i++) {
+        const t = i / steps;
+        const rotAngle = time * 0.01;
+        const x = edge[0].x + (edge[1].x - edge[0].x) * t;
+        const y = edge[0].y + (edge[1].y - edge[0].y) * t;
+        
+        // Apply rotation
+        const rotX = x * Math.cos(rotAngle) - y * Math.sin(rotAngle);
+        const rotY = x * Math.sin(rotAngle) + y * Math.cos(rotAngle);
+        
+        positions.push({
+          x: centerX + rotX,
+          y: centerY + rotY
+        });
+        idx++;
+      }
+    });
+
+    return positions.slice(0, count);
+  }
+
+  function getIcosahedronPositions(count, centerX, centerY) {
+    const positions = [];
+    const size = 130;
+    const phi = (1 + Math.sqrt(5)) / 2;
+    
+    // Icosahedron wireframe (simplified for 2D)
+    const edges = [
+      [{x: -100, y: -100}, {x: 100, y: -100}],
+      [{x: 100, y: -100}, {x: 100, y: 100}],
+      [{x: 100, y: 100}, {x: -100, y: 100}],
+      [{x: -100, y: 100}, {x: -100, y: -100}],
+      [{x: 0, y: -130}, {x: 100, y: -100}],
+      [{x: 0, y: -130}, {x: -100, y: -100}],
+      [{x: 0, y: 130}, {x: 100, y: 100}],
+      [{x: 0, y: 130}, {x: -100, y: 100}],
+      [{x: 130, y: 0}, {x: 100, y: -100}],
+      [{x: 130, y: 0}, {x: 100, y: 100}],
+      [{x: -130, y: 0}, {x: -100, y: -100}],
+      [{x: -130, y: 0}, {x: -100, y: 100}],
+    ];
+
+    let idx = 0;
+    edges.forEach(edge => {
+      const steps = Math.ceil(count / edges.length);
+      for (let i = 0; i < steps && idx < count; i++) {
+        const t = i / steps;
+        const rotAngle = time * 0.01;
+        const x = edge[0].x + (edge[1].x - edge[0].x) * t;
+        const y = edge[0].y + (edge[1].y - edge[0].y) * t;
+        
+        // Apply rotation
+        const rotX = x * Math.cos(rotAngle) - y * Math.sin(rotAngle);
+        const rotY = x * Math.sin(rotAngle) + y * Math.cos(rotAngle);
+        
+        positions.push({
+          x: centerX + rotX,
+          y: centerY + rotY
+        });
+        idx++;
+      }
+    });
+
+    return positions.slice(0, count);
+  }
+
+  function getShapePositions(shapeName, count, centerX, centerY) {
+    switch(shapeName) {
+      case 'dumbbell': return getDumbbellPositions(count, centerX, centerY);
+      case 'lightning': return getLightningPositions(count, centerX, centerY);
+      case 'cube': return getCubePositions(count, centerX, centerY);
+      case 'octahedron': return getOctahedronPositions(count, centerX, centerY);
+      case 'icosahedron': return getIcosahedronPositions(count, centerX, centerY);
+      default: return [];
+    }
+  }
+
+  function initParticles() {
+    particles = [];
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const shapePositions = getShapePositions(shapes[currentShape], 120, centerX, centerY);
+    
+    for (let i = 0; i < 120; i++) {
+      particles.push(new ParticleCluster(shapePositions[i].x, shapePositions[i].y, shapePositions[i]));
+    }
+  }
+
+  function animate() {
+    time++;
+    shapeTimer++;
+
+    // Change shape periodically
+    if (shapeTimer > shapeChangeInterval) {
+      currentShape = (currentShape + 1) % shapes.length;
+      shapeTimer = 0;
+    }
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Calculate shape positions
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const shapePositions = getShapePositions(shapes[currentShape], particles.length, centerX, centerY);
+
+    // Update molecules
+    particles.forEach((mol, i) => {
+      mol.shapeTimer++;
+      
+      // Hold shape for 100 frames, then drift
+      if (mol.shapeTimer < 100 && shapePositions[i]) {
+        mol.targetX = shapePositions[i].x;
+        mol.targetY = shapePositions[i].y;
+        mol.isInShape = true;
+      } else {
+        mol.isInShape = false;
+        // Let it drift upward
+        mol.targetY -= 0.5;
+        mol.targetX += Math.sin(mol.y * 0.01) * 0.3;
+      }
+
+      mol.update();
+      mol.draw();
+    });
+    
+    // When shape timer hits transition point, change shape
+    if (shapeTimer === shapeChangeInterval - 100) {
+      currentShape = (currentShape + 1) % shapes.length;
+      // Reset all particles to new shape immediately
+      particles.forEach((mol, i) => {
+        mol.shapeTimer = 0;
+      });
+    }
 
     requestAnimationFrame(animate);
   }
 
-  // Handle resize
   window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   });
 
-  // Start
-  console.log('Initializing particles...');
   initParticles();
-  console.log('Particles created:', particles.length);
   animate();
-  console.log('Animation started');
-  
-  // Debug: Show canvas info
-  console.log('Canvas size:', canvas.width, 'x', canvas.height);
-  console.log('Canvas element:', canvas);
 </script>
 
 </body>
