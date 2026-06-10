@@ -419,8 +419,15 @@
   });
 
   // Start
+  console.log('Initializing particles...');
   initParticles();
+  console.log('Particles created:', particles.length);
   animate();
+  console.log('Animation started');
+  
+  // Debug: Show canvas info
+  console.log('Canvas size:', canvas.width, 'x', canvas.height);
+  console.log('Canvas element:', canvas);
 </script>
 
 </body>
