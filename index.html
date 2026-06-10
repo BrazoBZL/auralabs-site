@@ -62,21 +62,21 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
+      width: 100vw;
+      height: 100vh;
       pointer-events: none;
+      display: block;
     }
 
     /* ==================== MAIN LAYOUT ==================== */
     body {
       display: flex;
       flex-direction: column;
+      position: relative;
     }
 
     main {
       position: relative;
-      z-index: 1;
       flex: 1;
     }
 
@@ -84,7 +84,7 @@
     nav {
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 50;
       background: var(--color-pure-white);
       border-bottom: 1px solid #e5e5e5;
       padding: var(--spacing-md) var(--spacing-lg);
@@ -211,11 +211,11 @@
     /* ==================== SECTIONS ==================== */
     section {
       position: relative;
-      z-index: 1;
       padding: var(--spacing-2xl) var(--spacing-lg);
       max-width: 1400px;
       margin: 0 auto;
       width: 100%;
+      background: var(--color-pure-white);
     }
 
     section h2 {
@@ -387,7 +387,6 @@
     /* ==================== FOOTER ==================== */
     footer {
       position: relative;
-      z-index: 1;
       background: var(--color-fog);
       padding: var(--spacing-lg);
       border-top: 1px solid #e5e5e5;
@@ -495,6 +494,9 @@
 </head>
 <body>
 
+  <!-- Particle Canvas (must be first in body) -->
+  <canvas id="particle-canvas"></canvas>
+
   <!-- Navigation -->
   <nav>
     <a href="#" class="nav-brand">Aura Labs</a>
@@ -567,8 +569,6 @@
   <footer>
     <p>&copy; 2026 Aura Labs. Research-grade peptides for verified researchers. <a href="#">Documentation</a> | <a href="#">Compliance</a> | <a href="#">Contact</a></p>
   </footer>
-
-  <!-- Particle Canvas (will be inserted here by JavaScript) -->
 
   <script>
     // ==================== COMPOUND DATA ====================
