@@ -13,6 +13,7 @@
 
 class AuraParticles {
   constructor(options = {}) {
+    console.log('🎨 AuraParticles initializing...');
     this.options = {
       container: '#particles',
       count: 500,
@@ -52,6 +53,8 @@ class AuraParticles {
   }
 
   init() {
+    console.log('🎨 AuraParticles init() called');
+    
     // Ensure body has position relative for z-index to work
     if (document.body.style.position === '' || document.body.style.position === 'static') {
       document.body.style.position = 'relative';
@@ -67,29 +70,38 @@ class AuraParticles {
     this.canvas.style.zIndex = '-9999';  // Far behind everything
     this.canvas.style.pointerEvents = 'none';  // Don't block interactions
     this.canvas.id = 'aura-particles';
+    
+    console.log('🎨 Canvas created, inserting into DOM');
     document.body.insertBefore(this.canvas, document.body.firstChild);
 
     this.ctx = this.canvas.getContext('2d', { alpha: true });
     
     if (!this.ctx) {
-      console.error('Failed to get canvas context');
+      console.error('❌ Failed to get canvas context');
       return;
     }
     
+    console.log('✅ Canvas context acquired');
+    
     // Set canvas size
     this.resize();
+    console.log(`✅ Canvas size: ${this.canvas.width}x${this.canvas.height}`);
+    
     window.addEventListener('resize', () => this.resize());
 
     // Create particles
     this.createParticles();
+    console.log(`✅ Created ${this.particles.length} particles`);
 
     // Set up interaction
     if (this.options.interaction) {
       this.setupInteraction();
+      console.log('✅ Interaction enabled');
     }
 
     // Start animation
     if (this.options.autoPlay) {
+      console.log('✅ Starting animation loop');
       this.play();
     }
   }
@@ -285,6 +297,10 @@ class AuraParticles {
 
     this.update();
     this.draw();
+    
+    if (Math.random() < 0.01) {
+      console.log(`🎬 Frame ${Math.random()}: ${this.particles.length} particles`);
+    }
 
     requestAnimationFrame(this.animate);
   };
