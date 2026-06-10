@@ -1252,5 +1252,26 @@
   });
 </script>
 
+<script src="particle-system.js"></script>
+<script>
+  // Initialize full-screen particle background
+  const particles = new AuraParticles({
+    type: 'molecular',
+    count: 1200,
+    colors: ['#2563eb', '#ffffff', '#dbeafe'],
+    speed: 0.8,
+    glow: true,
+    glowColor: '#2563eb',
+    glowIntensity: 0.4,
+    opacity: 0.4,
+    interaction: true,
+    interactionRadius: 200,
+    interactionStrength: 0.3,
+    autoPlay: true,
+    gravity: 0.05,
+    friction: 0.97
+  });
+</script>
+
 </body>
 </html>
