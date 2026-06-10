@@ -52,18 +52,29 @@ class AuraParticles {
   }
 
   init() {
+    // Ensure body has position relative for z-index to work
+    if (document.body.style.position === '' || document.body.style.position === 'static') {
+      document.body.style.position = 'relative';
+    }
+
     // Create canvas as fixed background
     this.canvas = document.createElement('canvas');
     this.canvas.style.position = 'fixed';
     this.canvas.style.top = '0';
     this.canvas.style.left = '0';
-    this.canvas.style.width = '100%';
-    this.canvas.style.height = '100%';
-    this.canvas.style.zIndex = '-1';  // Behind all content
+    this.canvas.style.width = '100vw';
+    this.canvas.style.height = '100vh';
+    this.canvas.style.zIndex = '-9999';  // Far behind everything
     this.canvas.style.pointerEvents = 'none';  // Don't block interactions
-    document.body.appendChild(this.canvas);
+    this.canvas.id = 'aura-particles';
+    document.body.insertBefore(this.canvas, document.body.firstChild);
 
-    this.ctx = this.canvas.getContext('2d');
+    this.ctx = this.canvas.getContext('2d', { alpha: true });
+    
+    if (!this.ctx) {
+      console.error('Failed to get canvas context');
+      return;
+    }
     
     // Set canvas size
     this.resize();
@@ -235,9 +246,8 @@ class AuraParticles {
   }
 
   draw() {
-    // Clear canvas
-    this.ctx.fillStyle = 'rgba(255, 255, 255, 0)';
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    // Clear canvas with transparency
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     // Draw particles
     for (let particle of this.particles) {
