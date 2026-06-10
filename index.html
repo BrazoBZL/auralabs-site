@@ -6,6 +6,7 @@
   <title>Aura Labs | Research-Grade Peptides</title>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
+    /* ==================== DESIGN TOKENS ==================== */
     :root {
       --color-ink: #17191c;
       --color-pure-white: #ffffff;
@@ -16,494 +17,392 @@
       --color-medical-blue: #2563eb;
       --color-blue-wash: #dbeafe;
       --color-ice: #f0f9ff;
+      
       --font-heading: 'EB Garamond', serif;
       --font-body: 'Inter', sans-serif;
+      
+      --spacing-xs: 8px;
+      --spacing-sm: 16px;
+      --spacing-md: 24px;
+      --spacing-lg: 40px;
+      --spacing-xl: 64px;
+      --spacing-2xl: 96px;
+      
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+      
+      --shadow-soft: 0px 2px 8px rgba(23, 25, 28, 0.06);
+      --shadow-medium: 0px 4px 16px rgba(23, 25, 28, 0.08);
+      
+      --transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
+    /* ==================== RESET & BASE ==================== */
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     html, body {
+      width: 100%;
       height: 100%;
       background: var(--color-pure-white);
       color: var(--color-ink);
       font-family: var(--font-body);
       line-height: 1.6;
+      font-size: 16px;
       overflow-x: hidden;
     }
 
-    /* ==================== SCROLL PROGRESS BAR ==================== */
-    .scroll-progress {
+    /* ==================== PARTICLE CANVAS BACKGROUND ==================== */
+    #particle-canvas {
       position: fixed;
       top: 0;
       left: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--color-medical-blue), #1d4ed8);
-      width: 0%;
-      z-index: 1000;
-      transition: width 0.1s ease-out;
-    }
-
-    /* ==================== HERO ==================== */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, var(--color-pure-white) 0%, var(--color-ice) 100%);
-    }
-
-    .hero-bg {
-      position: absolute;
       width: 100%;
       height: 100%;
-      top: 0;
-      left: 0;
-      z-index: 0;
-    }
-
-    .hero-glow {
-      position: absolute;
-      width: 1200px;
-      height: 1200px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, rgba(37, 99, 235, 0.05) 50%, transparent 100%);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      will-change: transform;
-      animation: glow-pulse 8s ease-in-out infinite;
-    }
-
-    @keyframes glow-pulse {
-      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
-      50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 900px;
-      text-align: center;
-      padding: 80px 40px;
-    }
-
-    .hero-title {
-      font-family: var(--font-heading);
-      font-size: clamp(44px, 8vw, 90px);
-      font-weight: 400;
-      line-height: 1.1;
-      letter-spacing: -0.025em;
-      margin-bottom: 24px;
-      color: var(--color-ink);
-      min-height: 120px;
-    }
-
-    .word {
-      display: inline-block;
-      opacity: 0;
-      animation: word-reveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-      margin: 0 0.15em;
-    }
-
-    .word:nth-child(1) { animation-delay: 0s; }
-    .word:nth-child(2) { animation-delay: 0.1s; }
-    .word:nth-child(3) { animation-delay: 0.2s; }
-    .word:nth-child(4) { animation-delay: 0.3s; }
-    .word:nth-child(5) { animation-delay: 0.4s; }
-    .word:nth-child(6) { animation-delay: 0.5s; }
-
-    @keyframes word-reveal {
-      from {
-        opacity: 0;
-        transform: translateY(30px) rotateX(-90deg);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) rotateX(0);
-      }
-    }
-
-    .hero-subtitle {
-      font-family: var(--font-body);
-      font-size: clamp(16px, 2vw, 18px);
-      font-weight: 400;
-      line-height: 1.7;
-      color: var(--color-ash);
-      max-width: 600px;
-      margin: 0 auto 48px;
-      letter-spacing: -0.009em;
-      animation: fade-in 1s ease-out 0.6s both;
-    }
-
-    @keyframes fade-in {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .hero-cta-group {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 80px;
-      animation: fade-in 1s ease-out 0.8s both;
-    }
-
-    .btn-primary {
-      display: inline-block;
-      padding: 14px 32px;
-      background: linear-gradient(135deg, var(--color-medical-blue), #1d4ed8);
-      color: var(--color-pure-white);
-      border: none;
-      border-radius: 9999px;
-      font-family: var(--font-body);
-      font-size: 15px;
-      font-weight: 500;
-      letter-spacing: -0.009em;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 4px 12px rgba(37, 99, 235, 0.2);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-primary::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.3);
-      transition: left 0.6s ease;
-    }
-
-    .btn-primary:hover::before {
-      left: 100%;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-6px);
-      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 20px 40px rgba(37, 99, 235, 0.3);
-    }
-
-    .btn-secondary {
-      display: inline-block;
-      background: transparent;
-      color: var(--color-medical-blue);
-      border: 2px solid var(--color-medical-blue);
-      border-radius: 9999px;
-      padding: 12px 30px;
-      font-family: var(--font-body);
-      font-size: 15px;
-      font-weight: 500;
-      letter-spacing: -0.009em;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-secondary::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--color-medical-blue);
       z-index: -1;
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .btn-secondary:hover::before {
-      transform: scaleX(1);
-    }
-
-    .btn-secondary:hover {
-      color: var(--color-pure-white);
-      transform: translateY(-6px);
-    }
-
-    /* ==================== FLOATING CARDS ==================== */
-    .floating-cards {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      z-index: 0;
       pointer-events: none;
     }
 
-    .float-card {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      border-radius: 24px;
-      padding: 24px;
-      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 12px 32px rgba(0, 0, 0, 0.1);
-      border: 1px solid rgba(163, 166, 175, 0.3);
-      max-width: 240px;
-      animation: float-in 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    /* ==================== MAIN LAYOUT ==================== */
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+    }
+
+    /* ==================== NAVIGATION ==================== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-pure-white);
+      border-bottom: 1px solid #e5e5e5;
+      padding: var(--spacing-md) var(--spacing-lg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(8px);
+      background-color: rgba(255, 255, 255, 0.95);
+    }
+
+    .nav-brand {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--color-ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--spacing-lg);
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      color: var(--color-graphite);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-medical-blue);
+    }
+
+    .nav-links a.active {
+      color: var(--color-medical-blue);
+      font-weight: 500;
+    }
+
+    .nav-cta {
+      display: flex;
+      gap: var(--spacing-md);
+    }
+
+    /* ==================== HERO SECTION ==================== */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: var(--spacing-lg);
+    }
+
+    .hero-content {
+      max-width: 900px;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(48px, 8vw, 84px);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--color-ink);
+      margin-bottom: var(--spacing-md);
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      font-size: clamp(16px, 2vw, 18px);
+      color: var(--color-graphite);
+      max-width: 600px;
+      margin: 0 auto var(--spacing-xl);
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: var(--spacing-md);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ==================== BUTTONS ==================== */
+    button, .btn {
+      padding: 12px 32px;
+      border: none;
+      border-radius: var(--radius-full);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--color-medical-blue);
+      color: var(--color-pure-white);
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--color-medical-blue);
+      border: 1px solid var(--color-medical-blue);
+    }
+
+    .btn-secondary:hover {
+      background: var(--color-blue-wash);
+    }
+
+    /* ==================== SECTIONS ==================== */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: var(--spacing-2xl) var(--spacing-lg);
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    section h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 400;
+      color: var(--color-ink);
+      margin-bottom: var(--spacing-xl);
+      text-align: center;
+      letter-spacing: -0.02em;
+    }
+
+    section h3 {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--color-ink);
+      margin-bottom: var(--spacing-md);
+    }
+
+    /* ==================== STANDARDS SECTION ==================== */
+    .standards {
+      background: var(--color-fog);
+    }
+
+    .standards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .standard-card {
+      background: var(--color-pure-white);
+      padding: var(--spacing-md);
+      border-radius: var(--radius-lg);
+      border: 1px solid #e5e5e5;
+      transition: var(--transition);
+    }
+
+    .standard-card:hover {
+      box-shadow: var(--shadow-medium);
+      transform: translateY(-4px);
+    }
+
+    .standard-card h3 {
+      color: var(--color-medical-blue);
+      margin-bottom: var(--spacing-sm);
+      font-size: 16px;
+    }
+
+    .standard-card p {
+      font-size: 14px;
+      color: var(--color-graphite);
+      line-height: 1.7;
+    }
+
+    /* ==================== COMPOUNDS SECTION ==================== */
+    .compounds {
+      background: var(--color-pure-white);
+    }
+
+    .search-bar {
+      display: flex;
+      gap: var(--spacing-sm);
+      max-width: 500px;
+      margin: 0 auto var(--spacing-xl);
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 12px var(--spacing-md);
+      border: 1px solid #e5e5e5;
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      font-size: 14px;
+      transition: var(--transition);
+    }
+
+    .search-bar input:focus {
+      outline: none;
+      border-color: var(--color-medical-blue);
+      box-shadow: 0 0 0 3px var(--color-blue-wash);
+    }
+
+    .category-filters {
+      display: flex;
+      gap: var(--spacing-sm);
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      border: 1px solid #e5e5e5;
+      background: var(--color-pure-white);
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--color-medical-blue);
+      color: var(--color-pure-white);
+      border-color: var(--color-medical-blue);
+    }
+
+    .compounds-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .compound-card {
+      background: var(--color-fog);
+      padding: var(--spacing-md);
+      border-radius: var(--radius-lg);
+      border: 1px solid #e5e5e5;
+      transition: var(--transition);
       cursor: pointer;
     }
 
-    @keyframes float-in {
-      from {
-        opacity: 0;
-        transform: translateY(50px) scale(0.85);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    .float-card:nth-child(1) {
-      top: 12%;
-      left: 5%;
-      width: 180px;
-      animation-delay: 0.6s;
-    }
-
-    .float-card:nth-child(2) {
-      top: 55%;
-      right: 5%;
-      width: 200px;
-      animation-delay: 0.9s;
-    }
-
-    .float-card:nth-child(3) {
-      bottom: 10%;
-      left: 8%;
-      width: 190px;
-      animation-delay: 1.2s;
-    }
-
-    .float-card:hover {
-      transform: scale(1.1) translateY(-10px);
-      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 30px 60px rgba(37, 99, 235, 0.25);
-      background: rgba(255, 255, 255, 1);
-    }
-
-    .float-card-label {
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--color-graphite);
-      margin-bottom: 8px;
-    }
-
-    .float-card-value {
-      font-family: var(--font-heading);
-      font-size: 36px;
-      font-weight: 400;
-      color: var(--color-medical-blue);
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      margin-bottom: 8px;
-    }
-
-    .float-card-desc {
-      font-family: var(--font-body);
-      font-size: 12px;
-      color: var(--color-graphite);
-      line-height: 1.5;
-    }
-
-    /* ==================== POSITION SECTION ==================== */
-    .position-section {
-      padding: 96px 40px;
+    .compound-card:hover {
       background: var(--color-pure-white);
-      border-top: 1px solid var(--color-dove);
-      position: relative;
+      box-shadow: var(--shadow-medium);
+      transform: translateY(-4px);
     }
 
-    .position-content {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .section-title {
+    .compound-name {
       font-family: var(--font-heading);
-      font-size: clamp(44px, 5vw, 64px);
-      font-weight: 400;
-      line-height: 1.1;
-      letter-spacing: -0.025em;
+      font-size: 18px;
+      font-weight: 500;
       color: var(--color-ink);
-      margin-bottom: 32px;
-      text-align: center;
-      opacity: 0;
-      animation: slide-in-title 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      margin-bottom: var(--spacing-sm);
     }
 
-    @keyframes slide-in-title {
-      from {
-        opacity: 0;
-        transform: translateX(-50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    .position-statement {
-      font-family: var(--font-body);
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 1.8;
-      color: var(--color-ash);
-      letter-spacing: -0.009em;
-      margin-bottom: 24px;
-      opacity: 0;
-      animation: fade-in 0.8s ease-out 0.3s forwards;
-    }
-
-    .position-statement strong {
-      font-weight: 600;
-      color: var(--color-medical-blue);
-    }
-
-    /* ==================== STATS SECTION ==================== */
-    .stats-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 32px;
-      margin-top: 48px;
-    }
-
-    .stat-box {
-      text-align: center;
-      padding: 24px;
-      background: var(--color-fog);
-      border-radius: 16px;
-      border: 1px solid var(--color-dove);
-      opacity: 0;
-      animation: stat-reveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-
-    .stat-box:nth-child(1) { animation-delay: 0.4s; }
-    .stat-box:nth-child(2) { animation-delay: 0.5s; }
-    .stat-box:nth-child(3) { animation-delay: 0.6s; }
-
-    @keyframes stat-reveal {
-      from {
-        opacity: 0;
-        transform: translateY(30px) scale(0.9);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    .stat-number {
-      font-family: var(--font-heading);
-      font-size: 44px;
-      font-weight: 400;
-      color: var(--color-medical-blue);
-      margin-bottom: 8px;
-    }
-
-    .stat-label {
-      font-family: var(--font-body);
+    .compound-dose {
       font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
       color: var(--color-graphite);
+      margin-bottom: var(--spacing-sm);
     }
 
-    /* ==================== LIBRARY SECTION ==================== */
-    .library-section {
-      padding: 96px 40px;
-      max-width: 1200px;
-      margin: 0 auto;
+    .compound-purity {
+      font-size: 13px;
+      color: var(--color-medical-blue);
+      font-weight: 500;
+      margin-bottom: var(--spacing-md);
     }
 
-    .library-header {
-      text-align: center;
-      margin-bottom: 96px;
-    }
-
-    .library-intro {
-      font-family: var(--font-body);
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--color-graphite);
-      max-width: 700px;
-      margin: 0 auto;
-      letter-spacing: -0.009em;
-      line-height: 1.7;
-      opacity: 0;
-      animation: fade-in 0.8s ease-out 0.3s forwards;
-    }
-
-    .search-box {
-      max-width: 500px;
-      margin: 32px auto;
-      position: relative;
-    }
-
-    .search-input {
+    .compound-btn {
       width: 100%;
-      padding: 12px 20px;
-      border: 1px solid var(--color-dove);
-      border-radius: 16px;
-      font-family: var(--font-body);
-      font-size: 15px;
-      background: var(--color-pure-white);
-      color: var(--color-ink);
-      letter-spacing: -0.009em;
-      transition: all 0.3s ease;
-      opacity: 0;
-      animation: fade-in 0.8s ease-out 0.4s forwards;
+      padding: 8px;
+      background: var(--color-medical-blue);
+      color: var(--color-pure-white);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      cursor: pointer;
+      transition: var(--transition);
     }
 
-    .search-input:focus {
-      outline: none;
-      border-color: var(--color-medical-blue);
-      box-shadow: 0px 0px 0px 3px rgba(37, 99, 235, 0.1);
-      transform: scale(1.02);
+    .compound-btn:hover {
+      background: #1d4ed8;
     }
 
-    /* ==================== CATEGORIES ==================== */
-    .categories-container {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
+    /* ==================== FOOTER ==================== */
+    footer {
+      position: relative;
+      z-index: 1;
+      background: var(--color-fog);
+      padding: var(--spacing-lg);
+      border-top: 1px solid #e5e5e5;
+      text-align: center;
+      font-size: 13px;
+      color: var(--color-graphite);
     }
 
-    .category-block {
-      border: 1px solid var(--color-dove);
-      background: var(--color-pure-white);
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 2px 4px rgba(0, 0, 0, 0.06);
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      opacity: 0;
-      animation: category-reveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    footer a {
+      color: var(--color-medical-blue);
+      text-decoration: none;
     }
 
-    .category-block:nth-child(1) { animation-delay: 0s; }
-    .category-block:nth-child(2) { animation-delay: 0.1s; }
-    .category-block:nth-child(3) { animation-delay: 0.2s; }
-    .category-block:nth-child(4) { animation-delay: 0.3s; }
-    .category-block:nth-child(5) { animation-delay: 0.4s; }
-
-    @keyframes category-reveal {
+    /* ==================== ANIMATIONS ==================== */
+    @keyframes fadeInUp {
       from {
         opacity: 0;
         transform: translateY(20px);
@@ -514,764 +413,402 @@
       }
     }
 
-    .category-block:hover {
-      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 12px 32px rgba(0, 0, 0, 0.12);
-      transform: translateY(-4px);
-    }
-
-    .category-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 24px;
-      cursor: pointer;
-      user-select: none;
-      background: var(--color-pure-white);
-      border: none;
-      width: 100%;
-      font-family: var(--font-heading);
-      font-size: 18px;
-      font-weight: 400;
-      letter-spacing: 0.01em;
-      color: var(--color-ink);
-      transition: all 0.3s ease;
-    }
-
-    .category-header:hover {
-      background: var(--color-fog);
-      color: var(--color-medical-blue);
-    }
-
-    .category-toggle {
-      width: 24px;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      color: var(--color-graphite);
-      flex-shrink: 0;
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .category-toggle.open {
-      transform: rotate(180deg) scale(1.2);
-      color: var(--color-medical-blue);
-    }
-
-    .category-content {
-      display: none;
-      padding: 24px;
-      border-top: 1px solid var(--color-dove);
-      background: var(--color-fog);
-      max-height: 0;
-      overflow: hidden;
-    }
-
-    .category-content.open {
-      display: block;
-      animation: expand 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-
-    @keyframes expand {
-      from { max-height: 0; opacity: 0; }
-      to { max-height: 1000px; opacity: 1; }
-    }
-
-    /* ==================== COMPOUND LIST ==================== */
-    .compound-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .compound-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--color-dove);
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      animation: item-slide 0.4s ease-out both;
-    }
-
-    .compound-item:last-child {
-      border-bottom: none;
-    }
-
-    @keyframes item-slide {
-      from {
-        opacity: 0;
-        transform: translateX(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    .category-content.open .compound-item {
-      animation: item-slide 0.4s ease-out both;
-    }
-
-    .compound-item:hover {
-      padding-left: 12px;
-      background: rgba(37, 99, 235, 0.05);
-      border-radius: 4px;
-    }
-
-    .compound-name {
-      font-family: var(--font-body);
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--color-ink);
-      letter-spacing: -0.009em;
-      transition: color 0.3s ease;
-    }
-
-    .compound-item:hover .compound-name {
-      color: var(--color-medical-blue);
-    }
-
-    .compound-dose {
-      font-family: var(--font-body);
-      font-size: 13px;
-      color: var(--color-graphite);
-      font-weight: 400;
-      letter-spacing: -0.009em;
-    }
-
-    .compound-item.hidden {
-      display: none;
-    }
-
-    /* ==================== ACCESS SECTION ==================== */
-    .access-section {
-      padding: 96px 40px;
-      background: var(--color-fog);
-      border-top: 1px solid var(--color-dove);
-    }
-
-    .access-content {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .access-steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 40px;
-      margin-top: 64px;
-    }
-
-    .access-step {
-      background: var(--color-pure-white);
-      padding: 32px;
-      border-radius: 24px;
-      border: 1px solid var(--color-dove);
-      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 4px 12px rgba(0, 0, 0, 0.08);
-      text-align: center;
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      position: relative;
-      overflow: hidden;
-      opacity: 0;
-      animation: step-reveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    }
-
-    .access-step:nth-child(1) { animation-delay: 0.2s; }
-    .access-step:nth-child(2) { animation-delay: 0.3s; }
-    .access-step:nth-child(3) { animation-delay: 0.4s; }
-
-    @keyframes step-reveal {
-      from {
-        opacity: 0;
-        transform: translateY(30px) scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    .access-step::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, var(--color-medical-blue), transparent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-
-    .access-step:hover::before {
-      transform: scaleX(1);
-    }
-
-    .access-step:hover {
-      box-shadow: 0px 0px 0px 1px rgba(23, 25, 28, 0.08), 0px 20px 40px rgba(37, 99, 235, 0.15);
-      transform: translateY(-8px);
-    }
-
-    .access-step-number {
-      font-family: var(--font-heading);
-      font-size: 48px;
-      font-weight: 400;
-      line-height: 1;
-      letter-spacing: -0.025em;
-      color: var(--color-medical-blue);
-      margin-bottom: 16px;
-      transition: all 0.3s ease;
-    }
-
-    .access-step:hover .access-step-number {
-      transform: scale(1.2);
-      color: #1d4ed8;
-    }
-
-    .access-step-label {
-      font-family: var(--font-body);
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--color-graphite);
-      margin-bottom: 12px;
-    }
-
-    .access-step-desc {
-      font-family: var(--font-body);
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--color-ash);
-      font-weight: 400;
-      letter-spacing: -0.009em;
-    }
-
-    /* ==================== FOOTER ==================== */
-    footer {
-      padding: 64px 40px;
-      border-top: 1px solid var(--color-dove);
-      background: var(--color-pure-white);
-      text-align: center;
-      opacity: 0;
-      animation: fade-in 0.8s ease-out forwards;
-    }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .footer-logo {
-      font-family: var(--font-heading);
-      font-size: 18px;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 32px;
-      color: var(--color-ink);
-    }
-
-    .footer-sections {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 48px;
-      margin-bottom: 48px;
-      text-align: left;
-    }
-
-    .footer-section h4 {
-      font-family: var(--font-body);
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--color-ink);
-      margin-bottom: 16px;
-      font-weight: 600;
-    }
-
-    .footer-section ul {
-      list-style: none;
-    }
-
-    .footer-section a {
-      font-family: var(--font-body);
-      font-size: 14px;
-      color: var(--color-graphite);
-      text-decoration: none;
-      line-height: 1.8;
-      transition: all 0.3s ease;
-      letter-spacing: -0.009em;
-      position: relative;
-    }
-
-    .footer-section a::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--color-medical-blue);
-      transition: width 0.3s ease;
-    }
-
-    .footer-section a:hover::after {
-      width: 100%;
-    }
-
-    .footer-section a:hover {
-      color: var(--color-medical-blue);
-    }
-
-    .footer-divider {
-      height: 1px;
-      background: var(--color-dove);
-      margin-bottom: 32px;
-    }
-
-    .footer-disclaimer {
-      font-family: var(--font-body);
-      font-size: 12px;
-      color: var(--color-graphite);
-      line-height: 1.8;
-      max-width: 900px;
-      margin: 0 auto 24px;
-      letter-spacing: -0.009em;
-    }
-
-    .footer-copy {
-      font-family: var(--font-body);
-      font-size: 11px;
-      color: var(--color-dove);
-      letter-spacing: 0.08em;
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
     }
 
     /* ==================== RESPONSIVE ==================== */
     @media (max-width: 768px) {
-      .hero-content { padding: 48px 24px; }
-      .hero-title { font-size: clamp(32px, 6vw, 48px); margin-bottom: 20px; }
-      .hero-subtitle { margin-bottom: 32px; }
-      .hero-cta-group { margin-bottom: 48px; }
-      .floating-cards { display: none; }
-      .position-section { padding: 64px 24px; }
-      .section-title { font-size: clamp(28px, 4vw, 44px); }
-      .library-section { padding: 64px 24px; }
-      .library-header { margin-bottom: 64px; }
-      .access-section { padding: 64px 24px; }
-      .access-steps { gap: 32px; }
-      .footer-sections { grid-template-columns: 1fr; gap: 32px; text-align: center; }
-      footer { padding: 48px 24px; }
+      nav {
+        flex-direction: column;
+        gap: var(--spacing-md);
+      }
+
+      .nav-links {
+        gap: var(--spacing-md);
+        font-size: 12px;
+      }
+
+      .hero {
+        height: auto;
+        min-height: 60vh;
+        padding: var(--spacing-xl) var(--spacing-md);
+      }
+
+      .hero h1 {
+        font-size: 40px;
+      }
+
+      section {
+        padding: var(--spacing-xl) var(--spacing-md);
+      }
+
+      .compounds-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      }
+
+      .search-bar {
+        flex-direction: column;
+      }
     }
 
     @media (max-width: 480px) {
-      .hero-content { padding: 32px 16px; }
-      .hero-title { font-size: clamp(24px, 5vw, 36px); margin-bottom: 16px; }
-      .hero-subtitle { font-size: 14px; margin-bottom: 24px; }
-      .btn-primary, .btn-secondary { padding: 11px 24px; font-size: 13px; }
-      .hero-cta-group { margin-bottom: 32px; }
-      .position-section { padding: 48px 16px; }
-      .section-title { font-size: clamp(20px, 3.5vw, 32px); }
-      .library-section { padding: 48px 16px; }
-      .categories-container { gap: 16px; }
-      .category-header { padding: 16px; font-size: 14px; }
-      .category-content { padding: 16px; }
-      .compound-name { font-size: 14px; }
-      .compound-dose { font-size: 12px; }
-      .access-section { padding: 48px 16px; }
-      .access-steps { gap: 24px; grid-template-columns: 1fr; }
-      .access-step { padding: 24px; }
-      .access-step-number { font-size: 36px; }
-      footer { padding: 32px 16px; }
+      :root {
+        font-size: 14px;
+      }
+
+      nav {
+        padding: var(--spacing-md) var(--spacing-sm);
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      section {
+        padding: var(--spacing-lg) var(--spacing-sm);
+      }
+
+      .compounds-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        gap: var(--spacing-sm);
+      }
+
+      button, .btn {
+        padding: 10px 20px;
+        font-size: 13px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="scroll-progress"></div>
-
-<!-- ==================== HERO ==================== -->
-<section class="hero">
-  <div class="hero-bg">
-    <div class="hero-glow"></div>
-  </div>
-
-  <div class="floating-cards">
-    <div class="float-card">
-      <div class="float-card-label">Verified Purity</div>
-      <div class="float-card-value">100%</div>
-      <div class="float-card-desc">Third-party tested</div>
+  <!-- Navigation -->
+  <nav>
+    <a href="#" class="nav-brand">Aura Labs</a>
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#compounds">Compounds</a></li>
+      <li><a href="/accounts.html">Account</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="/checkout.html" class="btn btn-primary">Cart (0)</a>
     </div>
-    <div class="float-card">
-      <div class="float-card-label">Compounds</div>
-      <div class="float-card-value">50+</div>
-      <div class="float-card-desc">Rigorously selected</div>
-    </div>
-    <div class="float-card">
-      <div class="float-card-label">Traceability</div>
-      <div class="float-card-value">100%</div>
-      <div class="float-card-desc">Full documentation</div>
-    </div>
-  </div>
+  </nav>
 
-  <div class="hero-content">
-    <h1 class="hero-title">
-      <span class="word">We</span>
-      <span class="word">offer</span>
-      <span class="word">what</span>
-      <span class="word">we're</span>
-      <span class="word">certain</span>
-      <span class="word">of.</span>
-    </h1>
-    <p class="hero-subtitle">Research-grade peptides with verified purity, documented sourcing, and transparent testing. Every batch tested. Every batch certified.</p>
-    <div class="hero-cta-group">
-      <a href="#library" class="btn-primary">View Selection</a>
-      <a href="mailto:research@auralabs.io" class="btn-secondary">Get in Touch</a>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== POSITION SECTION ==================== -->
-<section class="position-section">
-  <div class="position-content">
-    <h2 class="section-title">Our Approach</h2>
-    <p class="position-statement">
-      Aura Labs operates under one principle: <strong>research-grade means verified purity, documented sourcing, and known limitations.</strong> Every batch undergoes third-party testing. No exceptions. We document synthesis parameters, environmental controls, and verification results. Our supply chain is traceable. Our methodology is reproducible.
-    </p>
-
-    <div class="stats-container">
-      <div class="stat-box">
-        <div class="stat-number" data-target="100">0</div>
-        <div class="stat-label">Purity Verification</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-number" data-target="50">0</div>
-        <div class="stat-label">Available Compounds</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-number" data-target="100">0</div>
-        <div class="stat-label">Supply Traceability</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== COMPOUND LIBRARY ==================== -->
-<section class="library-section" id="library">
-  <div class="library-header">
-    <h2 class="section-title">Compound Library</h2>
-    <p class="library-intro">All available compounds organized by category. Expand each to view formulations and dosages.</p>
-    <div class="search-box">
-      <input type="text" class="search-input" id="searchInput" placeholder="Search compounds...">
-    </div>
-  </div>
-
-  <div class="categories-container">
-    
-    <!-- WEIGHT LOSS / GLP-1 -->
-    <div class="category-block">
-      <button class="category-header" onclick="toggleCategory(this)">
-        <span>Weight Loss & Metabolism</span>
-        <span class="category-toggle">▼</span>
-      </button>
-      <div class="category-content">
-        <div class="compound-list">
-          <div class="compound-item"><span class="compound-name">Semaglutide</span><span class="compound-dose">2mg, 5mg</span></div>
-          <div class="compound-item"><span class="compound-name">Retatrutide</span><span class="compound-dose">5mg</span></div>
-          <div class="compound-item"><span class="compound-name">Cagrilintide</span><span class="compound-dose">2.4mg</span></div>
-          <div class="compound-item"><span class="compound-name">AOD-9604</span><span class="compound-dose">5mg</span></div>
-          <div class="compound-item"><span class="compound-name">5-Amino-1MQ</span><span class="compound-dose">10mg</span></div>
-          <div class="compound-item"><span class="compound-name">Adipotide</span><span class="compound-dose">5mg</span></div>
-          <div class="compound-item"><span class="compound-name">HGH Fragment 176-191</span><span class="compound-dose">5mg</span></div>
-          <div class="compound-item"><span class="compound-name">L-Carnitine</span><span class="compound-dose">500mg</span></div>
-          <div class="compound-item"><span class="compound-name">Lipo-C</span><span class="compound-dose">5ml vial</span></div>
-          <div class="compound-item"><span class="compound-name">Tirzepatide</span><span class="compound-dose">5mg, 10mg</span></div>
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1>We offer what we're certain of.</h1>
+        <p>Research-grade peptides with verified purity, documented sourcing, and transparent testing. Nothing more.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="document.getElementById('compounds').scrollIntoView({ behavior: 'smooth' })">View Compounds</button>
+          <a href="/accounts.html" class="btn btn-secondary">Learn More</a>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- HEALING & RECOVERY -->
-    <div class="category-block">
-      <button class="category-header" onclick="toggleCategory(this)">
-        <span>Healing & Recovery</span>
-        <span class="category-toggle">▼</span>
-      </button>
-      <div class="category-content">
-        <div class="compound-list">
-          <div class="compound-item"><span class="compound-name">BPC-157</span><span class="compound-dose">2mg, 10mg</span></div>
-          <div class="compound-item"><span class="compound-name">TB-500</span><span class="compound-dose">5mg</span></div>
-          <div class="compound-item"><span class="compound-name">GHK-Cu</span><span class="compound-dose">50mg</span></div>
-          <div class="compound-item"><span class="compound-name">AHK-Cu</span><span class="compound-dose">50mg</span></div>
-          <div class="compound-item"><span class="compound-name">KPV</span><span class="compound-dose">5mg</span></div>
-          <div class="compound-item"><span class="compound-name">LL-37</span><span class="compound-dose">10mg</span></div>
-          <div class="compound-item"><span class="compound-name">GLOW</span><span class="compound-dose">5mg</span></div>
-          <div class="compound-item"><span class="compound-name">KLOW</span><span class="compound-dose">5mg</span></div>
-          <div class="compound-item"><span class="compound-name">Collagen Peptides</span><span class="compound-dose">500mg</span></div>
-          <div class="compound-item"><span class="compound-name">Matrixyl 3000</span><span class="compound-dose">100mg</span></div>
+    <!-- Standards Section -->
+    <section class="standards" id="standards">
+      <h2>Our Standards</h2>
+      <div class="standards-grid">
+        <div class="standard-card">
+          <h3>Research Grade</h3>
+          <p>Every compound meets pharmaceutical research standards. Third-party tested and verified for purity and consistency.</p>
+        </div>
+        <div class="standard-card">
+          <h3>Full Transparency</h3>
+          <p>Complete batch documentation, sourcing records, and testing data available for every product. No hidden suppliers.</p>
+        </div>
+        <div class="standard-card">
+          <h3>Selective Curation</h3>
+          <p>We only offer compounds that meet our standards. The ones we don't carry prove our discipline more than the ones we do.</p>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- HGH SECRETAGOGUES -->
-    <div class="category-block">
-      <button class="category-header" onclick="toggleCategory(this)">
-        <span>HGH Secretagogues</span>
-        <span class="category-toggle">▼</span>
-      </button>
-      <div class="category-content">
-        <div class="compound-list">
-          <div class="compound-item"><span class="compound-name">Ipamorelin</span><span class="compound-dose">2mg, 5mg</span></div>
-          <div class="compound-item"><span class="compound-name">CJC-1295 with DAC</span><span class="compound-dose">5mg</span></div>
-          <div class="compound-item"><span class="compound-name">CJC-1295 no DAC</span><span class="compound-dose">5mg</span></div>
-          <div class="compound-item"><span class="compound-name">GHRP-2</span><span class="compound-dose">5mg</span></div>
-          <div class="compound-item"><span class="compound-name">GHRP-6</span><span class="compound-dose">5mg</span></div>
-          <div class="compound-item"><span class="compound-name">Hexarelin</span><span class="compound-dose">2mg</span></div>
-          <div class="compound-item"><span class="compound-name">MK-677 (Ibutamoren)</span><span class="compound-dose">10mg</span></div>
-          <div class="compound-item"><span class="compound-name">Sermorelin</span><span class="compound-dose">15mg</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- NOOTROPICS & COGNITIVE -->
-    <div class="category-block">
-      <button class="category-header" onclick="toggleCategory(this)">
-        <span>Nootropics & Cognitive</span>
-        <span class="category-toggle">▼</span>
-      </button>
-      <div class="category-content">
-        <div class="compound-list">
-          <div class="compound-item"><span class="compound-name">Semax</span><span class="compound-dose">5mg</span></div>
-          <div class="compound-item"><span class="compound-name">NAD+</span><span class="compound-dose">500mg</span></div>
-          <div class="compound-item"><span class="compound-name">DSIP</span><span class="compound-dose">5mg</span></div>
-          <div class="compound-item"><span class="compound-name">Noopept</span><span class="compound-dose">10mg</span></div>
-          <div class="compound-item"><span class="compound-name">Phenylpiracetam</span><span class="compound-dose">100mg</span></div>
-          <div class="compound-item"><span class="compound-name">Aniracetam</span><span class="compound-dose">750mg</span></div>
-          <div class="compound-item"><span class="compound-name">Coluracetam</span><span class="compound-dose">5mg</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SPECIALTY & RARE -->
-    <div class="category-block">
-      <button class="category-header" onclick="toggleCategory(this)">
-        <span>Specialty & Rare</span>
-        <span class="category-toggle">▼</span>
-      </button>
-      <div class="category-content">
-        <div class="compound-list">
-          <div class="compound-item"><span class="compound-name">FOXO4-DRI</span><span class="compound-dose">10mg</span></div>
-          <div class="compound-item"><span class="compound-name">Epithalon</span><span class="compound-dose">10mg</span></div>
-          <div class="compound-item"><span class="compound-name">Pinealon</span><span class="compound-dose">5mg</span></div>
-          <div class="compound-item"><span class="compound-name">Thymosin Alpha 1</span><span class="compound-dose">10mg</span></div>
-          <div class="compound-item"><span class="compound-name">Goserelin</span><span class="compound-dose">3.6mg</span></div>
-          <div class="compound-item"><span class="compound-name">Triptorelin</span><span class="compound-dose">100mcg</span></div>
-          <div class="compound-item"><span class="compound-name">Selank</span><span class="compound-dose">5mg</span></div>
-          <div class="compound-item"><span class="compound-name">Deltasleep</span><span class="compound-dose">5mg</span></div>
-          <div class="compound-item"><span class="compound-name">Cerebrolysin</span><span class="compound-dose">10ml vial</span></div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ==================== ACCESS SECTION ==================== -->
-<section class="access-section">
-  <div class="access-content">
-    <h2 class="section-title">How to Access</h2>
-    <div class="access-steps">
-      <div class="access-step">
-        <div class="access-step-number">1</div>
-        <div class="access-step-label">Select</div>
-        <p class="access-step-desc">Choose compounds from our library based on your research needs.</p>
-      </div>
-
-      <div class="access-step">
-        <div class="access-step-number">2</div>
-        <div class="access-step-label">Request</div>
-        <p class="access-step-desc">Submit order with institutional verification. We validate researcher credentials.</p>
-      </div>
-
-      <div class="access-step">
-        <div class="access-step-number">3</div>
-        <div class="access-step-label">Receive</div>
-        <p class="access-step-desc">Full documentation and COA included with every shipment.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== FOOTER ==================== -->
-<footer>
-  <div class="footer-content">
-    <div class="footer-logo">Aura Labs</div>
-
-    <div class="footer-sections">
-      <div class="footer-section">
-        <h4>Compliance</h4>
-        <ul>
-          <li><a href="#">Research Use Only</a></li>
-          <li><a href="#">Legal Disclaimer</a></li>
-          <li><a href="#">Regulatory Status</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-section">
-        <h4>Documentation</h4>
-        <ul>
-          <li><a href="#">COA Library</a></li>
-          <li><a href="#">Specifications</a></li>
-          <li><a href="#">Sourcing</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-section">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="mailto:research@auralabs.io">research@auralabs.io</a></li>
-          <li><a href="#">Institutional Inquiry</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-divider"></div>
-
-    <div class="footer-disclaimer">
-      All compounds are provided for in vitro research and laboratory use only. Products have not been evaluated by regulatory agencies and are not approved for human consumption or clinical application. Researchers using these materials must comply with all applicable laws and institutional review requirements.
-    </div>
-
-    <div class="footer-copy">© 2026 Aura Labs. Research Use Only.</div>
-  </div>
-</footer>
-
-<script>
-  // Scroll progress bar
-  const scrollProgress = document.querySelector('.scroll-progress');
-  window.addEventListener('scroll', () => {
-    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrolled = window.scrollY;
-    scrollProgress.style.width = (scrolled / scrollHeight) * 100 + '%';
-  });
-
-  // Scroll reveal & counter animation
-  const revealElements = document.querySelectorAll('.section-title, .position-statement, .library-intro, .search-input');
-  const statBoxes = document.querySelectorAll('.stat-box');
-
-  const revealOnScroll = () => {
-    revealElements.forEach(el => {
-      const windowHeight = window.innerHeight;
-      const elementTop = el.getBoundingClientRect().top;
-      if (elementTop < windowHeight - 100) {
-        el.style.opacity = '1';
-      }
-    });
-
-    statBoxes.forEach(box => {
-      const windowHeight = window.innerHeight;
-      const elementTop = box.getBoundingClientRect().top;
-      if (elementTop < windowHeight - 100 && !box.classList.contains('counted')) {
-        animateCounter(box);
-        box.classList.add('counted');
-      }
-    });
-  };
-
-  const animateCounter = (box) => {
-    const numberEl = box.querySelector('.stat-number');
-    const target = parseInt(numberEl.dataset.target);
-    let current = 0;
-    const increment = target / 60;
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        numberEl.textContent = target + '%';
-        clearInterval(timer);
-      } else {
-        numberEl.textContent = Math.floor(current) + '%';
-      }
-    }, 16);
-  };
-
-  window.addEventListener('scroll', revealOnScroll, { passive: true });
-  revealOnScroll();
-
-  // Search/filter compounds
-  const searchInput = document.getElementById('searchInput');
-  searchInput.addEventListener('input', (e) => {
-    const query = e.target.value.toLowerCase();
-    const items = document.querySelectorAll('.compound-item');
-    items.forEach(item => {
-      const name = item.querySelector('.compound-name').textContent.toLowerCase();
-      if (name.includes(query)) {
-        item.classList.remove('hidden');
-      } else {
-        item.classList.add('hidden');
-      }
-    });
-  });
-
-  // Category toggle
-  function toggleCategory(element) {
-    const header = element;
-    const content = header.nextElementSibling;
-    const toggle = header.querySelector('.category-toggle');
-
-    document.querySelectorAll('.category-block').forEach(block => {
-      const h = block.querySelector('.category-header');
-      const c = block.querySelector('.category-content');
-      const t = h.querySelector('.category-toggle');
-
-      if (h !== header) {
-        h.classList.remove('open');
-        c.classList.remove('open');
-        t.classList.remove('open');
-      }
-    });
-
-    header.classList.toggle('open');
-    content.classList.toggle('open');
-    toggle.classList.toggle('open');
-  }
-
-  // Floating card mouse tracking
-  document.addEventListener('mousemove', (e) => {
-    const cards = document.querySelectorAll('.float-card');
-    cards.forEach(card => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      const distance = Math.sqrt(x * x + y * y);
+    <!-- Compounds Section -->
+    <section class="compounds" id="compounds">
+      <h2>Compound Library</h2>
       
-      if (distance < 200) {
-        card.style.transform = `scale(1.05) translate(${x * 0.1}px, ${y * 0.1}px)`;
-      }
-    });
-  });
-</script>
+      <div class="search-bar">
+        <input type="text" id="search" placeholder="Search compounds..." />
+      </div>
 
-<script src="particle-system.js"></script>
-<script>
-  // Initialize full-screen particle background
-  const particles = new AuraParticles({
-    type: 'molecular',
-    count: 1200,
-    colors: ['#2563eb', '#ffffff', '#dbeafe'],
-    speed: 0.8,
-    glow: true,
-    glowColor: '#2563eb',
-    glowIntensity: 0.4,
-    opacity: 0.4,
-    interaction: true,
-    interactionRadius: 200,
-    interactionStrength: 0.3,
-    autoPlay: true,
-    gravity: 0.05,
-    friction: 0.97
-  });
-</script>
+      <div class="category-filters">
+        <button class="filter-btn active" onclick="filterCategory('all')">All</button>
+        <button class="filter-btn" onclick="filterCategory('Weight Loss')">Weight Loss</button>
+        <button class="filter-btn" onclick="filterCategory('Healing')">Healing</button>
+        <button class="filter-btn" onclick="filterCategory('HGH')">HGH</button>
+        <button class="filter-btn" onclick="filterCategory('Cognitive')">Cognitive</button>
+        <button class="filter-btn" onclick="filterCategory('Specialty')">Specialty</button>
+      </div>
+
+      <div class="compounds-grid" id="compounds-grid">
+        <!-- Populated by JavaScript -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Aura Labs. Research-grade peptides for verified researchers. <a href="#">Documentation</a> | <a href="#">Compliance</a> | <a href="#">Contact</a></p>
+  </footer>
+
+  <!-- Particle Canvas (will be inserted here by JavaScript) -->
+
+  <script>
+    // ==================== COMPOUND DATA ====================
+    const compounds = [
+      // Weight Loss & Metabolism
+      { id: 1, name: 'Semaglutide', dose: '5mg', purity: '98.5%', category: 'Weight Loss' },
+      { id: 2, name: 'Tirzepatide', dose: '10mg', purity: '99.2%', category: 'Weight Loss' },
+      { id: 3, name: 'CJC-1295', dose: '2mg', purity: '98.8%', category: 'Weight Loss' },
+      { id: 4, name: 'Ipamorelin', dose: '5mg', purity: '99.1%', category: 'Weight Loss' },
+      { id: 5, name: 'Melanotan II', dose: '10mg', purity: '97.9%', category: 'Weight Loss' },
+      
+      // Healing & Recovery
+      { id: 6, name: 'BPC-157', dose: '5mg', purity: '99.2%', category: 'Healing' },
+      { id: 7, name: 'TB-500', dose: '2mg', purity: '98.7%', category: 'Healing' },
+      { id: 8, name: 'Selank', dose: '5mg', purity: '99.0%', category: 'Healing' },
+      { id: 9, name: 'Epithalon', dose: '10mg', purity: '98.5%', category: 'Healing' },
+      { id: 10, name: 'GHK-Cu', dose: '5mg', purity: '99.3%', category: 'Healing' },
+      
+      // HGH Secretagogues
+      { id: 11, name: 'MK-677', dose: '25mg', purity: '99.4%', category: 'HGH' },
+      { id: 12, name: 'GHRP-6', dose: '5mg', purity: '98.9%', category: 'HGH' },
+      { id: 13, name: 'GHRP-2', dose: '5mg', purity: '99.0%', category: 'HGH' },
+      { id: 14, name: 'Hexarelin', dose: '2mg', purity: '98.6%', category: 'HGH' },
+      { id: 15, name: 'Sermorelin', dose: '5mg', purity: '99.2%', category: 'HGH' },
+      
+      // Nootropics & Cognitive
+      { id: 16, name: 'Semax', dose: '500mcg', purity: '99.1%', category: 'Cognitive' },
+      { id: 17, name: 'Cerebrolysin', dose: '5ml', purity: '98.8%', category: 'Cognitive' },
+      { id: 18, name: 'Noopept', dose: '30mg', purity: '99.5%', category: 'Cognitive' },
+      { id: 19, name: 'NSI-189', dose: '40mg', purity: '99.2%', category: 'Cognitive' },
+      { id: 20, name: 'Piracetam', dose: '800mg', purity: '99.3%', category: 'Cognitive' },
+      
+      // Specialty & Rare
+      { id: 21, name: 'NAD+', dose: '500mg', purity: '99.8%', category: 'Specialty' },
+      { id: 22, name: 'Thymosin Alpha', dose: '5mg', purity: '99.0%', category: 'Specialty' },
+      { id: 23, name: 'LL-37', dose: '1mg', purity: '98.5%', category: 'Specialty' },
+      { id: 24, name: 'AOD-9604', dose: '5mg', purity: '99.1%', category: 'Specialty' },
+      { id: 25, name: 'Oxytocin', dose: '10IU', purity: '99.2%', category: 'Specialty' },
+      
+      // Additional compounds (26-50+)
+      { id: 26, name: 'Dihexa', dose: '5mg', purity: '98.9%', category: 'Cognitive' },
+      { id: 27, name: 'P21', dose: '1mg', purity: '98.7%', category: 'Specialty' },
+      { id: 28, name: 'Afamelanotide', dose: '16mg', purity: '99.0%', category: 'Specialty' },
+      { id: 29, name: 'Kisspeptin', dose: '5mg', purity: '98.6%', category: 'Specialty' },
+      { id: 30, name: 'Gonadorelin', dose: '2mg', purity: '99.1%', category: 'HGH' },
+      { id: 31, name: 'Triptorelin', dose: '100mcg', purity: '99.2%', category: 'HGH' },
+      { id: 32, name: 'Leuprolide', dose: '1mg', purity: '98.8%', category: 'Specialty' },
+      { id: 33, name: 'Besibesiran', dose: '500mcg', purity: '99.3%', category: 'Specialty' },
+      { id: 34, name: 'Pramlintide', dose: '60mcg', purity: '99.0%', category: 'Weight Loss' },
+      { id: 35, name: 'Amylin', dose: '10mcg', purity: '98.9%', category: 'Weight Loss' },
+      { id: 36, name: 'Peptide YY', dose: '5mg', purity: '99.1%', category: 'Weight Loss' },
+      { id: 37, name: 'GLP-1', dose: '5mg', purity: '99.4%', category: 'Weight Loss' },
+      { id: 38, name: 'Angelfish', dose: '2mg', purity: '98.5%', category: 'Cognitive' },
+      { id: 39, name: 'Neuregulin', dose: '5mg', purity: '98.8%', category: 'Cognitive' },
+      { id: 40, name: 'BDNF', dose: '1mg', purity: '99.2%', category: 'Cognitive' },
+      { id: 41, name: 'FGF21', dose: '250mcg', purity: '99.0%', category: 'Healing' },
+      { id: 42, name: 'HGH Fragment 176-191', dose: '5mg', purity: '99.1%', category: 'Weight Loss' },
+      { id: 43, name: 'DSIP', dose: '5mg', purity: '98.7%', category: 'Specialty' },
+      { id: 44, name: 'Liraglutide', dose: '18mg', purity: '99.3%', category: 'Weight Loss' },
+      { id: 45, name: 'Dulaglutide', dose: '1.5mg', purity: '99.2%', category: 'Weight Loss' },
+      { id: 46, name: 'Eptacopan', dose: '200mg', purity: '98.9%', category: 'Healing' },
+      { id: 47, name: 'Icatibant', dose: '30mg', purity: '99.0%', category: 'Healing' },
+      { id: 48, name: 'Angiotensin II', dose: '5mg', purity: '99.1%', category: 'Specialty' },
+      { id: 49, name: 'Bradykinin', dose: '2mg', purity: '98.6%', category: 'Specialty' },
+      { id: 50, name: 'Substance P', dose: '1mg', purity: '99.2%', category: 'Cognitive' }
+    ];
+
+    let currentFilter = 'all';
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // ==================== RENDER COMPOUNDS ====================
+    function renderCompounds() {
+      const grid = document.getElementById('compounds-grid');
+      grid.innerHTML = '';
+
+      const filtered = currentFilter === 'all' 
+        ? compounds 
+        : compounds.filter(c => c.category === currentFilter);
+
+      const searchTerm = document.getElementById('search').value.toLowerCase();
+      const searched = filtered.filter(c => c.name.toLowerCase().includes(searchTerm));
+
+      searched.forEach(compound => {
+        const card = document.createElement('div');
+        card.className = 'compound-card';
+        card.innerHTML = `
+          <div class="compound-name">${compound.name}</div>
+          <div class="compound-dose">${compound.dose}</div>
+          <div class="compound-purity">Purity: ${compound.purity}</div>
+          <button class="compound-btn" onclick="addToCart(${compound.id})">Add to Cart</button>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterCategory(category) {
+      currentFilter = category;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      renderCompounds();
+    }
+
+    // ==================== SHOPPING CART ====================
+    function addToCart(compoundId) {
+      const compound = compounds.find(c => c.id === compoundId);
+      cart.push(compound);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartBadge();
+      alert(`${compound.name} added to cart!`);
+    }
+
+    function updateCartBadge() {
+      document.querySelector('.nav-cta .btn-primary').textContent = `Cart (${cart.length})`;
+    }
+
+    // ==================== SEARCH ====================
+    document.getElementById('search').addEventListener('input', renderCompounds);
+
+    // ==================== INIT ====================
+    renderCompounds();
+    updateCartBadge();
+  </script>
+
+  <!-- Particle System -->
+  <canvas id="particle-canvas"></canvas>
+
+  <script>
+    // ==================== SIMPLE PARTICLE SYSTEM ====================
+    class ParticleSystem {
+      constructor(canvasId, config = {}) {
+        this.canvas = document.getElementById(canvasId);
+        this.ctx = this.canvas.getContext('2d');
+        this.particles = [];
+        this.config = {
+          count: 500,
+          colors: ['#2563eb', '#ffffff', '#dbeafe'],
+          speed: 0.8,
+          opacity: 0.4,
+          glow: true,
+          ...config
+        };
+
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+        this.createParticles();
+        this.animate();
+      }
+
+      resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+      }
+
+      createParticles() {
+        const centerX = this.canvas.width / 2;
+        const centerY = this.canvas.height / 2;
+        const radius = Math.min(centerX, centerY) * 0.4;
+
+        for (let i = 0; i < this.config.count; i++) {
+          const angle = (i / this.config.count) * Math.PI * 2;
+          const distance = radius * (0.5 + Math.random() * 0.5);
+
+          this.particles.push({
+            x: centerX + Math.cos(angle) * distance,
+            y: centerY + Math.sin(angle) * distance,
+            vx: (Math.random() - 0.5) * this.config.speed,
+            vy: (Math.random() - 0.5) * this.config.speed,
+            size: 1 + Math.random() * 2,
+            color: this.config.colors[i % this.config.colors.length],
+            baseX: centerX + Math.cos(angle) * distance,
+            baseY: centerY + Math.sin(angle) * distance
+          });
+        }
+      }
+
+      update() {
+        this.particles.forEach(p => {
+          p.vy += 0.05; // Gravity
+          p.vx *= 0.97; // Friction
+          p.vy *= 0.97;
+
+          p.x += p.vx;
+          p.y += p.vy;
+
+          // Bounce
+          if (p.x < 0 || p.x > this.canvas.width) p.vx *= -1;
+          if (p.y < 0 || p.y > this.canvas.height) p.vy *= -1;
+
+          p.x = Math.max(0, Math.min(this.canvas.width, p.x));
+          p.y = Math.max(0, Math.min(this.canvas.height, p.y));
+        });
+      }
+
+      draw() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        this.particles.forEach(p => {
+          // Particle
+          this.ctx.fillStyle = this.hexToRgba(p.color, this.config.opacity);
+          this.ctx.beginPath();
+          this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          this.ctx.fill();
+
+          // Glow
+          if (this.config.glow) {
+            this.ctx.shadowColor = this.hexToRgba('#2563eb', this.config.opacity * 0.6);
+            this.ctx.shadowBlur = p.size * 4;
+            this.ctx.beginPath();
+            this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            this.ctx.fill();
+            this.ctx.shadowBlur = 0;
+          }
+        });
+      }
+
+      hexToRgba(hex, alpha) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+      }
+
+      animate = () => {
+        this.update();
+        this.draw();
+        requestAnimationFrame(this.animate);
+      };
+    }
+
+    // Initialize particles
+    const particles = new ParticleSystem('particle-canvas', {
+      count: 1200,
+      colors: ['#2563eb', '#ffffff', '#dbeafe'],
+      speed: 0.8,
+      opacity: 0.4,
+      glow: true
+    });
+  </script>
 
 </body>
 </html>
