@@ -25,6 +25,7 @@
       height: 100%;
       pointer-events: none;
       z-index: 0;
+      opacity: 0.25;
     }
 
     .wrapper {
@@ -311,440 +312,204 @@
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   }
 
-  // ==================== PARTICLE SYSTEM WITH SHAPE FORMATION ====================
+  // ==================== DA VINCI BACKGROUND ====================
   const canvas = document.getElementById('canvas');
-  const ctx = canvas.getContext('2d', { alpha: true });
+  const ctx = canvas.getContext('2d');
 
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
-  let particles = [];
-  let time = 0;
-  const shapes = ['dumbbell', 'lightning', 'cube', 'octahedron', 'icosahedron'];
-  let currentShape = 0;
-  let shapeTimer = 0;
-  const shapeChangeInterval = 300; // frames between shape changes (faster)
+  // DNA helix variations
+  const helixTypes = [
+    { type: 'dna', speed: 0.8, scale: 1.0 },
+    { type: 'dna', speed: 1.2, scale: 0.8 },
+    { type: 'dna', speed: 0.6, scale: 1.2 },
+    { type: 'dna', speed: 0.9, scale: 0.9 },
+  ];
 
-  class Particle {
-    constructor(x, y, z = 50) {
-      this.x = x;
-      this.y = y;
-      this.z = z;
-      this.size = 2.5 + Math.random() * 1.5;
-      this.opacity = 0.7;
-      // Gradient color based on position (yellow → white → blue)
-      this.hue = Math.random();
-    }
-
-    getColor() {
-      // Yellow to white to blue gradient
-      if (this.hue < 0.33) {
-        // Yellow (warm)
-        return {r: 255, g: 220, b: 50};
-      } else if (this.hue < 0.66) {
-        // White
-        return {r: 255, g: 255, b: 255};
-      } else {
-        // Blue
-        return {r: 37, g: 99, b: 235};
-      }
-    }
-
-    draw() {
-      const scale = 0.5 + (this.z / 100) * 0.5;
-      const size = this.size * scale;
-      const color = this.getColor();
-
-      // Glow (outer)
-      ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${this.opacity * 0.2})`;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, size * 2, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Core particle
-      ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${this.opacity})`;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, size, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Bright highlight
-      ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity * 0.6})`;
-      ctx.beginPath();
-      ctx.arc(this.x - size * 0.3, this.y - size * 0.3, size * 0.25, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-
-  class ParticleCluster {
-    constructor(x, y, shapePos = null) {
-      this.x = x;
-      this.y = y;
-      this.z = Math.random() * 100;
-      this.targetX = shapePos ? shapePos.x : x;
-      this.targetY = shapePos ? shapePos.y : y;
-      this.targetZ = this.z;
-      this.particles = [];
-      this.generateCluster();
-      this.opacity = 0.7;
-      this.isInShape = shapePos ? true : false;
-      this.shapeTimer = 0; // Time spent in current shape
-    }
-
-    generateCluster() {
-      // Dense particle cluster (like Dala's style)
-      const clusterSize = 15 + Math.random() * 15;
-      for (let i = 0; i < clusterSize; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const distance = Math.random() * 20;
-        const offsetX = Math.cos(angle) * distance;
-        const offsetY = Math.sin(angle) * distance;
-        
-        this.particles.push(new Particle(offsetX, offsetY, 50 + Math.random() * 50));
-      }
+  class BackgroundElement {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.vx = (Math.random() - 0.5) * 0.2;
+      this.vy = (Math.random() - 0.5) * 0.2;
+      this.life = 1;
+      this.rotation = Math.random() * Math.PI * 2;
+      this.rotationSpeed = (Math.random() - 0.5) * 0.01;
+      this.scale = 0.6 + Math.random() * 0.8;
+      this.baseHeight = 80 + Math.random() * 120;
+      this.type = 'dna';
     }
 
     update() {
-      // Smoothly move toward target (faster)
-      this.x += (this.targetX - this.x) * 0.15;
-      this.y += (this.targetY - this.y) * 0.15;
-      this.z += (this.targetZ - this.z) * 0.15;
+      this.x += this.vx;
+      this.y += this.vy;
+      this.rotation += this.rotationSpeed;
+      this.life -= 0.0003;
 
-      // Z-depth oscillation
-      if (!this.isInShape) {
-        this.z += Math.sin(time * 0.01 + this.x * 0.001) * 0.5;
-      }
+      // Wrap around
+      if (this.x < -100) this.x = canvas.width + 100;
+      if (this.x > canvas.width + 100) this.x = -100;
+      if (this.y < -100) this.y = canvas.height + 100;
+      if (this.y > canvas.height + 100) this.y = -100;
+    }
 
-      // Drift if not in shape
-      if (!this.isInShape) {
-        this.targetY -= 0.5;
-        this.targetX += Math.sin(this.y * 0.01) * 0.3;
-        this.targetZ = 50 + Math.sin(time * 0.005 + this.x * 0.001) * 30;
-      }
+    drawDNA() {
+      const height = this.baseHeight;
+      const turns = 3;
+      
+      ctx.strokeStyle = '#2563eb';
+      ctx.lineWidth = 2;
 
-      // Reset when off screen
-      if (this.y < -100) {
-        this.y = canvas.height + 50;
-        this.targetY = canvas.height + 50;
-        this.x = Math.random() * canvas.width;
-        this.targetX = this.x;
-        this.z = Math.random() * 100;
-        this.targetZ = this.z;
-        this.generateCluster();
+      // Left strand
+      ctx.beginPath();
+      for (let i = 0; i <= 100; i++) {
+        const progress = i / 100;
+        const angle = progress * Math.PI * 2 * turns;
+        const x = Math.cos(angle) * 15 * this.scale;
+        const y = progress * height - height * 0.5;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
       }
+      ctx.stroke();
+
+      // Right strand
+      ctx.beginPath();
+      for (let i = 0; i <= 100; i++) {
+        const progress = i / 100;
+        const angle = progress * Math.PI * 2 * turns + Math.PI;
+        const x = Math.cos(angle) * 15 * this.scale;
+        const y = progress * height - height * 0.5;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+
+      // Base pairs
+      ctx.lineWidth = 1;
+      for (let i = 0; i <= 100; i += 5) {
+        const progress = i / 100;
+        const angle = progress * Math.PI * 2 * turns;
+        const x1 = Math.cos(angle) * 15 * this.scale;
+        const y = progress * height - height * 0.5;
+        const angle2 = angle + Math.PI;
+        const x2 = Math.cos(angle2) * 15 * this.scale;
+        ctx.beginPath();
+        ctx.moveTo(x1, y);
+        ctx.lineTo(x2, y);
+        ctx.stroke();
+      }
+    }
+
+    drawCircle() {
+      ctx.strokeStyle = '#2563eb';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.arc(0, 0, this.baseHeight * 0.4, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    drawHelix() {
+      ctx.strokeStyle = '#2563eb';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let i = 0; i < 80; i++) {
+        const angle = (i / 80) * Math.PI * 6;
+        const radius = (i / 80) * this.baseHeight * 0.3;
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius - this.baseHeight * 0.15;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
+
+    drawSpiral() {
+      ctx.strokeStyle = '#2563eb';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let i = 0; i < 100; i++) {
+        const angle = (i / 100) * Math.PI * 8;
+        const radius = (i / 100) * this.baseHeight * 0.4;
+        const x = Math.cos(angle) * radius;
+        const y = Math.sin(angle) * radius;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
     }
 
     draw() {
-      // Draw all particles in cluster
-      this.particles.forEach(p => {
-        p.opacity = this.opacity;
-        p.z = this.z;
-        const absX = this.x + p.x;
-        const absY = this.y + p.y;
-        
-        const scale = 0.5 + (p.z / 100) * 0.5;
-        const size = p.size * scale;
-        const color = p.getColor();
+      ctx.save();
+      ctx.globalAlpha = this.life * 0.5;
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rotation);
+      ctx.scale(this.scale, this.scale);
 
-        // Glow
-        ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${p.opacity * 0.2})`;
-        ctx.beginPath();
-        ctx.arc(absX, absY, size * 2, 0, Math.PI * 2);
-        ctx.fill();
+      if (this.type === 'dna') {
+        this.drawDNA();
+      } else if (this.type === 'circle') {
+        this.drawCircle();
+      } else if (this.type === 'helix') {
+        this.drawHelix();
+      } else if (this.type === 'spiral') {
+        this.drawSpiral();
+      }
 
-        // Core
-        ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${p.opacity})`;
-        ctx.beginPath();
-        ctx.arc(absX, absY, size, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Highlight
-        ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity * 0.5})`;
-        ctx.beginPath();
-        ctx.arc(absX - size * 0.3, absY - size * 0.3, size * 0.25, 0, Math.PI * 2);
-        ctx.fill();
-      });
+      ctx.restore();
     }
   }
 
-  // Shape position functions
-  function getDumbbellPositions(count, centerX, centerY) {
-    const positions = [];
-    const barbell = [
-      // Left weight (circle of orbs)
-      ...Array.from({length: 35}, (_, i) => {
-        const angle = (i / 35) * Math.PI * 2;
-        return {
-          x: centerX - 150 + Math.cos(angle) * 50,
-          y: centerY + Math.sin(angle) * 50
-        };
-      }),
-      // Bar (line of orbs)
-      ...Array.from({length: 50}, (_, i) => ({
-        x: centerX - 100 + (i / 50) * 200,
-        y: centerY
-      })),
-      // Right weight (circle of orbs)
-      ...Array.from({length: 35}, (_, i) => {
-        const angle = (i / 35) * Math.PI * 2;
-        return {
-          x: centerX + 150 + Math.cos(angle) * 50,
-          y: centerY + Math.sin(angle) * 50
-        };
-      })
-    ];
-    return positions.slice(0, count);
-  }
-
-  function getLightningPositions(count, centerX, centerY) {
-    const positions = [];
-    const points = [
-      {x: centerX, y: centerY - 200},
-      {x: centerX - 80, y: centerY - 100},
-      {x: centerX + 60, y: centerY + 0},
-      {x: centerX - 50, y: centerY + 100},
-      {x: centerX, y: centerY + 200}
-    ];
-
-    // Create zigzag line with more orbs
-    let currentPos = 0;
-    for (let i = 0; i < points.length - 1; i++) {
-      const p1 = points[i];
-      const p2 = points[i + 1];
-      const dist = Math.hypot(p2.x - p1.x, p2.y - p1.y);
-      const steps = Math.ceil(dist / 5);
-
-      for (let j = 0; j < steps && currentPos < count; j++) {
-        const t = j / steps;
-        positions.push({
-          x: p1.x + (p2.x - p1.x) * t,
-          y: p1.y + (p2.y - p1.y) * t
-        });
-        currentPos++;
+  let elements = [];
+  function initElements() {
+    elements = [];
+    // Mix of DNA strands and other structures
+    for (let i = 0; i < 20; i++) {
+      elements.push(new DNAStrand());
+    }
+    // Add other geometric shapes
+    for (let i = 0; i < 15; i++) {
+      const rand = Math.random();
+      if (rand < 0.33) {
+        elements.push(createCircle());
+      } else if (rand < 0.66) {
+        elements.push(createHelix());
+      } else {
+        elements.push(createSpiral());
       }
     }
-
-    return positions.slice(0, count);
   }
 
-  function getSpiralPositions(count, centerX, centerY) {
-    const positions = [];
-    for (let i = 0; i < count; i++) {
-      const angle = (i / count) * Math.PI * 6; // 3 full rotations
-      const radius = (i / count) * 150;
-      positions.push({
-        x: centerX + Math.cos(angle) * radius,
-        y: centerY + Math.sin(angle) * radius
-      });
-    }
-    return positions;
+  function createCircle() {
+    const el = new BackgroundElement();
+    el.type = 'circle';
+    return el;
   }
 
-  function getCubePositions(count, centerX, centerY) {
-    const positions = [];
-    const size = 120;
-    
-    // Cube edges
-    const edges = [
-      // Front face
-      [{x: -size, y: -size}, {x: size, y: -size}],
-      [{x: size, y: -size}, {x: size, y: size}],
-      [{x: size, y: size}, {x: -size, y: size}],
-      [{x: -size, y: size}, {x: -size, y: -size}],
-      // Back face (perspective)
-      [{x: -size * 0.7, y: -size * 0.7}, {x: size * 0.7, y: -size * 0.7}],
-      [{x: size * 0.7, y: -size * 0.7}, {x: size * 0.7, y: size * 0.7}],
-      [{x: size * 0.7, y: size * 0.7}, {x: -size * 0.7, y: size * 0.7}],
-      [{x: -size * 0.7, y: size * 0.7}, {x: -size * 0.7, y: -size * 0.7}],
-      // Connecting edges
-      [{x: -size, y: -size}, {x: -size * 0.7, y: -size * 0.7}],
-      [{x: size, y: -size}, {x: size * 0.7, y: -size * 0.7}],
-      [{x: size, y: size}, {x: size * 0.7, y: size * 0.7}],
-      [{x: -size, y: size}, {x: -size * 0.7, y: size * 0.7}]
-    ];
-
-    let idx = 0;
-    edges.forEach(edge => {
-      const steps = Math.ceil(count / edges.length);
-      for (let i = 0; i < steps && idx < count; i++) {
-        const t = i / steps;
-        const rotAngle = time * 0.01;
-        const x = edge[0].x + (edge[1].x - edge[0].x) * t;
-        const y = edge[0].y + (edge[1].y - edge[0].y) * t;
-        
-        // Apply 3D rotation
-        const rotX = x * Math.cos(rotAngle) - y * Math.sin(rotAngle);
-        const rotY = x * Math.sin(rotAngle) + y * Math.cos(rotAngle);
-        
-        positions.push({
-          x: centerX + rotX,
-          y: centerY + rotY
-        });
-        idx++;
-      }
-    });
-
-    return positions.slice(0, count);
+  function createHelix() {
+    const el = new BackgroundElement();
+    el.type = 'helix';
+    return el;
   }
 
-  function getOctahedronPositions(count, centerX, centerY) {
-    const positions = [];
-    const size = 140;
-    
-    // Octahedron edges (two pyramids base-to-base)
-    const edges = [
-      // Top pyramid
-      [{x: 0, y: -size}, {x: size, y: 0}],
-      [{x: size, y: 0}, {x: 0, y: size}],
-      [{x: 0, y: size}, {x: -size, y: 0}],
-      [{x: -size, y: 0}, {x: 0, y: -size}],
-      // Bottom pyramid (perspective)
-      [{x: 0, y: -size * 0.6}, {x: size * 0.6, y: 0}],
-      [{x: size * 0.6, y: 0}, {x: 0, y: size * 0.6}],
-      [{x: 0, y: size * 0.6}, {x: -size * 0.6, y: 0}],
-      [{x: -size * 0.6, y: 0}, {x: 0, y: -size * 0.6}],
-      // Vertical connections
-      [{x: size, y: 0}, {x: size * 0.6, y: 0}],
-      [{x: 0, y: size}, {x: 0, y: size * 0.6}],
-      [{x: -size, y: 0}, {x: -size * 0.6, y: 0}],
-      [{x: 0, y: -size}, {x: 0, y: -size * 0.6}]
-    ];
-
-    let idx = 0;
-    edges.forEach(edge => {
-      const steps = Math.ceil(count / edges.length);
-      for (let i = 0; i < steps && idx < count; i++) {
-        const t = i / steps;
-        const rotAngle = time * 0.01;
-        const x = edge[0].x + (edge[1].x - edge[0].x) * t;
-        const y = edge[0].y + (edge[1].y - edge[0].y) * t;
-        
-        // Apply rotation
-        const rotX = x * Math.cos(rotAngle) - y * Math.sin(rotAngle);
-        const rotY = x * Math.sin(rotAngle) + y * Math.cos(rotAngle);
-        
-        positions.push({
-          x: centerX + rotX,
-          y: centerY + rotY
-        });
-        idx++;
-      }
-    });
-
-    return positions.slice(0, count);
-  }
-
-  function getIcosahedronPositions(count, centerX, centerY) {
-    const positions = [];
-    const size = 130;
-    const phi = (1 + Math.sqrt(5)) / 2;
-    
-    // Icosahedron wireframe (simplified for 2D)
-    const edges = [
-      [{x: -100, y: -100}, {x: 100, y: -100}],
-      [{x: 100, y: -100}, {x: 100, y: 100}],
-      [{x: 100, y: 100}, {x: -100, y: 100}],
-      [{x: -100, y: 100}, {x: -100, y: -100}],
-      [{x: 0, y: -130}, {x: 100, y: -100}],
-      [{x: 0, y: -130}, {x: -100, y: -100}],
-      [{x: 0, y: 130}, {x: 100, y: 100}],
-      [{x: 0, y: 130}, {x: -100, y: 100}],
-      [{x: 130, y: 0}, {x: 100, y: -100}],
-      [{x: 130, y: 0}, {x: 100, y: 100}],
-      [{x: -130, y: 0}, {x: -100, y: -100}],
-      [{x: -130, y: 0}, {x: -100, y: 100}],
-    ];
-
-    let idx = 0;
-    edges.forEach(edge => {
-      const steps = Math.ceil(count / edges.length);
-      for (let i = 0; i < steps && idx < count; i++) {
-        const t = i / steps;
-        const rotAngle = time * 0.01;
-        const x = edge[0].x + (edge[1].x - edge[0].x) * t;
-        const y = edge[0].y + (edge[1].y - edge[0].y) * t;
-        
-        // Apply rotation
-        const rotX = x * Math.cos(rotAngle) - y * Math.sin(rotAngle);
-        const rotY = x * Math.sin(rotAngle) + y * Math.cos(rotAngle);
-        
-        positions.push({
-          x: centerX + rotX,
-          y: centerY + rotY
-        });
-        idx++;
-      }
-    });
-
-    return positions.slice(0, count);
-  }
-
-  function getShapePositions(shapeName, count, centerX, centerY) {
-    switch(shapeName) {
-      case 'dumbbell': return getDumbbellPositions(count, centerX, centerY);
-      case 'lightning': return getLightningPositions(count, centerX, centerY);
-      case 'cube': return getCubePositions(count, centerX, centerY);
-      case 'octahedron': return getOctahedronPositions(count, centerX, centerY);
-      case 'icosahedron': return getIcosahedronPositions(count, centerX, centerY);
-      default: return [];
-    }
-  }
-
-  function initParticles() {
-    particles = [];
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-    const shapePositions = getShapePositions(shapes[currentShape], 120, centerX, centerY);
-    
-    for (let i = 0; i < 120; i++) {
-      particles.push(new ParticleCluster(shapePositions[i].x, shapePositions[i].y, shapePositions[i]));
-    }
+  function createSpiral() {
+    const el = new BackgroundElement();
+    el.type = 'spiral';
+    return el;
   }
 
   function animate() {
-    time++;
-    shapeTimer++;
-
-    // Change shape periodically
-    if (shapeTimer > shapeChangeInterval) {
-      currentShape = (currentShape + 1) % shapes.length;
-      shapeTimer = 0;
-    }
-
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Calculate shape positions
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-    const shapePositions = getShapePositions(shapes[currentShape], particles.length, centerX, centerY);
+    elements.forEach((el, i) => {
+      el.update();
+      el.draw();
 
-    // Update molecules
-    particles.forEach((mol, i) => {
-      mol.shapeTimer++;
-      
-      // Hold shape for 100 frames, then drift
-      if (mol.shapeTimer < 100 && shapePositions[i]) {
-        mol.targetX = shapePositions[i].x;
-        mol.targetY = shapePositions[i].y;
-        mol.isInShape = true;
-      } else {
-        mol.isInShape = false;
-        // Let it drift upward
-        mol.targetY -= 0.5;
-        mol.targetX += Math.sin(mol.y * 0.01) * 0.3;
+      // Regenerate old elements
+      if (el.life < 0) {
+        elements[i] = new BackgroundElement();
       }
-
-      mol.update();
-      mol.draw();
     });
-    
-    // When shape timer hits transition point, change shape
-    if (shapeTimer === shapeChangeInterval - 100) {
-      currentShape = (currentShape + 1) % shapes.length;
-      // Reset all particles to new shape immediately
-      particles.forEach((mol, i) => {
-        mol.shapeTimer = 0;
-      });
-    }
 
     requestAnimationFrame(animate);
   }
@@ -754,7 +519,7 @@
     canvas.height = window.innerHeight;
   });
 
-  initParticles();
+  initElements();
   animate();
 </script>
 
