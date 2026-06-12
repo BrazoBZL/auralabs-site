@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aura Labs – Pharmaceutical-Grade Compounds</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --void:        #08080c;
+      --deep:        #0d0d14;
+      --surface:     #13131c;
+      --border:      #1e1e2e;
+      --muted:       #3a3a52;
+      --white:       #f0f0f8;
+      --silver:      #a0a0b8;
+      --ghost:       #6b6b8a;
+      --blue:        #2563eb;
+      --blue-dim:    #1a3a8f;
+      --blue-glow:   rgba(37,99,235,0.06);
+      --gold:        #c8a96e;
+      --font-heading: 'EB Garamond', serif;
+      --font-body:    'Inter', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--void);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* NAVIGATION */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+      transition: background 300ms, border-bottom 300ms;
+      border-bottom: 1px solid transparent;
+    }
+
+    nav.scrolled {
+      background: rgba(8, 8, 12, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom-color: var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-center {
+      display: flex;
+      gap: 40px;
+    }
+
+    .nav-center a {
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ghost);
+      text-decoration: none;
+      transition: color 200ms;
+    }
+
+    .nav-center a:hover {
+      color: var(--white);
+    }
+
+    .nav-cart {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 8px 18px;
+      border: 1px solid var(--border);
+      color: var(--ghost);
+      background: transparent;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      height: 100vh;
+      background: var(--void);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, var(--blue-glow) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      padding-top: 55vh;
+      opacity: 0;
+      animation: fadeIn 400ms linear forwards;
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(52px, 7vw, 88px);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.0;
+      color: var(--white);
+      max-width: 780px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+    }
+
+    .hero-subtext {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: -0.009em;
+      line-height: 1.8;
+      color: var(--ghost);
+      margin-top: 28px;
+      max-width: 460px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      align-items: center;
+      margin-top: 40px;
+    }
+
+    .btn-primary {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 150ms;
+    }
+
+    .btn-primary:hover {
+      background: var(--blue-dim);
+    }
+
+    .btn-secondary {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ghost);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 200ms;
+    }
+
+    .btn-secondary:hover {
+      color: var(--white);
+    }
+
+    /* STANDARDS SECTION */
+    .standards {
+      background: var(--deep);
+      padding: 100px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .standards-grid {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 80px;
+    }
+
+    .standards-left h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 3.5vw, 48px);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--white);
+    }
+
+    .standards-items {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .standards-item {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+
+    .standards-item:first-child {
+      margin-top: 0;
+    }
+
+    .standards-item-label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .standards-item-body {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--ghost);
+    }
+
+    /* COMPOUNDS SECTION */
+    .compounds {
+      background: var(--void);
+      padding-bottom: 100px;
+    }
+
+    .compounds-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-bottom: 20px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .compounds-title {
+      font-family: var(--font-heading);
+      font-size: 40px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--white);
+    }
+
+    #compound-count {
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ghost);
+    }
+
+    .filter-controls {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      border: 1px solid var(--border);
+      color: var(--ghost);
+      background: transparent;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 150ms;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .filter-btn.active {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    #compounds-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .compound-card {
+      background: var(--surface);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .compound-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .compound-category {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .compound-purity-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--ghost);
+    }
+
+    .compound-name {
+      font-family: var(--font-heading);
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--white);
+      margin-top: 16px;
+      margin-bottom: 6px;
+      line-height: 1.1;
+    }
+
+    .compound-dose {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--ghost);
+      margin-bottom: 20px;
+    }
+
+    .compound-purity-row {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-body);
+      font-size: 10px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .compound-purity-track {
+      height: 2px;
+      background: var(--border);
+      border-radius: 0;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .compound-purity-fill {
+      height: 100%;
+      background: var(--blue);
+    }
+
+    .compound-acquire {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--blue);
+      color: var(--blue);
+      background: transparent;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 150ms;
+    }
+
+    .compound-acquire:hover {
+      background: var(--blue);
+      color: white;
+    }
+
+    /* ACCESS SECTION */
+    .access {
+      background: var(--deep);
+      padding: 100px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .access-headline {
+      font-family: var(--font-heading);
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 56px;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: row;
+      gap: 48px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .step-number {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+
+    .step-name {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .step-description {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--ghost);
+      max-width: 240px;
+    }
+
+    .access-cta {
+      display: block;
+      text-align: center;
+    }
+
+    .btn-begin {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 14px 40px;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 150ms;
+    }
+
+    .btn-begin:hover {
+      background: var(--blue-dim);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--void);
+      padding: 52px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-logo {
+      font-family: var(--font-heading);
+      font-size: 17px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ghost);
+    }
+
+    .footer-disclaimer {
+      font-family: var(--font-body);
+      font-size: 11px;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 360px;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-family: var(--font-body);
+      font-size: 11px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--ghost);
+      text-decoration: none;
+      transition: color 200ms;
+    }
+
+    .footer-links a:hover {
+      color: var(--silver);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-center {
+        display: none;
+      }
+
+      .standards-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .steps {
+        gap: 36px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #compounds-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .standards,
+      .access {
+        padding: 60px 0;
+      }
+
+      nav {
+        padding: 16px 24px;
+      }
+
+      .container {
+        padding: 0 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Aura Labs</a>
+  <div class="nav-center">
+    <a href="#">Home</a>
+    <a href="#compounds">Compounds</a>
+    <a href="#standards">Methodology</a>
+  </div>
+  <button class="nav-cart">Cart (0)</button>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-content">
+      <h1>We offer what we're<br><em>certain of.</em></h1>
+      <p class="hero-subtext">Pharmaceutical-grade compounds. Verified purity. Documented sourcing. For researchers who require precision.</p>
+      <div class="hero-ctas">
+        <button class="btn-primary" onclick="scrollTo('#compounds')">View Compounds</button>
+        <button class="btn-secondary" onclick="scrollTo('#standards')">Methodology</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STANDARDS SECTION -->
+<section class="standards" id="standards">
+  <div class="container">
+    <div class="standards-grid">
+      <div class="standards-left">
+        <h2>Built on<br>verifiable<br>methodology.</h2>
+      </div>
+      <div class="standards-right">
+        <div class="standards-items">
+          <div class="standards-item">
+            <label class="standards-item-label">Purity</label>
+            <p class="standards-item-body">Every batch tested by independent third-party laboratory. Purity verified by HPLC. Certificate of analysis available on request.</p>
+          </div>
+          <div class="standards-item">
+            <label class="standards-item-label">Sourcing</label>
+            <p class="standards-item-body">Supply chain documented from synthesis to delivery. Synthesis parameters on record. No unverified intermediaries.</p>
+          </div>
+          <div class="standards-item">
+            <label class="standards-item-label">Selection</label>
+            <p class="standards-item-body">We carry only what meets the standard. The compounds we do not carry are as deliberate as the ones we do.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPOUND LIBRARY SECTION -->
+<section class="compounds" id="compounds">
+  <div class="container">
+    <div class="compounds-header">
+      <h2 class="compounds-title">Compound Library</h2>
+      <span id="compound-count"></span>
+    </div>
+    <div class="filter-controls" id="filters"></div>
+    <div id="compounds-grid"></div>
+  </div>
+</section>
+
+<!-- ACCESS SECTION -->
+<section class="access" id="access">
+  <div class="container">
+    <h2 class="access-headline">Researcher Access</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="step-number">Step 01</span>
+        <h3 class="step-name">Select</h3>
+        <p class="step-description">Identify the compound and specification that meets your research requirements.</p>
+      </div>
+      <div class="step">
+        <span class="step-number">Step 02</span>
+        <h3 class="step-name">Request</h3>
+        <p class="step-description">Submit your research order. Documentation on file. Orders processed within 48 hours.</p>
+      </div>
+      <div class="step">
+        <span class="step-number">Step 03</span>
+        <h3 class="step-name">Receive</h3>
+        <p class="step-description">Compound delivered with certificate of analysis. Lot number traceable. Chain complete.</p>
+      </div>
+    </div>
+    <div class="access-cta">
+      <button class="btn-begin" onclick="scrollTo('#compounds')">Begin</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-logo">Aura Labs</div>
+      <p class="footer-disclaimer">For research use only. Not for human consumption. All compounds sold strictly for laboratory and research purposes.</p>
+      <div class="footer-links">
+        <a href="#">Documentation</a>
+        <a href="#">Compliance</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const compounds = [
+    { name:'Semaglutide',   dose:'5mg',    purity:98.5, category:'Weight Loss' },
+    { name:'Tirzepatide',   dose:'10mg',   purity:99.2, category:'Weight Loss' },
+    { name:'Retatrutide',   dose:'2mg',    purity:98.8, category:'Weight Loss' },
+    { name:'Ipamorelin',    dose:'5mg',    purity:99.1, category:'HGH'         },
+    { name:'CJC-1295',      dose:'2mg',    purity:98.9, category:'HGH'         },
+    { name:'Sermorelin',    dose:'5mg',    purity:99.2, category:'HGH'         },
+    { name:'MK-677',        dose:'25mg',   purity:99.4, category:'HGH'         },
+    { name:'GHRP-6',        dose:'5mg',    purity:98.9, category:'HGH'         },
+    { name:'BPC-157',       dose:'5mg',    purity:99.2, category:'Healing'     },
+    { name:'TB-500',        dose:'2mg',    purity:98.7, category:'Healing'     },
+    { name:'GHK-Cu',        dose:'5mg',    purity:99.3, category:'Healing'     },
+    { name:'KPV',           dose:'10mg',   purity:99.0, category:'Healing'     },
+    { name:'Semax',         dose:'500mcg', purity:99.1, category:'Cognitive'   },
+    { name:'Selank',        dose:'5mg',    purity:99.0, category:'Cognitive'   },
+    { name:'NAD+',          dose:'500mg',  purity:99.8, category:'Specialty'   },
+    { name:'Epithalon',     dose:'10mg',   purity:98.5, category:'Specialty'   },
+    { name:'FOXO4-DRI',     dose:'10mg',   purity:98.2, category:'Specialty'   },
+    { name:'Hexarelin',     dose:'2mg',    purity:98.6, category:'HGH'         },
+    { name:'GHRP-2',        dose:'5mg',    purity:99.0, category:'HGH'         },
+    { name:'AOD-9604',      dose:'5mg',    purity:99.1, category:'Weight Loss' },
+  ];
+
+  let currentFilter = 'All';
+
+  function renderCompounds(filter = 'All') {
+    const grid = document.getElementById('compounds-grid');
+    grid.innerHTML = '';
+
+    const filtered = filter === 'All' 
+      ? compounds 
+      : compounds.filter(c => c.category === filter);
+
+    document.getElementById('compound-count').textContent = `${filtered.length} compounds`;
+
+    filtered.forEach(compound => {
+      const card = document.createElement('div');
+      card.className = 'compound-card';
+      card.innerHTML = `
+        <div class="compound-card-top">
+          <span class="compound-category">${compound.category}</span>
+          <span class="compound-purity-label">${compound.purity}% HPLC</span>
+        </div>
+        <h3 class="compound-name">${compound.name}</h3>
+        <p class="compound-dose">${compound.dose}</p>
+        <div class="compound-purity-row">
+          <span>Purity</span>
+          <span>${compound.purity}%</span>
+        </div>
+        <div class="compound-purity-track">
+          <div class="compound-purity-fill" style="width: ${compound.purity}%"></div>
+        </div>
+        <button class="compound-acquire">Acquire</button>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function renderFilters() {
+    const filtersContainer = document.getElementById('filters');
+    const categories = ['All', 'Weight Loss', 'Healing', 'HGH', 'Cognitive', 'Specialty'];
+    
+    categories.forEach(cat => {
+      const btn = document.createElement('button');
+      btn.className = 'filter-btn';
+      if (cat === 'All') btn.classList.add('active');
+      btn.textContent = cat;
+      btn.onclick = () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = cat;
+        renderCompounds(cat);
+      };
+      filtersContainer.appendChild(btn);
+    });
+  }
+
+  function scrollTo(id) {
+    const element = document.querySelector(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 60) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+
+  // Initialize on load
+  document.addEventListener('DOMContentLoaded', () => {
+    renderFilters();
+    renderCompounds();
+  });
+</script>
+
+</body>
+</html>
