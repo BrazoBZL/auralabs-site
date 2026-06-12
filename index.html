@@ -5,304 +5,391 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aura Labs — Research-Grade Peptides</title>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
   <style>
     :root {
-      --black:   #08080c;
-      --deep:    #0d0d14;
-      --surface: #13131c;
-      --border:  #1e1e2e;
-      --muted:   #3a3a52;
-      --ghost:   #6b6b8a;
-      --silver:  #a0a0b8;
-      --white:   #f0f0f8;
-      --blue:    #2563eb;
-      --blue-dim:#1a3a8f;
-      --blue-glow: rgba(37,99,235,0.15);
-      --gold:    #c9a84c;
+      --white:  #ffffff;
+      --off:    #f8f8f6;
+      --light:  #f0f0ec;
+      --ink:    #0e0e12;
+      --deep:   #13131a;
+      --border-light: #e0e0da;
+      --border-dark:  #1e1e28;
+      --ghost:  #888880;
+      --silver: #555550;
+      --blue:   #2563eb;
+      --blue-light: #dbeafe;
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--black);
-      color: var(--white);
       font-family: 'Inter', sans-serif;
       font-size: 14px;
       line-height: 1.6;
+      background: var(--white);
+      color: var(--ink);
       overflow-x: hidden;
     }
 
-    /* ─── CANVAS ────────────────────────────────────── */
-    #bg-canvas {
-      position: fixed;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ─── NAV ──────────────────────────────────────── */
+    /* ── NAV ─────────────────────────────────── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 200;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 24px 48px;
-      border-bottom: 1px solid transparent;
-      transition: all 0.4s ease;
+      transition: all 0.4s;
     }
 
-    nav.scrolled {
-      background: rgba(8,8,12,0.92);
-      backdrop-filter: blur(20px);
-      border-color: var(--border);
+    nav.light {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-light);
     }
 
-    .nav-logo {
+    nav.dark {
+      background: rgba(14,14,18,0.0);
+    }
+
+    nav.dark.scrolled {
+      background: rgba(14,14,18,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .logo {
       font-family: 'EB Garamond', serif;
       font-size: 20px;
-      letter-spacing: 0.08em;
-      color: var(--white);
+      letter-spacing: 0.06em;
       text-transform: uppercase;
     }
 
-    .nav-logo span {
-      color: var(--blue);
-    }
+    nav.dark .logo { color: #f0f0ec; }
+    nav.light .logo { color: var(--ink); }
 
     .nav-links {
       display: flex;
-      gap: 40px;
+      gap: 36px;
       list-style: none;
     }
 
     .nav-links a {
-      color: var(--ghost);
-      text-decoration: none;
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover { color: var(--white); }
-
-    .nav-cart {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 20px;
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      cursor: pointer;
-      background: transparent;
-      color: var(--silver);
-      font-family: 'Inter', sans-serif;
       font-size: 12px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    nav.dark  .nav-links a { color: #6b6b82; }
+    nav.light .nav-links a { color: var(--ghost); }
+    nav.dark  .nav-links a:hover { color: #f0f0ec; }
+    nav.light .nav-links a:hover { color: var(--ink); }
+
+    .nav-cta {
+      padding: 9px 22px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
       transition: all 0.3s;
     }
 
-    .nav-cart:hover {
-      border-color: var(--blue);
-      color: var(--white);
-    }
+    nav.dark  .nav-cta { background: transparent; border: 1px solid #2a2a38; color: #6b6b82; }
+    nav.light .nav-cta { background: var(--blue); border: 1px solid var(--blue); color: white; }
+    nav.dark  .nav-cta:hover { border-color: var(--blue); color: var(--blue); }
+    nav.light .nav-cta:hover { background: #1d4ed8; }
 
-    .cart-count {
-      background: var(--blue);
-      color: white;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      font-weight: 500;
-    }
-
-    /* ─── HERO ──────────────────────────────────────── */
+    /* ── HERO (dark) ─────────────────────────── */
     .hero {
       position: relative;
-      z-index: 1;
-      height: 100vh;
+      background: var(--ink);
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 0 40px;
+      padding: 120px 40px 80px;
+      overflow: hidden;
     }
 
+    /* Canvas lives inside hero */
+    #bg-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
     .hero-eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.25em;
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--blue);
-      margin-bottom: 32px;
+      border: 1px solid rgba(37,99,235,0.3);
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 40px;
       opacity: 0;
       animation: fadeUp 0.8s 0.3s forwards;
     }
 
     .hero h1 {
       font-family: 'EB Garamond', serif;
-      font-size: clamp(52px, 7vw, 96px);
+      font-size: clamp(52px, 7vw, 92px);
       font-weight: 400;
       line-height: 1.05;
       letter-spacing: -0.02em;
-      color: var(--white);
-      max-width: 900px;
+      color: #f0f0ec;
+      margin-bottom: 28px;
       opacity: 0;
       animation: fadeUp 0.8s 0.5s forwards;
     }
 
     .hero h1 em {
       font-style: italic;
-      color: var(--silver);
+      color: #888880;
     }
 
     .hero-sub {
-      margin-top: 32px;
-      font-size: 15px;
-      color: var(--ghost);
-      max-width: 520px;
+      font-size: 16px;
+      color: #555558;
+      max-width: 480px;
       line-height: 1.8;
+      margin: 0 auto 48px;
       opacity: 0;
       animation: fadeUp 0.8s 0.7s forwards;
     }
 
     .hero-actions {
-      margin-top: 48px;
       display: flex;
-      gap: 16px;
+      gap: 12px;
+      justify-content: center;
       opacity: 0;
       animation: fadeUp 0.8s 0.9s forwards;
     }
 
-    .btn-primary {
+    .btn-blue {
       padding: 14px 36px;
       background: var(--blue);
       color: white;
       border: none;
-      cursor: pointer;
       font-family: 'Inter', sans-serif;
       font-size: 12px;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      transition: all 0.3s;
+      cursor: pointer;
       border-radius: 2px;
+      transition: all 0.3s;
     }
 
-    .btn-primary:hover {
+    .btn-blue:hover {
       background: #1d4ed8;
       transform: translateY(-2px);
       box-shadow: 0 8px 32px rgba(37,99,235,0.4);
     }
 
-    .btn-ghost {
+    .btn-outline-light {
       padding: 14px 36px;
       background: transparent;
-      color: var(--silver);
-      border: 1px solid var(--border);
-      cursor: pointer;
+      color: #888880;
+      border: 1px solid #2a2a38;
       font-family: 'Inter', sans-serif;
       font-size: 12px;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      transition: all 0.3s;
+      cursor: pointer;
       border-radius: 2px;
+      transition: all 0.3s;
     }
 
-    .btn-ghost:hover {
-      border-color: var(--silver);
-      color: var(--white);
+    .btn-outline-light:hover {
+      border-color: #888880;
+      color: #f0f0ec;
     }
 
-    .hero-scroll {
-      position: absolute;
-      bottom: 40px;
+    /* Hero stats strip */
+    .hero-stats {
+      position: relative;
+      z-index: 1;
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
+      gap: 0;
+      margin-top: 80px;
+      border-top: 1px solid #1e1e28;
+      width: 100%;
+      max-width: 700px;
+      opacity: 0;
+      animation: fadeUp 0.8s 1.1s forwards;
+    }
+
+    .stat {
+      flex: 1;
+      padding: 32px 24px;
+      border-right: 1px solid #1e1e28;
+      text-align: center;
+    }
+
+    .stat:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: 'EB Garamond', serif;
+      font-size: 36px;
+      font-weight: 400;
+      color: #f0f0ec;
+      letter-spacing: -0.02em;
+    }
+
+    .stat-label {
       font-size: 10px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--muted);
-      opacity: 0;
-      animation: fadeUp 0.8s 1.2s forwards;
+      color: #555558;
+      margin-top: 4px;
     }
 
-    .scroll-line {
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(to bottom, var(--muted), transparent);
-      animation: scrollPulse 2s infinite;
+    /* ── LIGHT DIVIDER ───────────────────────── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-light), transparent);
     }
 
-    /* ─── STANDARDS ────────────────────────────────── */
+    /* ── STANDARDS (light) ───────────────────── */
     .standards {
-      position: relative;
-      z-index: 1;
-      padding: 120px 48px;
-      border-top: 1px solid var(--border);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      max-width: 1200px;
+      background: var(--white);
+      padding: 100px 48px;
+    }
+
+    .standards-inner {
+      max-width: 1100px;
       margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .standards-label {
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 20px;
     }
 
     .standards-headline {
       font-family: 'EB Garamond', serif;
-      font-size: clamp(36px, 4vw, 56px);
+      font-size: clamp(36px, 4vw, 52px);
       font-weight: 400;
       line-height: 1.15;
       letter-spacing: -0.02em;
+      color: var(--ink);
+      position: sticky;
+      top: 100px;
     }
 
     .standards-headline em {
       font-style: italic;
-      color: var(--silver);
+      color: var(--ghost);
     }
 
     .standards-items {
       display: flex;
       flex-direction: column;
-      gap: 40px;
+      gap: 0;
     }
 
     .standard-item {
-      border-top: 1px solid var(--border);
-      padding-top: 24px;
+      padding: 36px 0;
+      border-top: 1px solid var(--border-light);
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 32px;
     }
 
-    .standard-label {
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 12px;
+    .standard-item:last-child {
+      border-bottom: 1px solid var(--border-light);
     }
 
-    .standard-text {
+    .standard-num {
+      font-family: 'EB Garamond', serif;
+      font-size: 13px;
       color: var(--ghost);
+    }
+
+    .standard-content h3 {
+      font-family: 'EB Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .standard-content p {
       font-size: 14px;
+      color: var(--ghost);
       line-height: 1.8;
     }
 
-    /* ─── COMPOUNDS ────────────────────────────────── */
+    /* ── COMPOUNDS (off-white) ───────────────── */
     .compounds-section {
-      position: relative;
-      z-index: 1;
-      padding: 0 48px 120px;
+      background: var(--off);
+      padding: 100px 48px;
+    }
+
+    .featured-banner {
+      background: rgba(37, 99, 235, 0.05);
+      border: 1px solid rgba(37, 99, 235, 0.2);
+      padding: 20px 24px;
+      border-radius: 4px;
+      margin-bottom: 48px;
+      text-align: center;
+    }
+
+    .featured-banner p {
+      font-size: 13px;
+      color: var(--ink);
+      letter-spacing: 0.05em;
+      line-height: 1.6;
+    }
+
+    .featured-banner strong {
+      color: var(--blue);
+      font-weight: 500;
+    }
+
+    .category-header {
+      margin-top: 56px;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .category-header:first-of-type {
+      margin-top: 0;
+    }
+
+    .category-title {
+      font-family: 'EB Garamond', serif;
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      text-transform: uppercase;
+      font-variant: small-caps;
+      letter-spacing: 0.08em;
+    }
+
+    .compounds-inner {
       max-width: 1200px;
       margin: 0 auto;
     }
@@ -311,9 +398,9 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      margin-bottom: 48px;
+      margin-bottom: 40px;
       padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border-light);
     }
 
     .section-title {
@@ -321,142 +408,125 @@
       font-size: 42px;
       font-weight: 400;
       letter-spacing: -0.02em;
+      color: var(--ink);
     }
 
-    .section-count {
+    .section-meta {
       font-size: 11px;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--ghost);
     }
 
-    /* Search + Filter */
+    /* Controls */
     .controls {
       display: flex;
-      gap: 12px;
-      margin-bottom: 40px;
+      gap: 8px;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
       align-items: center;
     }
 
     .search-input {
-      flex: 1;
-      max-width: 300px;
       padding: 10px 16px;
-      background: var(--surface);
-      border: 1px solid var(--border);
+      background: var(--white);
+      border: 1px solid var(--border-light);
       border-radius: 2px;
-      color: var(--white);
       font-family: 'Inter', sans-serif;
       font-size: 13px;
+      color: var(--ink);
       outline: none;
+      min-width: 220px;
       transition: border-color 0.3s;
     }
 
-    .search-input::placeholder { color: var(--muted); }
+    .search-input::placeholder { color: #bbb; }
+    .search-input:focus { border-color: var(--blue); }
 
-    .search-input:focus {
-      border-color: var(--blue);
-    }
-
-    .filter-btn {
-      padding: 10px 18px;
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--ghost);
+    .filter-pill {
+      padding: 9px 18px;
+      background: var(--white);
+      border: 1px solid var(--border-light);
+      border-radius: 999px;
       font-family: 'Inter', sans-serif;
       font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ghost);
       cursor: pointer;
-      border-radius: 2px;
-      transition: all 0.3s;
+      transition: all 0.25s;
     }
 
-    .filter-btn:hover,
-    .filter-btn.active {
-      border-color: var(--blue);
-      color: var(--blue);
-    }
+    .filter-pill:hover { border-color: var(--ink); color: var(--ink); }
+    .filter-pill.active { background: var(--ink); border-color: var(--ink); color: white; }
 
-    /* Compound Cards */
+    /* Grid */
     .compounds-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2px;
+      background: var(--border-light);
+      border: 1px solid var(--border-light);
     }
 
     .compound-card {
-      background: var(--deep);
-      padding: 32px;
+      background: var(--white);
+      padding: 36px 32px;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: all 0.3s;
       position: relative;
       overflow: hidden;
     }
 
-    .compound-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, var(--blue-glow), transparent);
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-
     .compound-card:hover {
-      background: var(--surface);
+      background: var(--ink);
     }
 
-    .compound-card:hover::before {
-      opacity: 1;
-    }
+    .compound-card:hover .compound-name,
+    .compound-card:hover .compound-dose { color: #f0f0ec; }
+    .compound-card:hover .compound-category { color: var(--blue); }
+    .compound-card:hover .compound-purity-val { color: #888880; }
+    .compound-card:hover .purity-track { background: #2a2a38; }
+    .compound-card:hover .purity-fill { background: var(--blue); }
+    .compound-card:hover .add-btn { opacity: 1; transform: translateY(0); }
+    .compound-card:hover .purity-label { color: #555558; }
 
-    .compound-card:hover .add-btn {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .card-top {
+    .card-header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 24px;
+      align-items: center;
+      margin-bottom: 20px;
     }
 
     .compound-category {
       font-size: 10px;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--blue);
+      transition: color 0.3s;
     }
 
-    .compound-purity {
-      font-size: 11px;
+    .compound-purity-val {
+      font-size: 12px;
       color: var(--ghost);
-      letter-spacing: 0.05em;
+      transition: color 0.3s;
     }
 
     .compound-name {
       font-family: 'EB Garamond', serif;
-      font-size: 28px;
+      font-size: 30px;
       font-weight: 400;
+      color: var(--ink);
       line-height: 1.1;
-      color: var(--white);
-      margin-bottom: 8px;
       letter-spacing: -0.01em;
+      margin-bottom: 6px;
+      transition: color 0.3s;
     }
 
     .compound-dose {
       font-size: 13px;
       color: var(--ghost);
-      margin-bottom: 24px;
-    }
-
-    /* Purity bar */
-    .purity-bar {
-      margin-bottom: 24px;
+      margin-bottom: 28px;
+      transition: color 0.3s;
     }
 
     .purity-label {
@@ -465,71 +535,99 @@
       font-size: 10px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 6px;
+      color: var(--ghost);
+      margin-bottom: 8px;
+      transition: color 0.3s;
     }
 
     .purity-track {
-      height: 2px;
-      background: var(--border);
-      border-radius: 0;
+      height: 1px;
+      background: var(--border-light);
+      margin-bottom: 28px;
+      transition: background 0.3s;
     }
 
     .purity-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--blue-dim), var(--blue));
-      transition: width 1s ease;
+      background: var(--ink);
+      transition: background 0.3s;
     }
 
     .add-btn {
       width: 100%;
       padding: 12px;
       background: transparent;
-      border: 1px solid var(--blue);
+      border: 1px solid rgba(37,99,235,0.4);
       color: var(--blue);
       font-family: 'Inter', sans-serif;
       font-size: 11px;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       cursor: pointer;
-      transition: all 0.3s;
       border-radius: 2px;
       opacity: 0;
-      transform: translateY(8px);
-      transition: all 0.3s ease;
+      transform: translateY(6px);
+      transition: all 0.3s;
     }
 
     .add-btn:hover {
       background: var(--blue);
+      border-color: var(--blue);
       color: white;
     }
 
-    /* ─── FOOTER ────────────────────────────────────── */
+    /* ── CLOSING DARK SECTION ────────────────── */
+    .closing {
+      background: var(--deep);
+      padding: 120px 48px;
+      text-align: center;
+    }
+
+    .closing h2 {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(40px, 5vw, 68px);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: #f0f0ec;
+      margin-bottom: 24px;
+    }
+
+    .closing h2 em {
+      font-style: italic;
+      color: #555558;
+    }
+
+    .closing p {
+      font-size: 15px;
+      color: #555558;
+      max-width: 480px;
+      margin: 0 auto 48px;
+      line-height: 1.8;
+    }
+
+    /* ── FOOTER ─────────────────────────────── */
     footer {
-      position: relative;
-      z-index: 1;
-      padding: 60px 48px;
-      border-top: 1px solid var(--border);
+      background: var(--ink);
+      padding: 48px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-top: 1px solid #1e1e28;
     }
 
     .footer-logo {
       font-family: 'EB Garamond', serif;
       font-size: 18px;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: #2a2a38;
     }
 
-    .footer-note {
+    .footer-copy {
       font-size: 11px;
-      color: var(--muted);
+      color: #2a2a38;
       letter-spacing: 0.05em;
-      max-width: 400px;
-      text-align: center;
-      line-height: 1.8;
     }
 
     .footer-links {
@@ -540,117 +638,153 @@
 
     .footer-links a {
       font-size: 11px;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: #2a2a38;
       text-decoration: none;
       transition: color 0.3s;
     }
 
-    .footer-links a:hover { color: var(--silver); }
+    .footer-links a:hover { color: #888880; }
 
-    /* ─── ANIMATIONS ────────────────────────────────── */
+    /* ── ANIMATIONS ─────────────────────────── */
     @keyframes fadeUp {
-      from { opacity:0; transform: translateY(20px); }
-      to   { opacity:1; transform: translateY(0); }
+      from { opacity:0; transform:translateY(24px); }
+      to   { opacity:1; transform:translateY(0); }
     }
 
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.3; }
-      50%       { opacity: 1; }
-    }
-
-    /* ─── RESPONSIVE ────────────────────────────────── */
+    /* ── RESPONSIVE ─────────────────────────── */
     @media (max-width: 768px) {
       nav { padding: 20px 24px; }
       .nav-links { display: none; }
-      .standards { grid-template-columns: 1fr; gap: 48px; padding: 80px 24px; }
-      .compounds-section { padding: 0 24px 80px; }
-      .section-header { flex-direction: column; align-items: flex-start; gap: 8px; }
-      .compounds-grid { grid-template-columns: 1fr; }
-      footer { flex-direction: column; gap: 24px; text-align: center; padding: 40px 24px; }
+      .standards-inner { grid-template-columns: 1fr; gap: 48px; }
+      .standard-item { grid-template-columns: 1fr; gap: 8px; }
+      .standards-headline { position: static; }
+      .compounds-section { padding: 80px 24px; }
+      .standards { padding: 80px 24px; }
+      .closing { padding: 80px 24px; }
+      footer { flex-direction: column; gap: 24px; padding: 40px 24px; text-align: center; }
+      .hero-stats { flex-direction: column; }
+      .stat { border-right: none; border-bottom: 1px solid #1e1e28; }
+      .stat:last-child { border-bottom: none; }
     }
   </style>
 </head>
 <body>
 
-<!-- Background Canvas -->
-<canvas id="bg-canvas"></canvas>
-
-<!-- Navigation -->
-<nav id="nav">
-  <div class="nav-logo">Aura <span>Labs</span></div>
+<!-- Nav (starts dark for hero, transitions to light) -->
+<nav id="nav" class="dark">
+  <div class="logo">Aura Labs</div>
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
     <li><a href="#compounds">Compounds</a></li>
     <li><a href="accounts.html">Account</a></li>
   </ul>
-  <button class="nav-cart" onclick="viewCart()">
-    Cart
-    <span class="cart-count" id="cart-count">0</span>
+  <button class="nav-cta" onclick="window.location.href='checkout.html'">
+    Cart (<span id="cart-count">0</span>)
   </button>
 </nav>
 
-<!-- Hero -->
+<!-- DARK HERO -->
 <section class="hero" id="home">
-  <div class="hero-eyebrow">Research-Grade Peptides</div>
-  <h1>We offer what we're<br><em>certain of.</em></h1>
-  <p class="hero-sub">Pharmaceutical-grade compounds. Verified purity. Documented sourcing. For researchers who demand precision.</p>
-  <div class="hero-actions">
-    <button class="btn-primary" onclick="document.getElementById('compounds').scrollIntoView({behavior:'smooth'})">View Compounds</button>
-    <button class="btn-ghost" onclick="document.getElementById('standards').scrollIntoView({behavior:'smooth'})">Our Standards</button>
+  <canvas id="bg-canvas"></canvas>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Research-Grade Peptides</div>
+    <h1>We offer what<br>we're <em>certain of.</em></h1>
+    <p class="hero-sub">Pharmaceutical precision. Verified purity. Documented sourcing. For researchers who demand more.</p>
+    <div class="hero-actions">
+      <button class="btn-blue" onclick="document.getElementById('compounds').scrollIntoView({behavior:'smooth'})">View Compounds</button>
+      <button class="btn-outline-light" onclick="document.getElementById('standards').scrollIntoView({behavior:'smooth'})">Our Standards</button>
+    </div>
   </div>
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    Scroll
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">99.8%</div>
+      <div class="stat-label">Max Purity</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">20+</div>
+      <div class="stat-label">Compounds</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3rd</div>
+      <div class="stat-label">Party Tested</div>
+    </div>
   </div>
 </section>
 
-<!-- Standards -->
-<div class="standards" id="standards">
-  <div>
-    <div class="standards-headline">Built on<br><em>verifiable</em><br>science.</div>
-  </div>
-  <div class="standards-items">
-    <div class="standard-item">
-      <div class="standard-label">Purity</div>
-      <div class="standard-text">Every batch tested by independent third-party laboratories. Full certificates of analysis available on request.</div>
+<!-- LIGHT STANDARDS -->
+<section class="standards" id="standards">
+  <div class="standards-inner">
+    <div>
+      <div class="standards-label">Our Principles</div>
+      <h2 class="standards-headline">Built on<br><em>verifiable</em><br>science.</h2>
     </div>
-    <div class="standard-item">
-      <div class="standard-label">Sourcing</div>
-      <div class="standard-text">Supply chain fully documented from synthesis to delivery. No unknown intermediaries. No unverified suppliers.</div>
+    <div class="standards-items">
+      <div class="standard-item">
+        <div class="standard-num">01</div>
+        <div class="standard-content">
+          <h3>Independent Purity Testing</h3>
+          <p>Every batch verified by third-party laboratories before it reaches you. Full certificates of analysis on request.</p>
+        </div>
+      </div>
+      <div class="standard-item">
+        <div class="standard-num">02</div>
+        <div class="standard-content">
+          <h3>Documented Sourcing</h3>
+          <p>Supply chain fully traceable from synthesis to delivery. No unknown intermediaries. No unverified suppliers.</p>
+        </div>
+      </div>
+      <div class="standard-item">
+        <div class="standard-num">03</div>
+        <div class="standard-content">
+          <h3>Deliberate Selection</h3>
+          <p>We carry only what we can fully vouch for. The compounds we don't carry are as deliberate as the ones we do.</p>
+        </div>
+      </div>
     </div>
-    <div class="standard-item">
-      <div class="standard-label">Selection</div>
-      <div class="standard-text">We carry only what we can vouch for. The compounds we don't carry are as deliberate as the ones we do.</div>
+  </div>
+</section>
+
+<!-- OFF-WHITE COMPOUNDS -->
+<section class="compounds-section" id="compounds">
+  <div class="compounds-inner">
+    <div class="section-header">
+      <div class="section-title">Compound Library</div>
+      <div class="section-meta" id="compound-count">20 compounds</div>
     </div>
+
+    <div class="featured-banner">
+      <p>These compounds represent our <strong>core collection</strong>—selected by research criteria that define us. Access to the <strong>full catalog (50+ compounds)</strong> is available upon verification.</p>
+    </div>
+
+    <div class="controls">
+      <input class="search-input" id="search" type="text" placeholder="Search by name...">
+      <button class="filter-pill active" onclick="setFilter('all',this)">All</button>
+      <button class="filter-pill" onclick="setFilter('Weight Loss',this)">Weight Loss</button>
+      <button class="filter-pill" onclick="setFilter('Healing',this)">Healing</button>
+      <button class="filter-pill" onclick="setFilter('HGH',this)">HGH</button>
+      <button class="filter-pill" onclick="setFilter('Cognitive',this)">Cognitive</button>
+      <button class="filter-pill" onclick="setFilter('Specialty',this)">Specialty</button>
+    </div>
+
+    <div class="compounds-grid" id="compounds-grid"></div>
   </div>
-</div>
+</section>
 
-<!-- Compounds -->
-<div class="compounds-section" id="compounds">
-  <div class="section-header">
-    <div class="section-title">Compound Library</div>
-    <div class="section-count" id="compound-count">20 compounds</div>
-  </div>
+<!-- DARK CLOSING -->
+<section class="closing">
+  <h2>Research without<br><em>compromise.</em></h2>
+  <p>Every compound we offer has been selected, tested, and verified to meet the standards serious research demands.</p>
+  <button class="btn-blue" onclick="document.getElementById('compounds').scrollIntoView({behavior:'smooth'})">Request Access</button>
+</section>
 
-  <div class="controls">
-    <input class="search-input" id="search" type="text" placeholder="Search compounds...">
-    <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
-    <button class="filter-btn" onclick="setFilter('Weight Loss', this)">Weight Loss</button>
-    <button class="filter-btn" onclick="setFilter('Healing', this)">Healing</button>
-    <button class="filter-btn" onclick="setFilter('HGH', this)">HGH</button>
-    <button class="filter-btn" onclick="setFilter('Cognitive', this)">Cognitive</button>
-    <button class="filter-btn" onclick="setFilter('Specialty', this)">Specialty</button>
-  </div>
-
-  <div class="compounds-grid" id="compounds-grid"></div>
-</div>
-
-<!-- Footer -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-logo">Aura Labs</div>
-  <div class="footer-note">For research use only. Not for human consumption. All compounds are sold strictly for laboratory and research purposes.</div>
+  <div class="footer-copy">&copy; 2026 — For research use only</div>
   <ul class="footer-links">
     <li><a href="#">Documentation</a></li>
     <li><a href="#">Compliance</a></li>
@@ -659,176 +793,184 @@
 </footer>
 
 <script>
-  // ─── DATA ───────────────────────────────────────────
+  // ── DATA ──────────────────────────────────────────
   const compounds = [
-    { name:'Semaglutide',   dose:'5mg',    purity:98.5, category:'Weight Loss' },
-    { name:'Tirzepatide',   dose:'10mg',   purity:99.2, category:'Weight Loss' },
-    { name:'CJC-1295',      dose:'2mg',    purity:98.8, category:'Weight Loss' },
-    { name:'Ipamorelin',    dose:'5mg',    purity:99.1, category:'HGH'         },
-    { name:'BPC-157',       dose:'5mg',    purity:99.2, category:'Healing'     },
-    { name:'TB-500',        dose:'2mg',    purity:98.7, category:'Healing'     },
-    { name:'MK-677',        dose:'25mg',   purity:99.4, category:'HGH'         },
-    { name:'GHRP-6',        dose:'5mg',    purity:98.9, category:'HGH'         },
-    { name:'Semax',         dose:'500mcg', purity:99.1, category:'Cognitive'   },
-    { name:'NAD+',          dose:'500mg',  purity:99.8, category:'Specialty'   },
-    { name:'Selank',        dose:'5mg',    purity:99.0, category:'Cognitive'   },
-    { name:'Epithalon',     dose:'10mg',   purity:98.5, category:'Specialty'   },
-    { name:'GHK-Cu',        dose:'5mg',    purity:99.3, category:'Healing'     },
-    { name:'GHRP-2',        dose:'5mg',    purity:99.0, category:'HGH'         },
-    { name:'Hexarelin',     dose:'2mg',    purity:98.6, category:'HGH'         },
-    { name:'Sermorelin',    dose:'5mg',    purity:99.2, category:'HGH'         },
-    { name:'Cerebrolysin',  dose:'5ml',    purity:98.8, category:'Cognitive'   },
-    { name:'Noopept',       dose:'30mg',   purity:99.5, category:'Cognitive'   },
-    { name:'NSI-189',       dose:'40mg',   purity:99.2, category:'Cognitive'   },
-    { name:'Piracetam',     dose:'800mg',  purity:99.3, category:'Cognitive'   },
+    { name:'Semaglutide',  dose:'5mg',    purity:98.5, category:'Weight Loss' },
+    { name:'Tirzepatide',  dose:'10mg',   purity:99.2, category:'Weight Loss' },
+    { name:'CJC-1295',     dose:'2mg',    purity:98.8, category:'Weight Loss' },
+    { name:'Ipamorelin',   dose:'5mg',    purity:99.1, category:'HGH'         },
+    { name:'BPC-157',      dose:'5mg',    purity:99.2, category:'Healing'     },
+    { name:'TB-500',       dose:'2mg',    purity:98.7, category:'Healing'     },
+    { name:'MK-677',       dose:'25mg',   purity:99.4, category:'HGH'         },
+    { name:'GHRP-6',       dose:'5mg',    purity:98.9, category:'HGH'         },
+    { name:'Semax',        dose:'500mcg', purity:99.1, category:'Cognitive'   },
+    { name:'NAD+',         dose:'500mg',  purity:99.8, category:'Specialty'   },
+    { name:'Selank',       dose:'5mg',    purity:99.0, category:'Cognitive'   },
+    { name:'Epithalon',    dose:'10mg',   purity:98.5, category:'Specialty'   },
+    { name:'GHK-Cu',       dose:'5mg',    purity:99.3, category:'Healing'     },
+    { name:'GHRP-2',       dose:'5mg',    purity:99.0, category:'HGH'         },
+    { name:'Hexarelin',    dose:'2mg',    purity:98.6, category:'HGH'         },
+    { name:'Sermorelin',   dose:'5mg',    purity:99.2, category:'HGH'         },
+    { name:'Cerebrolysin', dose:'5ml',    purity:98.8, category:'Cognitive'   },
+    { name:'Noopept',      dose:'30mg',   purity:99.5, category:'Cognitive'   },
+    { name:'NSI-189',      dose:'40mg',   purity:99.2, category:'Cognitive'   },
+    { name:'Piracetam',    dose:'800mg',  purity:99.3, category:'Cognitive'   },
   ];
 
-  let cart = [];
+  let cart = JSON.parse(localStorage.getItem('cart')||'[]');
   let activeFilter = 'all';
 
-  // ─── RENDER ─────────────────────────────────────────
-  function render() {
-    const search = document.getElementById('search').value.toLowerCase();
-    const grid   = document.getElementById('compounds-grid');
-    
-    const filtered = compounds.filter(c => {
-      const matchFilter = activeFilter === 'all' || c.category === activeFilter;
-      const matchSearch = c.name.toLowerCase().includes(search);
-      return matchFilter && matchSearch;
-    });
+  function updateCartCount() {
+    document.getElementById('cart-count').textContent = cart.length;
+  }
 
+  function render() {
+    const q = document.getElementById('search').value.toLowerCase();
+    const filtered = compounds.filter(c =>
+      (activeFilter === 'all' || c.category === activeFilter) &&
+      c.name.toLowerCase().includes(q)
+    );
     document.getElementById('compound-count').textContent = `${filtered.length} compound${filtered.length !== 1 ? 's' : ''}`;
 
-    grid.innerHTML = filtered.map((c, i) => `
-      <div class="compound-card">
-        <div class="card-top">
-          <div class="compound-category">${c.category}</div>
-          <div class="compound-purity">${c.purity}% pure</div>
-        </div>
-        <div class="compound-name">${c.name}</div>
-        <div class="compound-dose">${c.dose}</div>
-        <div class="purity-bar">
+    // Group by category
+    const categories = {};
+    filtered.forEach(c => {
+      if (!categories[c.category]) categories[c.category] = [];
+      categories[c.category].push(c);
+    });
+
+    // Order categories intentionally
+    const categoryOrder = ['Weight Loss', 'Healing', 'HGH', 'Cognitive', 'Specialty'];
+    const orderedCategories = categoryOrder.filter(cat => categories[cat]);
+
+    const html = orderedCategories.map(category => {
+      const catCompounds = categories[category];
+      const cards = catCompounds.map(c => `
+        <div class="compound-card">
+          <div class="card-header">
+            <div class="compound-category">${c.category}</div>
+            <div class="compound-purity-val">${c.purity}% purity</div>
+          </div>
+          <div class="compound-name">${c.name}</div>
+          <div class="compound-dose">${c.dose}</div>
           <div class="purity-label">
-            <span>Purity</span>
-            <span>${c.purity}%</span>
+            <span>Verified Purity</span><span>${c.purity}%</span>
           </div>
           <div class="purity-track">
             <div class="purity-fill" style="width:${c.purity}%"></div>
           </div>
+          <button class="add-btn" onclick="addToCart('${c.name}',event)">Request Access</button>
         </div>
-        <button class="add-btn" onclick="addToCart('${c.name}')">Add to Cart</button>
-      </div>
-    `).join('');
+      `).join('');
+
+      return `
+        <div class="category-header">
+          <div class="category-title">${category}</div>
+        </div>
+        <div class="compounds-grid" style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2px; background: var(--border-light); border: 1px solid var(--border-light); margin-bottom: 32px;">
+          ${cards}
+        </div>
+      `;
+    }).join('');
+
+    document.getElementById('compounds-grid').innerHTML = html;
   }
 
-  function setFilter(filter, btn) {
-    activeFilter = filter;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  function setFilter(f, btn) {
+    activeFilter = f;
+    document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     render();
   }
 
-  function addToCart(name) {
+  function addToCart(name, e) {
+    e.stopPropagation();
     cart.push(name);
-    document.getElementById('cart-count').textContent = cart.length;
     localStorage.setItem('cart', JSON.stringify(cart));
-  }
-
-  function viewCart() {
-    window.location.href = 'checkout.html';
+    updateCartCount();
   }
 
   document.getElementById('search').addEventListener('input', render);
-
-  // ─── NAV SCROLL ──────────────────────────────────────
-  window.addEventListener('scroll', () => {
-    document.getElementById('nav').classList.toggle('scrolled', scrollY > 50);
-  });
-
   render();
+  updateCartCount();
 
-  // ─── BACKGROUND CANVAS ───────────────────────────────
+  // ── NAV BEHAVIOR ──────────────────────────────────
+  const nav = document.getElementById('nav');
+  const heroEl = document.querySelector('.hero');
+
+  function updateNav() {
+    const heroBottom = heroEl.getBoundingClientRect().bottom;
+    if (heroBottom <= 80) {
+      nav.className = 'light';
+    } else {
+      nav.className = scrollY > 20 ? 'dark scrolled' : 'dark';
+    }
+  }
+
+  window.addEventListener('scroll', updateNav);
+  updateNav();
+
+  // ── BACKGROUND CANVAS ─────────────────────────────
   const canvas = document.getElementById('bg-canvas');
-  const ctx    = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d');
 
   function resize() {
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
   }
   resize();
   window.addEventListener('resize', resize);
 
-  // DNA strands
   class DNAStrand {
-    constructor() { this.reset(true); }
-
-    reset(init = false) {
-      this.x      = Math.random() * canvas.width;
-      this.y      = init ? Math.random() * canvas.height : canvas.height + 200;
-      this.vy     = -0.15 - Math.random() * 0.15;
-      this.vx     = (Math.random() - 0.5) * 0.1;
-      this.angle  = Math.random() * Math.PI * 2;
-      this.spin   = (Math.random() - 0.5) * 0.006;
-      this.scale  = 0.5 + Math.random() * 0.8;
-      this.height = 100 + Math.random() * 80;
-      this.alpha  = 0.08 + Math.random() * 0.12;
+    constructor(init = false) {
+      this.x     = Math.random() * canvas.width;
+      this.y     = init ? Math.random() * canvas.height : canvas.height + 200;
+      this.vy    = -0.2 - Math.random() * 0.15;
+      this.vx    = (Math.random() - 0.5) * 0.12;
+      this.angle = Math.random() * Math.PI * 2;
+      this.spin  = (Math.random() - 0.5) * 0.006;
+      this.h     = 80 + Math.random() * 80;
+      this.w     = 10 + Math.random() * 6;
+      this.alpha = 0.12 + Math.random() * 0.12;
     }
 
     update() {
-      this.x     += this.vx;
-      this.y     += this.vy;
-      this.angle += this.spin;
-      if (this.y < -300) this.reset();
+      this.x += this.vx; this.y += this.vy; this.angle += this.spin;
+      if (this.y < -300) { this.y = canvas.height + 200; this.x = Math.random() * canvas.width; }
     }
 
     draw() {
       ctx.save();
       ctx.translate(this.x, this.y);
       ctx.rotate(this.angle);
-
-      const h = this.height;
-      const w = 12 * this.scale;
-      const turns = 3;
-      const steps = 80;
-
       ctx.globalAlpha = this.alpha;
       ctx.strokeStyle = '#2563eb';
-      ctx.lineWidth   = 1.2;
 
-      // Strand A
-      ctx.beginPath();
-      for (let i = 0; i <= steps; i++) {
-        const t = i / steps;
-        const a = t * Math.PI * 2 * turns;
-        const x = Math.cos(a) * w;
-        const y = t * h - h * 0.5;
-        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-      }
-      ctx.stroke();
+      const steps = 60;
+      const turns = 3;
 
-      // Strand B
-      ctx.beginPath();
-      for (let i = 0; i <= steps; i++) {
-        const t = i / steps;
-        const a = t * Math.PI * 2 * turns + Math.PI;
-        const x = Math.cos(a) * w;
-        const y = t * h - h * 0.5;
-        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-      }
-      ctx.stroke();
-
-      // Base pairs
-      ctx.lineWidth = 0.6;
-      ctx.globalAlpha = this.alpha * 0.6;
-      for (let i = 0; i <= steps; i += 6) {
-        const t = i / steps;
-        const a = t * Math.PI * 2 * turns;
-        const x1 = Math.cos(a) * w;
-        const x2 = Math.cos(a + Math.PI) * w;
-        const y  = t * h - h * 0.5;
+      ctx.lineWidth = 1.5;
+      ['0', 'Math.PI'].forEach((offset, si) => {
         ctx.beginPath();
-        ctx.moveTo(x1, y);
-        ctx.lineTo(x2, y);
+        for (let i = 0; i <= steps; i++) {
+          const t = i / steps;
+          const a = t * Math.PI * 2 * turns + (si === 1 ? Math.PI : 0);
+          const x = Math.cos(a) * this.w;
+          const y = t * this.h - this.h * 0.5;
+          i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      });
+
+      ctx.lineWidth = 0.7;
+      ctx.globalAlpha = this.alpha * 0.5;
+      for (let i = 0; i <= steps; i += 5) {
+        const t = i / steps;
+        const a = t * Math.PI * 2 * turns;
+        const y = t * this.h - this.h * 0.5;
+        ctx.beginPath();
+        ctx.moveTo(Math.cos(a) * this.w, y);
+        ctx.lineTo(Math.cos(a + Math.PI) * this.w, y);
         ctx.stroke();
       }
 
@@ -836,27 +978,22 @@
     }
   }
 
-  // Floating molecules
-  class Molecule {
-    constructor() { this.reset(true); }
-
-    reset(init = false) {
+  class FloatShape {
+    constructor(init = false) {
       this.x     = Math.random() * canvas.width;
       this.y     = init ? Math.random() * canvas.height : canvas.height + 100;
-      this.vx    = (Math.random() - 0.5) * 0.2;
+      this.vx    = (Math.random() - 0.5) * 0.15;
       this.vy    = -0.1 - Math.random() * 0.1;
       this.angle = Math.random() * Math.PI * 2;
-      this.spin  = (Math.random() - 0.5) * 0.008;
-      this.size  = 15 + Math.random() * 20;
-      this.alpha = 0.04 + Math.random() * 0.08;
+      this.spin  = (Math.random() - 0.5) * 0.007;
+      this.size  = 18 + Math.random() * 22;
+      this.alpha = 0.05 + Math.random() * 0.07;
       this.type  = Math.floor(Math.random() * 3);
     }
 
     update() {
-      this.x     += this.vx;
-      this.y     += this.vy;
-      this.angle += this.spin;
-      if (this.y < -100) this.reset();
+      this.x += this.vx; this.y += this.vy; this.angle += this.spin;
+      if (this.y < -120) { this.y = canvas.height + 120; this.x = Math.random() * canvas.width; }
     }
 
     draw() {
@@ -868,39 +1005,28 @@
       ctx.lineWidth = 1;
 
       const s = this.size;
-
       if (this.type === 0) {
-        // Hexagon (benzene ring)
+        // hexagon
         ctx.beginPath();
         for (let i = 0; i < 6; i++) {
           const a = (i / 6) * Math.PI * 2;
-          const x = Math.cos(a) * s;
-          const y = Math.sin(a) * s;
-          i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+          i === 0 ? ctx.moveTo(Math.cos(a)*s, Math.sin(a)*s) : ctx.lineTo(Math.cos(a)*s, Math.sin(a)*s);
         }
-        ctx.closePath();
-        ctx.stroke();
+        ctx.closePath(); ctx.stroke();
       } else if (this.type === 1) {
-        // Central atom + bonds
+        // molecule bonds
         for (let i = 0; i < 4; i++) {
-          const a = (i / 4) * Math.PI * 2;
-          ctx.beginPath();
-          ctx.moveTo(0, 0);
-          ctx.lineTo(Math.cos(a) * s, Math.sin(a) * s);
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.arc(Math.cos(a) * s, Math.sin(a) * s, s * 0.15, 0, Math.PI * 2);
-          ctx.stroke();
+          const a = (i/4)*Math.PI*2;
+          ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(Math.cos(a)*s, Math.sin(a)*s); ctx.stroke();
+          ctx.beginPath(); ctx.arc(Math.cos(a)*s, Math.sin(a)*s, s*0.12, 0, Math.PI*2); ctx.stroke();
         }
       } else {
-        // Spiral
+        // spiral
         ctx.beginPath();
         for (let i = 0; i < 60; i++) {
-          const a = (i / 60) * Math.PI * 4;
-          const r = (i / 60) * s;
-          const x = Math.cos(a) * r;
-          const y = Math.sin(a) * r;
-          i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+          const a = (i/60)*Math.PI*4;
+          const r = (i/60)*s;
+          i === 0 ? ctx.moveTo(Math.cos(a)*r, Math.sin(a)*r) : ctx.lineTo(Math.cos(a)*r, Math.sin(a)*r);
         }
         ctx.stroke();
       }
@@ -909,17 +1035,15 @@
     }
   }
 
-  const strands   = Array.from({length: 18}, () => new DNAStrand());
-  const molecules = Array.from({length: 20}, () => new Molecule());
+  const strands = Array.from({length: 16}, () => new DNAStrand(true));
+  const shapes  = Array.from({length: 18}, () => new FloatShape(true));
 
-  function animateBg() {
+  (function loop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     strands.forEach(s => { s.update(); s.draw(); });
-    molecules.forEach(m => { m.update(); m.draw(); });
-    requestAnimationFrame(animateBg);
-  }
-
-  animateBg();
+    shapes.forEach(s  => { s.update(); s.draw(); });
+    requestAnimationFrame(loop);
+  })();
 </script>
 
 </body>
