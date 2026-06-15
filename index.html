@@ -3,1602 +3,1244 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aura Labs — Research Compound Archive</title>
+  <title>Aura Labs</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     :root {
-      --bg:          #f9f8f6;
-      --bg-white:    #ffffff;
-      --border:      #e2e0db;
-      --border-light:#eeece8;
-      --text-primary:#18181b;
-      --text-secondary:#6b7280;
-      --text-muted:  #9ca3af;
-      --accent:      #2563eb;
-      --accent-light:#eff6ff;
-      --accent-dim:  #bfdbfe;
-      --row-hover:   #f4f3f1;
-      --tag-bg:      #f3f4f6;
-      --tag-text:    #374151;
-      --green:       #059669;
-      --green-bg:    #ecfdf5;
+      --bg:         #faf9f7;
+      --text:       #8b8b8b;
+      --text-dark:  #3d3330;
+      --accent:     #5a4a40;
+      --border:     #e2dbd7;
+      --border-lt:  #ede8e4;
+      --serif:      'Cormorant Garamond', Georgia, serif;
+      --sans:       'DM Sans', system-ui, sans-serif;
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       background: var(--bg);
-      color: var(--text-primary);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
       font-size: 14px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      opacity: 0;
+      animation: fadeIn 1.2s ease forwards;
     }
 
-    /* ─── NAVIGATION ─── */
+    body.no-animation {
+      animation: none !important;
+      opacity: 1 !important;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* ── NAVIGATION ───────────────────────────────────── */
     nav {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 100;
-      background: rgba(249, 248, 246, 0.95);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      padding: 28px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      mix-blend-mode: normal;
     }
 
-    .nav-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 48px;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    nav.scrolled {
+      background: rgba(250, 249, 247, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-lt);
+      padding: 18px 48px;
+      transition: all 0.4s ease;
     }
 
     .nav-logo {
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: var(--text-primary);
-      text-decoration: none;
-    }
-
-    .nav-logo span {
-      color: var(--text-secondary);
+      font-family: var(--serif);
+      font-size: 20px;
       font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--text-dark);
+      text-decoration: none;
     }
 
     .nav-links {
       display: flex;
-      align-items: center;
-      gap: 32px;
+      gap: 36px;
+      list-style: none;
     }
 
     .nav-links a {
-      font-size: 13px;
-      color: var(--text-secondary);
-      text-decoration: none;
-      letter-spacing: 0.01em;
-      transition: color 150ms;
-    }
-
-    .nav-links a:hover { color: var(--text-primary); }
-
-    .nav-cta {
+      font-family: var(--sans);
       font-size: 12px;
-      font-weight: 500;
-      color: var(--accent) !important;
-      border: 1px solid var(--accent-dim);
-      padding: 5px 14px;
-      border-radius: 4px;
-      transition: background 150ms !important;
-    }
-
-    .nav-cta:hover {
-      background: var(--accent-light);
-      color: var(--accent) !important;
-    }
-
-    /* ─── MAIN LAYOUT ─── */
-    main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 48px;
-      padding-top: 56px;
-    }
-
-    /* ─── MASTHEAD ─── */
-    .masthead {
-      padding: 72px 0 56px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .masthead-eyebrow {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
+      font-weight: 400;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
       color: var(--accent);
-      margin-bottom: 16px;
     }
 
-    .masthead-title {
-      font-size: 36px;
-      font-weight: 300;
-      color: var(--text-primary);
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      max-width: 640px;
-      margin-bottom: 20px;
+    /* ── HERO ─────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 640px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
     }
 
-    .masthead-title strong {
-      font-weight: 600;
-    }
-
-    .masthead-body {
-      font-size: 15px;
-      color: var(--text-secondary);
-      max-width: 560px;
-      line-height: 1.7;
-      margin-bottom: 32px;
-    }
-
-    .masthead-meta {
-      display: flex;
-      gap: 32px;
-      flex-wrap: wrap;
-    }
-
-    .meta-item {
+    .hero-content {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      justify-content: flex-end;
+      padding: 0 64px 72px 64px;
+      position: relative;
+      z-index: 2;
     }
 
-    .meta-label {
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .meta-value {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-primary);
-    }
-
-    /* ─── NOTICE BANNER ─── */
-    .notice-banner {
-      margin-top: 40px;
-      padding: 12px 20px;
-      background: var(--bg-white);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--accent);
-      border-radius: 4px;
-      font-size: 12px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    /* ─── ARCHIVE SECTION ─── */
-    .archive-section {
-      padding: 56px 0;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
+    .hero-logotype {
+      font-family: var(--serif);
+      font-size: clamp(48px, 6vw, 88px);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      color: var(--text-dark);
+      line-height: 1.0;
       margin-bottom: 24px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
     }
 
-    .section-title {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
+    .hero-logotype em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-descriptor {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: var(--text);
+      margin-bottom: 48px;
+      max-width: 280px;
     }
 
-    .section-count {
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .hero-cta::after {
+      content: '↓';
+      font-size: 14px;
+      transition: transform 0.3s ease;
+    }
+
+    .hero-cta:hover::after {
+      transform: translateY(4px);
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1.05);
+      transition: transform 0.1s linear;
+      will-change: transform;
+    }
+
+    .hero-image-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        var(--bg) 0%,
+        transparent 30%
+      );
+    }
+
+    /* ── SECTION COMMONS ──────────────────────────────── */
+    section {
+      padding: 96px 64px;
+    }
+
+    .section-label {
+      font-family: var(--sans);
       font-size: 11px;
-      color: var(--text-muted);
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text);
+      opacity: 0.6;
+      margin-bottom: 48px;
     }
 
-    /* ─── FILTER BAR ─── */
-    .filter-bar {
+    /* ── ARCHIVE ──────────────────────────────────────── */
+    .archive {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 96px 64px;
+    }
+
+    .archive-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 48px;
+    }
+
+    .archive-title {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 300;
+      color: var(--text-dark);
+    }
+
+    .archive-count {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      opacity: 0.5;
+    }
+
+    .filter-row {
       display: flex;
       gap: 8px;
+      margin-bottom: 32px;
       flex-wrap: wrap;
-      margin-bottom: 24px;
     }
 
     .filter-btn {
-      font-family: inherit;
-      font-size: 12px;
-      font-weight: 500;
-      padding: 6px 14px;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text);
+      background: transparent;
       border: 1px solid var(--border);
-      border-radius: 20px;
-      background: var(--bg-white);
-      color: var(--text-secondary);
+      padding: 7px 16px;
       cursor: pointer;
-      transition: all 150ms;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--bg);
+    }
+
+    .compound-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .compound-table thead th {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text);
+      opacity: 0.5;
+      text-align: left;
+      padding: 0 0 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .compound-table thead th:last-child {
+      text-align: right;
+    }
+
+    .compound-table tbody tr {
+      border-bottom: 1px solid var(--border-lt);
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .compound-table tbody tr:hover {
+      background: rgba(90, 74, 64, 0.03);
+    }
+
+    .compound-table tbody tr:hover .view-link {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .compound-table td {
+      padding: 20px 0;
+      vertical-align: middle;
+    }
+
+    .compound-table td:last-child {
+      text-align: right;
+    }
+
+    .td-name {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-dark);
       letter-spacing: 0.01em;
     }
 
-    .filter-btn:hover {
-      border-color: var(--accent-dim);
-      color: var(--accent);
-      background: var(--accent-light);
+    .td-area {
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--text);
+      padding-left: 40px;
     }
 
-    .filter-btn.active {
-      background: var(--text-primary);
-      border-color: var(--text-primary);
-      color: #fff;
-    }
-
-    /* ─── RESEARCH TABLE ─── */
-    .research-table {
-      width: 100%;
-      background: var(--bg-white);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .table-header {
-      display: grid;
-      grid-template-columns: 2.5fr 1.5fr 1fr 1fr 1.2fr 120px;
-      padding: 10px 24px;
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .th {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .compound-row {
-      display: grid;
-      grid-template-columns: 2.5fr 1.5fr 1fr 1fr 1.2fr 120px;
-      padding: 16px 24px;
-      border-bottom: 1px solid var(--border-light);
-      align-items: center;
-      transition: background 120ms;
-      cursor: pointer;
-    }
-
-    .compound-row:last-child { border-bottom: none; }
-
-    .compound-row:hover { background: var(--row-hover); }
-
-    .compound-row.hidden { display: none; }
-
-    .cell-name {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .compound-name {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-primary);
-      letter-spacing: -0.01em;
-    }
-
-    .compound-sub {
+    .td-format {
+      font-family: var(--sans);
       font-size: 11px;
-      color: var(--text-muted);
+      color: var(--text);
+      opacity: 0.7;
+      padding-left: 40px;
     }
 
-    .cell-category {
-      font-size: 12px;
-      color: var(--text-secondary);
+    .td-avail {
+      padding-left: 40px;
     }
 
-    .cell-format {
-      font-size: 12px;
-      color: var(--text-secondary);
-    }
-
-    .cell-price {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-    }
-
-    .price-value {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-primary);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .price-market {
-      font-size: 10px;
-      color: var(--text-muted);
-    }
-
-    .cell-status {}
-
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--green);
-      background: var(--green-bg);
-      padding: 3px 8px;
-      border-radius: 3px;
-      letter-spacing: 0.02em;
-    }
-
-    .status-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--green);
-      flex-shrink: 0;
-    }
-
-    .cell-action {}
-
-    .action-link {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--accent);
-      text-decoration: none;
-      border: 1px solid var(--accent-dim);
-      padding: 5px 12px;
-      border-radius: 4px;
+    .avail-badge {
       display: inline-block;
-      transition: background 150ms;
-      white-space: nowrap;
-    }
-
-    .action-link:hover {
-      background: var(--accent-light);
-    }
-
-    /* ─── MODAL ─── */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(24, 24, 27, 0.5);
-      z-index: 200;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-
-    .modal-overlay.open {
-      display: flex;
-    }
-
-    .modal {
-      background: var(--bg-white);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      max-width: 680px;
-      width: 100%;
-      max-height: 85vh;
-      overflow-y: auto;
-    }
-
-    .modal-header {
-      padding: 28px 32px 20px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      position: sticky;
-      top: 0;
-      background: var(--bg-white);
-      z-index: 1;
-    }
-
-    .modal-title {
-      font-size: 20px;
-      font-weight: 500;
-      color: var(--text-primary);
-      letter-spacing: -0.02em;
-    }
-
-    .modal-cat {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--text-muted);
-      margin-top: 4px;
+      padding: 4px 10px;
+      border: 1px solid var(--border);
     }
 
-    .modal-close {
-      font-size: 20px;
-      color: var(--text-muted);
-      cursor: pointer;
-      background: none;
-      border: none;
-      font-family: inherit;
-      line-height: 1;
-      padding: 2px 6px;
-      border-radius: 4px;
-      transition: background 150ms;
+    .avail-badge.in-stock {
+      border-color: rgba(90, 74, 64, 0.3);
+      color: var(--accent);
     }
 
-    .modal-close:hover {
-      background: var(--tag-bg);
-      color: var(--text-primary);
+    .avail-badge.limited {
+      border-color: rgba(139, 139, 139, 0.4);
+      color: var(--text);
     }
 
-    .modal-body {
-      padding: 28px 32px;
+    .view-link {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
     }
 
-    .modal-grid {
+    /* ── INQUIRY FORM ─────────────────────────────────── */
+    .inquiry {
+      background: var(--bg);
+      border-top: 1px solid var(--border-lt);
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 96px 64px;
+    }
+
+    .inquiry-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 28px;
+      gap: 96px;
+      align-items: start;
     }
 
-    .modal-stat {
-      padding: 14px 16px;
-      background: var(--bg);
-      border: 1px solid var(--border-light);
-      border-radius: 6px;
+    .inquiry-left h2 {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 300;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+      line-height: 1.2;
     }
 
-    .modal-stat-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 4px;
+    .inquiry-left p {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.8;
+      max-width: 340px;
     }
 
-    .modal-stat-value {
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--text-primary);
-    }
-
-    .modal-stat-sub {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .modal-section {
+    .form-group {
       margin-bottom: 24px;
     }
 
-    .modal-section-title {
+    .form-group label {
+      display: block;
+      font-family: var(--sans);
       font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border-light);
-    }
-
-    .modal-section p {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-    }
-
-    .mechanism-block {
-      font-size: 12px;
-      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
-      color: var(--accent);
-      background: var(--accent-light);
-      padding: 10px 14px;
-      border-radius: 4px;
-      border: 1px solid var(--accent-dim);
-      letter-spacing: 0.02em;
-    }
-
-    .tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .tag {
-      font-size: 11px;
       font-weight: 400;
-      background: var(--tag-bg);
-      color: var(--tag-text);
-      padding: 4px 10px;
-      border-radius: 3px;
-    }
-
-    .stack-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .stack-item {
-      padding: 12px 14px;
-      background: var(--bg);
-      border: 1px solid var(--border-light);
-      border-radius: 5px;
-    }
-
-    .stack-item-name {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 2px;
-    }
-
-    .stack-item-reason {
-      font-size: 11px;
-      color: var(--text-secondary);
-    }
-
-    .avoid-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .avoid-item {
-      padding: 10px 14px;
-      background: #fff7ed;
-      border: 1px solid #fed7aa;
-      border-radius: 5px;
-    }
-
-    .avoid-item-name {
-      font-size: 12px;
-      font-weight: 600;
-      color: #c2410c;
-      margin-bottom: 2px;
-    }
-
-    .avoid-item-reason {
-      font-size: 11px;
-      color: #9a3412;
-    }
-
-    .safety-note {
-      font-size: 12px;
-      color: var(--text-secondary);
-      background: #fffbeb;
-      border: 1px solid #fde68a;
-      border-radius: 5px;
-      padding: 12px 14px;
-      line-height: 1.6;
-    }
-
-    .modal-footer {
-      padding: 20px 32px 28px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .modal-footer-note {
-      font-size: 11px;
-      color: var(--text-muted);
-      max-width: 360px;
-      line-height: 1.5;
-    }
-
-    .modal-footer-actions {
-      display: flex;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .btn-primary {
-      font-family: inherit;
-      font-size: 13px;
-      font-weight: 500;
-      background: var(--text-primary);
-      color: #fff;
-      border: 1px solid var(--text-primary);
-      padding: 9px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: opacity 150ms;
-    }
-
-    .btn-primary:hover { opacity: 0.85; }
-
-    .btn-secondary {
-      font-family: inherit;
-      font-size: 13px;
-      font-weight: 500;
-      background: transparent;
-      color: var(--text-secondary);
-      border: 1px solid var(--border);
-      padding: 9px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 150ms;
-    }
-
-    .btn-secondary:hover { background: var(--bg); }
-
-    /* ─── INSTITUTIONAL PILLARS ─── */
-    .pillars {
-      padding: 56px 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .pillars-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .pillar {
-      background: var(--bg-white);
-      padding: 32px 28px;
-    }
-
-    .pillar-icon {
-      width: 28px;
-      height: 28px;
-      margin-bottom: 16px;
-      color: var(--accent);
-    }
-
-    .pillar-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 8px;
-      letter-spacing: -0.01em;
-    }
-
-    .pillar-body {
-      font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.65;
-    }
-
-    /* ─── CONTACT / INQUIRY ─── */
-    .inquiry-section {
-      padding: 56px 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .inquiry-inner {
-      background: var(--bg-white);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 40px 48px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 40px;
-    }
-
-    .inquiry-text {}
-
-    .inquiry-eyebrow {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: var(--text);
+      opacity: 0.6;
       margin-bottom: 8px;
     }
 
-    .inquiry-title {
-      font-size: 22px;
-      font-weight: 400;
-      color: var(--text-primary);
-      letter-spacing: -0.02em;
-      margin-bottom: 10px;
-    }
-
-    .inquiry-body {
-      font-size: 13px;
-      color: var(--text-secondary);
-      max-width: 420px;
-      line-height: 1.6;
-    }
-
-    .inquiry-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .inquiry-btn {
-      font-family: inherit;
-      font-size: 13px;
-      font-weight: 500;
-      padding: 10px 24px;
-      border-radius: 6px;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      text-align: center;
-      white-space: nowrap;
-      transition: all 150ms;
-    }
-
-    .inquiry-btn.primary {
-      background: var(--text-primary);
-      color: #fff;
-      border: 1px solid var(--text-primary);
-    }
-
-    .inquiry-btn.primary:hover { opacity: 0.85; }
-
-    .inquiry-btn.secondary {
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
       background: transparent;
-      color: var(--text-secondary);
-      border: 1px solid var(--border);
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 10px 0;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.2s ease;
+      -webkit-appearance: none;
     }
 
-    .inquiry-btn.secondary:hover { background: var(--bg); }
+    .form-group select {
+      cursor: pointer;
+    }
 
-    /* ─── FOOTER ─── */
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-bottom-color: var(--accent);
+    }
+
+    .form-group textarea {
+      resize: none;
+      height: 88px;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--text);
+      opacity: 0.4;
+    }
+
+    .form-submit {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 14px 40px;
+      background: var(--accent);
+      color: var(--bg);
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+
+    .form-submit:hover {
+      opacity: 0.85;
+    }
+
+    /* ── FOOTER ───────────────────────────────────────── */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 0;
-    }
-
-    .footer-inner {
+      border-top: 1px solid var(--border-lt);
+      padding: 48px 64px;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 48px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-
-    .footer-brand {}
-
-    .footer-logo {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 6px;
-    }
-
-    .footer-tagline {
-      font-size: 12px;
-      color: var(--text-muted);
-      max-width: 260px;
-      line-height: 1.5;
-    }
-
-    .footer-links {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
       gap: 48px;
+      align-items: end;
     }
 
-    .footer-col {}
+    .footer-brand {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--text-dark);
+    }
 
-    .footer-col-title {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 12px;
+    .footer-brand small {
+      display: block;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text);
+      opacity: 0.5;
+      letter-spacing: 0.1em;
+      margin-top: 6px;
+    }
+
+    .footer-col p {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.9;
+      opacity: 0.7;
     }
 
     .footer-col a {
-      display: block;
-      font-size: 12px;
-      color: var(--text-secondary);
+      color: var(--text);
       text-decoration: none;
-      margin-bottom: 8px;
-      transition: color 150ms;
     }
 
-    .footer-col a:hover { color: var(--text-primary); }
+    .footer-col a:hover {
+      color: var(--accent);
+    }
 
     .footer-legal {
-      border-top: 1px solid var(--border-light);
-      margin-top: 32px;
-      padding-top: 20px;
+      font-family: var(--sans);
+      font-size: 10px;
+      color: var(--text);
+      opacity: 0.4;
+      letter-spacing: 0.06em;
+      line-height: 1.8;
     }
 
-    .footer-legal-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 48px;
+    /* ── MODAL ────────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(61, 51, 48, 0.35);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
     }
 
-    .footer-legal p {
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-panel {
+      background: var(--bg);
+      width: min(640px, 100vw);
+      height: 100vh;
+      overflow-y: auto;
+      transform: translateX(48px);
+      transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+      padding: 64px 56px;
+      position: relative;
+    }
+
+    .modal-overlay.open .modal-panel {
+      transform: translateX(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 32px;
+      right: 40px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      opacity: 0.5;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-close:hover {
+      opacity: 1;
+    }
+
+    .modal-category {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text);
+      opacity: 0.5;
+      margin-bottom: 12px;
+    }
+
+    .modal-title {
+      font-family: var(--serif);
+      font-size: 44px;
+      font-weight: 300;
+      color: var(--text-dark);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .modal-format {
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--text);
+      opacity: 0.6;
+      margin-bottom: 40px;
+    }
+
+    .modal-price-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 24px 0;
+      border-top: 1px solid var(--border-lt);
+      border-bottom: 1px solid var(--border-lt);
+      margin-bottom: 48px;
+    }
+
+    .modal-price {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--accent);
+    }
+
+    .modal-price-compare {
+      font-family: var(--sans);
       font-size: 11px;
-      color: var(--text-muted);
-      line-height: 1.6;
-      max-width: 760px;
+      color: var(--text);
+      opacity: 0.5;
     }
 
-    /* ─── RESPONSIVE ─── */
+    .modal-price-compare strong {
+      display: block;
+      font-weight: 400;
+      color: var(--text);
+      opacity: 0.7;
+      text-decoration: line-through;
+    }
+
+    .modal-section {
+      margin-bottom: 40px;
+    }
+
+    .modal-section-label {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text);
+      opacity: 0.5;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-lt);
+    }
+
+    .modal-mechanism {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--text-dark);
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .modal-text {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    .modal-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .modal-tag {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 5px 12px;
+    }
+
+    .modal-safety {
+      background: rgba(90, 74, 64, 0.04);
+      border-left: 2px solid var(--accent);
+      padding: 16px 20px;
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .modal-inquiry-btn {
+      display: block;
+      width: 100%;
+      margin-top: 48px;
+      padding: 16px;
+      background: var(--accent);
+      color: var(--bg);
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-inquiry-btn:hover {
+      opacity: 0.85;
+    }
+
+    /* ── DIVIDER ──────────────────────────────────────── */
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--border);
+      margin: 0 auto;
+    }
+
+    /* ── RESPONSIVE ───────────────────────────────────── */
     @media (max-width: 900px) {
-      .nav-inner, main { padding-left: 24px; padding-right: 24px; }
-      .table-header { display: none; }
-      .compound-row {
+      .hero {
         grid-template-columns: 1fr;
-        gap: 6px;
+        height: auto;
+        min-height: 100vh;
       }
-      .cell-action { margin-top: 4px; }
-      .pillars-grid { grid-template-columns: 1fr; }
-      .inquiry-inner { flex-direction: column; }
-      .footer-inner { flex-direction: column; gap: 32px; }
-      .footer-links { flex-direction: column; gap: 24px; }
-      .modal-grid { grid-template-columns: 1fr; }
-      .modal-footer { flex-direction: column; align-items: flex-start; }
+
+      .hero-image-wrap {
+        position: absolute;
+        inset: 0;
+        opacity: 0.15;
+        z-index: 0;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 160px 32px 64px;
+        justify-content: flex-end;
+        min-height: 100vh;
+      }
+
+      .archive,
+      .inquiry {
+        padding: 64px 32px;
+      }
+
+      .inquiry-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      nav {
+        padding: 24px 32px;
+      }
+
+      nav.scrolled {
+        padding: 16px 32px;
+      }
+
+      footer {
+        grid-template-columns: 1fr;
+        padding: 48px 32px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        display: none;
+      }
+
+      .compound-table .td-format,
+      .compound-table th:nth-child(3) {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
 
   <!-- NAVIGATION -->
-  <nav>
-    <div class="nav-inner">
-      <a href="#" class="nav-logo">Aura Labs <span>/ Research Archive</span></a>
-      <div class="nav-links">
-        <a href="#archive">Compound Archive</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <a href="mailto:contact@auralabs.com" class="nav-cta">Request Access</a>
-      </div>
-    </div>
+  <nav id="nav">
+    <a class="nav-logo" href="#">Aura Labs</a>
+    <ul class="nav-links">
+      <li><a href="#archive">Archive</a></li>
+      <li><a href="#inquiry">Inquiry</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
   </nav>
 
-  <!-- MAIN -->
-  <main>
-
-    <!-- MASTHEAD -->
-    <section class="masthead">
-      <div class="masthead-eyebrow">Research-Grade Compound Archive</div>
-      <h1 class="masthead-title">
-        <strong>Pharmaceutical-grade compounds</strong><br>
-        for serious research applications.
-      </h1>
-      <p class="masthead-body">
-        Aura Labs maintains a curated archive of research compounds, each independently 
-        verified for purity and characterized for research use. Documentation is available 
-        for qualified researchers upon request.
-      </p>
-      <div class="masthead-meta">
-        <div class="meta-item">
-          <span class="meta-label">Archive Status</span>
-          <span class="meta-value">Active — Q2 2026</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Compounds Listed</span>
-          <span class="meta-value">14 Research Compounds</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Quality Standard</span>
-          <span class="meta-value">≥ 98% Purity (HPLC)</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">Turnaround</span>
-          <span class="meta-value">3–5 Business Days</span>
-        </div>
-      </div>
-
-      <div class="notice-banner">
-        <strong>Research Use Only.</strong> All compounds in this archive are supplied 
-        exclusively for in vitro research, laboratory studies, and qualified investigational 
-        purposes. Not for human consumption, therapeutic use, or clinical application. 
-        Procurement constitutes agreement with terms of use.
-      </div>
-    </section>
-
-    <!-- COMPOUND ARCHIVE -->
-    <section class="archive-section" id="archive">
-
-      <div class="section-header">
-        <span class="section-title">Compound Archive</span>
-        <span class="section-count" id="compound-count">14 compounds</span>
-      </div>
-
-      <!-- Filter Bar -->
-      <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all">All Categories</button>
-        <button class="filter-btn" data-filter="weight-loss">Metabolic &amp; GLP-1</button>
-        <button class="filter-btn" data-filter="healing">Healing &amp; Recovery</button>
-        <button class="filter-btn" data-filter="hgh">HGH Secretagogues</button>
-        <button class="filter-btn" data-filter="nootropics">Cognitive</button>
-        <button class="filter-btn" data-filter="specialty">Specialty</button>
-      </div>
-
-      <!-- Research Table -->
-      <div class="research-table">
-        <div class="table-header">
-          <div class="th">Compound</div>
-          <div class="th">Research Area</div>
-          <div class="th">Format</div>
-          <div class="th">Reference Price</div>
-          <div class="th">Availability</div>
-          <div class="th"></div>
-        </div>
-
-        <!-- WEIGHT LOSS / METABOLIC -->
-        <div class="compound-row" data-category="weight-loss" data-id="semaglutide-2mg" onclick="openModal('semaglutide-2mg')">
-          <div class="cell-name">
-            <span class="compound-name">Semaglutide 2mg</span>
-            <span class="compound-sub">GLP-1 Receptor Agonist</span>
-          </div>
-          <div class="cell-category">Metabolic / GLP-1</div>
-          <div class="cell-format">Lyophilized Powder</div>
-          <div class="cell-price">
-            <span class="price-value">$30</span>
-            <span class="price-market">Market ref: $260–300</span>
-          </div>
-          <div class="cell-status"><span class="status-badge"><span class="status-dot"></span>In Stock</span></div>
-          <div class="cell-action"><a href="#" class="action-link" onclick="event.preventDefault(); openModal('semaglutide-2mg')">View Details</a></div>
-        </div>
-
-        <div class="compound-row" data-category="weight-loss" data-id="semaglutide-5mg" onclick="openModal('semaglutide-5mg')">
-          <div class="cell-name">
-            <span class="compound-name">Semaglutide 5mg</span>
-            <span class="compound-sub">GLP-1 Receptor Agonist</span>
-          </div>
-          <div class="cell-category">Metabolic / GLP-1</div>
-          <div class="cell-format">Lyophilized Powder</div>
-          <div class="cell-price">
-            <span class="price-value">$49</span>
-            <span class="price-market">Market ref: $460–520</span>
-          </div>
-          <div class="cell-status"><span class="status-badge"><span class="status-dot"></span>In Stock</span></div>
-          <div class="cell-action"><a href="#" class="action-link" onclick="event.preventDefault(); openModal('semaglutide-5mg')">View Details</a></div>
-        </div>
-
-        <div class="compound-row" data-category="weight-loss" data-id="retatrutide-5mg" onclick="openModal('retatrutide-5mg')">
-          <div class="cell-name">
-            <span class="compound-name">Retatrutide 5mg</span>
-            <span class="compound-sub">Triple Agonist (GLP-1 / GIP / Glucagon)</span>
-          </div>
-          <div class="cell-category">Metabolic / GLP-1</div>
-          <div class="cell-format">Lyophilized Powder</div>
-          <div class="cell-price">
-            <span class="price-value">$49</span>
-            <span class="price-market">Market ref: $400–500</span>
-          </div>
-          <div class="cell-status"><span class="status-badge"><span class="status-dot"></span>In Stock</span></div>
-          <div class="cell-action"><a href="#" class="action-link" onclick="event.preventDefault(); openModal('retatrutide-5mg')">View Details</a></div>
-        </div>
-
-        <!-- HEALING & RECOVERY -->
-        <div class="compound-row" data-category="healing" data-id="bpc157-2mg" onclick="openModal('bpc157-2mg')">
-          <div class="cell-name">
-            <span class="compound-name">BPC-157 2mg</span>
-            <span class="compound-sub">Body Protection Compound</span>
-          </div>
-          <div class="cell-category">Healing &amp; Recovery</div>
-          <div class="cell-format">Lyophilized Powder</div>
-          <div class="cell-price">
-            <span class="price-value">$30</span>
-            <span class="price-market">Market ref: $60–80</span>
-          </div>
-          <div class="cell-status"><span class="status-badge"><span class="status-dot"></span>In Stock</span></div>
-          <div class="cell-action"><a href="#" class="action-link" onclick="event.preventDefault(); openModal('bpc157-2mg')">View Details</a></div>
-        </div>
-
-        <div class="compound-row" data-category="healing" data-id="bpc157-10mg" onclick="openModal('bpc157-10mg')">
-          <div class="cell-name">
-            <span class="compound-name">BPC-157 10mg</span>
-            <span class="compound-sub">Body Protection Compound</span>
-          </div>
-          <div class="cell-category">Healing &amp; Recovery</div>
-          <div class="cell-format">Lyophilized Powder</div>
-          <div class="cell-price">
-            <span class="price-value">$68</span>
-            <span class="price-market">Market ref: $200–250</span>
-          </div>
-          <div class="cell-status"><span class="status-badge"><span class="status-dot"></span>In Stock</span></div>
-          <div class="cell-action"><a href="#" class="action-link" onclick="event.preventDefault(); openModal('bpc157-10mg')">View Details</a></div>
-        </div>
-
-        <div class="compound-row" data-category="healing" data-id="tb500-5mg" onclick="openModal('tb500-5mg')">
-          <div class="cell-name">
-            <span class="compound-name">TB-500 5mg</span>
-            <span class="compound-sub">Thymosin Beta-4 Fragment</span>
-          </div>
-          <div class="cell-category">Healing &amp; Recovery</div>
-          <div class="cell-format">Lyophilized Powder</div>
-          <div class="cell-price">
-            <span class="price-value">$55</span>
-            <span class="price-market">Market ref: $100–140</span>
-          </div>
-          <div class="cell-status"><span class="status-badge"><span class="status-dot"></span>In Stock</span></div>
-          <div class="cell-action"><a href="#" class="action-link" onclick="event.preventDefault(); openModal('tb500-5mg')">View Details</a></div>
-        </div>
-
-        <div class="compound-row" data-category="healing" data-id="ghkcu-50mg" onclick="openModal('ghkcu-50mg')">
-          <div class="cell-name">
-            <span class="compound-name">GHK-Cu 50mg</span>
-            <span class="compound-sub">Copper Tripeptide Complex</span>
-          </div>
-          <div class="cell-category">Healing &amp; Recovery</div>
-          <div class="cell-format">Lyophilized Powder</div>
-          <div class="cell-price">
-            <span class="price-value">$32</span>
-            <span class="price-market">Market ref: $80–120</span>
-          </div>
-          <div class="cell-status"><span class="status-badge"><span class="status-dot"></span>In Stock</span></div>
-          <div class="cell-action"><a href="#" class="action-link" onclick="event.preventDefault(); openModal('ghkcu-50mg')">View Details</a></div>
-        </div>
-
-        <!-- HGH SECRETAGOGUES -->
-        <div class="compound-row" data-category="hgh" data-id="ipamorelin-2mg" onclick="openModal('ipamorelin-2mg')">
-          <div class="cell-name">
-            <span class="compound-name">Ipamorelin 2mg</span>
-            <span class="compound-sub">Selective GH Secretagogue</span>
-          </div>
-          <div class="cell-category">HGH Secretagogue</div>
-          <div class="cell-format">Lyophilized Powder</div>
-          <div class="cell-price">
-            <span class="price-value">$24</span>
-            <span class="price-market">Market ref: $50–70</span>
-          </div>
-          <div class="cell-status"><span class="status-badge"><span class="status-dot"></span>In Stock</span></div>
-          <div class="cell-action"><a href="#" class="action-link" onclick="event.preventDefault(); openModal('ipamorelin-2mg')">View Details</a></div>
-        </div>
-
-        <div class="compound-row" data-category="hgh" data-id="ipamorelin-5mg" onclick="openModal('ipamorelin-5mg')">
-          <div class="cell-name">
-            <span class="compound-name">Ipamorelin 5mg</span>
-            <span class="compound-sub">Selective GH Secretagogue</span>
-          </div>
-          <div class="cell-category">HGH Secretagogue</div>
-          <div class="cell-format">Lyophilized Powder</div>
-          <div class="cell-price">
-            <span class="price-value">$49</span>
-            <span class="price-market">Market ref: $100–130</span>
-          </div>
-          <div class="cell-status"><span class="status-badge"><span class="status-dot"></span>In Stock</span></div>
-          <div class="cell-action"><a href="#" class="action-link" onclick="event.preventDefault(); openModal('ipamorelin-5mg')">View Details</a></div>
-        </div>
-
-        <div class="compound-row" data-category="hgh" data-id="cjc1295-5mg" onclick="openModal('cjc1295-5mg')">
-          <div class="cell-name">
-            <span class="compound-name">CJC-1295 5mg (no DAC)</span>
-            <span class="compound-sub">GHRH Analogue</span>
-          </div>
-          <div class="cell-category">HGH Secretagogue</div>
-          <div class="cell-format">Lyophilized Powder</div>
-          <div class="cell-price">
-            <span class="price-value">$93</span>
-            <span class="price-market">Market ref: $180–240</span>
-          </div>
-          <div class="cell-status"><span class="status-badge"><span class="status-dot"></span>In Stock</span></div>
-          <div class="cell-action"><a href="#" class="action-link" onclick="event.preventDefault(); openModal('cjc1295-5mg')">View Details</a></div>
-        </div>
-
-        <!-- NOOTROPICS -->
-        <div class="compound-row" data-category="nootropics" data-id="semax-5mg" onclick="openModal('semax-5mg')">
-          <div class="cell-name">
-            <span class="compound-name">Semax 5mg</span>
-            <span class="compound-sub">ACTH Analogue / Neuropeptide</span>
-          </div>
-          <div class="cell-category">Cognitive</div>
-          <div class="cell-format">Lyophilized Powder</div>
-          <div class="cell-price">
-            <span class="price-value">$54</span>
-            <span class="price-market">Market ref: $120–160</span>
-          </div>
-          <div class="cell-status"><span class="status-badge"><span class="status-dot"></span>In Stock</span></div>
-          <div class="cell-action"><a href="#" class="action-link" onclick="event.preventDefault(); openModal('semax-5mg')">View Details</a></div>
-        </div>
-
-        <div class="compound-row" data-category="nootropics" data-id="nad-500mg" onclick="openModal('nad-500mg')">
-          <div class="cell-name">
-            <span class="compound-name">NAD⁺ 500mg</span>
-            <span class="compound-sub">Nicotinamide Adenine Dinucleotide</span>
-          </div>
-          <div class="cell-category">Cognitive / Longevity</div>
-          <div class="cell-format">Lyophilized Powder</div>
-          <div class="cell-price">
-            <span class="price-value">$78</span>
-            <span class="price-market">Market ref: $200–280</span>
-          </div>
-          <div class="cell-status"><span class="status-badge"><span class="status-dot"></span>In Stock</span></div>
-          <div class="cell-action"><a href="#" class="action-link" onclick="event.preventDefault(); openModal('nad-500mg')">View Details</a></div>
-        </div>
-
-        <!-- SPECIALTY -->
-        <div class="compound-row" data-category="specialty" data-id="foxo4-10mg" onclick="openModal('foxo4-10mg')">
-          <div class="cell-name">
-            <span class="compound-name">FOXO4-DRI 10mg</span>
-            <span class="compound-sub">Senolytic D-Retro Inverso Peptide</span>
-          </div>
-          <div class="cell-category">Specialty / Longevity</div>
-          <div class="cell-format">Lyophilized Powder</div>
-          <div class="cell-price">
-            <span class="price-value">$329</span>
-            <span class="price-market">Market ref: $800–1,200</span>
-          </div>
-          <div class="cell-status"><span class="status-badge"><span class="status-dot"></span>In Stock</span></div>
-          <div class="cell-action"><a href="#" class="action-link" onclick="event.preventDefault(); openModal('foxo4-10mg')">View Details</a></div>
-        </div>
-
-      </div><!-- /research-table -->
-
-    </section>
-
-    <!-- INSTITUTIONAL PILLARS -->
-    <section class="pillars" id="about">
-      <div class="section-header">
-        <span class="section-title">Why Aura Labs</span>
-      </div>
-      <div class="pillars-grid">
-        <div class="pillar">
-          <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/>
-          </svg>
-          <div class="pillar-title">Verified Purity</div>
-          <p class="pillar-body">Every compound is independently characterized. Third-party HPLC analysis confirms ≥ 98% purity prior to release. Certificates of analysis are available on request.</p>
-        </div>
-        <div class="pillar">
-          <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/>
-          </svg>
-          <div class="pillar-title">Full Documentation</div>
-          <p class="pillar-body">Research-grade documentation accompanies every order: mechanism summaries, stability data, storage requirements, and protocol references drawn from peer-reviewed literature.</p>
-        </div>
-        <div class="pillar">
-          <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/>
-          </svg>
-          <div class="pillar-title">Transparent Pricing</div>
-          <p class="pillar-body">Reference prices reflect current market rates for equivalent compounds. Aura Labs pricing is typically 30–70% below market—reflecting research accessibility as a core principle, not a sales tactic.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- INQUIRY SECTION -->
-    <section class="inquiry-section" id="contact">
-      <div class="inquiry-inner">
-        <div class="inquiry-text">
-          <div class="inquiry-eyebrow">Research Inquiries</div>
-          <div class="inquiry-title">Request documentation or discuss your research.</div>
-          <p class="inquiry-body">
-            Qualified researchers may request certificates of analysis, protocol documentation, 
-            bulk pricing, or custom compound preparation. Reach out directly — no forms, no 
-            friction.
-          </p>
-        </div>
-        <div class="inquiry-actions">
-          <a href="mailto:research@auralabs.com" class="inquiry-btn primary">Request Documentation</a>
-          <a href="mailto:research@auralabs.com" class="inquiry-btn secondary">General Inquiry</a>
-        </div>
-      </div>
-    </section>
-
-  </main><!-- /main -->
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <div class="footer-logo">Aura Labs</div>
-        <div class="footer-tagline">Research-grade compounds for qualified investigators. Not for human use.</div>
-      </div>
-      <div class="footer-links">
-        <div class="footer-col">
-          <div class="footer-col-title">Archive</div>
-          <a href="#archive">Compound Archive</a>
-          <a href="#archive">Metabolic / GLP-1</a>
-          <a href="#archive">Healing &amp; Recovery</a>
-          <a href="#archive">Cognitive</a>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Information</div>
-          <a href="mailto:research@auralabs.com">Request Documentation</a>
-          <a href="mailto:research@auralabs.com">Bulk Inquiry</a>
-          <a href="#">Terms of Use</a>
-          <a href="#">Privacy Policy</a>
-        </div>
-      </div>
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <h1 class="hero-logotype">Aura<br><em>Labs</em></h1>
+      <p class="hero-descriptor">Research-grade compounds. Precision sourcing.</p>
+      <a class="hero-cta" href="#archive">Compound Archive</a>
     </div>
-    <div class="footer-legal">
-      <div class="footer-legal-inner">
-        <p>
-          All compounds are sold for research, educational, and laboratory purposes only. 
-          Aura Labs makes no claims regarding therapeutic efficacy or safety for human use. 
-          Purchaser assumes full responsibility for compliance with applicable laws and 
-          regulations. © 2026 Aura Labs. All rights reserved.
-        </p>
-      </div>
+    <div class="hero-image-wrap" id="heroImage">
+      <img src="images/semaglutide.png" alt="" loading="eager">
     </div>
-  </footer>
+  </section>
 
-  <!-- DETAIL MODAL -->
-  <div class="modal-overlay" id="modal-overlay" onclick="closeModalOnOverlay(event)">
-    <div class="modal" id="modal">
-      <div class="modal-header">
-        <div>
-          <div class="modal-title" id="modal-title">—</div>
-          <div class="modal-cat" id="modal-cat">—</div>
+  <!-- COMPOUND ARCHIVE -->
+  <div class="archive" id="archive">
+    <div class="archive-header">
+      <div>
+        <p class="section-label">Compound Archive</p>
+        <h2 class="archive-title">Current Inventory</h2>
+      </div>
+      <span class="archive-count" id="archiveCount">10 compounds</span>
+    </div>
+
+    <div class="filter-row" id="filterRow">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="weight">Weight Management</button>
+      <button class="filter-btn" data-filter="healing">Healing &amp; Recovery</button>
+      <button class="filter-btn" data-filter="hgh">HGH Secretagogues</button>
+      <button class="filter-btn" data-filter="cognitive">Cognitive</button>
+      <button class="filter-btn" data-filter="specialty">Specialty</button>
+    </div>
+
+    <table class="compound-table" id="compoundTable">
+      <thead>
+        <tr>
+          <th>Compound</th>
+          <th>Research Area</th>
+          <th>Format</th>
+          <th>Availability</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+      </tbody>
+    </table>
+  </div>
+
+  <!-- INQUIRY FORM -->
+  <div class="inquiry" id="inquiry">
+    <div class="inquiry-grid">
+      <div class="inquiry-left">
+        <p class="section-label">Researcher Access</p>
+        <h2>Submit an inquiry for compounds, pricing, or documentation.</h2>
+        <p style="margin-top: 24px;">For institutional researchers, licensed practitioners, and verified professionals. All inquiries reviewed within 24 hours.</p>
+      </div>
+      <form id="inquiryForm">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" placeholder="Full name">
         </div>
-        <button class="modal-close" onclick="closeModal()">×</button>
-      </div>
-      <div class="modal-body" id="modal-body">
-        <!-- filled by JS -->
-      </div>
-      <div class="modal-footer">
-        <div class="modal-footer-note" id="modal-footer-note"></div>
-        <div class="modal-footer-actions">
-          <button class="btn-secondary" onclick="closeModal()">Close</button>
-          <a href="mailto:research@auralabs.com" class="btn-primary" id="modal-request-btn">Request Documentation</a>
+        <div class="form-group">
+          <label>Institution / Organization</label>
+          <input type="text" placeholder="University, clinic, or company">
         </div>
-      </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="researcher@institution.edu">
+        </div>
+        <div class="form-group">
+          <label>Compound of interest</label>
+          <select>
+            <option value="" disabled selected>Select compound</option>
+            <option>Semaglutide 2mg</option>
+            <option>Retatrutide 5mg</option>
+            <option>BPC-157 2mg</option>
+            <option>TB-500 5mg</option>
+            <option>GHK-CU 50mg</option>
+            <option>Ipamorelin 5mg</option>
+            <option>CJC-1295 no DAC 5mg</option>
+            <option>Semax 5mg</option>
+            <option>NAD+ 500mg</option>
+            <option>FOXO4-DRI 10mg</option>
+            <option>Multiple / Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Research context</label>
+          <textarea placeholder="Brief description of intended application"></textarea>
+        </div>
+        <button type="submit" class="form-submit">Submit inquiry</button>
+      </form>
     </div>
   </div>
 
-  <script src="products-data.js"></script>
-  <script>
-    // ─── FILTER ───────────────────────────────────────────────
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const rows = document.querySelectorAll('.compound-row');
-    const countEl = document.getElementById('compound-count');
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="footer-brand">
+      Aura Labs
+      <small>Research compounds since 2024</small>
+    </div>
+    <div class="footer-col">
+      <p>
+        <a href="mailto:research@auralabs.com">research@auralabs.com</a><br>
+        Shipping within 48h of verification<br>
+        US domestic + international
+      </p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-legal">
+        All compounds are sold for research purposes only.<br>
+        Not intended for human use. For laboratory use by<br>
+        qualified researchers. Verify local regulations.
+      </p>
+    </div>
+  </footer>
 
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        let visible = 0;
-        rows.forEach(row => {
-          const match = filter === 'all' || row.dataset.category === filter;
-          row.classList.toggle('hidden', !match);
-          if (match) visible++;
-        });
-        countEl.textContent = visible + (visible === 1 ? ' compound' : ' compounds');
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay" aria-modal="true" role="dialog">
+    <div class="modal-panel" id="modalPanel">
+      <button class="modal-close" id="modalClose">Close ×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script>
+    // ── COMPOUND DATA ──────────────────────────────────────────────────────────
+    const compounds = [
+      {
+        id: "semaglutide-2mg",
+        name: "Semaglutide 2mg",
+        area: "Weight Management",
+        areaKey: "weight",
+        format: "Lyophilized Powder",
+        availability: "in-stock",
+        price: 30,
+        marketRange: "$260–300",
+        mechanism: "GLP-1 agonist → increases satiety → reduces appetite → supports weight management",
+        description: "GLP-1 receptor agonist that mimics glucagon-like peptide-1. Slows gastric emptying, increases satiety, reduces hunger signaling. The 2mg dose is standard for initial research protocols.",
+        applications: ["Weight loss research", "Appetite suppression studies", "Metabolic health", "Blood sugar management"],
+        sourcing: "Synthesized via solid-phase peptide synthesis. Purity ≥98% confirmed by HPLC. Certificate of Analysis provided with each order.",
+        safety: "Monitor for pancreatitis indicators. Contraindicated in subjects with medullary thyroid cancer history. GI adjustment period typical in first 2–4 weeks.",
+        researchNotes: "Most studied GLP-1 agonist for metabolic research. Typical protocol: 0.25–2.4mg weekly over 16+ weeks shows 15–20% body weight reduction in research subjects."
+      },
+      {
+        id: "retatrutide-5mg",
+        name: "Retatrutide 5mg",
+        area: "Weight Management",
+        areaKey: "weight",
+        format: "Lyophilized Powder",
+        availability: "in-stock",
+        price: 49,
+        marketRange: "$500–550",
+        mechanism: "GIP + GLP-1 + GCG triple agonist → multi-pathway appetite suppression + metabolic acceleration",
+        description: "Triple incretin receptor agonist — next generation metabolic compound. Activates GIP, GLP-1, and glucagon receptors simultaneously for potent multi-pathway effects.",
+        applications: ["Next-gen weight management research", "Metabolic syndrome studies", "Glucagon pathway studies", "Advanced obesity protocols"],
+        sourcing: "SPPS synthesis, lyophilized to powder. Purity ≥98%. Full third-party CoA on request.",
+        safety: "Triple agonist profile requires careful dosing. Do not combine with other GLP-1 agonists. Monitor hepatic enzymes.",
+        researchNotes: "Emerging class. Early research data: 20–25% mean weight reduction at 12 weeks. Potentially improved tolerability vs single-agonist analogues."
+      },
+      {
+        id: "bpc157-2mg",
+        name: "BPC-157 2mg",
+        area: "Healing & Recovery",
+        areaKey: "healing",
+        format: "Lyophilized Powder",
+        availability: "in-stock",
+        price: 30,
+        marketRange: "$260–310",
+        mechanism: "VEGF + FGF upregulation → angiogenesis → tissue proliferation → accelerated healing",
+        description: "Body Protection Compound-157. Pentadecapeptide isolated from gastric secretion. Promotes tissue repair across musculoskeletal, neural, and gastrointestinal systems.",
+        applications: ["Tendon & ligament repair", "Muscle damage recovery", "Gut mucosal healing", "Neural repair research", "Post-injury recovery"],
+        sourcing: "SPPS synthesis, pharmaceutical-grade reagents. ≥98% purity by HPLC/MS verification.",
+        safety: "Excellent tolerability profile. 100+ peer-reviewed safety studies. No contraindications established at research dosages. Long-term use well-documented.",
+        researchNotes: "100+ peer-reviewed citations. Research dosing: 250–500mcg daily. Optimal results with localized + systemic co-administration. 4–8 week protocols standard."
+      },
+      {
+        id: "tb500-5mg",
+        name: "TB-500 5mg",
+        area: "Healing & Recovery",
+        areaKey: "healing",
+        format: "Lyophilized Powder",
+        availability: "in-stock",
+        price: 55,
+        marketRange: "$360–420",
+        mechanism: "Cell migration facilitation + systemic anti-inflammatory signaling → whole-body tissue repair",
+        description: "Thymosin Beta 4 fragment. Naturally occurring peptide governing actin regulation, cell migration, and tissue repair. Operates systemically, unlike BPC-157's local concentration.",
+        applications: ["Systemic soft tissue repair", "Joint recovery research", "Collagen restructuring", "Inflammation reduction", "Whole-body healing protocols"],
+        sourcing: "Recombinant synthesis. Lyophilized. Purity ≥98% by HPLC.",
+        safety: "Well tolerated. May transiently modulate immune response. Exercise caution with pre-existing immunological conditions.",
+        researchNotes: "Standard protocol: 2–2.5mg twice weekly for 4–6 weeks. Frequently stacked with BPC-157 for comprehensive local + systemic coverage."
+      },
+      {
+        id: "ghkcu-50mg",
+        name: "GHK-CU 50mg",
+        area: "Healing & Recovery",
+        areaKey: "healing",
+        format: "Solution",
+        availability: "in-stock",
+        price: 32,
+        marketRange: "$390–450",
+        mechanism: "Collagen synthesis upregulation + copper-mediated cross-linking → structural tissue repair",
+        description: "Copper peptide with potent collagen-stimulating properties. Signals fibroblasts to increase collagen and glycosaminoglycan synthesis. Copper component enables proper cross-linking.",
+        applications: ["Collagen synthesis research", "Wound healing", "Dermal repair", "Anti-aging models", "Bone density studies"],
+        sourcing: "Chelated copper peptide solution. Verified metal-to-peptide ratio. Sterile-filtered.",
+        safety: "Exceptional safety profile. Copper levels at peptide dosing are physiologically negligible. No known contraindications.",
+        researchNotes: "Topical and systemic research. 50–100mg weekly shows measurable collagen density increase at 4–6 weeks. Synergistic with BPC-157 and TB-500."
+      },
+      {
+        id: "ipamorelin-5mg",
+        name: "Ipamorelin 5mg",
+        area: "HGH Secretagogue",
+        areaKey: "hgh",
+        format: "Lyophilized Powder",
+        availability: "in-stock",
+        price: 49,
+        marketRange: "$330–390",
+        mechanism: "GHS receptor agonism → pulsatile pituitary GH release → endogenous HGH elevation",
+        description: "Selective growth hormone secretagogue. Most receptor-selective GHS available. Stimulates pituitary GH release without affecting cortisol or prolactin — preserving the natural feedback axis.",
+        applications: ["Natural HGH elevation", "Muscle hypertrophy research", "Recovery optimization", "Body composition studies", "Aging & longevity protocols"],
+        sourcing: "SPPS synthesis, pentapeptide. Purity ≥98.5% by HPLC/MS.",
+        safety: "No documented suppression of natural GH axis. Slow tolerance development (~4–6 months). Well-tolerated long-term in research settings.",
+        researchNotes: "5mg vial for advanced protocols. Research shows 4–6× natural GH baseline at 100–200mcg doses. Peak serum GH at 30–60 min post-administration. Often stacked with CJC-1295."
+      },
+      {
+        id: "cjc1295-nodac-5mg",
+        name: "CJC-1295 no DAC 5mg",
+        area: "HGH Secretagogue",
+        areaKey: "hgh",
+        format: "Lyophilized Powder",
+        availability: "in-stock",
+        price: 93,
+        marketRange: "$430–510",
+        mechanism: "GHRH analogue → rapid pituitary stimulation → short-duration GH spike (30–90 min half-life)",
+        description: "Growth hormone-releasing hormone analogue. Short-acting profile (no Drug Affinity Complex) designed for pulsatile co-administration with Ipamorelin. Creates synchronized GH release.",
+        applications: ["Rapid GH elevation research", "Ipamorelin stacking protocols", "GH pulse optimization", "Athletic recovery research"],
+        sourcing: "SPPS synthesized. Lyophilized. ≥98% purity.",
+        safety: "No negative feedback on natural GH axis. No known long-term contraindications. Water retention possible at higher doses.",
+        researchNotes: "Optimal: 100mcg co-administered with Ipamorelin. Dual-mechanism synergy creates physiologically natural GH curve. Peak GH at 15–30 min. Can be used indefinitely in research."
+      },
+      {
+        id: "semax-5mg",
+        name: "Semax 5mg",
+        area: "Cognitive",
+        areaKey: "cognitive",
+        format: "Lyophilized Powder",
+        availability: "in-stock",
+        price: 54,
+        marketRange: "$260–310",
+        mechanism: "BDNF upregulation + neuroprotective signaling → cognitive enhancement + stress resilience",
+        description: "ACTH-derived neuroprotective peptide. Significantly increases brain-derived neurotrophic factor (BDNF), enhancing neuroplasticity. Extensively studied in Russian literature for cognitive optimization.",
+        applications: ["Cognitive enhancement protocols", "Neuroprotection research", "Stress resilience studies", "Learning & memory optimization", "Age-related cognitive decline modeling"],
+        sourcing: "SPPS synthesis. Lyophilized. Purity ≥98%.",
+        safety: "Well tolerated in all documented studies. Promotes neurogenesis. No reported adverse effects at standard research dosages.",
+        researchNotes: "Dosing: 500mcg–1mg daily. Improved memory consolidation and processing speed documented at 2–4 weeks. Long-term use studies show sustained benefit without tolerance."
+      },
+      {
+        id: "nad-500mg",
+        name: "NAD+ 500mg",
+        area: "Cognitive",
+        areaKey: "cognitive",
+        format: "Lyophilized Powder",
+        availability: "in-stock",
+        price: 78,
+        marketRange: "$390–460",
+        mechanism: "Mitochondrial NAD+ restoration → sirtuin activation → cellular energy + DNA repair cascade",
+        description: "Nicotinamide Adenine Dinucleotide. Central coenzyme of cellular energy metabolism. Declines with age. Restoration research shows mitochondrial function recovery, longevity signaling, and cognitive improvements.",
+        applications: ["Cellular energy optimization", "Anti-aging research", "Mitochondrial health", "Cognitive support", "Longevity protocol research"],
+        sourcing: "Pharmaceutical-grade NAD+ lyophilized powder. Identity confirmed by NMR and MS.",
+        safety: "Excellent safety profile. Copper levels within physiological norms. Long-term use documented without adverse findings.",
+        researchNotes: "250–500mg daily. Measurable NAD+ tissue restoration at 4–8 weeks. Sirtuin activation confirmed in cell culture models. Frequently combined with FOXO4-DRI in longevity protocols."
+      },
+      {
+        id: "foxo4dri-10mg",
+        name: "FOXO4-DRI 10mg",
+        area: "Specialty",
+        areaKey: "specialty",
+        format: "Lyophilized Powder",
+        availability: "limited",
+        price: 329,
+        marketRange: "$1,450–1,600",
+        mechanism: "Senescent cell targeting → FOXO4–p53 complex disruption → apoptosis induction → tissue rejuvenation",
+        description: "D-amino acid retro-inverso peptide. Selectively targets senescent cells by disrupting the FOXO4–p53 protein interaction that prevents apoptosis. Senolytic mechanism with high selectivity.",
+        applications: ["Cellular senescence research", "Longevity & aging studies", "Age-related inflammation modeling", "Tissue rejuvenation research"],
+        sourcing: "D-retro-inverso synthesis (all-D amino acids). Premium SPPS with HPLC purification. ≥97% purity. Limited production batches.",
+        safety: "Emerging safety profile. Studies to date show good tolerability. Immune status should be confirmed prior to research. Not combined with immunosuppressive protocols.",
+        researchNotes: "Cutting edge senolytic. 2–5mg weekly. Senescent cell burden reduction documented at 4–8 weeks. Often combined with NAD+ for comprehensive longevity protocols."
+      }
+    ];
+
+    // ── TABLE RENDER ────────────────────────────────────────────────────────────
+    function renderTable(filter) {
+      const tbody = document.getElementById('tableBody');
+      const count = document.getElementById('archiveCount');
+      const filtered = filter === 'all' ? compounds : compounds.filter(c => c.areaKey === filter);
+      count.textContent = filtered.length + ' compound' + (filtered.length !== 1 ? 's' : '');
+
+      tbody.innerHTML = '';
+      filtered.forEach(c => {
+        const tr = document.createElement('tr');
+        tr.dataset.id = c.id;
+        tr.innerHTML = `
+          <td class="td-name">${c.name}</td>
+          <td class="td-area">${c.area}</td>
+          <td class="td-format">${c.format}</td>
+          <td class="td-avail"><span class="avail-badge ${c.availability}">${c.availability === 'in-stock' ? 'In Stock' : 'Limited'}</span></td>
+          <td><span class="view-link">View →</span></td>
+        `;
+        tr.addEventListener('click', () => openModal(c.id));
+        tbody.appendChild(tr);
       });
+    }
+
+    // ── FILTERS ─────────────────────────────────────────────────────────────────
+    document.getElementById('filterRow').addEventListener('click', e => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderTable(btn.dataset.filter);
     });
 
-    // ─── COMPOUND DATA ────────────────────────────────────────
-    const compounds = {
-      'semaglutide-2mg': {
-        name: 'Semaglutide 2mg',
-        category: 'Metabolic / GLP-1 · Lyophilized Powder',
-        price: '$30',
-        market: '$260–300',
-        mechanism: 'GLP-1 agonist → increases satiety → reduces appetite → supports weight management',
-        description: 'Semaglutide is a GLP-1 receptor agonist that mimics glucagon-like peptide-1, a hormone that regulates blood sugar and appetite. Works by slowing gastric emptying, increasing feelings of fullness, and reducing hunger signals. The 2mg dose is ideal for first-time research.',
-        bestFor: ['Weight loss research', 'Appetite suppression studies', 'Metabolic health', 'Blood sugar management'],
-        stackWith: [
-          { product: 'Tirzepatide 5mg', reason: 'Dual agonist + GLP-1 creates synergistic appetite suppression' },
-          { product: 'AOD-9604 5mg', reason: 'AOD-9604 targets fat mobilization while Semaglutide suppresses appetite' }
-        ],
-        avoidWith: [
-          { product: 'Liraglutide', reason: 'Both are GLP-1 agonists; combining increases side effects without benefit' }
-        ],
-        researchNotes: 'Most researched peptide for weight loss. Typical research: 0.25–2.4mg weekly over 16+ weeks shows 15–20% body weight reduction.',
-        safety: 'Monitor for pancreatitis symptoms. Not for subjects with personal/family history of medullary thyroid cancer.'
-      },
-      'semaglutide-5mg': {
-        name: 'Semaglutide 5mg',
-        category: 'Metabolic / GLP-1 · Lyophilized Powder',
-        price: '$49',
-        market: '$460–520',
-        mechanism: 'GLP-1 agonist (higher dose) → pronounced satiety → potent appetite reduction',
-        description: 'Higher concentration of Semaglutide for advanced research. 5mg provides stronger appetite suppression and metabolic effects compared to 2mg, suitable for continuation studies after tolerance development.',
-        bestFor: ['Advanced weight loss research', 'Continuation studies', 'Metabolic optimization'],
-        stackWith: [
-          { product: 'BPC-157 10mg', reason: 'Supports muscle healing during caloric deficit' },
-          { product: 'CJC-1295 5mg (no DAC)', reason: 'Preserves muscle mass during Semaglutide-induced weight loss' }
-        ],
-        avoidWith: [
-          { product: 'Semaglutide 2mg simultaneously', reason: 'Do not combine doses of the same compound' }
-        ],
-        researchNotes: 'Higher dose for continuation research. 5mg provides ~2x appetite suppression versus 2mg formulation.',
-        safety: 'Same safety profile as 2mg; monitor gastric motility and thyroid markers.'
-      },
-      'retatrutide-5mg': {
-        name: 'Retatrutide 5mg',
-        category: 'Metabolic / GLP-1 · Lyophilized Powder',
-        price: '$49',
-        market: '$400–500',
-        mechanism: 'Triple agonist: GLP-1 + GIP + Glucagon receptors → multi-pathway metabolic modulation',
-        description: 'Retatrutide (LY3437943) is a novel triple agonist acting on GLP-1, GIP, and glucagon receptors simultaneously. Phase 2 trials showed up to 24% body weight reduction—substantially exceeding dual-agonist approaches.',
-        bestFor: ['Advanced metabolic research', 'Multi-receptor pathway studies', 'Weight loss protocol development'],
-        stackWith: [
-          { product: 'BPC-157 5mg', reason: 'GI protection during adaptation phase' }
-        ],
-        avoidWith: [
-          { product: 'Other GLP-1 agonists', reason: 'Redundant receptor engagement; compounded side effects' }
-        ],
-        researchNotes: 'Cutting-edge compound. Phase 2: 24.2% mean body weight reduction at 48 weeks (12mg dose).',
-        safety: 'Emerging safety profile. Well-tolerated in trials. Monitor thyroid and pancrease markers.'
-      },
-      'bpc157-2mg': {
-        name: 'BPC-157 2mg',
-        category: 'Healing & Recovery · Lyophilized Powder',
-        price: '$30',
-        market: '$60–80',
-        mechanism: 'Angiogenesis promotion → collagen synthesis → nitric oxide modulation → tissue regeneration',
-        description: 'BPC-157 (Body Protection Compound) is a pentadecapeptide derived from a protein found in gastric juice. Exhibits accelerated healing of muscle, tendon, and ligament tissue, as well as GI protective effects.',
-        bestFor: ['Muscle injury recovery research', 'Tendon/ligament healing studies', 'GI mucosal protection', 'Wound healing protocols'],
-        stackWith: [
-          { product: 'TB-500 5mg', reason: 'Synergistic recovery: BPC-157 handles acute repair, TB-500 systemic regeneration' },
-          { product: 'GHK-Cu 50mg', reason: 'Enhanced collagen synthesis and anti-inflammatory effects' }
-        ],
-        avoidWith: [],
-        researchNotes: 'Excellent safety profile in multiple animal models. Standard research: 200–500mcg per injection, 2x daily.',
-        safety: 'No significant adverse effects noted in peer-reviewed research. Well-tolerated across species.'
-      },
-      'bpc157-10mg': {
-        name: 'BPC-157 10mg',
-        category: 'Healing & Recovery · Lyophilized Powder',
-        price: '$68',
-        market: '$200–250',
-        mechanism: 'Angiogenesis promotion → collagen synthesis → nitric oxide modulation → tissue regeneration',
-        description: 'High-concentration BPC-157 for extended research protocols. 10mg vial provides 5x the research capacity of the 2mg format, suitable for multi-week tissue healing studies.',
-        bestFor: ['Extended recovery research', 'High-frequency study designs', 'Chronic injury models'],
-        stackWith: [
-          { product: 'TB-500 5mg', reason: 'Enhanced systemic healing when combined' },
-          { product: 'Ipamorelin', reason: 'Growth hormone secretion combined with direct tissue repair' }
-        ],
-        avoidWith: [],
-        researchNotes: 'Higher concentration for longer-duration studies. 10mg provides ~50 research doses at 200mcg.',
-        safety: 'Same as 2mg formulation. Extensive safety documentation available on request.'
-      },
-      'tb500-5mg': {
-        name: 'TB-500 5mg',
-        category: 'Healing & Recovery · Lyophilized Powder',
-        price: '$55',
-        market: '$100–140',
-        mechanism: 'Thymosin beta-4 fragment → actin regulation → anti-inflammation → angiogenesis → systemic regeneration',
-        description: 'TB-500 is a synthetic analogue of the naturally occurring peptide Thymosin Beta-4. Promotes systemic healing, reduces inflammation, and accelerates recovery from musculoskeletal injuries.',
-        bestFor: ['Systemic healing research', 'Inflammation reduction studies', 'Vascular repair models', 'Athletic recovery protocols'],
-        stackWith: [
-          { product: 'BPC-157', reason: 'Gold standard combination: local (BPC) + systemic (TB-500) healing' }
-        ],
-        avoidWith: [],
-        researchNotes: 'TB-500 is systemic; reaches tissues BPC-157 may not. Research: 5–10mg weekly, 4–8 weeks.',
-        safety: 'Well-tolerated. Possible transient fatigue or head rush at higher doses in some models.'
-      },
-      'ghkcu-50mg': {
-        name: 'GHK-Cu 50mg',
-        category: 'Healing & Recovery · Lyophilized Powder',
-        price: '$32',
-        market: '$80–120',
-        mechanism: 'Copper chelation → collagen/elastin synthesis → anti-oxidant signaling → tissue remodeling',
-        description: 'GHK-Cu (Glycyl-L-histidyl-L-lysine copper) is a naturally occurring human copper peptide. Promotes wound healing, collagen production, and anti-inflammatory responses. Also studied for potential role in skin regeneration and gene expression.',
-        bestFor: ['Wound healing research', 'Collagen synthesis studies', 'Dermal regeneration models', 'Anti-aging pathway research'],
-        stackWith: [
-          { product: 'BPC-157', reason: 'Enhanced collagen repair synergy' }
-        ],
-        avoidWith: [
-          { product: 'High-dose zinc supplementation', reason: 'Competes with copper binding; may reduce efficacy' }
-        ],
-        researchNotes: 'One of the most researched anti-aging peptides. Activates 31 of 84 key genes involved in regeneration.',
-        safety: 'Excellent safety profile. Topical and systemic use well-documented in literature.'
-      },
-      'ipamorelin-2mg': {
-        name: 'Ipamorelin 2mg',
-        category: 'HGH Secretagogue · Lyophilized Powder',
-        price: '$24',
-        market: '$50–70',
-        mechanism: 'Selective GHRP → pituitary GH pulse → IGF-1 elevation → lean tissue preservation',
-        description: 'Ipamorelin is a selective growth hormone releasing peptide (GHRP) that stimulates natural GH secretion without significantly affecting cortisol or prolactin. Considered the cleanest secretagogue for research purposes.',
-        bestFor: ['GH secretion studies', 'Body composition research', 'Sleep quality investigation', 'Lean mass preservation'],
-        stackWith: [
-          { product: 'CJC-1295 (no DAC)', reason: 'GHRH + GHRP combination creates synergistic GH pulse' }
-        ],
-        avoidWith: [],
-        researchNotes: 'Highly selective; does not cause cortisol elevation. Research: 100–300mcg, 2–3x daily.',
-        safety: 'Clean side effect profile. Occasional mild water retention. No significant hormone disruption noted.'
-      },
-      'ipamorelin-5mg': {
-        name: 'Ipamorelin 5mg',
-        category: 'HGH Secretagogue · Lyophilized Powder',
-        price: '$49',
-        market: '$100–130',
-        mechanism: 'Selective GHRP → pituitary GH pulse → IGF-1 elevation → lean tissue preservation',
-        description: 'Higher-concentration Ipamorelin for extended study designs. 5mg provides multi-month research capacity at standard protocols, reducing preparation frequency.',
-        bestFor: ['Long-duration GH research', 'Longitudinal body composition studies', 'Aging and GH decline models'],
-        stackWith: [
-          { product: 'CJC-1295 5mg (no DAC)', reason: 'Benchmark combination for GH research protocols' }
-        ],
-        avoidWith: [],
-        researchNotes: 'Equivalent to ~25 research doses at 200mcg. Ideal for 8–12 week study designs.',
-        safety: 'Identical safety profile to 2mg; concentration only affects dose calculation.'
-      },
-      'cjc1295-5mg': {
-        name: 'CJC-1295 5mg (no DAC)',
-        category: 'HGH Secretagogue · Lyophilized Powder',
-        price: '$93',
-        market: '$180–240',
-        mechanism: 'GHRH analogue → sustained GH axis stimulation → IGF-1 upregulation → anabolic signaling',
-        description: 'CJC-1295 (no DAC) is a modified GHRH analogue with a shorter half-life than the DAC version, allowing more physiological pulsatile GH release. Pairs with Ipamorelin for what is considered the gold standard GH research protocol.',
-        bestFor: ['GH pulse research', 'Body composition studies', 'Sleep-associated GH secretion', 'Anti-aging research'],
-        stackWith: [
-          { product: 'Ipamorelin 2–5mg', reason: 'Synergistic 10x amplification of natural GH pulse' }
-        ],
-        avoidWith: [
-          { product: 'CJC-1295 with DAC', reason: 'Do not combine; redundant receptor saturation' }
-        ],
-        researchNotes: 'No DAC version preferred for pulsatile GH studies. Typical: 100mcg CJC + 100mcg Ipamorelin, 2–3x daily.',
-        safety: 'Well-tolerated. Water retention possible at higher doses. Monitor IGF-1 in long-term studies.'
-      },
-      'semax-5mg': {
-        name: 'Semax 5mg',
-        category: 'Cognitive / Neuropeptide · Lyophilized Powder',
-        price: '$54',
-        market: '$120–160',
-        mechanism: 'ACTH(4-7) analogue → BDNF upregulation → dopaminergic modulation → neuroprotection',
-        description: 'Semax is an ACTH-derived peptide developed in Russia with nootropic, neuroprotective, and anxiolytic properties. Stimulates BDNF and NGF production. Used extensively in stroke recovery research and cognitive enhancement studies.',
-        bestFor: ['Cognitive enhancement research', 'Neuroprotection studies', 'BDNF upregulation models', 'Anxiety and stress pathway research'],
-        stackWith: [
-          { product: 'NAD+ 500mg', reason: 'Complementary cellular energy + neurotrophic support' }
-        ],
-        avoidWith: [],
-        researchNotes: 'Administered intranasally in most research. Rapid onset. Research: 100–600mcg per dose.',
-        safety: 'Well-researched. Minimal side effects documented. Possible mild stimulatory effects.'
-      },
-      'nad-500mg': {
-        name: 'NAD⁺ 500mg',
-        category: 'Cognitive / Longevity · Lyophilized Powder',
-        price: '$78',
-        market: '$200–280',
-        mechanism: 'NAD+ repletion → sirtuin activation → mitochondrial biogenesis → DNA repair enhancement',
-        description: 'Nicotinamide Adenine Dinucleotide (NAD+) is a critical coenzyme involved in cellular energy metabolism, DNA repair, and aging pathways. Levels decline significantly with age. Research applications span longevity, neurodegeneration, and metabolic disease.',
-        bestFor: ['Aging and longevity research', 'Mitochondrial function studies', 'DNA repair pathway research', 'Cognitive health models'],
-        stackWith: [
-          { product: 'Semax 5mg', reason: 'Comprehensive cognitive and cellular energy support' },
-          { product: 'FOXO4-DRI 10mg', reason: 'Multi-pathway anti-aging research protocol' }
-        ],
-        avoidWith: [],
-        researchNotes: 'IV NAD+ research shows rapid cellular uptake. 500mg format suitable for 5–10 IV research sessions.',
-        safety: 'Well-tolerated. Possible flushing or nausea at IV administration rates. Oral/IV routes both studied.'
-      },
-      'foxo4-10mg': {
-        name: 'FOXO4-DRI 10mg',
-        category: 'Specialty / Longevity · Lyophilized Powder',
-        price: '$329',
-        market: '$800–1,200',
-        mechanism: 'FOXO4-p53 interaction disruption → selective senescent cell apoptosis → senolytic clearance',
-        description: 'FOXO4-DRI is a D-retro inverso peptide that disrupts the FOXO4-p53 interaction in senescent cells, triggering selective apoptosis of these cells without affecting healthy tissue. Represents a cutting-edge approach to cellular senescence research.',
-        bestFor: ['Senolytic research', 'Cellular senescence models', 'Longevity pathway studies', 'p53-FOXO4 interaction research'],
-        stackWith: [
-          { product: 'NAD+ 500mg', reason: 'Complementary longevity pathways: senolytic + metabolic restoration' }
-        ],
-        avoidWith: [
-          { product: 'Immunosuppressants (high dose)', reason: 'FOXO4-DRI relies on immune recognition; suppression blunts effects' }
-        ],
-        researchNotes: 'Cutting-edge senolytic. Research: 2–5mg weekly. Studies show senescent cell reduction in 4–8 weeks.',
-        safety: 'Emerging safety profile. Well-tolerated in studies. Not for immunocompromised subjects.'
-      }
-    };
+    renderTable('all');
 
-    // ─── MODAL ────────────────────────────────────────────────
+    // ── MODAL ────────────────────────────────────────────────────────────────────
     function openModal(id) {
-      const c = compounds[id];
+      const c = compounds.find(x => x.id === id);
       if (!c) return;
 
-      document.getElementById('modal-title').textContent = c.name;
-      document.getElementById('modal-cat').textContent = c.category;
-      document.getElementById('modal-request-btn').href =
-        `mailto:research@auralabs.com?subject=Documentation Request: ${encodeURIComponent(c.name)}`;
-      document.getElementById('modal-footer-note').textContent =
-        'Research use only. Documentation includes mechanism summary, stability data, and protocol references.';
+      const html = `
+        <p class="modal-category">${c.area}</p>
+        <h2 class="modal-title">${c.name}</h2>
+        <p class="modal-format">${c.format}</p>
 
-      const stackHTML = c.stackWith.length
-        ? c.stackWith.map(s => `<div class="stack-item"><div class="stack-item-name">${s.product}</div><div class="stack-item-reason">${s.reason}</div></div>`).join('')
-        : '<p>No specific co-administration notes.</p>';
-
-      const avoidHTML = c.avoidWith.length
-        ? c.avoidWith.map(a => `<div class="avoid-item"><div class="avoid-item-name">${a.product}</div><div class="avoid-item-reason">${a.reason}</div></div>`).join('')
-        : '<p style="font-size:12px;color:var(--text-muted)">No specific contraindications noted in current literature.</p>';
-
-      const bestForHTML = c.bestFor.map(b => `<span class="tag">${b}</span>`).join('');
-
-      document.getElementById('modal-body').innerHTML = `
-        <div class="modal-grid">
-          <div class="modal-stat">
-            <div class="modal-stat-label">Reference Price</div>
-            <div class="modal-stat-value">${c.price}</div>
-            <div class="modal-stat-sub">Market reference: ${c.market}</div>
-          </div>
-          <div class="modal-stat">
-            <div class="modal-stat-label">Format</div>
-            <div class="modal-stat-value">Lyophilized Powder</div>
-            <div class="modal-stat-sub">≥ 98% purity (HPLC verified)</div>
+        <div class="modal-price-row">
+          <div class="modal-price">$${c.price}</div>
+          <div class="modal-price-compare">
+            <strong>${c.marketRange}</strong>
+            Market range
           </div>
         </div>
 
         <div class="modal-section">
-          <div class="modal-section-title">Description</div>
-          <p>${c.description}</p>
+          <p class="modal-section-label">Mechanism</p>
+          <p class="modal-mechanism">${c.mechanism}</p>
         </div>
 
         <div class="modal-section">
-          <div class="modal-section-title">Mechanism of Action</div>
-          <div class="mechanism-block">${c.mechanism}</div>
+          <p class="modal-section-label">Applications</p>
+          <div class="modal-tags">
+            ${c.applications.map(a => `<span class="modal-tag">${a}</span>`).join('')}
+          </div>
         </div>
 
         <div class="modal-section">
-          <div class="modal-section-title">Research Applications</div>
-          <div class="tag-list">${bestForHTML}</div>
+          <p class="modal-section-label">Sourcing & Purity</p>
+          <p class="modal-text">${c.sourcing}</p>
         </div>
 
         <div class="modal-section">
-          <div class="modal-section-title">Co-administration Notes</div>
-          <div class="stack-list">${stackHTML}</div>
+          <p class="modal-section-label">Research Notes</p>
+          <p class="modal-text">${c.researchNotes}</p>
         </div>
 
         <div class="modal-section">
-          <div class="modal-section-title">Contraindications</div>
-          <div class="avoid-list">${avoidHTML}</div>
+          <p class="modal-section-label">Safety Considerations</p>
+          <div class="modal-safety">${c.safety}</div>
         </div>
 
-        <div class="modal-section">
-          <div class="modal-section-title">Research Notes</div>
-          <p>${c.researchNotes}</p>
-        </div>
-
-        <div class="modal-section">
-          <div class="modal-section-title">Safety Considerations</div>
-          <div class="safety-note">${c.safety}</div>
-        </div>
+        <button class="modal-inquiry-btn" onclick="document.getElementById('modalOverlay').classList.remove('open'); setTimeout(()=>document.querySelector('#inquiry input').focus(), 400)">
+          Submit researcher inquiry
+        </button>
       `;
 
-      document.getElementById('modal-overlay').classList.add('open');
+      document.getElementById('modalContent').innerHTML = html;
+      document.getElementById('modalOverlay').classList.add('open');
+      document.getElementById('modalPanel').scrollTop = 0;
       document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
-      document.getElementById('modal-overlay').classList.remove('open');
+      document.getElementById('modalOverlay').classList.remove('open');
       document.body.style.overflow = '';
     }
 
-    function closeModalOnOverlay(e) {
-      if (e.target === document.getElementById('modal-overlay')) closeModal();
-    }
-
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('modalOverlay').addEventListener('click', e => {
+      if (e.target === document.getElementById('modalOverlay')) closeModal();
+    });
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeModal();
     });
-  </script>
 
+    // ── NAV SCROLL STATE ─────────────────────────────────────────────────────────
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // ── PARALLAX ─────────────────────────────────────────────────────────────────
+    const heroImg = document.querySelector('.hero-image-wrap img');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      const heroH = document.getElementById('hero').offsetHeight;
+      if (y < heroH) {
+        const pct = y / heroH;
+        heroImg.style.transform = `scale(1.05) translateY(${pct * 40}px)`;
+      }
+    }, { passive: true });
+
+    // ── SCREENSHOT MODE ──────────────────────────────────────────────────────────
+    if (new URLSearchParams(location.search).has('screenshot')) {
+      document.body.classList.add('no-animation');
+    }
+
+    // ── FORM ─────────────────────────────────────────────────────────────────────
+    document.getElementById('inquiryForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const btn = e.target.querySelector('.form-submit');
+      btn.textContent = 'Inquiry received';
+      btn.style.background = 'var(--text)';
+      setTimeout(() => {
+        btn.textContent = 'Submit inquiry';
+        btn.style.background = 'var(--accent)';
+        e.target.reset();
+      }, 4000);
+    });
+  </script>
 </body>
 </html>
