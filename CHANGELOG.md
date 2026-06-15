@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.1.0] — 2026-06-14 — Photography Mockups
+
+- Replace hero image with monochromatic clinical vial photography (15° angle, white bg, soft-lit)
+- Add archive section lab bench background image (cool tones, empty workspace, natural light)
+- Add compound macro detail image inside product modal (side-lit, high contrast, textured)
+- Style modal image: 200px full-width strip with HPLC caption, no layout changes
+- New image assets: `hero-vial.jpg`, `lab-bench.jpg`, `compound-macro.jpg`
+
+---
+
 ## [2.0.0] — 2026-06-14
 
 ### Complete rebuild — locked strategy implementation
