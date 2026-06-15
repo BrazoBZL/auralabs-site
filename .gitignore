@@ -1,22 +1,21 @@
-# Sensitive files
-credentials/
-*.key
-*.pem
-.env
-.env.local
-.env.*.local
-MEMORY.md
-SOUL.md
-IDENTITY.md
-USER.md
-*.secret
+# Images
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp
+/images/
+
+# Backups & Temp
+*backup*.html
+test*.html
+test*.backup
+
+# Screenshots
+/screenshots/
 
 # System
 .DS_Store
 node_modules/
+.env
 *.log
-
-# IDE
-.vscode/
-.idea/
-*.swp
