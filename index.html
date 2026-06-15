@@ -216,10 +216,28 @@
     }
 
     /* ── ARCHIVE ──────────────────────────────────────── */
+    .archive-section {
+      background-image: url('images/lab-bench.jpg');
+      background-size: cover;
+      background-position: center 40%;
+      background-attachment: scroll;
+      position: relative;
+    }
+
+    .archive-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(250, 249, 247, 0.92);
+      pointer-events: none;
+    }
+
     .archive {
       max-width: 1200px;
       margin: 0 auto;
       padding: 96px 64px;
+      position: relative;
+      z-index: 1;
     }
 
     .archive-header {
@@ -715,6 +733,29 @@
       line-height: 1.7;
     }
 
+    .modal-compound-img {
+      margin-top: 8px;
+    }
+
+    .modal-compound-img img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      object-position: center;
+      filter: contrast(1.1);
+      display: block;
+    }
+
+    .modal-img-caption {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      opacity: 0.55;
+      margin-top: 8px;
+    }
+
     .modal-inquiry-btn {
       display: block;
       width: 100%;
@@ -824,11 +865,12 @@
       <a class="hero-cta" href="#archive">Compound Archive</a>
     </div>
     <div class="hero-image-wrap" id="heroImage">
-      <img src="images/semaglutide.png" alt="" loading="eager">
+      <img src="images/hero-vial.jpg" alt="Semaglutide research vial — monochromatic clinical photography" loading="eager">
     </div>
   </section>
 
   <!-- COMPOUND ARCHIVE -->
+  <div class="archive-section">
   <div class="archive" id="archive">
     <div class="archive-header">
       <div>
@@ -861,6 +903,7 @@
       </tbody>
     </table>
   </div>
+  </div><!-- /.archive-section -->
 
   <!-- INQUIRY FORM -->
   <div class="inquiry" id="inquiry">
@@ -1181,6 +1224,14 @@
         <div class="modal-section">
           <p class="modal-section-label">Safety Considerations</p>
           <div class="modal-safety">${c.safety}</div>
+        </div>
+
+        <div class="modal-section">
+          <p class="modal-section-label">Compound Detail</p>
+          <div class="modal-compound-img">
+            <img src="images/compound-macro.jpg" alt="Macro photography — lyophilized compound texture, side-lit" loading="lazy">
+            <p class="modal-img-caption">Lyophilized powder — side-lit macro. Purity ≥98% by HPLC.</p>
+          </div>
         </div>
 
         <button class="modal-inquiry-btn" onclick="document.getElementById('modalOverlay').classList.remove('open'); setTimeout(()=>document.querySelector('#inquiry input').focus(), 400)">
