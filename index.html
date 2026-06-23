@@ -1,1299 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aura Labs</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --bg:         #faf9f7;
-      --text:       #8b8b8b;
-      --text-dark:  #3d3330;
-      --accent:     #5a4a40;
-      --border:     #e2dbd7;
-      --border-lt:  #ede8e4;
-      --serif:      'Cormorant Garamond', Georgia, serif;
-      --sans:       'DM Sans', system-ui, sans-serif;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
-      font-weight: 300;
-      font-size: 14px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      opacity: 0;
-      animation: fadeIn 1.2s ease forwards;
-    }
-
-    body.no-animation {
-      animation: none !important;
-      opacity: 1 !important;
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    /* ── NAVIGATION ───────────────────────────────────── */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      padding: 28px 48px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      mix-blend-mode: normal;
-    }
-
-    nav.scrolled {
-      background: rgba(250, 249, 247, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-lt);
-      padding: 18px 48px;
-      transition: all 0.4s ease;
-    }
-
-    .nav-logo {
-      font-family: var(--serif);
-      font-size: 20px;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      color: var(--text-dark);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 36px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: var(--sans);
-      font-size: 12px;
-      font-weight: 400;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent);
-    }
-
-    /* ── HERO ─────────────────────────────────────────── */
-    .hero {
-      position: relative;
-      height: 100vh;
-      min-height: 640px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      overflow: hidden;
-    }
-
-    .hero-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 0 64px 72px 64px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-logotype {
-      font-family: var(--serif);
-      font-size: clamp(48px, 6vw, 88px);
-      font-weight: 300;
-      letter-spacing: -0.01em;
-      color: var(--text-dark);
-      line-height: 1.0;
-      margin-bottom: 24px;
-    }
-
-    .hero-logotype em {
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    .hero-descriptor {
-      font-family: var(--sans);
-      font-size: 13px;
-      font-weight: 400;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text);
-      margin-bottom: 48px;
-      max-width: 280px;
-    }
-
-    .hero-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      font-family: var(--sans);
-      font-size: 12px;
-      font-weight: 400;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      background: none;
-    }
-
-    .hero-cta::after {
-      content: '↓';
-      font-size: 14px;
-      transition: transform 0.3s ease;
-    }
-
-    .hero-cta:hover::after {
-      transform: translateY(4px);
-    }
-
-    .hero-image-wrap {
-      position: relative;
-      overflow: hidden;
-      width: 100%;
-      height: 100%;
-    }
-
-    .hero-image-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      transform: scale(1.05);
-      transition: transform 0.1s linear;
-      will-change: transform;
-    }
-
-    .hero-image-wrap::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to right,
-        var(--bg) 0%,
-        transparent 30%
-      );
-    }
-
-    /* ── SECTION COMMONS ──────────────────────────────── */
-    section {
-      padding: 96px 64px;
-    }
-
-    .section-label {
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text);
-      opacity: 0.6;
-      margin-bottom: 48px;
-    }
-
-    /* ── ARCHIVE ──────────────────────────────────────── */
-    .archive-section {
-      background-image: url('images/lab-bench.jpg');
-      background-size: cover;
-      background-position: center 40%;
-      background-attachment: scroll;
-      position: relative;
-    }
-
-    .archive-section::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(250, 249, 247, 0.92);
-      pointer-events: none;
-    }
-
-    .archive {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 96px 64px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .archive-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 48px;
-    }
-
-    .archive-title {
-      font-family: var(--serif);
-      font-size: 36px;
-      font-weight: 300;
-      color: var(--text-dark);
-    }
-
-    .archive-count {
-      font-family: var(--sans);
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text);
-      opacity: 0.5;
-    }
-
-    .filter-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 32px;
-      flex-wrap: wrap;
-    }
-
-    .filter-btn {
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text);
-      background: transparent;
-      border: 1px solid var(--border);
-      padding: 7px 16px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .filter-btn:hover,
-    .filter-btn.active {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: var(--bg);
-    }
-
-    .compound-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .compound-table thead th {
-      font-family: var(--sans);
-      font-size: 10px;
-      font-weight: 400;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text);
-      opacity: 0.5;
-      text-align: left;
-      padding: 0 0 14px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .compound-table thead th:last-child {
-      text-align: right;
-    }
-
-    .compound-table tbody tr {
-      border-bottom: 1px solid var(--border-lt);
-      cursor: pointer;
-      transition: background 0.15s ease;
-    }
-
-    .compound-table tbody tr:hover {
-      background: rgba(90, 74, 64, 0.03);
-    }
-
-    .compound-table tbody tr:hover .view-link {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .compound-table td {
-      padding: 20px 0;
-      vertical-align: middle;
-    }
-
-    .compound-table td:last-child {
-      text-align: right;
-    }
-
-    .td-name {
-      font-family: var(--serif);
-      font-size: 18px;
-      font-weight: 400;
-      color: var(--text-dark);
-      letter-spacing: 0.01em;
-    }
-
-    .td-area {
-      font-family: var(--sans);
-      font-size: 12px;
-      color: var(--text);
-      padding-left: 40px;
-    }
-
-    .td-format {
-      font-family: var(--sans);
-      font-size: 11px;
-      color: var(--text);
-      opacity: 0.7;
-      padding-left: 40px;
-    }
-
-    .td-avail {
-      padding-left: 40px;
-    }
-
-    .avail-badge {
-      display: inline-block;
-      font-family: var(--sans);
-      font-size: 10px;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border: 1px solid var(--border);
-    }
-
-    .avail-badge.in-stock {
-      border-color: rgba(90, 74, 64, 0.3);
-      color: var(--accent);
-    }
-
-    .avail-badge.limited {
-      border-color: rgba(139, 139, 139, 0.4);
-      color: var(--text);
-    }
-
-    .view-link {
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      opacity: 0;
-      transform: translateX(-6px);
-      transition: opacity 0.2s ease, transform 0.2s ease;
-    }
-
-    /* ── INQUIRY FORM ─────────────────────────────────── */
-    .inquiry {
-      background: var(--bg);
-      border-top: 1px solid var(--border-lt);
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 96px 64px;
-    }
-
-    .inquiry-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 96px;
-      align-items: start;
-    }
-
-    .inquiry-left h2 {
-      font-family: var(--serif);
-      font-size: 36px;
-      font-weight: 300;
-      color: var(--text-dark);
-      margin-bottom: 20px;
-      line-height: 1.2;
-    }
-
-    .inquiry-left p {
-      font-family: var(--sans);
-      font-size: 13px;
-      color: var(--text);
-      line-height: 1.8;
-      max-width: 340px;
-    }
-
-    .form-group {
-      margin-bottom: 24px;
-    }
-
-    .form-group label {
-      display: block;
-      font-family: var(--sans);
-      font-size: 10px;
-      font-weight: 400;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text);
-      opacity: 0.6;
-      margin-bottom: 8px;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid var(--border);
-      padding: 10px 0;
-      font-family: var(--sans);
-      font-size: 14px;
-      font-weight: 300;
-      color: var(--text-dark);
-      outline: none;
-      transition: border-color 0.2s ease;
-      -webkit-appearance: none;
-    }
-
-    .form-group select {
-      cursor: pointer;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-bottom-color: var(--accent);
-    }
-
-    .form-group textarea {
-      resize: none;
-      height: 88px;
-    }
-
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: var(--text);
-      opacity: 0.4;
-    }
-
-    .form-submit {
-      display: inline-block;
-      margin-top: 16px;
-      padding: 14px 40px;
-      background: var(--accent);
-      color: var(--bg);
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      border: none;
-      cursor: pointer;
-      transition: opacity 0.2s ease;
-    }
-
-    .form-submit:hover {
-      opacity: 0.85;
-    }
-
-    /* ── FOOTER ───────────────────────────────────────── */
-    footer {
-      border-top: 1px solid var(--border-lt);
-      padding: 48px 64px;
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 48px;
-      align-items: end;
-    }
-
-    .footer-brand {
-      font-family: var(--serif);
-      font-size: 22px;
-      font-weight: 300;
-      color: var(--text-dark);
-    }
-
-    .footer-brand small {
-      display: block;
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 300;
-      color: var(--text);
-      opacity: 0.5;
-      letter-spacing: 0.1em;
-      margin-top: 6px;
-    }
-
-    .footer-col p {
-      font-size: 12px;
-      color: var(--text);
-      line-height: 1.9;
-      opacity: 0.7;
-    }
-
-    .footer-col a {
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .footer-col a:hover {
-      color: var(--accent);
-    }
-
-    .footer-legal {
-      font-family: var(--sans);
-      font-size: 10px;
-      color: var(--text);
-      opacity: 0.4;
-      letter-spacing: 0.06em;
-      line-height: 1.8;
-    }
-
-    /* ── MODAL ────────────────────────────────────────── */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(61, 51, 48, 0.35);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.35s ease;
-    }
-
-    .modal-overlay.open {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .modal-panel {
-      background: var(--bg);
-      width: min(640px, 100vw);
-      height: 100vh;
-      overflow-y: auto;
-      transform: translateX(48px);
-      transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
-      padding: 64px 56px;
-      position: relative;
-    }
-
-    .modal-overlay.open .modal-panel {
-      transform: translateX(0);
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 32px;
-      right: 40px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: var(--sans);
-      font-size: 12px;
-      font-weight: 400;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text);
-      opacity: 0.5;
-      transition: opacity 0.2s ease;
-    }
-
-    .modal-close:hover {
-      opacity: 1;
-    }
-
-    .modal-category {
-      font-family: var(--sans);
-      font-size: 10px;
-      font-weight: 400;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text);
-      opacity: 0.5;
-      margin-bottom: 12px;
-    }
-
-    .modal-title {
-      font-family: var(--serif);
-      font-size: 44px;
-      font-weight: 300;
-      color: var(--text-dark);
-      line-height: 1.1;
-      margin-bottom: 8px;
-    }
-
-    .modal-format {
-      font-family: var(--sans);
-      font-size: 12px;
-      color: var(--text);
-      opacity: 0.6;
-      margin-bottom: 40px;
-    }
-
-    .modal-price-row {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      padding: 24px 0;
-      border-top: 1px solid var(--border-lt);
-      border-bottom: 1px solid var(--border-lt);
-      margin-bottom: 48px;
-    }
-
-    .modal-price {
-      font-family: var(--serif);
-      font-size: 32px;
-      font-weight: 300;
-      color: var(--accent);
-    }
-
-    .modal-price-compare {
-      font-family: var(--sans);
-      font-size: 11px;
-      color: var(--text);
-      opacity: 0.5;
-    }
-
-    .modal-price-compare strong {
-      display: block;
-      font-weight: 400;
-      color: var(--text);
-      opacity: 0.7;
-      text-decoration: line-through;
-    }
-
-    .modal-section {
-      margin-bottom: 40px;
-    }
-
-    .modal-section-label {
-      font-family: var(--sans);
-      font-size: 10px;
-      font-weight: 400;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text);
-      opacity: 0.5;
-      margin-bottom: 14px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border-lt);
-    }
-
-    .modal-mechanism {
-      font-family: var(--serif);
-      font-size: 18px;
-      font-weight: 300;
-      color: var(--text-dark);
-      line-height: 1.5;
-      font-style: italic;
-    }
-
-    .modal-text {
-      font-family: var(--sans);
-      font-size: 13px;
-      font-weight: 300;
-      color: var(--text);
-      line-height: 1.8;
-    }
-
-    .modal-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .modal-tag {
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 300;
-      color: var(--text);
-      border: 1px solid var(--border);
-      padding: 5px 12px;
-    }
-
-    .modal-safety {
-      background: rgba(90, 74, 64, 0.04);
-      border-left: 2px solid var(--accent);
-      padding: 16px 20px;
-      font-family: var(--sans);
-      font-size: 12px;
-      color: var(--text);
-      line-height: 1.7;
-    }
-
-    .modal-compound-img {
-      margin-top: 8px;
-    }
-
-    .modal-compound-img img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      object-position: center;
-      filter: contrast(1.1);
-      display: block;
-    }
-
-    .modal-img-caption {
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.08em;
-      color: var(--text);
-      opacity: 0.55;
-      margin-top: 8px;
-    }
-
-    .modal-inquiry-btn {
-      display: block;
-      width: 100%;
-      margin-top: 48px;
-      padding: 16px;
-      background: var(--accent);
-      color: var(--bg);
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      border: none;
-      cursor: pointer;
-      text-align: center;
-      transition: opacity 0.2s ease;
-    }
-
-    .modal-inquiry-btn:hover {
-      opacity: 0.85;
-    }
-
-    /* ── DIVIDER ──────────────────────────────────────── */
-    .divider {
-      width: 40px;
-      height: 1px;
-      background: var(--border);
-      margin: 0 auto;
-    }
-
-    /* ── RESPONSIVE ───────────────────────────────────── */
-    @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: 1fr;
-        height: auto;
-        min-height: 100vh;
-      }
-
-      .hero-image-wrap {
-        position: absolute;
-        inset: 0;
-        opacity: 0.15;
-        z-index: 0;
-      }
-
-      .hero-content {
-        position: relative;
-        z-index: 2;
-        padding: 160px 32px 64px;
-        justify-content: flex-end;
-        min-height: 100vh;
-      }
-
-      .archive,
-      .inquiry {
-        padding: 64px 32px;
-      }
-
-      .inquiry-grid {
-        grid-template-columns: 1fr;
-        gap: 48px;
-      }
-
-      nav {
-        padding: 24px 32px;
-      }
-
-      nav.scrolled {
-        padding: 16px 32px;
-      }
-
-      footer {
-        grid-template-columns: 1fr;
-        padding: 48px 32px;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .nav-links {
-        display: none;
-      }
-
-      .compound-table .td-format,
-      .compound-table th:nth-child(3) {
-        display: none;
-      }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aura Labs — Research Materials</title>
+<meta name="description" content="Premium research materials held to a higher standard." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-  <!-- NAVIGATION -->
-  <nav id="nav">
-    <a class="nav-logo" href="#">Aura Labs</a>
-    <ul class="nav-links">
-      <li><a href="#archive">Archive</a></li>
-      <li><a href="#inquiry">Inquiry</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+  <!-- Age Gate -->
+  <div id="age-gate" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(248, 246, 241, 0.98); z-index: 9999; align-items: center; justify-content: center;">
+    <div style="max-width: 540px; padding: 60px; text-align: center;">
+      <h1 style="font-family: 'EB Garamond', Georgia, serif; font-size: 48px; font-weight: 500; letter-spacing: -0.055em; line-height: 0.98; margin: 0 0 32px 0;">Age Verification Required</h1>
+      
+      <p style="font-size: 14px; line-height: 1.7; color: #111111; margin: 0 0 44px 0;">By entering Aura Labs, you confirm:</p>
+      
+      <div style="text-align: left; max-width: 480px; margin: 0 auto 44px auto; font-size: 13px; line-height: 1.8; color: #111111;">
+        <p style="margin: 12px 0;">✓ I am 21 years of age or older</p>
+        <p style="margin: 12px 0;">✓ I understand all Aura Labs products are intended exclusively for laboratory research and analytical purposes only</p>
+        <p style="margin: 12px 0;">✓ These products are NOT approved by the FDA for human consumption, animal use, or any non-research application</p>
+        <p style="margin: 12px 0;">✓ I assume full responsibility for proper handling, storage, and use in compliance with all applicable laws</p>
+        <p style="margin: 12px 0;">✓ I understand Aura Labs reserves the right to refuse orders and report suspected misuse to authorities</p>
+      </div>
+      
+      <div style="margin: 0 0 44px 0;">
+        <label style="display: flex; align-items: center; gap: 12px; font-size: 12px; cursor: pointer; justify-content: center;">
+          <input type="checkbox" id="age-gate-agree" style="width: 16px; height: 16px; cursor: pointer;">
+          <span>I agree to the above terms and Aura Labs' Terms of Service</span>
+        </label>
+      </div>
+      
+      <div style="display: flex; gap: 16px; justify-content: center;">
+        <button id="age-gate-enter" style="background: #050505; color: white; border: none; padding: 12px 32px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 800; cursor: not-allowed; opacity: 0.5;">Enter</button>
+        <a id="age-gate-decline" href="#" style="background: transparent; color: #111111; border: 1px solid #111111; padding: 12px 32px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; cursor: pointer;">Decline</a>
+      </div>
+    </div>
+  </div>
+<header class="site-header">
+  <a class="brand" href="index.html">AURA LABS</a>
+  <nav class="main-nav">
+    <a href="catalog.html">Compounds</a>
+    <a href="#quality">Quality</a>
+    <a href="#inquiry">Inquiry</a>
+    <a href="#about">About</a>
+    <a href="account.html">Account</a>
+    <a href="#contact">Contact</a>
   </nav>
+</header>
 
-  <!-- HERO -->
-  <section class="hero" id="hero">
-    <div class="hero-content">
-      <h1 class="hero-logotype">Aura<br><em>Labs</em></h1>
-      <p class="hero-descriptor">Research-grade compounds. Precision sourcing.</p>
-      <a class="hero-cta" href="#archive">Compound Archive</a>
+<main>
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">Research-Grade Compounds.<br>Precision. Transparency. Trust.</p>
+    <h1>Premium research materials held to a higher standard.</h1>
+    <p>Aura Labs provides carefully sourced compounds with transparent documentation and consistent quality.</p>
+    <div class="button-row">
+      <a class="btn btn-primary" href="catalog.html">View Compounds</a>
+      <a class="text-link" href="#quality">Our Standards <span>→</span></a>
     </div>
-    <div class="hero-image-wrap" id="heroImage">
-      <img src="images/hero-vial.jpg" alt="Semaglutide research vial — monochromatic clinical photography" loading="eager">
-    </div>
-  </section>
+  </div>
+  <div class="hero-image">
+    <img src="assets/hero-packaging.jpg" alt="Aura Labs premium packaging on limestone surface">
+  </div>
+</section>
 
-  <!-- COMPOUND ARCHIVE -->
-  <div class="archive-section">
-  <div class="archive" id="archive">
-    <div class="archive-header">
+<section class="trust-strip">
+  <div class="trust-item">
+    <div class="icon">▤</div>
+    <h3>Verified Batches</h3>
+    <p>Every batch is tested and documented for purity.</p>
+  </div>
+  <div class="trust-item">
+    <div class="icon">♢</div>
+    <h3>Transparent Documentation</h3>
+    <p>Certificates and analysis available with every order.</p>
+  </div>
+  <div class="trust-item">
+    <div class="icon">▢</div>
+    <h3>Secure & Private</h3>
+    <p>Discreet packaging. Secure checkout.</p>
+  </div>
+  <div class="trust-item">
+    <div class="icon">◎</div>
+    <h3>Researcher Focused</h3>
+    <p>Built for researchers who care about what arrives.</p>
+  </div>
+</section>
+
+<section class="featured" id="compounds">
+  <p class="eyebrow center">Featured Compounds</p>
+  <h2>Curated. Verified. Ready for Research.</h2>
+  <div class="featured-grid">
+    <article class="compound-card">
+      <img src="assets/bpc157.jpg" alt="BPC-157 product image">
+      <h3>BPC-157</h3>
+      <p>Research-grade peptide presented with batch-level documentation and certificate access.</p>
+      <a href="catalog.html">View Compound <span>→</span></a>
+    </article>
+    <article class="compound-card">
+      <img src="assets/tb500.jpg" alt="TB-500 product image">
+      <h3>TB-500</h3>
+      <p>High-purity research material supported by transparent verification standards.</p>
+      <a href="catalog.html">View Compound <span>→</span></a>
+    </article>
+    <article class="compound-card">
+      <img src="assets/ghkcu.jpg" alt="GHK-Cu product image">
+      <h3>GHK-Cu</h3>
+      <p>Copper peptide research material with documentation-focused presentation.</p>
+      <a href="catalog.html">View Compound <span>→</span></a>
+    </article>
+  </div>
+</section>
+
+<section class="standard" id="quality">
+  <div class="standard-copy">
+    <p class="eyebrow">The Aura Standard</p>
+    <h2>Built For Researchers<br>Who Care About What Arrives.</h2>
+    <p>Aura Labs is intentionally focused. Every product, every batch, and every document is presented with the same standard: clarity, consistency, and verification. We believe premium research materials should feel premium at every point of the experience—from discovery to documentation.</p>
+    <div class="proof-grid">
       <div>
-        <p class="section-label">Compound Archive</p>
-        <h2 class="archive-title">Current Inventory</h2>
+        <div class="proof-icon">◎</div>
+        <h3>Focused Catalog</h3>
+        <p>A deliberately curated selection built around quality rather than volume.</p>
       </div>
-      <span class="archive-count" id="archiveCount">10 compounds</span>
-    </div>
-
-    <div class="filter-row" id="filterRow">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="weight">Weight Management</button>
-      <button class="filter-btn" data-filter="healing">Healing &amp; Recovery</button>
-      <button class="filter-btn" data-filter="hgh">HGH Secretagogues</button>
-      <button class="filter-btn" data-filter="cognitive">Cognitive</button>
-      <button class="filter-btn" data-filter="specialty">Specialty</button>
-    </div>
-
-    <table class="compound-table" id="compoundTable">
-      <thead>
-        <tr>
-          <th>Compound</th>
-          <th>Research Area</th>
-          <th>Format</th>
-          <th>Availability</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody id="tableBody">
-      </tbody>
-    </table>
-  </div>
-  </div><!-- /.archive-section -->
-
-  <!-- INQUIRY FORM -->
-  <div class="inquiry" id="inquiry">
-    <div class="inquiry-grid">
-      <div class="inquiry-left">
-        <p class="section-label">Researcher Access</p>
-        <h2>Submit an inquiry for compounds, pricing, or documentation.</h2>
-        <p style="margin-top: 24px;">For institutional researchers, licensed practitioners, and verified professionals. All inquiries reviewed within 24 hours.</p>
+      <div>
+        <div class="proof-icon">♢</div>
+        <h3>Verified Batches</h3>
+        <p>Documentation and verification presented clearly and consistently.</p>
       </div>
-      <form id="inquiryForm">
-        <div class="form-group">
-          <label>Name</label>
-          <input type="text" placeholder="Full name">
-        </div>
-        <div class="form-group">
-          <label>Institution / Organization</label>
-          <input type="text" placeholder="University, clinic, or company">
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" placeholder="researcher@institution.edu">
-        </div>
-        <div class="form-group">
-          <label>Compound of interest</label>
-          <select>
-            <option value="" disabled selected>Select compound</option>
-            <option>Semaglutide 2mg</option>
-            <option>Retatrutide 5mg</option>
-            <option>BPC-157 2mg</option>
-            <option>TB-500 5mg</option>
-            <option>GHK-CU 50mg</option>
-            <option>Ipamorelin 5mg</option>
-            <option>CJC-1295 no DAC 5mg</option>
-            <option>Semax 5mg</option>
-            <option>NAD+ 500mg</option>
-            <option>FOXO4-DRI 10mg</option>
-            <option>Multiple / Other</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Research context</label>
-          <textarea placeholder="Brief description of intended application"></textarea>
-        </div>
-        <button type="submit" class="form-submit">Submit inquiry</button>
-      </form>
+      <div>
+        <div class="proof-icon">□</div>
+        <h3>Premium Presentation</h3>
+        <p>Products, packaging, and information designed with the same attention to detail.</p>
+      </div>
     </div>
   </div>
-
-  <!-- FOOTER -->
-  <footer id="contact">
-    <div class="footer-brand">
-      Aura Labs
-      <small>Research compounds since 2024</small>
-    </div>
-    <div class="footer-col">
-      <p>
-        <a href="mailto:research@auralabs.com">research@auralabs.com</a><br>
-        Shipping within 48h of verification<br>
-        US domestic + international
-      </p>
-    </div>
-    <div class="footer-col">
-      <p class="footer-legal">
-        All compounds are sold for research purposes only.<br>
-        Not intended for human use. For laboratory use by<br>
-        qualified researchers. Verify local regulations.
-      </p>
-    </div>
-  </footer>
-
-  <!-- MODAL -->
-  <div class="modal-overlay" id="modalOverlay" aria-modal="true" role="dialog">
-    <div class="modal-panel" id="modalPanel">
-      <button class="modal-close" id="modalClose">Close ×</button>
-      <div id="modalContent"></div>
-    </div>
+  <div class="standard-image">
+    <img src="assets/aura-standard-macro.jpg" alt="Aura Labs macro packaging detail">
   </div>
+</section>
 
-  <script>
-    // ── COMPOUND DATA ──────────────────────────────────────────────────────────
-    const compounds = [
-      {
-        id: "semaglutide-2mg",
-        name: "Semaglutide 2mg",
-        area: "Weight Management",
-        areaKey: "weight",
-        format: "Lyophilized Powder",
-        availability: "in-stock",
-        price: 30,
-        marketRange: "$260–300",
-        mechanism: "GLP-1 agonist → increases satiety → reduces appetite → supports weight management",
-        description: "GLP-1 receptor agonist that mimics glucagon-like peptide-1. Slows gastric emptying, increases satiety, reduces hunger signaling. The 2mg dose is standard for initial research protocols.",
-        applications: ["Weight loss research", "Appetite suppression studies", "Metabolic health", "Blood sugar management"],
-        sourcing: "Synthesized via solid-phase peptide synthesis. Purity ≥98% confirmed by HPLC. Certificate of Analysis provided with each order.",
-        safety: "Monitor for pancreatitis indicators. Contraindicated in subjects with medullary thyroid cancer history. GI adjustment period typical in first 2–4 weeks.",
-        researchNotes: "Most studied GLP-1 agonist for metabolic research. Typical protocol: 0.25–2.4mg weekly over 16+ weeks shows 15–20% body weight reduction in research subjects."
-      },
-      {
-        id: "retatrutide-5mg",
-        name: "Retatrutide 5mg",
-        area: "Weight Management",
-        areaKey: "weight",
-        format: "Lyophilized Powder",
-        availability: "in-stock",
-        price: 49,
-        marketRange: "$500–550",
-        mechanism: "GIP + GLP-1 + GCG triple agonist → multi-pathway appetite suppression + metabolic acceleration",
-        description: "Triple incretin receptor agonist — next generation metabolic compound. Activates GIP, GLP-1, and glucagon receptors simultaneously for potent multi-pathway effects.",
-        applications: ["Next-gen weight management research", "Metabolic syndrome studies", "Glucagon pathway studies", "Advanced obesity protocols"],
-        sourcing: "SPPS synthesis, lyophilized to powder. Purity ≥98%. Full third-party CoA on request.",
-        safety: "Triple agonist profile requires careful dosing. Do not combine with other GLP-1 agonists. Monitor hepatic enzymes.",
-        researchNotes: "Emerging class. Early research data: 20–25% mean weight reduction at 12 weeks. Potentially improved tolerability vs single-agonist analogues."
-      },
-      {
-        id: "bpc157-2mg",
-        name: "BPC-157 2mg",
-        area: "Healing & Recovery",
-        areaKey: "healing",
-        format: "Lyophilized Powder",
-        availability: "in-stock",
-        price: 30,
-        marketRange: "$260–310",
-        mechanism: "VEGF + FGF upregulation → angiogenesis → tissue proliferation → accelerated healing",
-        description: "Body Protection Compound-157. Pentadecapeptide isolated from gastric secretion. Promotes tissue repair across musculoskeletal, neural, and gastrointestinal systems.",
-        applications: ["Tendon & ligament repair", "Muscle damage recovery", "Gut mucosal healing", "Neural repair research", "Post-injury recovery"],
-        sourcing: "SPPS synthesis, pharmaceutical-grade reagents. ≥98% purity by HPLC/MS verification.",
-        safety: "Excellent tolerability profile. 100+ peer-reviewed safety studies. No contraindications established at research dosages. Long-term use well-documented.",
-        researchNotes: "100+ peer-reviewed citations. Research dosing: 250–500mcg daily. Optimal results with localized + systemic co-administration. 4–8 week protocols standard."
-      },
-      {
-        id: "tb500-5mg",
-        name: "TB-500 5mg",
-        area: "Healing & Recovery",
-        areaKey: "healing",
-        format: "Lyophilized Powder",
-        availability: "in-stock",
-        price: 55,
-        marketRange: "$360–420",
-        mechanism: "Cell migration facilitation + systemic anti-inflammatory signaling → whole-body tissue repair",
-        description: "Thymosin Beta 4 fragment. Naturally occurring peptide governing actin regulation, cell migration, and tissue repair. Operates systemically, unlike BPC-157's local concentration.",
-        applications: ["Systemic soft tissue repair", "Joint recovery research", "Collagen restructuring", "Inflammation reduction", "Whole-body healing protocols"],
-        sourcing: "Recombinant synthesis. Lyophilized. Purity ≥98% by HPLC.",
-        safety: "Well tolerated. May transiently modulate immune response. Exercise caution with pre-existing immunological conditions.",
-        researchNotes: "Standard protocol: 2–2.5mg twice weekly for 4–6 weeks. Frequently stacked with BPC-157 for comprehensive local + systemic coverage."
-      },
-      {
-        id: "ghkcu-50mg",
-        name: "GHK-CU 50mg",
-        area: "Healing & Recovery",
-        areaKey: "healing",
-        format: "Solution",
-        availability: "in-stock",
-        price: 32,
-        marketRange: "$390–450",
-        mechanism: "Collagen synthesis upregulation + copper-mediated cross-linking → structural tissue repair",
-        description: "Copper peptide with potent collagen-stimulating properties. Signals fibroblasts to increase collagen and glycosaminoglycan synthesis. Copper component enables proper cross-linking.",
-        applications: ["Collagen synthesis research", "Wound healing", "Dermal repair", "Anti-aging models", "Bone density studies"],
-        sourcing: "Chelated copper peptide solution. Verified metal-to-peptide ratio. Sterile-filtered.",
-        safety: "Exceptional safety profile. Copper levels at peptide dosing are physiologically negligible. No known contraindications.",
-        researchNotes: "Topical and systemic research. 50–100mg weekly shows measurable collagen density increase at 4–6 weeks. Synergistic with BPC-157 and TB-500."
-      },
-      {
-        id: "ipamorelin-5mg",
-        name: "Ipamorelin 5mg",
-        area: "HGH Secretagogue",
-        areaKey: "hgh",
-        format: "Lyophilized Powder",
-        availability: "in-stock",
-        price: 49,
-        marketRange: "$330–390",
-        mechanism: "GHS receptor agonism → pulsatile pituitary GH release → endogenous HGH elevation",
-        description: "Selective growth hormone secretagogue. Most receptor-selective GHS available. Stimulates pituitary GH release without affecting cortisol or prolactin — preserving the natural feedback axis.",
-        applications: ["Natural HGH elevation", "Muscle hypertrophy research", "Recovery optimization", "Body composition studies", "Aging & longevity protocols"],
-        sourcing: "SPPS synthesis, pentapeptide. Purity ≥98.5% by HPLC/MS.",
-        safety: "No documented suppression of natural GH axis. Slow tolerance development (~4–6 months). Well-tolerated long-term in research settings.",
-        researchNotes: "5mg vial for advanced protocols. Research shows 4–6× natural GH baseline at 100–200mcg doses. Peak serum GH at 30–60 min post-administration. Often stacked with CJC-1295."
-      },
-      {
-        id: "cjc1295-nodac-5mg",
-        name: "CJC-1295 no DAC 5mg",
-        area: "HGH Secretagogue",
-        areaKey: "hgh",
-        format: "Lyophilized Powder",
-        availability: "in-stock",
-        price: 93,
-        marketRange: "$430–510",
-        mechanism: "GHRH analogue → rapid pituitary stimulation → short-duration GH spike (30–90 min half-life)",
-        description: "Growth hormone-releasing hormone analogue. Short-acting profile (no Drug Affinity Complex) designed for pulsatile co-administration with Ipamorelin. Creates synchronized GH release.",
-        applications: ["Rapid GH elevation research", "Ipamorelin stacking protocols", "GH pulse optimization", "Athletic recovery research"],
-        sourcing: "SPPS synthesized. Lyophilized. ≥98% purity.",
-        safety: "No negative feedback on natural GH axis. No known long-term contraindications. Water retention possible at higher doses.",
-        researchNotes: "Optimal: 100mcg co-administered with Ipamorelin. Dual-mechanism synergy creates physiologically natural GH curve. Peak GH at 15–30 min. Can be used indefinitely in research."
-      },
-      {
-        id: "semax-5mg",
-        name: "Semax 5mg",
-        area: "Cognitive",
-        areaKey: "cognitive",
-        format: "Lyophilized Powder",
-        availability: "in-stock",
-        price: 54,
-        marketRange: "$260–310",
-        mechanism: "BDNF upregulation + neuroprotective signaling → cognitive enhancement + stress resilience",
-        description: "ACTH-derived neuroprotective peptide. Significantly increases brain-derived neurotrophic factor (BDNF), enhancing neuroplasticity. Extensively studied in Russian literature for cognitive optimization.",
-        applications: ["Cognitive enhancement protocols", "Neuroprotection research", "Stress resilience studies", "Learning & memory optimization", "Age-related cognitive decline modeling"],
-        sourcing: "SPPS synthesis. Lyophilized. Purity ≥98%.",
-        safety: "Well tolerated in all documented studies. Promotes neurogenesis. No reported adverse effects at standard research dosages.",
-        researchNotes: "Dosing: 500mcg–1mg daily. Improved memory consolidation and processing speed documented at 2–4 weeks. Long-term use studies show sustained benefit without tolerance."
-      },
-      {
-        id: "nad-500mg",
-        name: "NAD+ 500mg",
-        area: "Cognitive",
-        areaKey: "cognitive",
-        format: "Lyophilized Powder",
-        availability: "in-stock",
-        price: 78,
-        marketRange: "$390–460",
-        mechanism: "Mitochondrial NAD+ restoration → sirtuin activation → cellular energy + DNA repair cascade",
-        description: "Nicotinamide Adenine Dinucleotide. Central coenzyme of cellular energy metabolism. Declines with age. Restoration research shows mitochondrial function recovery, longevity signaling, and cognitive improvements.",
-        applications: ["Cellular energy optimization", "Anti-aging research", "Mitochondrial health", "Cognitive support", "Longevity protocol research"],
-        sourcing: "Pharmaceutical-grade NAD+ lyophilized powder. Identity confirmed by NMR and MS.",
-        safety: "Excellent safety profile. Copper levels within physiological norms. Long-term use documented without adverse findings.",
-        researchNotes: "250–500mg daily. Measurable NAD+ tissue restoration at 4–8 weeks. Sirtuin activation confirmed in cell culture models. Frequently combined with FOXO4-DRI in longevity protocols."
-      },
-      {
-        id: "foxo4dri-10mg",
-        name: "FOXO4-DRI 10mg",
-        area: "Specialty",
-        areaKey: "specialty",
-        format: "Lyophilized Powder",
-        availability: "limited",
-        price: 329,
-        marketRange: "$1,450–1,600",
-        mechanism: "Senescent cell targeting → FOXO4–p53 complex disruption → apoptosis induction → tissue rejuvenation",
-        description: "D-amino acid retro-inverso peptide. Selectively targets senescent cells by disrupting the FOXO4–p53 protein interaction that prevents apoptosis. Senolytic mechanism with high selectivity.",
-        applications: ["Cellular senescence research", "Longevity & aging studies", "Age-related inflammation modeling", "Tissue rejuvenation research"],
-        sourcing: "D-retro-inverso synthesis (all-D amino acids). Premium SPPS with HPLC purification. ≥97% purity. Limited production batches.",
-        safety: "Emerging safety profile. Studies to date show good tolerability. Immune status should be confirmed prior to research. Not combined with immunosuppressive protocols.",
-        researchNotes: "Cutting edge senolytic. 2–5mg weekly. Senescent cell burden reduction documented at 4–8 weeks. Often combined with NAD+ for comprehensive longevity protocols."
-      }
-    ];
+<section class="category-preview">
+  <p class="eyebrow center">Catalog Architecture</p>
+  <h2>50+ Research Compounds, Organized for Clarity.</h2>
+  <div class="category-grid" id="categoryGrid"></div>
+  <a class="catalog-cta" href="catalog.html">View Full Catalog <span>→</span></a>
+</section>
 
-    // ── TABLE RENDER ────────────────────────────────────────────────────────────
-    function renderTable(filter) {
-      const tbody = document.getElementById('tableBody');
-      const count = document.getElementById('archiveCount');
-      const filtered = filter === 'all' ? compounds : compounds.filter(c => c.areaKey === filter);
-      count.textContent = filtered.length + ' compound' + (filtered.length !== 1 ? 's' : '');
+<section class="inventory-preview">
+  <div>
+    <p class="eyebrow">Current Inventory</p>
+    <h2>Available Compounds</h2>
+    <p>Consistently updated inventory with verified stock and documentation.</p>
+    <a href="catalog.html">View All Compounds <span>→</span></a>
+  </div>
+  <table>
+    <thead>
+      <tr><th>Compound</th><th>Research Area</th><th>Format</th><th>Availability</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Semaglutide</td><td>Weight Management</td><td>Lyophilized Powder</td><td><span class="dot"></span> In Stock</td></tr>
+      <tr><td>BPC-157</td><td>Healing & Recovery</td><td>Lyophilized Powder</td><td><span class="dot"></span> In Stock</td></tr>
+      <tr><td>TB-500</td><td>Healing & Recovery</td><td>Lyophilized Powder</td><td><span class="dot"></span> In Stock</td></tr>
+      <tr><td>GHK-Cu</td><td>Copper Peptides</td><td>Lyophilized Powder</td><td><span class="dot"></span> In Stock</td></tr>
+      <tr><td>Ipamorelin</td><td>HGH Secretagogue</td><td>Lyophilized Powder</td><td><span class="dot"></span> In Stock</td></tr>
+    </tbody>
+  </table>
+</section>
+</main>
 
-      tbody.innerHTML = '';
-      filtered.forEach(c => {
-        const tr = document.createElement('tr');
-        tr.dataset.id = c.id;
-        tr.innerHTML = `
-          <td class="td-name">${c.name}</td>
-          <td class="td-area">${c.area}</td>
-          <td class="td-format">${c.format}</td>
-          <td class="td-avail"><span class="avail-badge ${c.availability}">${c.availability === 'in-stock' ? 'In Stock' : 'Limited'}</span></td>
-          <td><span class="view-link">View →</span></td>
-        `;
-        tr.addEventListener('click', () => openModal(c.id));
-        tbody.appendChild(tr);
-      });
-    }
+<footer id="contact">
+  <div class="footer-brand">
+    <h2>AURA LABS</h2>
+    <p>RESEARCH MATERIALS</p>
+  </div>
+  <div>
+    <p>Research compounds since 2024.</p>
+    <p>All compounds are sold for research purposes only.<br>Not for human consumption.</p>
+  </div>
+  <div id="inquiry">
+    <h3>Have Questions?</h3>
+    <p>Submit an inquiry and our team will respond within 24 hours.</p>
+  </div>
+  <a class="btn btn-primary" href="mailto:research@auralabs.com">Submit Inquiry</a>
+</footer>
 
-    // ── FILTERS ─────────────────────────────────────────────────────────────────
-    document.getElementById('filterRow').addEventListener('click', e => {
-      const btn = e.target.closest('.filter-btn');
-      if (!btn) return;
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderTable(btn.dataset.filter);
-    });
-
-    renderTable('all');
-
-    // ── MODAL ────────────────────────────────────────────────────────────────────
-    function openModal(id) {
-      const c = compounds.find(x => x.id === id);
-      if (!c) return;
-
-      const html = `
-        <p class="modal-category">${c.area}</p>
-        <h2 class="modal-title">${c.name}</h2>
-        <p class="modal-format">${c.format}</p>
-
-        <div class="modal-price-row">
-          <div class="modal-price">$${c.price}</div>
-          <div class="modal-price-compare">
-            <strong>${c.marketRange}</strong>
-            Market range
-          </div>
-        </div>
-
-        <div class="modal-section">
-          <p class="modal-section-label">Mechanism</p>
-          <p class="modal-mechanism">${c.mechanism}</p>
-        </div>
-
-        <div class="modal-section">
-          <p class="modal-section-label">Applications</p>
-          <div class="modal-tags">
-            ${c.applications.map(a => `<span class="modal-tag">${a}</span>`).join('')}
-          </div>
-        </div>
-
-        <div class="modal-section">
-          <p class="modal-section-label">Sourcing & Purity</p>
-          <p class="modal-text">${c.sourcing}</p>
-        </div>
-
-        <div class="modal-section">
-          <p class="modal-section-label">Research Notes</p>
-          <p class="modal-text">${c.researchNotes}</p>
-        </div>
-
-        <div class="modal-section">
-          <p class="modal-section-label">Safety Considerations</p>
-          <div class="modal-safety">${c.safety}</div>
-        </div>
-
-        <div class="modal-section">
-          <p class="modal-section-label">Compound Detail</p>
-          <div class="modal-compound-img">
-            <img src="images/compound-macro.jpg" alt="Macro photography — lyophilized compound texture, side-lit" loading="lazy">
-            <p class="modal-img-caption">Lyophilized powder — side-lit macro. Purity ≥98% by HPLC.</p>
-          </div>
-        </div>
-
-        <button class="modal-inquiry-btn" onclick="document.getElementById('modalOverlay').classList.remove('open'); setTimeout(()=>document.querySelector('#inquiry input').focus(), 400)">
-          Submit researcher inquiry
-        </button>
-      `;
-
-      document.getElementById('modalContent').innerHTML = html;
-      document.getElementById('modalOverlay').classList.add('open');
-      document.getElementById('modalPanel').scrollTop = 0;
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-      document.getElementById('modalOverlay').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    document.getElementById('modalClose').addEventListener('click', closeModal);
-    document.getElementById('modalOverlay').addEventListener('click', e => {
-      if (e.target === document.getElementById('modalOverlay')) closeModal();
-    });
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeModal();
-    });
-
-    // ── NAV SCROLL STATE ─────────────────────────────────────────────────────────
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 60);
-    }, { passive: true });
-
-    // ── PARALLAX ─────────────────────────────────────────────────────────────────
-    const heroImg = document.querySelector('.hero-image-wrap img');
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      const heroH = document.getElementById('hero').offsetHeight;
-      if (y < heroH) {
-        const pct = y / heroH;
-        heroImg.style.transform = `scale(1.05) translateY(${pct * 40}px)`;
-      }
-    }, { passive: true });
-
-    // ── SCREENSHOT MODE ──────────────────────────────────────────────────────────
-    if (new URLSearchParams(location.search).has('screenshot')) {
-      document.body.classList.add('no-animation');
-    }
-
-    // ── FORM ─────────────────────────────────────────────────────────────────────
-    document.getElementById('inquiryForm').addEventListener('submit', e => {
-      e.preventDefault();
-      const btn = e.target.querySelector('.form-submit');
-      btn.textContent = 'Inquiry received';
-      btn.style.background = 'var(--text)';
-      setTimeout(() => {
-        btn.textContent = 'Submit inquiry';
-        btn.style.background = 'var(--accent)';
-        e.target.reset();
-      }, 4000);
-    });
-  </script>
+<script src="age-gate.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

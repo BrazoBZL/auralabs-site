@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account — Aura Labs</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .account-hero {
+      min-height: 200px;
+      background: var(--bg);
+      padding: 80px 58px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .account-hero h1 {
+      margin: 0 0 16px 0;
+      font-size: clamp(42px, 4.5vw, 72px);
+      font-family: "EB Garamond", Georgia, serif;
+      font-weight: 500;
+      letter-spacing: -.055em;
+      line-height: .98;
+    }
+
+    .account-hero p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--muted);
+      max-width: 500px;
+    }
+
+    .account-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 120px;
+      max-width: 1138px;
+      margin: 0 auto;
+      padding: 120px 58px;
+      background: var(--bg);
+    }
+
+    .signin-panel, .access-panel, .dashboard-panel {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .signin-panel h2, .access-panel h2, .dashboard-panel h2 {
+      font-family: "EB Garamond", Georgia, serif;
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 500;
+      letter-spacing: -.055em;
+      line-height: .98;
+      margin: 0 0 44px 0;
+    }
+
+    .form-group {
+      margin-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .form-group input, .form-group textarea {
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      background: transparent;
+      font-family: Inter, system-ui, sans-serif;
+      font-size: 14px;
+      color: var(--ink);
+    }
+
+    .form-group input::placeholder, .form-group textarea::placeholder {
+      color: rgba(17, 17, 17, .5);
+    }
+
+    .signin-panel .btn, .access-panel .btn, .dashboard-panel .btn {
+      width: 100%;
+      margin-bottom: 28px;
+    }
+
+    .signin-links {
+      display: flex;
+      gap: 28px;
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .signin-links a, .signin-links button {
+      background: none;
+      border: none;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 4px;
+      cursor: pointer;
+      font-size: 11px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .signin-links a:hover, .signin-links button:hover {
+      border-bottom-color: var(--ink);
+    }
+
+    .access-panel {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .access-panel h2 {
+      margin: 0 0 24px 0;
+    }
+
+    .access-panel p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ink);
+      margin: 0 0 44px 0;
+      max-width: 380px;
+    }
+
+    .access-features {
+      margin-bottom: 44px;
+    }
+
+    .access-feature {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .access-feature:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .access-feature h3 {
+      font-family: "EB Garamond", Georgia, serif;
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0 0 8px 0;
+      letter-spacing: -.02em;
+    }
+
+    .access-feature p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .access-panel .btn {
+      align-self: flex-start;
+    }
+
+    .dashboard-panel {
+      grid-column: 1 / -1;
+    }
+
+    .dashboard-panel h2 {
+      margin: 0 0 32px 0;
+    }
+
+    .logout-btn {
+      align-self: flex-start;
+      width: auto;
+      margin-bottom: 0;
+    }
+
+    .support-strip {
+      background: var(--bg2);
+      border-top: 1px solid var(--line);
+      padding: 60px 58px;
+      text-align: center;
+    }
+
+    .support-strip h3 {
+      font-family: "EB Garamond", Georgia, serif;
+      font-size: clamp(24px, 2.5vw, 36px);
+      font-weight: 500;
+      letter-spacing: -.02em;
+      margin: 0 0 32px 0;
+    }
+
+    .support-strip .btn {
+      display: inline-flex;
+    }
+
+    .message {
+      padding: 16px;
+      border-radius: 4px;
+      margin-bottom: 28px;
+      font-size: 13px;
+    }
+
+    .message.success {
+      background: rgba(76, 175, 80, 0.1);
+      border: 1px solid rgba(76, 175, 80, 0.3);
+      color: #2d5016;
+    }
+
+    .message.error {
+      background: rgba(244, 67, 54, 0.1);
+      border: 1px solid rgba(244, 67, 54, 0.3);
+      color: #b71c1c;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 1024px) {
+      .account-content {
+        grid-template-columns: 1fr;
+        gap: 80px;
+        padding: 80px 40px;
+      }
+
+      .access-panel {
+        grid-column: 1;
+        grid-row: auto;
+      }
+
+      .account-hero {
+        padding: 60px 40px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .account-hero {
+        padding: 40px 24px;
+      }
+
+      .account-hero h1 {
+        font-size: clamp(32px, 8vw, 42px);
+      }
+
+      .account-content {
+        padding: 60px 24px;
+        gap: 60px;
+      }
+
+      .signin-links {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html" class="brand">AURA LABS</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="catalog.html">Catalog</a>
+      <a href="account.html">Account</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="account-hero">
+    <h1>Account</h1>
+    <p>Access your orders, documentation, and account details.</p>
+  </section>
+
+  <section class="account-content" id="auth-section">
+    <div class="signin-panel">
+      <h2>Sign in</h2>
+      <div id="signin-message"></div>
+      <form id="signin-form">
+        <div class="form-group">
+          <label for="signin-email">Email address</label>
+          <input type="email" id="signin-email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="signin-password">Password</label>
+          <input type="password" id="signin-password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign In</button>
+      </form>
+      <div class="signin-links">
+        <button type="button" id="reset-btn">Forgot password?</button>
+        <button type="button" id="signup-toggle-btn">Create account</button>
+      </div>
+    </div>
+
+    <div class="access-panel">
+      <h2>Researcher account access</h2>
+      <p>Create an account to view order history, access documentation, and manage inquiry details.</p>
+      
+      <div class="access-features">
+        <div class="access-feature">
+          <h3>Order history</h3>
+          <p>View past orders and tracking information.</p>
+        </div>
+        <div class="access-feature">
+          <h3>Certificate access</h3>
+          <p>Download batch certificates and documentation.</p>
+        </div>
+        <div class="access-feature">
+          <h3>Account details</h3>
+          <p>Manage contact information and preferences.</p>
+        </div>
+      </div>
+
+      <button type="button" id="signup-btn" class="btn btn-primary">Create Account</button>
+    </div>
+  </section>
+
+  <!-- Sign Up Section (Hidden) -->
+  <section class="account-content hidden" id="signup-section">
+    <div style="grid-column: 1 / -1; max-width: 540px; margin: 0 auto;">
+      <h2 style="font-family: 'EB Garamond', Georgia, serif; font-size: clamp(28px, 3vw, 42px); font-weight: 500; letter-spacing: -.055em; line-height: .98; margin: 0 0 44px 0;">Create Account</h2>
+      <div id="signup-message"></div>
+      <form id="signup-form">
+        <div class="form-group">
+          <label for="signup-name">Name</label>
+          <input type="text" id="signup-name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label for="signup-email">Email address</label>
+          <input type="email" id="signup-email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="signup-password">Password</label>
+          <input type="password" id="signup-password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Account</button>
+      </form>
+      <div class="signin-links" style="margin-top: 28px;">
+        <button type="button" id="back-to-signin-btn">Back to sign in</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard Section (Hidden) -->
+  <section class="account-content hidden" id="dashboard-section">
+    <div class="dashboard-panel" style="grid-column: 1 / -1;">
+      <h2>Welcome back</h2>
+      <p id="user-greeting" style="font-size: 14px; color: var(--muted); margin: 0 0 44px 0;"></p>
+      
+      <h3 style="font-family: 'EB Garamond', Georgia, serif; font-size: 20px; font-weight: 500; margin: 44px 0 24px 0;">Order History</h3>
+      <div id="orders-list" style="margin-bottom: 44px;">
+        <p style="color: var(--muted);">No orders yet.</p>
+      </div>
+
+      <button type="button" class="btn btn-primary logout-btn" id="logout-btn">Sign Out</button>
+    </div>
+  </section>
+
+  <section class="support-strip">
+    <h3>Need help accessing your account?</h3>
+    <p style="font-size: 14px; color: var(--muted); margin: 0 0 32px 0;">Submit an inquiry and our team will respond within 24 hours.</p>
+    <button type="button" class="btn btn-primary" id="contact-support-btn">Contact Support</button>
+  </section>
+
+  <!-- Contact Support Modal (Hidden) -->
+  <div id="support-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 100; align-items: center; justify-content: center;">
+    <div style="background: var(--bg); padding: 60px; max-width: 540px; border: 1px solid var(--line);">
+      <h2 style="font-family: 'EB Garamond', Georgia, serif; font-size: 32px; font-weight: 500; margin: 0 0 32px 0;">Contact Support</h2>
+      <div id="support-message"></div>
+      <form id="support-form">
+        <div class="form-group">
+          <label for="support-email">Email</label>
+          <input type="email" id="support-email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="support-subject">Subject</label>
+          <input type="text" id="support-subject" placeholder="How can we help?" required>
+        </div>
+        <div class="form-group">
+          <label for="support-text">Message</label>
+          <textarea id="support-text" placeholder="Your message..." required style="min-height: 120px;"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
+        <button type="button" class="btn" style="background: transparent; color: var(--ink); border: 1px solid var(--line); margin-top: 12px; width: 100%;" onclick="document.getElementById('support-modal').style.display='none'">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+  <footer style="background: var(--bg); padding: 60px 58px; border-top: 1px solid var(--line); text-align: center; font-size: 11px; color: var(--muted); letter-spacing: .16em;">
+    <p style="margin: 0;">© 2026 Aura Labs. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Backend API always on localhost:5000 (accessible through ngrok)
+    const API_URL = 'http://localhost:5000/api';
+
+    // DOM Elements
+    const authSection = document.getElementById('auth-section');
+    const signupSection = document.getElementById('signup-section');
+    const dashboardSection = document.getElementById('dashboard-section');
+    
+    const signinForm = document.getElementById('signin-form');
+    const signupForm = document.getElementById('signup-form');
+    const supportForm = document.getElementById('support-form');
+
+    // Auth State
+    let currentUser = JSON.parse(localStorage.getItem('aura_user')) || null;
+    let currentToken = localStorage.getItem('aura_token') || null;
+
+    // Initialize
+    if (currentUser && currentToken) {
+      showDashboard();
+    }
+
+    // Sign In
+    signinForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('signin-email').value;
+      const password = document.getElementById('signin-password').value;
+
+      try {
+        const response = await fetch(`${API_URL}/auth/signin`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          currentUser = data;
+          currentToken = data.token;
+          localStorage.setItem('aura_user', JSON.stringify(data));
+          localStorage.setItem('aura_token', data.token);
+          signinForm.reset();
+          showDashboard();
+        } else {
+          showMessage('signin-message', data.error || 'Sign in failed', 'error');
+        }
+      } catch (error) {
+        showMessage('signin-message', 'Connection error. Check that backend is running.', 'error');
+      }
+    });
+
+    // Sign Up
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('signup-name').value;
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+
+      try {
+        const response = await fetch(`${API_URL}/auth/signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          currentUser = data;
+          currentToken = data.token;
+          localStorage.setItem('aura_user', JSON.stringify(data));
+          localStorage.setItem('aura_token', data.token);
+          signupForm.reset();
+          showDashboard();
+        } else {
+          showMessage('signup-message', data.error || 'Sign up failed', 'error');
+        }
+      } catch (error) {
+        showMessage('signup-message', 'Connection error. Check that backend is running.', 'error');
+      }
+    });
+
+    // Support Form
+    supportForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('support-email').value;
+      const subject = document.getElementById('support-subject').value;
+      const message = document.getElementById('support-text').value;
+
+      try {
+        const response = await fetch(`${API_URL}/support`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, subject, message })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          showMessage('support-message', 'Support request sent. We\'ll respond within 24 hours.', 'success');
+          supportForm.reset();
+          setTimeout(() => {
+            document.getElementById('support-modal').style.display = 'none';
+          }, 2000);
+        } else {
+          showMessage('support-message', data.error || 'Failed to send', 'error');
+        }
+      } catch (error) {
+        showMessage('support-message', 'Connection error', 'error');
+      }
+    });
+
+    // UI Helpers
+    function showMessage(elementId, message, type) {
+      const el = document.getElementById(elementId);
+      el.innerHTML = `<div class="message ${type}">${message}</div>`;
+    }
+
+    function showDashboard() {
+      authSection.classList.add('hidden');
+      signupSection.classList.add('hidden');
+      dashboardSection.classList.remove('hidden');
+
+      document.getElementById('user-greeting').textContent = `Welcome, ${currentUser.name || currentUser.email}`;
+
+      // Load orders
+      fetch(`${API_URL}/user/${currentUser.userId}/orders`, {
+        headers: { 'Authorization': `Bearer ${currentToken}` }
+      })
+        .then(r => r.json())
+        .then(orders => {
+          const list = document.getElementById('orders-list');
+          if (orders.length === 0) {
+            list.innerHTML = '<p style="color: var(--muted);">No orders yet.</p>';
+          } else {
+            list.innerHTML = orders.map(o => `
+              <div style="padding: 16px; border: 1px solid var(--line); margin-bottom: 12px;">
+                <p style="margin: 0 0 8px 0; font-weight: 600;">${o.compound_name}</p>
+                <p style="margin: 0; font-size: 12px; color: var(--muted);">Quantity: ${o.quantity}</p>
+                <p style="margin: 0; font-size: 12px; color: var(--muted);">Date: ${new Date(o.order_date).toLocaleDateString()}</p>
+              </div>
+            `).join('');
+          }
+        })
+        .catch(e => console.error('Failed to load orders:', e));
+    }
+
+    // Button Listeners
+    document.getElementById('signup-btn').addEventListener('click', () => {
+      authSection.classList.add('hidden');
+      signupSection.classList.remove('hidden');
+    });
+
+    document.getElementById('signup-toggle-btn').addEventListener('click', () => {
+      authSection.classList.add('hidden');
+      signupSection.classList.remove('hidden');
+    });
+
+    document.getElementById('back-to-signin-btn').addEventListener('click', () => {
+      signupSection.classList.add('hidden');
+      authSection.classList.remove('hidden');
+      document.getElementById('signup-form').reset();
+      document.getElementById('signup-message').innerHTML = '';
+    });
+
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      currentUser = null;
+      currentToken = null;
+      localStorage.removeItem('aura_user');
+      localStorage.removeItem('aura_token');
+      dashboardSection.classList.add('hidden');
+      authSection.classList.remove('hidden');
+      signinForm.reset();
+      document.getElementById('signin-message').innerHTML = '';
+    });
+
+    document.getElementById('contact-support-btn').addEventListener('click', () => {
+      document.getElementById('support-modal').style.display = 'flex';
+    });
+
+    document.getElementById('reset-btn').addEventListener('click', () => {
+      const email = prompt('Enter your email:');
+      if (email) {
+        fetch(`${API_URL}/auth/reset-request`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        })
+          .then(r => r.json())
+          .then(d => showMessage('signin-message', d.message, 'success'))
+          .catch(e => showMessage('signin-message', 'Error', 'error'));
+      }
+    });
+
+    // Close support modal on outside click
+    document.getElementById('support-modal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('support-modal')) {
+        document.getElementById('support-modal').style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

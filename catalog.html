@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aura Labs — Full Catalog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="index.html">AURA LABS</a>
+  <nav class="main-nav">
+    <a href="catalog.html">Compounds</a>
+    <a href="index.html#quality">Quality</a>
+    <a href="index.html#inquiry">Inquiry</a>
+    <a href="index.html#about">About</a>
+    <a href="account.html">Account</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<main class="catalog-page">
+  <section class="catalog-hero">
+    <div>
+      <p class="eyebrow">Full Catalog</p>
+      <h1>Research compounds organized for clarity.</h1>
+    </div>
+    <div>
+      <p>Aura Labs groups 50+ research listings by how researchers naturally browse: metabolic, recovery, secretagogues, cognitive, copper peptides, longevity, advanced research, and hormone support.</p>
+      <div class="filters" id="filterBar"></div>
+    </div>
+  </section>
+
+  <section class="catalog-table-wrap">
+    <table class="catalog-table">
+      <thead>
+        <tr>
+          <th>Compound</th>
+          <th>Category</th>
+          <th>Strength</th>
+          <th>Format</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="catalogBody"></tbody>
+    </table>
+  </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
