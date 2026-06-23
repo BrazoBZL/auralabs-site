@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog Post — Aura Labs</title>
+  <meta name="description" content="Blog post from Aura Labs" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .post-container { max-width: 720px; margin: 0 auto; padding: 60px 20px; }
+    .post-header { text-align: center; margin-bottom: 40px; }
+    .post-header h1 { font-family: 'EB Garamond', Georgia, serif; font-size: 48px; margin: 0 0 20px 0; color: #050505; line-height: 1.1; }
+    .post-header .meta { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: #999; }
+    .post-content { color: #333; font-size: 16px; line-height: 1.8; }
+    .post-content h2 { font-family: 'EB Garamond', Georgia, serif; font-size: 32px; margin: 40px 0 20px 0; color: #050505; }
+    .post-content h3 { font-family: 'EB Garamond', Georgia, serif; font-size: 24px; margin: 30px 0 15px 0; color: #050505; }
+    .post-content p { margin-bottom: 20px; }
+    .post-content ul, .post-content ol { margin: 20px 0 20px 20px; }
+    .post-content li { margin-bottom: 10px; }
+    .post-content strong { font-weight: 600; }
+    .post-footer { border-top: 1px solid #E8E6E1; margin-top: 60px; padding-top: 40px; }
+    .back-link { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #050505; text-decoration: none; }
+    .back-link:hover { color: #666; }
+    .error { text-align: center; color: #d32f2f; padding: 40px 0; }
+  </style>
+  <script type="application/ld+json" id="post-schema"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">AURA LABS</a>
+    <nav class="main-nav">
+      <a href="catalog.html">Compounds</a>
+      <a href="blog.html">Research</a>
+      <a href="checkout.html">Checkout</a>
+      <a href="account.html">Account</a>
+    </nav>
+  </header>
+
+  <main>
+    <article class="post-container" id="post-container">
+      <div style="text-align: center; padding: 40px 0; color: #999;">Loading post...</div>
+    </article>
+  </main>
+
+  <footer style="background: #F8F6F1; border-top: 1px solid #E8E6E1; padding: 40px 20px; text-align: center; color: #666; font-size: 12px;">
+    <p>&copy; 2026 Aura Labs. All rights reserved. | <a href="#" style="color: #666; text-decoration: none;">Privacy</a> | <a href="#" style="color: #666; text-decoration: none;">Terms</a></p>
+  </footer>
+
+  <script>
+    const API_URL = 'http://localhost:5000';
+
+    // Get slug from URL
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('slug');
+
+    async function loadPost() {
+      if (!slug) {
+        document.getElementById('post-container').innerHTML = '<div class="error">Post not found.</div>';
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_URL}/api/blog/posts/${slug}`);
+        
+        if (!response.ok) {
+          throw new Error('Post not found');
+        }
+
+        const post = await response.json();
+
+        // Update page title and meta
+        document.title = `${post.title} — Aura Labs`;
+        document.querySelector('meta[name="description"]').content = post.meta_description || post.excerpt;
+
+        // Update schema markup
+        const schema = {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": post.title,
+          "description": post.excerpt,
+          "image": "https://auralabsbio.co/assets/hero-packaging.jpg",
+          "author": {
+            "@type": "Organization",
+            "name": post.author
+          },
+          "datePublished": post.published_at,
+          "dateModified": post.updated_at
+        };
+        document.getElementById('post-schema').textContent = JSON.stringify(schema);
+
+        // Render post
+        const date = new Date(post.published_at).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+
+        const container = document.getElementById('post-container');
+        container.innerHTML = `
+          <header class="post-header">
+            <h1>${post.title}</h1>
+            <div class="meta">${date}${post.category ? ` • ${post.category}` : ''} • By ${post.author}</div>
+          </header>
+
+          <div class="post-content">
+            ${post.content}
+          </div>
+
+          <footer class="post-footer">
+            <a href="blog.html" class="back-link">← Back to All Posts</a>
+          </footer>
+        `;
+
+      } catch (error) {
+        document.getElementById('post-container').innerHTML = `<div class="error">Error loading post: ${error.message}</div>`;
+      }
+    }
+
+    loadPost();
+  </script>
+</body>
+</html>

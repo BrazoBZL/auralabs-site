@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research & Insights — Aura Labs</title>
+  <meta name="description" content="Research articles, compound guides, and scientific insights from Aura Labs." />
+  <meta name="keywords" content="research peptides, compound guides, scientific insights, peptide research" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .blog-container { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+    .blog-header { text-align: center; margin-bottom: 60px; }
+    .blog-header h1 { font-family: 'EB Garamond', Georgia, serif; font-size: 48px; margin: 0 0 12px 0; color: #050505; }
+    .blog-header p { color: #666; font-size: 14px; }
+    .posts-grid { display: grid; gap: 40px; margin-bottom: 60px; }
+    .post-card { border: 1px solid #E8E6E1; padding: 30px; background: #FEFDFB; transition: all 0.3s ease; }
+    .post-card:hover { border-color: #D8D4CC; }
+    .post-meta { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #999; margin-bottom: 12px; }
+    .post-title { font-family: 'EB Garamond', Georgia, serif; font-size: 28px; margin: 0 0 12px 0; color: #050505; }
+    .post-excerpt { color: #666; font-size: 14px; line-height: 1.6; margin-bottom: 16px; }
+    .post-link { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #050505; text-decoration: none; }
+    .post-link:hover { color: #666; }
+    .no-posts { text-align: center; color: #999; padding: 40px 0; }
+    .loading { text-align: center; color: #999; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Aura Labs Research & Insights",
+    "description": "Research articles and scientific insights about peptides and compounds",
+    "url": "https://auralabsbio.co/blog",
+    "image": "https://auralabsbio.co/assets/hero-packaging.jpg"
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">AURA LABS</a>
+    <nav class="main-nav">
+      <a href="catalog.html">Compounds</a>
+      <a href="blog.html" style="color: #050505; font-weight: 700;">Research</a>
+      <a href="checkout.html">Checkout</a>
+      <a href="account.html">Account</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="blog-container">
+      <div class="blog-header">
+        <h1>Research & Insights</h1>
+        <p>Scientific articles, compound guides, and research updates from Aura Labs.</p>
+      </div>
+
+      <div class="posts-grid" id="posts-container">
+        <div class="loading">Loading posts...</div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="background: #F8F6F1; border-top: 1px solid #E8E6E1; padding: 40px 20px; text-align: center; color: #666; font-size: 12px;">
+    <p>&copy; 2026 Aura Labs. All rights reserved. | <a href="#" style="color: #666; text-decoration: none;">Privacy</a> | <a href="#" style="color: #666; text-decoration: none;">Terms</a></p>
+  </footer>
+
+  <script>
+    const API_URL = 'http://localhost:5000';
+
+    async function loadPosts() {
+      try {
+        const response = await fetch(`${API_URL}/api/blog/posts`);
+        const posts = await response.json();
+
+        const container = document.getElementById('posts-container');
+        container.innerHTML = '';
+
+        if (posts.length === 0) {
+          container.innerHTML = '<div class="no-posts">No posts yet. Check back soon.</div>';
+          return;
+        }
+
+        posts.forEach(post => {
+          const date = new Date(post.published_at).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+
+          const card = document.createElement('article');
+          card.className = 'post-card';
+          card.innerHTML = `
+            <div class="post-meta">${date}${post.category ? ` • ${post.category}` : ''}</div>
+            <h2 class="post-title">${post.title}</h2>
+            <p class="post-excerpt">${post.excerpt}</p>
+            <a href="blog-post.html?slug=${post.slug}" class="post-link">Read More →</a>
+          `;
+          container.appendChild(card);
+        });
+      } catch (error) {
+        document.getElementById('posts-container').innerHTML = `<div class="no-posts">Error loading posts: ${error.message}</div>`;
+      }
+    }
+
+    loadPosts();
+  </script>
+</body>
+</html>
