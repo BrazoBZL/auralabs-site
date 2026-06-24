@@ -272,7 +272,17 @@
       <a href="account.html">Account</a>
       <a href="#contact">Contact</a>
     </nav>
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+      <span class="hamburger"></span>
+    </button>
   </header>
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="catalog.html">Catalog</a>
+    <a href="account.html">Account</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
   <section class="account-hero">
     <h1>Account</h1>
@@ -599,6 +609,31 @@
         document.getElementById('support-modal').style.display = 'none';
       }
     });
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    if(menuBtn) {
+      menuBtn.addEventListener('click', () => {
+        menuBtn.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+      });
+      
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menuBtn.classList.remove('active');
+          mobileMenu.classList.remove('active');
+        });
+      });
+      
+      document.addEventListener('click', (e) => {
+        if(!e.target.closest('.site-header') && !e.target.closest('.mobile-menu')) {
+          menuBtn.classList.remove('active');
+          mobileMenu.classList.remove('active');
+        }
+      });
+    }
   </script>
 </body>
 </html>

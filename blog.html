@@ -61,7 +61,19 @@
       <a href="account.html">Account</a>
       <a href="#contact">Contact</a>
     </nav>
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+      <span class="hamburger"></span>
+    </button>
   </header>
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="catalog.html">Compounds</a>
+    <a href="blog.html">Research</a>
+    <a href="#quality">Quality</a>
+    <a href="account.html">Account</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
   <!-- Blog Archive View -->
   <div id="blog-archive">
@@ -446,6 +458,31 @@
       posts.forEach(post => post.style.display = 'none');
       document.getElementById('blog-archive').style.display = 'block';
       window.scrollTo(0, 0);
+    }
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    if(menuBtn) {
+      menuBtn.addEventListener('click', () => {
+        menuBtn.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+      });
+      
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menuBtn.classList.remove('active');
+          mobileMenu.classList.remove('active');
+        });
+      });
+      
+      document.addEventListener('click', (e) => {
+        if(!e.target.closest('.site-header') && !e.target.closest('.mobile-menu')) {
+          menuBtn.classList.remove('active');
+          mobileMenu.classList.remove('active');
+        }
+      });
     }
   </script>
 </body>

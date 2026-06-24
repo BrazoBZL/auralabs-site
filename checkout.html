@@ -37,7 +37,17 @@
       <a href="account.html">Account</a>
       <a href="checkout.html" style="color: #050505; font-weight: 700;">Checkout</a>
     </nav>
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+      <span class="hamburger"></span>
+    </button>
   </header>
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="catalog.html">Compounds</a>
+    <a href="blog.html">Research</a>
+    <a href="account.html">Account</a>
+    <a href="checkout.html">Checkout</a>
+  </nav>
 
   <main>
     <section class="checkout-container">
@@ -270,6 +280,31 @@
 
     // Load cart on page load
     loadCart();
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    if(menuBtn) {
+      menuBtn.addEventListener('click', () => {
+        menuBtn.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+      });
+      
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menuBtn.classList.remove('active');
+          mobileMenu.classList.remove('active');
+        });
+      });
+      
+      document.addEventListener('click', (e) => {
+        if(!e.target.closest('.site-header') && !e.target.closest('.mobile-menu')) {
+          menuBtn.classList.remove('active');
+          mobileMenu.classList.remove('active');
+        }
+      });
+    }
   </script>
 </body>
 </html>
