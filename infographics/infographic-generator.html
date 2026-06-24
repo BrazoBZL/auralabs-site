@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research Infographics — Aura Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #fbfaf7; color: #333; }
+    
+    .container { max-width: 1200px; margin: 0 auto; padding: 60px 40px; }
+    h1 { font-family: 'EB Garamond', serif; font-size: 48px; margin-bottom: 12px; color: #050505; }
+    .subtitle { font-size: 14px; color: #666; margin-bottom: 40px; }
+    
+    .infographics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; }
+    
+    .infographic-card { background: white; padding: 0; border: 1px solid #e8e6e1; }
+    .infographic-card h2 { font-family: 'EB Garamond', serif; font-size: 24px; padding: 24px 24px 12px; color: #050505; margin-bottom: 8px; }
+    .infographic-card p { font-size: 13px; color: #666; padding: 0 24px 12px; line-height: 1.5; }
+    
+    .svg-container { width: 100%; height: 500px; background: #fefdfb; border: 1px solid #e8e6e1; display: flex; align-items: center; justify-content: center; }
+    
+    svg { width: 100%; height: 100%; }
+    
+    .btn { display: inline-block; padding: 12px 24px; background: #050505; color: white; border: none; cursor: pointer; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; font-weight: 800; margin: 16px 24px 24px; }
+    .btn:hover { opacity: .8; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Research Infographics</h1>
+    <p class="subtitle">Shareable visual guides for peptide research. Download and share on social media, research blogs, and scientific communities.</p>
+    
+    <div class="infographics-grid">
+      
+      <!-- Infographic 1: Peptide Comparison -->
+      <div class="infographic-card">
+        <h2>Peptide Structure Comparison</h2>
+        <p>Visual comparison of peptide sequences: Semaglutide vs. BPC-157 vs. TB-500. Shows molecular differences and functional classifications.</p>
+        <div class="svg-container">
+          <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <style>
+                .pep-title { font-family: 'EB Garamond', serif; font-size: 16px; font-weight: bold; }
+                .pep-label { font-family: 'Inter', sans-serif; font-size: 12px; }
+                .pep-bar { fill: none; stroke: #050505; stroke-width: 2; }
+              </style>
+            </defs>
+            
+            <!-- Title -->
+            <text x="200" y="30" text-anchor="middle" class="pep-title">Peptide Molecular Comparison</text>
+            
+            <!-- Semaglutide -->
+            <text x="20" y="70" class="pep-label" font-weight="800">Semaglutide</text>
+            <rect x="20" y="80" width="300" height="30" class="pep-bar" stroke="#2563eb" stroke-width="3" fill="#e0e7ff"/>
+            <text x="330" y="100" class="pep-label">39 AA</text>
+            <text x="20" y="130" class="pep-label">GLP-1 Receptor Agonist | Metabolic | Weekly Dosing</text>
+            
+            <!-- BPC-157 -->
+            <text x="20" y="170" class="pep-label" font-weight="800">BPC-157</text>
+            <rect x="20" y="180" width="60" height="30" class="pep-bar" stroke="#0b8f3a" stroke-width="3" fill="#dcfce7"/>
+            <text x="90" y="200" class="pep-label">15 AA | Localized Tissue Repair | Injection Site</text>
+            
+            <!-- TB-500 -->
+            <text x="20" y="240" class="pep-label" font-weight="800">TB-500</text>
+            <rect x="20" y="250" width="130" height="30" class="pep-bar" stroke="#7c3aed" stroke-width="3" fill="#f3e8ff"/>
+            <text x="160" y="270" class="pep-label">43 AA | Systemic Tissue Repair | Circulating</text>
+            
+            <!-- Legend -->
+            <text x="20" y="320" class="pep-label" font-weight="800">Molecular Weight Representation</text>
+            <text x="20" y="360" class="pep-label" font-size="11">Left = Lower MW | Right = Higher MW</text>
+            
+            <!-- Classification -->
+            <rect x="20" y="380" width="80" height="50" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="4"/>
+            <text x="30" y="400" class="pep-label" font-weight="800">Metabolic</text>
+            <text x="30" y="420" class="pep-label" font-size="10">GLP-1, Peptide</text>
+            
+            <rect x="120" y="380" width="80" height="50" fill="none" stroke="#0b8f3a" stroke-width="2" stroke-dasharray="4"/>
+            <text x="130" y="400" class="pep-label" font-weight="800">Localized</text>
+            <text x="130" y="420" class="pep-label" font-size="10">Tissue Repair</text>
+            
+            <rect x="220" y="380" width="100" height="50" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="4"/>
+            <text x="230" y="400" class="pep-label" font-weight="800">Systemic</text>
+            <text x="230" y="420" class="pep-label" font-size="10">Tissue Repair</text>
+          </svg>
+        </div>
+        <button class="btn" onclick="downloadSVG('peptide-comparison')">Download SVG</button>
+      </div>
+      
+      <!-- Infographic 2: GLP-1 Signaling -->
+      <div class="infographic-card">
+        <h2>GLP-1 Signaling Pathway</h2>
+        <p>Visual representation of how GLP-1 receptor agonists (Semaglutide, etc.) activate intracellular signaling cascades.</p>
+        <div class="svg-container">
+          <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <style>
+                .pathway-title { font-family: 'EB Garamond', serif; font-size: 16px; font-weight: bold; }
+                .pathway-label { font-family: 'Inter', sans-serif; font-size: 11px; }
+                .box { fill: #e0e7ff; stroke: #2563eb; stroke-width: 2; }
+                .arrow { fill: none; stroke: #050505; stroke-width: 2; marker-end: url(#arrowhead); }
+              </style>
+              <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <polygon points="0 0, 10 3, 0 6" fill="#050505"/>
+              </marker>
+            </defs>
+            
+            <text x="200" y="30" text-anchor="middle" class="pathway-title">GLP-1 Receptor Signaling</text>
+            
+            <!-- Extracellular -->
+            <text x="200" y="60" text-anchor="middle" class="pathway-label" font-weight="800">Extracellular</text>
+            <rect x="80" y="70" width="240" height="40" class="box"/>
+            <text x="200" y="100" text-anchor="middle" class="pathway-label">GLP-1 or Agonist (Semaglutide)</text>
+            
+            <!-- Arrow -->
+            <line x1="200" y1="110" x2="200" y2="140" class="arrow"/>
+            
+            <!-- Receptor -->
+            <text x="200" y="165" text-anchor="middle" class="pathway-label" font-weight="800">GLP-1 Receptor (Cell Membrane)</text>
+            <circle cx="200" cy="190" r="30" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+            
+            <!-- Arrow -->
+            <line x1="200" y1="220" x2="200" y2="250" class="arrow"/>
+            
+            <!-- G-Protein -->
+            <text x="200" y="275" text-anchor="middle" class="pathway-label" font-weight="800">G-Protein Activation</text>
+            <rect x="100" y="280" width="200" height="40" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+            <text x="200" y="310" text-anchor="middle" class="pathway-label" font-size="10">↑ cAMP | ↑ IP3</text>
+            
+            <!-- Arrow -->
+            <line x1="200" y1="320" x2="200" y2="350" class="arrow"/>
+            
+            <!-- Downstream Effects -->
+            <text x="200" y="375" text-anchor="middle" class="pathway-label" font-weight="800">Intracellular Response</text>
+            
+            <!-- Three parallel effects -->
+            <rect x="20" y="385" width="90" height="60" fill="#dcfce7" stroke="#0b8f3a" stroke-width="2"/>
+            <text x="65" y="410" text-anchor="middle" class="pathway-label" font-weight="800">Insulin</text>
+            <text x="65" y="430" text-anchor="middle" class="pathway-label" font-size="9">Secretion ↑</text>
+            
+            <rect x="155" y="385" width="90" height="60" fill="#dcfce7" stroke="#0b8f3a" stroke-width="2"/>
+            <text x="200" y="410" text-anchor="middle" class="pathway-label" font-weight="800">Satiety</text>
+            <text x="200" y="430" text-anchor="middle" class="pathway-label" font-size="9">Signaling ↑</text>
+            
+            <rect x="290" y="385" width="90" height="60" fill="#dcfce7" stroke="#0b8f3a" stroke-width="2"/>
+            <text x="335" y="410" text-anchor="middle" class="pathway-label" font-weight="800">GI Motility</text>
+            <text x="335" y="430" text-anchor="middle" class="pathway-label" font-size="9">Slowing ↑</text>
+          </svg>
+        </div>
+        <button class="btn" onclick="downloadSVG('glp1-pathway')">Download SVG</button>
+      </div>
+      
+      <!-- Infographic 3: HGH Secretagogue Comparison -->
+      <div class="infographic-card">
+        <h2>Growth Hormone Secretagogue Mechanisms</h2>
+        <p>Comparison of how different secretagogues (Ipamorelin, CJC-1295, GHRP-6) trigger GH release via different pathways.</p>
+        <div class="svg-container">
+          <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <style>
+                .hgh-title { font-family: 'EB Garamond', serif; font-size: 16px; font-weight: bold; }
+                .hgh-label { font-family: 'Inter', sans-serif; font-size: 11px; }
+                .hgh-box { fill: #dbeafe; stroke: #0284c7; stroke-width: 2; }
+              </style>
+            </defs>
+            
+            <text x="200" y="30" text-anchor="middle" class="hgh-title">GH Secretagogue Mechanisms</text>
+            
+            <!-- Somatotroph Cell -->
+            <rect x="50" y="50" width="300" height="420" fill="none" stroke="#050505" stroke-width="2" stroke-dasharray="4"/>
+            <text x="60" y="70" class="hgh-label" font-weight="800">Somatotroph Cell (Pituitary)</text>
+            
+            <!-- Pathway 1: Ipamorelin -->
+            <text x="70" y="110" class="hgh-label" font-weight="800">Ipamorelin</text>
+            <rect x="70" y="120" width="100" height="30" class="hgh-box"/>
+            <text x="120" y="140" text-anchor="middle" class="hgh-label" font-size="10">Ghrelin Receptor</text>
+            <line x1="120" y1="150" x2="120" y2="180" stroke="#050505" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <text x="120" y="200" text-anchor="middle" class="hgh-label" font-size="10">↑ GH Release</text>
+            
+            <!-- Pathway 2: CJC-1295 -->
+            <text x="220" y="110" class="hgh-label" font-weight="800">CJC-1295</text>
+            <rect x="200" y="120" width="100" height="30" class="hgh-box" fill="#fef3c7"/>
+            <text x="250" y="140" text-anchor="middle" class="hgh-label" font-size="10">GHRH Receptor</text>
+            <line x1="250" y1="150" x2="250" y2="180" stroke="#050505" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <text x="250" y="200" text-anchor="middle" class="hgh-label" font-size="10">↑ GH Release</text>
+            
+            <!-- Comparison Table -->
+            <text x="70" y="250" class="hgh-label" font-weight="800">Comparison:</text>
+            
+            <rect x="70" y="260" width="80" height="130" class="hgh-box"/>
+            <text x="110" y="280" text-anchor="middle" class="hgh-label" font-weight="800" font-size="10">Ipamorelin</text>
+            <text x="110" y="300" text-anchor="middle" class="hgh-label" font-size="9">Half-life: 2h</text>
+            <text x="110" y="315" text-anchor="middle" class="hgh-label" font-size="9">Prolactin: ↑↑</text>
+            <text x="110" y="330" text-anchor="middle" class="hgh-label" font-size="9">Cortisol: ↑</text>
+            <text x="110" y="345" text-anchor="middle" class="hgh-label" font-size="9">Selectivity: High</text>
+            <text x="110" y="360" text-anchor="middle" class="hgh-label" font-size="9">Frequency: 3x/day</text>
+            
+            <rect x="160" y="260" width="80" height="130" class="hgh-box" fill="#fef3c7"/>
+            <text x="200" y="280" text-anchor="middle" class="hgh-label" font-weight="800" font-size="10">CJC-1295</text>
+            <text x="200" y="300" text-anchor="middle" class="hgh-label" font-size="9">Half-life: 6-8d</text>
+            <text x="200" y="315" text-anchor="middle" class="hgh-label" font-size="9">Prolactin: ↑</text>
+            <text x="200" y="330" text-anchor="middle" class="hgh-label" font-size="9">Cortisol: ↑</text>
+            <text x="200" y="345" text-anchor="middle" class="hgh-label" font-size="9">Selectivity: Good</text>
+            <text x="200" y="360" text-anchor="middle" class="hgh-label" font-size="9">Frequency: 2x/wk</text>
+            
+            <rect x="250" y="260" width="80" height="130" class="hgh-box" fill="#dcfce7"/>
+            <text x="290" y="280" text-anchor="middle" class="hgh-label" font-weight="800" font-size="10">GHRP-6</text>
+            <text x="290" y="300" text-anchor="middle" class="hgh-label" font-size="9">Half-life: 1h</text>
+            <text x="290" y="315" text-anchor="middle" class="hgh-label" font-size="9">Prolactin: ↑↑↑</text>
+            <text x="290" y="330" text-anchor="middle" class="hgh-label" font-size="9">Cortisol: ↑↑</text>
+            <text x="290" y="345" text-anchor="middle" class="hgh-label" font-size="9">Selectivity: Fair</text>
+            <text x="290" y="360" text-anchor="middle" class="hgh-label" font-size="9">Frequency: 3x/day</text>
+          </svg>
+        </div>
+        <button class="btn" onclick="downloadSVG('hgh-secretagogues')">Download SVG</button>
+      </div>
+      
+      <!-- Infographic 4: Peptide Research Timeline -->
+      <div class="infographic-card">
+        <h2>50-Year Peptide Research Timeline</h2>
+        <p>Historical development of key peptide discoveries and clinical applications from 1974 to 2024.</p>
+        <div class="svg-container">
+          <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <style>
+                .timeline-title { font-family: 'EB Garamond', serif; font-size: 16px; font-weight: bold; }
+                .timeline-label { font-family: 'Inter', sans-serif; font-size: 10px; }
+              </style>
+            </defs>
+            
+            <text x="200" y="30" text-anchor="middle" class="timeline-title">50 Years of Peptide Discovery</text>
+            
+            <!-- Timeline line -->
+            <line x1="60" y1="80" x2="60" y2="480" stroke="#050505" stroke-width="3"/>
+            
+            <!-- 1974 -->
+            <circle cx="60" cy="100" r="6" fill="#2563eb"/>
+            <text x="80" y="105" class="timeline-label" font-weight="800">1974</text>
+            <text x="80" y="120" class="timeline-label">Somatostatin</text>
+            <text x="80" y="130" class="timeline-label" font-size="9">GH inhibition discovered</text>
+            
+            <!-- 1982 -->
+            <circle cx="60" cy="160" r="6" fill="#0b8f3a"/>
+            <text x="80" y="165" class="timeline-label" font-weight="800">1982</text>
+            <text x="80" y="180" class="timeline-label">GHRH Identified</text>
+            <text x="80" y="190" class="timeline-label" font-size="9">GH releasing hormone</text>
+            
+            <!-- 1994 -->
+            <circle cx="60" cy="220" r="6" fill="#7c3aed"/>
+            <text x="80" y="225" class="timeline-label" font-weight="800">1994</text>
+            <text x="80" y="240" class="timeline-label">Ghrelin Discovery</text>
+            <text x="80" y="250" class="timeline-label" font-size="9">Natural GH secretagogue</text>
+            
+            <!-- 2003 -->
+            <circle cx="60" cy="280" r="6" fill="#f59e0b"/>
+            <text x="80" y="285" class="timeline-label" font-weight="800">2003</text>
+            <text x="80" y="300" class="timeline-label">BPC-157 Research</text>
+            <text x="80" y="310" class="timeline-label" font-size="9">Tissue repair properties</text>
+            
+            <!-- 2009 -->
+            <circle cx="60" cy="340" r="6" fill="#ec4899"/>
+            <text x="80" y="345" class="timeline-label" font-weight="800">2009</text>
+            <text x="80" y="360" class="timeline-label">Semaglutide Patent</text>
+            <text x="80" y="370" class="timeline-label" font-size="9">GLP-1 agonist (Novo Nordisk)</text>
+            
+            <!-- 2018 -->
+            <circle cx="60" cy="400" r="6" fill="#06b6d4"/>
+            <text x="80" y="405" class="timeline-label" font-weight="800">2018</text>
+            <text x="80" y="420" class="timeline-label">Peptide Boom</text>
+            <text x="80" y="430" class="timeline-label" font-size="9">Research-grade market surge</text>
+            
+            <!-- 2024 -->
+            <circle cx="60" cy="460" r="6" fill="#050505"/>
+            <text x="80" y="465" class="timeline-label" font-weight="800">2024</text>
+            <text x="80" y="480" class="timeline-label">Modern Era</text>
+          </svg>
+        </div>
+        <button class="btn" onclick="downloadSVG('peptide-timeline')">Download SVG</button>
+      </div>
+      
+      <!-- Infographic 5: NAD+ Metabolic Pathway -->
+      <div class="infographic-card">
+        <h2>NAD+ Metabolic Pathway</h2>
+        <p>How NAD+ precursors (NMN, NR) support cellular energy production and mitochondrial function.</p>
+        <div class="svg-container">
+          <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <style>
+                .nad-title { font-family: 'EB Garamond', serif; font-size: 16px; font-weight: bold; }
+                .nad-label { font-family: 'Inter', sans-serif; font-size: 11px; }
+                .nad-box { fill: #dcfce7; stroke: #0b8f3a; stroke-width: 2; }
+                .nad-arrow { fill: none; stroke: #050505; stroke-width: 2; marker-end: url(#arrowhead); }
+              </style>
+              <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <polygon points="0 0, 10 3, 0 6" fill="#050505"/>
+              </marker>
+            </defs>
+            
+            <text x="200" y="30" text-anchor="middle" class="nad-title">NAD+ Biosynthetic Pathway</text>
+            
+            <!-- Precursors -->
+            <text x="70" y="70" class="nad-label" font-weight="800">NAD+ Precursors:</text>
+            
+            <rect x="20" y="80" width="110" height="40" class="nad-box"/>
+            <text x="75" y="105" text-anchor="middle" class="nad-label" font-size="10">NMN</text>
+            
+            <rect x="145" y="80" width="110" height="40" class="nad-box"/>
+            <text x="200" y="105" text-anchor="middle" class="nad-label" font-size="10">NR</text>
+            
+            <rect x="270" y="80" width="110" height="40" class="nad-box"/>
+            <text x="325" y="105" text-anchor="middle" class="nad-label" font-size="10">Tryptophan</text>
+            
+            <!-- Arrows -->
+            <line x1="75" y1="120" x2="100" y2="160" class="nad-arrow"/>
+            <line x1="200" y1="120" x2="200" y2="160" class="nad-arrow"/>
+            <line x1="325" y1="120" x2="250" y2="160" class="nad-arrow"/>
+            
+            <!-- NAD+ Synthesis -->
+            <rect x="80" y="160" width="240" height="50" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+            <text x="200" y="190" text-anchor="middle" class="nad-label" font-weight="800">NAD+ Synthesis in Cytoplasm & Mitochondria</text>
+            
+            <!-- Arrow -->
+            <line x1="200" y1="210" x2="200" y2="240" class="nad-arrow"/>
+            
+            <!-- NAD+ Functions -->
+            <text x="70" y="270" class="nad-label" font-weight="800">NAD+ Functions:</text>
+            
+            <rect x="20" y="280" width="110" height="60" class="nad-box"/>
+            <text x="75" y="305" text-anchor="middle" class="nad-label" font-weight="800">ATP</text>
+            <text x="75" y="325" text-anchor="middle" class="nad-label" font-size="9">Energy</text>
+            <text x="75" y="335" text-anchor="middle" class="nad-label" font-size="9">Production</text>
+            
+            <rect x="145" y="280" width="110" height="60" class="nad-box"/>
+            <text x="200" y="305" text-anchor="middle" class="nad-label" font-weight="800">Sirtuins</text>
+            <text x="200" y="325" text-anchor="middle" class="nad-label" font-size="9">Cellular</text>
+            <text x="200" y="335" text-anchor="middle" class="nad-label" font-size="9">Aging</text>
+            
+            <rect x="270" y="280" width="110" height="60" class="nad-box"/>
+            <text x="325" y="305" text-anchor="middle" class="nad-label" font-weight="800">DNA Repair</text>
+            <text x="325" y="325" text-anchor="middle" class="nad-label" font-size="9">Genomic</text>
+            <text x="325" y="335" text-anchor="middle" class="nad-label" font-size="9">Stability</text>
+            
+            <!-- Results -->
+            <text x="70" y="380" class="nad-label" font-weight="800">Downstream Effects:</text>
+            
+            <rect x="70" y="390" width="260" height="80" fill="none" stroke="#050505" stroke-width="2" stroke-dasharray="4"/>
+            <text x="85" y="410" class="nad-label">✓ Mitochondrial Function ↑</text>
+            <text x="85" y="430" class="nad-label">✓ Metabolic Rate ↑</text>
+            <text x="85" y="450" class="nad-label">✓ Longevity Markers ↑</text>
+            <text x="200" y="410" class="nad-label">✓ Cellular Stress Resistance ↑</text>
+            <text x="200" y="430" class="nad-label">✓ NAD-Dependent Pathways ↑</text>
+            <text x="200" y="450" class="nad-label">✓ Age-Related Decline Slowed</text>
+          </svg>
+        </div>
+        <button class="btn" onclick="downloadSVG('nad-pathway')">Download SVG</button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function downloadSVG(name) {
+      alert(`Infographic "${name}" is ready for download. In production, this would trigger SVG download or PNG export. Share widely on scientific communities, Twitter, Reddit, and research blogs.`);
+    }
+  </script>
+</body>
+</html>
