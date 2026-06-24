@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dosage & Safety Calculator — Aura Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #fbfaf7; color: #333; }
+    
+    .container { max-width: 900px; margin: 0 auto; padding: 60px 40px; }
+    h1 { font-family: 'EB Garamond', serif; font-size: 48px; margin-bottom: 12px; color: #050505; }
+    .subtitle { font-size: 14px; color: #666; margin-bottom: 40px; }
+    
+    .tool-section { background: white; padding: 40px; border: 1px solid #e8e6e1; margin-bottom: 40px; }
+    .tool-section h2 { font-family: 'EB Garamond', serif; font-size: 32px; margin-bottom: 24px; color: #050505; }
+    
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+    @media (max-width: 768px) { .form-grid { grid-template-columns: 1fr; } }
+    
+    .form-group { margin-bottom: 20px; }
+    label { display: block; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; font-weight: 800; color: #050505; margin-bottom: 8px; }
+    select, input { width: 100%; padding: 12px; border: 1px solid #e8e6e1; background: #fefdfb; font-family: inherit; font-size: 14px; }
+    select:focus, input:focus { outline: none; border-color: #050505; }
+    
+    .btn { display: inline-block; padding: 12px 32px; background: #050505; color: white; border: none; cursor: pointer; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; font-weight: 800; }
+    .btn:hover { opacity: .8; }
+    
+    .results { background: #f0ede6; padding: 28px; margin-top: 32px; display: none; border-left: 4px solid #050505; }
+    .results.active { display: block; }
+    .results h3 { font-family: 'EB Garamond', serif; font-size: 20px; margin-bottom: 16px; color: #050505; }
+    
+    .result-row { display: grid; grid-template-columns: 250px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid #ddd; }
+    .result-row:last-child { border-bottom: none; }
+    .result-label { font-weight: 800; font-size: 13px; color: #666; }
+    .result-value { font-size: 16px; color: #050505; font-weight: 700; }
+    
+    .safety-box { background: white; padding: 20px; margin: 20px 0; border-left: 4px solid #ff6b6b; }
+    .safety-box.warning { border-left-color: #ffa500; }
+    .safety-box.safe { border-left-color: #0b8f3a; }
+    .safety-box h4 { font-weight: 800; margin-bottom: 8px; font-size: 13px; }
+    .safety-box p { font-size: 12px; line-height: 1.5; }
+    
+    .dosing-schedule { margin: 20px 0; }
+    .dosing-schedule h4 { font-weight: 800; margin: 12px 0; font-size: 13px; }
+    .dose-item { background: white; padding: 12px; margin: 8px 0; border-left: 3px solid #050505; font-size: 12px; }
+    
+    .warning-text { background: #fff3cd; padding: 12px; margin: 16px 0; border: 1px solid #ffc107; color: #856404; font-size: 12px; }
+    
+    @media print {
+      .btn { display: none; }
+      .container { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Dosage & Safety Calculator</h1>
+    <p class="subtitle">Calculate research-appropriate dosages based on body weight, assess safety limits, and generate dosing schedules.</p>
+    
+    <div class="tool-section">
+      <h2>Dosage Calculator</h2>
+      
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="peptide">Select Peptide</label>
+          <select id="peptide" onchange="updatePeptide()">
+            <option value="">-- Choose a peptide --</option>
+            <option value="ipamorelin">Ipamorelin</option>
+            <option value="cjc-dac">CJC-1295 (with DAC)</option>
+            <option value="cjc-nodac">CJC-1295 (without DAC)</option>
+            <option value="ghrp6">GHRP-6</option>
+            <option value="ghrp2">GHRP-2</option>
+            <option value="bpc157">BPC-157</option>
+            <option value="tb500">TB-500</option>
+            <option value="semaglutide">Semaglutide</option>
+            <option value="custom">Custom</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="species">Research Subject Type</label>
+          <select id="species">
+            <option value="human">Human (for reference - research use)</option>
+            <option value="mouse">Mouse</option>
+            <option value="rat">Rat</option>
+            <option value="dog">Dog</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="weight">Body Weight (kg)</label>
+          <input type="number" id="weight" placeholder="e.g., 70" step="0.1" min="0">
+        </div>
+        <div class="form-group">
+          <label for="frequency">Dosing Frequency</label>
+          <select id="frequency">
+            <option value="">-- Select Frequency --</option>
+            <option value="once">Once daily</option>
+            <option value="twice">Twice daily</option>
+            <option value="thrice">Three times daily</option>
+            <option value="weekly">Once weekly</option>
+            <option value="biweekly">Twice weekly</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="duration">Study Duration</label>
+          <select id="duration">
+            <option value="">-- Select Duration --</option>
+            <option value="2">2 weeks</option>
+            <option value="4">4 weeks</option>
+            <option value="8">8 weeks</option>
+            <option value="12">12 weeks</option>
+            <option value="24">24 weeks</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="dosageMethod">Dosage Method</label>
+          <select id="dosageMethod">
+            <option value="standard">Standard Research Dose</option>
+            <option value="perkg">Per Kilogram Body Weight</option>
+            <option value="custom">Custom Dose</option>
+          </select>
+        </div>
+      </div>
+      
+      <div id="customDoseInput" style="display: none;">
+        <div class="form-group">
+          <label for="customDose">Custom Dose Amount (mcg or mg)</label>
+          <input type="number" id="customDose" placeholder="e.g., 100" step="10" min="1">
+        </div>
+      </div>
+      
+      <button class="btn" onclick="calculate()">Calculate Dosage & Safety</button>
+    </div>
+    
+    <div id="results" class="results">
+      <h3>Dosage Calculation Results</h3>
+      
+      <div class="result-row">
+        <div class="result-label">Peptide</div>
+        <div class="result-value" id="resultPeptide"></div>
+      </div>
+      
+      <div class="result-row">
+        <div class="result-label">Recommended Dose</div>
+        <div class="result-value" id="resultDose"></div>
+      </div>
+      
+      <div class="result-row">
+        <div class="result-label">Frequency</div>
+        <div class="result-value" id="resultFrequency"></div>
+      </div>
+      
+      <div class="result-row">
+        <div class="result-label">Total Daily Dose</div>
+        <div class="result-value" id="resultDailyTotal"></div>
+      </div>
+      
+      <div class="result-row">
+        <div class="result-label">Total Weekly Dose</div>
+        <div class="result-value" id="resultWeeklyTotal"></div>
+      </div>
+      
+      <div class="result-row">
+        <div class="result-label">Study Total Dose</div>
+        <div class="result-value" id="resultStudyTotal"></div>
+      </div>
+      
+      <div id="safetyDiv"></div>
+      
+      <div class="dosing-schedule">
+        <h3 style="font-family: 'EB Garamond', serif; font-size: 18px; margin-top: 28px; margin-bottom: 16px; color: #050505;">Dosing Schedule</h3>
+        <div id="schedule"></div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    const peptideData = {
+      ipamorelin: {
+        name: 'Ipamorelin',
+        unit: 'mcg',
+        standard: 100,
+        perkg: 1.5,
+        maxDaily: 600,
+        maxFreq: 3,
+        notes: 'Selective ghrelin agonist. Minimal prolactin elevation.'
+      },
+      'cjc-dac': {
+        name: 'CJC-1295 (with DAC)',
+        unit: 'mcg',
+        standard: 100,
+        perkg: 1.5,
+        maxDaily: 200,
+        maxFreq: 2,
+        notes: 'Extended half-life. Dosing typically 2x weekly.'
+      },
+      'cjc-nodac': {
+        name: 'CJC-1295 (without DAC)',
+        unit: 'mcg',
+        standard: 100,
+        perkg: 1.5,
+        maxDaily: 600,
+        maxFreq: 3,
+        notes: 'Shorter half-life. Can dose multiple times daily.'
+      },
+      ghrp6: {
+        name: 'GHRP-6',
+        unit: 'mcg',
+        standard: 75,
+        perkg: 1,
+        maxDaily: 300,
+        maxFreq: 3,
+        notes: 'Older secretagogue. Prolactin elevation moderate.'
+      },
+      ghrp2: {
+        name: 'GHRP-2',
+        unit: 'mcg',
+        standard: 75,
+        perkg: 1,
+        maxDaily: 300,
+        maxFreq: 3,
+        notes: 'Potent GH release. Cortisol elevation possible.'
+      },
+      bpc157: {
+        name: 'BPC-157',
+        unit: 'mcg',
+        standard: 15,
+        perkg: 0.2,
+        maxDaily: 40,
+        maxFreq: 2,
+        notes: 'Localized tissue repair. Inject at injury site.'
+      },
+      tb500: {
+        name: 'TB-500',
+        unit: 'mg',
+        standard: 5,
+        perkg: 0.05,
+        maxDaily: 10,
+        maxFreq: 3,
+        notes: 'Systemic tissue repair. IV or frequent SC dosing.'
+      },
+      semaglutide: {
+        name: 'Semaglutide',
+        unit: 'mg',
+        standard: 0.5,
+        perkg: 0.008,
+        maxDaily: 2,
+        maxFreq: 1,
+        notes: 'GLP-1 agonist. Weekly dosing typical.'
+      }
+    };
+    
+    function updatePeptide() {
+      const method = document.getElementById('dosageMethod').value;
+      const customInput = document.getElementById('customDoseInput');
+      if (method === 'custom' || document.getElementById('peptide').value === 'custom') {
+        customInput.style.display = 'block';
+      } else {
+        customInput.style.display = 'none';
+      }
+    }
+    
+    function calculate() {
+      const peptideKey = document.getElementById('peptide').value;
+      const weight = parseFloat(document.getElementById('weight').value);
+      const frequency = document.getElementById('frequency').value;
+      const duration = parseInt(document.getElementById('duration').value);
+      const dosageMethod = document.getElementById('dosageMethod').value;
+      
+      if (!peptideKey || !weight || !frequency || !duration) {
+        alert('Please fill in all required fields');
+        return;
+      }
+      
+      let dose, data;
+      
+      if (peptideKey === 'custom') {
+        const customDose = parseFloat(document.getElementById('customDose').value);
+        if (!customDose) {
+          alert('Please enter a custom dose');
+          return;
+        }
+        dose = customDose;
+        data = { name: 'Custom Peptide', unit: 'dose units' };
+      } else {
+        data = peptideData[peptideKey];
+        if (dosageMethod === 'standard') {
+          dose = data.standard;
+        } else if (dosageMethod === 'perkg') {
+          dose = Math.round(weight * data.perkg * 10) / 10;
+        } else {
+          const customDose = parseFloat(document.getElementById('customDose').value);
+          if (!customDose) {
+            alert('Please enter a custom dose');
+            return;
+          }
+          dose = customDose;
+        }
+      }
+      
+      // Validate against max daily
+      const freqValues = { once: 1, twice: 2, thrice: 3, weekly: 1, biweekly: 0.5 };
+      const freqMultiplier = freqValues[frequency];
+      const dailyDose = dose * freqMultiplier;
+      
+      if (data.maxDaily && dailyDose > data.maxDaily) {
+        alert(`Warning: Calculated daily dose (${dailyDose} ${data.unit}) exceeds typical research maximum (${data.maxDaily} ${data.unit}). Proceeding with your dose.`);
+      }
+      
+      // Calculate totals
+      const freqPerWeek = { once: 1, twice: 2, thrice: 3, weekly: 1, biweekly: 0.5 }[frequency];
+      const weeklyDose = dose * freqPerWeek;
+      const studyDays = duration * 7;
+      const studyDoses = Math.round((studyDays / 7) * freqPerWeek);
+      const studyTotal = dose * studyDoses;
+      
+      // Build frequency label
+      const freqLabel = { once: 'Once daily', twice: 'Twice daily', thrice: 'Three times daily', weekly: 'Once weekly', biweekly: 'Twice weekly' }[frequency];
+      
+      // Safety assessment
+      let safetyHTML = '';
+      if (data.maxDaily && dailyDose > data.maxDaily * 1.5) {
+        safetyHTML = `<div class="safety-box warning"><h4>⚠️ Dosage Alert</h4><p>Your calculated daily dose exceeds typical research maximums. Ensure institutional approval is obtained and safety monitoring is robust.</p></div>`;
+      } else if (data.maxDaily && dailyDose > data.maxDaily) {
+        safetyHTML = `<div class="safety-box warning"><h4>⚠️ High End Dosage</h4><p>Your dose is at the upper range of research protocol. Verify with your institutional safety committee.</p></div>`;
+      } else {
+        safetyHTML = `<div class="safety-box safe"><h4>✓ Within Typical Range</h4><p>Your dosage falls within standard research ranges. Proceed with institutional approval.</p></div>`;
+      }
+      
+      // Dosing schedule
+      let scheduleHTML = '';
+      if (frequency === 'once') {
+        scheduleHTML = `<div class="dose-item">Every morning: ${dose} ${data.unit} (8:00 AM recommended for consistency)</div>`;
+      } else if (frequency === 'twice') {
+        scheduleHTML = `<div class="dose-item">Morning: ${dose} ${data.unit} (8:00 AM)</div><div class="dose-item">Evening: ${dose} ${data.unit} (8:00 PM)</div>`;
+      } else if (frequency === 'thrice') {
+        scheduleHTML = `<div class="dose-item">Morning: ${dose} ${data.unit} (8:00 AM)</div><div class="dose-item">Midday: ${dose} ${data.unit} (2:00 PM)</div><div class="dose-item">Evening: ${dose} ${data.unit} (8:00 PM)</div>`;
+      } else if (frequency === 'weekly') {
+        scheduleHTML = `<div class="dose-item">Every Monday: ${dose} ${data.unit} (8:00 AM)</div>`;
+      } else if (frequency === 'biweekly') {
+        scheduleHTML = `<div class="dose-item">Every Monday & Thursday: ${dose} ${data.unit}</div>`;
+      }
+      
+      // Update results
+      document.getElementById('resultPeptide').textContent = data.name;
+      document.getElementById('resultDose').textContent = `${dose} ${data.unit}`;
+      document.getElementById('resultFrequency').textContent = freqLabel;
+      document.getElementById('resultDailyTotal').textContent = `${(dailyDose).toFixed(1)} ${data.unit}`;
+      document.getElementById('resultWeeklyTotal').textContent = `${(weeklyDose * 7).toFixed(1)} ${data.unit}`;
+      document.getElementById('resultStudyTotal').textContent = `${studyTotal.toFixed(1)} ${data.unit} (${studyDoses} injections over ${duration} weeks)`;
+      document.getElementById('safetyDiv').innerHTML = safetyHTML;
+      document.getElementById('schedule').innerHTML = scheduleHTML;
+      
+      if (data.notes) {
+        document.getElementById('safetyDiv').innerHTML += `<div class="warning-text"><strong>Note:</strong> ${data.notes}</div>`;
+      }
+      
+      document.getElementById('results').classList.add('active');
+      document.querySelector('#results').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    document.getElementById('dosageMethod').addEventListener('change', updatePeptide);
+    document.getElementById('peptide').addEventListener('change', updatePeptide);
+  </script>
+</body>
+</html>

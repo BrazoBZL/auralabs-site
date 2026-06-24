@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research Protocol Generator — Aura Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #fbfaf7; color: #333; }
+    
+    .container { max-width: 1000px; margin: 0 auto; padding: 60px 40px; }
+    h1 { font-family: 'EB Garamond', serif; font-size: 48px; margin-bottom: 12px; color: #050505; }
+    .subtitle { font-size: 14px; color: #666; margin-bottom: 40px; }
+    
+    .tool-section { background: white; padding: 40px; border: 1px solid #e8e6e1; margin-bottom: 40px; }
+    .tool-section h2 { font-family: 'EB Garamond', serif; font-size: 32px; margin-bottom: 24px; color: #050505; }
+    
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+    @media (max-width: 768px) { .form-grid { grid-template-columns: 1fr; } }
+    
+    .form-group { margin-bottom: 20px; }
+    label { display: block; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; font-weight: 800; color: #050505; margin-bottom: 8px; }
+    select, input, textarea { width: 100%; padding: 12px; border: 1px solid #e8e6e1; background: #fefdfb; font-family: inherit; font-size: 14px; }
+    select:focus, input:focus, textarea:focus { outline: none; border-color: #050505; }
+    
+    .btn { display: inline-block; padding: 12px 32px; background: #050505; color: white; border: none; cursor: pointer; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; font-weight: 800; }
+    .btn:hover { opacity: .8; }
+    .btn-secondary { background: #666; }
+    
+    .protocol { background: #fefdfb; padding: 32px; border: 1px solid #e8e6e1; display: none; }
+    .protocol.active { display: block; }
+    .protocol h2 { font-family: 'EB Garamond', serif; font-size: 28px; margin: 24px 0 12px 0; color: #050505; }
+    .protocol h3 { font-family: 'EB Garamond', serif; font-size: 20px; margin: 20px 0 12px 0; color: #050505; }
+    .protocol p { line-height: 1.6; margin-bottom: 12px; font-size: 13px; }
+    .protocol ul { margin: 12px 0 12px 24px; font-size: 13px; line-height: 1.6; }
+    .protocol li { margin-bottom: 8px; }
+    .protocol table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 12px; }
+    .protocol th, .protocol td { padding: 8px; border: 1px solid #e8e6e1; text-align: left; }
+    .protocol th { background: #f0ede6; font-weight: 800; }
+    
+    .protocol-actions { margin-top: 32px; display: flex; gap: 12px; }
+    
+    .checklist { background: #f0ede6; padding: 20px; margin-top: 20px; }
+    .checklist h4 { font-weight: 800; margin-bottom: 12px; font-size: 13px; }
+    .checklist-item { display: flex; align-items: center; margin-bottom: 10px; font-size: 13px; }
+    .checklist-item input { margin-right: 10px; width: auto; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Research Protocol Generator</h1>
+    <p class="subtitle">Create a customized research protocol template for your peptide study. Answer a few questions, get a complete protocol outline.</p>
+    
+    <div class="tool-section">
+      <h2>Protocol Information</h2>
+      
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="title">Protocol Title</label>
+          <input type="text" id="title" placeholder="e.g., Effects of BPC-157 on Tendon Repair">
+        </div>
+        <div class="form-group">
+          <label for="pi">Principal Investigator Name</label>
+          <input type="text" id="pi" placeholder="e.g., Dr. Jane Smith">
+        </div>
+        <div class="form-group">
+          <label for="institution">Institution</label>
+          <input type="text" id="institution" placeholder="e.g., University of X">
+        </div>
+        <div class="form-group">
+          <label for="peptide">Peptide Used</label>
+          <select id="peptide">
+            <option value="">-- Select Peptide --</option>
+            <option value="ipamorelin">Ipamorelin</option>
+            <option value="cjc1295">CJC-1295</option>
+            <option value="bpc157">BPC-157</option>
+            <option value="tb500">TB-500</option>
+            <option value="semaglutide">Semaglutide</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="studyType">Study Type</label>
+          <select id="studyType">
+            <option value="">-- Select Study Type --</option>
+            <option value="invitro">In Vitro (Cell Culture)</option>
+            <option value="animal">Animal Model</option>
+            <option value="human">Human Subjects</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="duration">Study Duration</label>
+          <select id="duration">
+            <option value="">-- Select Duration --</option>
+            <option value="2weeks">2 Weeks</option>
+            <option value="4weeks">4 Weeks</option>
+            <option value="8weeks">8 Weeks</option>
+            <option value="12weeks">12 Weeks</option>
+            <option value="24weeks">24 Weeks</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="objective">Research Objective (Brief)</label>
+        <textarea id="objective" placeholder="Describe what you aim to investigate..." style="height: 100px;"></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="dosage">Planned Dosage</label>
+        <input type="text" id="dosage" placeholder="e.g., 100 mcg per injection, 2x daily">
+      </div>
+      
+      <button class="btn" onclick="generateProtocol()">Generate Protocol</button>
+    </div>
+    
+    <div id="protocolOutput" class="protocol">
+      <div id="protocolContent"></div>
+      
+      <div class="protocol-actions">
+        <button class="btn" onclick="printProtocol()">Print Protocol</button>
+        <button class="btn btn-secondary" onclick="copyProtocol()">Copy to Clipboard</button>
+        <button class="btn btn-secondary" onclick="downloadProtocol()">Download as Text</button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function generateProtocol() {
+      const title = document.getElementById('title').value || 'Research Protocol [Title Pending]';
+      const pi = document.getElementById('pi').value || '[Principal Investigator Name]';
+      const institution = document.getElementById('institution').value || '[Institution]';
+      const peptide = document.getElementById('peptide').value || 'Peptide';
+      const studyType = document.getElementById('studyType').value;
+      const duration = document.getElementById('duration').value;
+      const objective = document.getElementById('objective').value || 'To investigate the effects of ' + peptide;
+      const dosage = document.getElementById('dosage').value || '[Dosage to be determined]';
+      
+      if (!studyType || !duration) {
+        alert('Please select study type and duration');
+        return;
+      }
+      
+      const studyTypeLabel = {
+        invitro: 'In Vitro',
+        animal: 'Animal Model',
+        human: 'Human Subjects'
+      }[studyType];
+      
+      const durationLabel = {
+        '2weeks': '2 weeks',
+        '4weeks': '4 weeks',
+        '8weeks': '8 weeks',
+        '12weeks': '12 weeks',
+        '24weeks': '24 weeks'
+      }[duration];
+      
+      const date = new Date();
+      const dateStr = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      
+      let protocolHTML = `
+        <h1>${title}</h1>
+        
+        <h3>PROTOCOL INFORMATION</h3>
+        <table>
+          <tr><th>Field</th><th>Details</th></tr>
+          <tr><td>Principal Investigator</td><td>${pi}</td></tr>
+          <tr><td>Institution</td><td>${institution}</td></tr>
+          <tr><td>Peptide Compound</td><td>${peptide}</td></tr>
+          <tr><td>Study Type</td><td>${studyTypeLabel}</td></tr>
+          <tr><td>Study Duration</td><td>${durationLabel}</td></tr>
+          <tr><td>Date Prepared</td><td>${dateStr}</td></tr>
+        </table>
+        
+        <h3>1. BACKGROUND & RATIONALE</h3>
+        <p><strong>Background:</strong> ${peptide} is a peptide compound with documented effects on [tissue repair/growth hormone secretion/metabolic function]. Previous research has demonstrated [insert relevant literature findings].</p>
+        <p><strong>Research Gap:</strong> Despite promising preclinical data, the effects of ${peptide} on [specific condition/outcome] remain unclear.</p>
+        <p><strong>Hypothesis:</strong> We hypothesize that ${peptide} treatment will result in [measurable improvement] compared to control.</p>
+        
+        <h3>2. SPECIFIC AIMS</h3>
+        <p><strong>Primary Objective:</strong> ${objective}</p>
+        <p><strong>Secondary Objectives:</strong></p>
+        <ul>
+          <li>To assess safety and tolerability of ${peptide} dosing</li>
+          <li>To measure [specific outcome markers]</li>
+          <li>To compare ${peptide} treatment vs. control at multiple timepoints</li>
+        </ul>
+        
+        <h3>3. METHODS</h3>
+        
+        <h4>3.1 Study Design</h4>
+        <p>This is a ${studyTypeLabel} study with a ${duration} treatment period. ${studyType === 'animal' ? 'Subjects will be randomly assigned to treatment or control groups.' : 'Participants will be randomly assigned using stratified randomization.'}</p>
+        
+        <h4>3.2 Subjects/Materials</h4>`;
+      
+      if (studyType === 'animal') {
+        protocolHTML += `
+          <p><strong>Animal Model:</strong> [Select rodent species: Sprague-Dawley rats, C57BL/6 mice, etc.]</p>
+          <p><strong>Group Size:</strong> [Minimum n=10 per group recommended for statistical power]</p>
+          <p><strong>Age/Weight:</strong> [Specify age range and weight range for consistency]</p>`;
+      } else if (studyType === 'invitro') {
+        protocolHTML += `
+          <p><strong>Cell Type:</strong> [Specify: fibroblasts, myoblasts, endothelial cells, etc.]</p>
+          <p><strong>Culture Conditions:</strong> [Temperature, CO₂, growth medium]</p>
+          <p><strong>Passage Number:</strong> [Specify to ensure consistency]</p>`;
+      } else {
+        protocolHTML += `
+          <p><strong>Inclusion Criteria:</strong> [List specific inclusion criteria]</p>
+          <p><strong>Exclusion Criteria:</strong> [List specific exclusion criteria]</p>
+          <p><strong>Sample Size:</strong> [Based on power analysis with n=X per group]</p>`;
+      }
+      
+      protocolHTML += `
+        
+        <h4>3.3 Treatment Protocol</h4>
+        <p><strong>Peptide:</strong> ${peptide} (Aura Labs, 98% purity, batch [XXXXX])</p>
+        <p><strong>Dosage:</strong> ${dosage}</p>
+        <p><strong>Route of Administration:</strong> [Subcutaneous injection / Intravenous / Oral / Topical]</p>
+        <p><strong>Treatment Duration:</strong> ${durationLabel}</p>
+        <p><strong>Control Group:</strong> Vehicle (saline) at equivalent volume and frequency</p>
+        
+        <h4>3.4 Outcome Measurements</h4>
+        <p><strong>Primary Outcome:</strong> [Specify measurable primary outcome]</p>
+        <p><strong>Secondary Outcomes:</strong></p>
+        <ul>
+          <li>[Outcome 1]</li>
+          <li>[Outcome 2]</li>
+          <li>[Outcome 3]</li>
+        </ul>
+        <p><strong>Safety Monitoring:</strong> [Adverse events, clinical observations, lab parameters]</p>
+        
+        <h4>3.5 Measurement Timeline</h4>
+        <table>
+          <tr>
+            <th>Timepoint</th>
+            <th>Week</th>
+            <th>Measurements</th>
+          </tr>
+          <tr>
+            <td>Baseline</td>
+            <td>0</td>
+            <td>[Baseline measurements]</td>
+          </tr>
+          <tr>
+            <td>Mid-Study</td>
+            <td>${duration === '2weeks' ? '1' : duration === '4weeks' ? '2' : duration === '8weeks' ? '4' : duration === '12weeks' ? '6' : '12'}</td>
+            <td>[Intermediate measurements]</td>
+          </tr>
+          <tr>
+            <td>End-Study</td>
+            <td>${duration === '2weeks' ? '2' : duration === '4weeks' ? '4' : duration === '8weeks' ? '8' : duration === '12weeks' ? '12' : '24'}</td>
+            <td>[Final measurements, tissue harvest]</td>
+          </tr>
+        </table>
+        
+        <h3>4. DATA ANALYSIS</h3>
+        <p><strong>Statistical Methods:</strong> Two-way ANOVA (treatment × time) with post-hoc Tukey test for pairwise comparisons. Significance threshold: p &lt; 0.05.</p>
+        <p><strong>Software:</strong> GraphPad Prism 10 or equivalent statistical software.</p>
+        
+        <h3>5. SAFETY & ETHICS</h3>
+        ${studyType === 'animal' ? `<p><strong>Animal Care:</strong> All procedures approved by Institutional Animal Care and Use Committee (IACUC Protocol #[XXXXX]). Care will follow institutional guidelines and the Guide for the Care and Use of Laboratory Animals (8th edition).</p>` : ''}
+        ${studyType === 'human' ? `<p><strong>Human Subjects:</strong> This protocol has been reviewed and approved by the Institutional Review Board (IRB Protocol #[XXXXX]). All participants will provide informed consent prior to enrollment.</p>` : ''}
+        <p><strong>Adverse Events:</strong> Any serious adverse events will be reported immediately to [oversight committee]. All participants/subjects will be monitored for safety throughout the study.</p>
+        
+        <h3>6. TIMELINE</h3>
+        <ul>
+          <li><strong>Month 1:</strong> Final approvals, peptide procurement, subject recruitment</li>
+          <li><strong>Month 1-2:</strong> Baseline measurements, initiate treatment</li>
+          <li><strong>Month 2-4:</strong> Ongoing treatment and monitoring</li>
+          <li><strong>Month 4-5:</strong> Final measurements, tissue analysis</li>
+          <li><strong>Month 5-6:</strong> Data analysis and manuscript preparation</li>
+        </ul>
+        
+        <h3>7. ANTICIPATED OUTCOMES & IMPLICATIONS</h3>
+        <p>If ${peptide} demonstrates [expected effect], this will support further investigation into [clinical application]. Results will be disseminated via peer-reviewed publication and presented at [relevant conferences].</p>
+        
+        <h3>8. REFERENCES</h3>
+        <p>1. [Insert relevant citation for ${peptide}]</p>
+        <p>2. [Insert relevant methodological reference]</p>
+        <p>3. [Additional references as needed]</p>
+        
+        <div class="checklist">
+          <h4>PRE-SUBMISSION CHECKLIST</h4>
+          <div class="checklist-item"><input type="checkbox"> Protocol title, PI, and institution confirmed</div>
+          <div class="checklist-item"><input type="checkbox"> Specific aims clearly stated</div>
+          <div class="checklist-item"><input type="checkbox"> Methods section complete with details</div>
+          <div class="checklist-item"><input type="checkbox"> Outcome measurements defined</div>
+          <div class="checklist-item"><input type="checkbox"> Safety monitoring plan included</div>
+          <div class="checklist-item"><input type="checkbox"> Statistical analysis plan specified</div>
+          <div class="checklist-item"><input type="checkbox"> Timeline is realistic</div>
+          <div class="checklist-item"><input type="checkbox"> Budget (if applicable) prepared</div>
+          <div class="checklist-item"><input type="checkbox"> IRB/IACUC protocol number added</div>
+          <div class="checklist-item"><input type="checkbox"> All references cited</div>
+        </div>
+      `;
+      
+      document.getElementById('protocolContent').innerHTML = protocolHTML;
+      document.getElementById('protocolOutput').classList.add('active');
+      document.querySelector('#protocolOutput').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function printProtocol() {
+      window.print();
+    }
+    
+    function copyProtocol() {
+      const text = document.getElementById('protocolContent').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Protocol copied to clipboard!');
+      });
+    }
+    
+    function downloadProtocol() {
+      const text = document.getElementById('protocolContent').innerText;
+      const title = document.getElementById('title').value || 'protocol';
+      const filename = `${title.replace(/[^a-z0-9]/gi, '-').toLowerCase()}.txt`;
+      
+      const element = document.createElement('a');
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+      element.setAttribute('download', filename);
+      element.style.display = 'none';
+      document.body.appendChild(element);
+      element.click();
+      document.body.removeChild(element);
+    }
+  </script>
+</body>
+</html>

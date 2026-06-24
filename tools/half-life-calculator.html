@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peptide Half-Life Calculator — Aura Labs</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #fbfaf7; color: #333; }
+    
+    .container { max-width: 900px; margin: 0 auto; padding: 60px 40px; }
+    h1 { font-family: 'EB Garamond', serif; font-size: 48px; margin-bottom: 12px; color: #050505; }
+    .subtitle { font-size: 14px; color: #666; margin-bottom: 40px; }
+    
+    .tool-section { background: white; padding: 40px; border: 1px solid #e8e6e1; margin-bottom: 40px; }
+    .tool-section h2 { font-family: 'EB Garamond', serif; font-size: 32px; margin-bottom: 24px; color: #050505; }
+    
+    .form-group { margin-bottom: 24px; }
+    label { display: block; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; font-weight: 800; color: #050505; margin-bottom: 8px; }
+    select, input { width: 100%; max-width: 500px; padding: 12px; border: 1px solid #e8e6e1; background: #fefdfb; font-family: inherit; font-size: 14px; }
+    select:focus, input:focus { outline: none; border-color: #050505; }
+    
+    .btn { display: inline-block; padding: 12px 32px; background: #050505; color: white; border: none; cursor: pointer; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; font-weight: 800; }
+    .btn:hover { opacity: .8; }
+    
+    .results { background: #f0ede6; padding: 28px; border-left: 4px solid #050505; margin-top: 32px; display: none; }
+    .results.active { display: block; }
+    .results h3 { font-family: 'EB Garamond', serif; font-size: 20px; margin-bottom: 16px; color: #050505; }
+    
+    .result-row { display: grid; grid-template-columns: 200px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid #ddd; }
+    .result-row:last-child { border-bottom: none; }
+    .result-label { font-weight: 800; font-size: 13px; color: #666; }
+    .result-value { font-size: 16px; color: #050505; font-weight: 700; }
+    
+    .peptide-db { margin-top: 40px; }
+    .peptide-db h3 { font-family: 'EB Garamond', serif; font-size: 24px; margin-bottom: 20px; color: #050505; }
+    .peptide-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .peptide-card { background: #fefdfb; padding: 16px; border: 1px solid #e8e6e1; }
+    .peptide-name { font-weight: 800; font-size: 13px; color: #050505; }
+    .peptide-detail { font-size: 12px; color: #666; margin: 4px 0; }
+    
+    .timeline-visual { margin-top: 28px; }
+    .timeline { display: flex; align-items: flex-end; gap: 8px; height: 150px; }
+    .bar { background: #050505; flex: 1; border-radius: 2px 2px 0 0; position: relative; display: flex; align-items: flex-end; justify-content: center; }
+    .bar-label { position: absolute; bottom: -24px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+    .bar-value { color: white; font-size: 12px; font-weight: 800; padding: 4px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Peptide Half-Life Calculator</h1>
+    <p class="subtitle">Understand peptide pharmacokinetics: peak concentration, elimination time, and dosing intervals.</p>
+    
+    <div class="tool-section">
+      <h2>Calculate Half-Life & Peak Timing</h2>
+      
+      <div class="form-group">
+        <label for="peptide">Select Peptide</label>
+        <select id="peptide" onchange="updatePeptide()">
+          <option value="">-- Choose a peptide --</option>
+          <option value="ipamorelin">Ipamorelin</option>
+          <option value="cjc-dac">CJC-1295 (with DAC)</option>
+          <option value="cjc-nodac">CJC-1295 (without DAC)</option>
+          <option value="ghrp6">GHRP-6</option>
+          <option value="ghrp2">GHRP-2</option>
+          <option value="hexarelin">Hexarelin</option>
+          <option value="bpc157">BPC-157</option>
+          <option value="tb500">TB-500</option>
+          <option value="semaglutide">Semaglutide</option>
+          <option value="mk677">MK-677</option>
+          <option value="custom">Custom (enter half-life)</option>
+        </select>
+      </div>
+      
+      <div id="customInput" style="display: none;">
+        <div class="form-group">
+          <label for="customHalfLife">Enter Half-Life (hours)</label>
+          <input type="number" id="customHalfLife" placeholder="e.g., 2.5" step="0.1" min="0.1">
+        </div>
+        <div class="form-group">
+          <label for="customPeakTime">Peak Concentration Time (hours)</label>
+          <input type="number" id="customPeakTime" placeholder="e.g., 0.5" step="0.1" min="0.1">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="dose">Dose (micrograms)</label>
+        <input type="number" id="dose" placeholder="e.g., 200" step="10" min="1">
+      </div>
+      
+      <div class="form-group">
+        <label for="injectionTime">Injection Time</label>
+        <input type="time" id="injectionTime" value="08:00">
+      </div>
+      
+      <button class="btn" onclick="calculate()">Calculate</button>
+    </div>
+    
+    <div id="results" class="results">
+      <h3>Pharmacokinetic Profile</h3>
+      
+      <div class="result-row">
+        <div class="result-label">Half-Life</div>
+        <div class="result-value"><span id="resultHalfLife"></span> hours</div>
+      </div>
+      
+      <div class="result-row">
+        <div class="result-label">Peak Concentration</div>
+        <div class="result-value"><span id="resultPeakConc"></span> (Cmax)</div>
+      </div>
+      
+      <div class="result-row">
+        <div class="result-label">Peak Time</div>
+        <div class="result-value"><span id="resultPeakTime"></span></div>
+      </div>
+      
+      <div class="result-row">
+        <div class="result-label">Time to 50% Elimination</div>
+        <div class="result-value"><span id="resultT50"></span></div>
+      </div>
+      
+      <div class="result-row">
+        <div class="result-label">Time to 25% Remaining</div>
+        <div class="result-value"><span id="resultT25"></span></div>
+      </div>
+      
+      <div class="result-row">
+        <div class="result-label">Time to 12.5% Remaining</div>
+        <div class="result-value"><span id="resultT125"></span></div>
+      </div>
+      
+      <div class="result-row">
+        <div class="result-label">Time to Clinically Undetectable</div>
+        <div class="result-value"><span id="resultTClear"></span></div>
+      </div>
+      
+      <div class="timeline-visual">
+        <h3 style="font-size: 16px; margin-bottom: 16px; font-family: 'EB Garamond', serif;">Concentration Over Time</h3>
+        <div class="timeline" id="timeline"></div>
+      </div>
+      
+      <div style="margin-top: 32px; padding: 20px; background: #fff; border: 1px solid #e8e6e1;">
+        <h3 style="font-size: 14px; font-weight: 800; margin-bottom: 12px;">Dosing Recommendations</h3>
+        <div id="dosageAdvice" style="font-size: 13px; line-height: 1.6; color: #333;"></div>
+      </div>
+    </div>
+    
+    <div class="tool-section peptide-db">
+      <h2>Peptide Database</h2>
+      <p style="font-size: 14px; color: #666; margin-bottom: 24px;">Quick reference for common research peptides.</p>
+      
+      <div class="peptide-list">
+        <div class="peptide-card">
+          <div class="peptide-name">Ipamorelin</div>
+          <div class="peptide-detail">Half-Life: 2 hours</div>
+          <div class="peptide-detail">Peak: 0.5-1 hour</div>
+          <div class="peptide-detail">Typical Dose: 100-200 mcg</div>
+          <div class="peptide-detail">Frequency: 1-3x daily</div>
+        </div>
+        
+        <div class="peptide-card">
+          <div class="peptide-name">CJC-1295 (with DAC)</div>
+          <div class="peptide-detail">Half-Life: 6-8 days</div>
+          <div class="peptide-detail">Peak: 4-6 hours</div>
+          <div class="peptide-detail">Typical Dose: 100 mcg</div>
+          <div class="peptide-detail">Frequency: 1-2x weekly</div>
+        </div>
+        
+        <div class="peptide-card">
+          <div class="peptide-name">CJC-1295 (without DAC)</div>
+          <div class="peptide-detail">Half-Life: 0.5-1 hour</div>
+          <div class="peptide-detail">Peak: 0.25-0.5 hour</div>
+          <div class="peptide-detail">Typical Dose: 100-200 mcg</div>
+          <div class="peptide-detail">Frequency: 1-3x daily</div>
+        </div>
+        
+        <div class="peptide-card">
+          <div class="peptide-name">GHRP-6</div>
+          <div class="peptide-detail">Half-Life: 0.5-1 hour</div>
+          <div class="peptide-detail">Peak: 0.5-1 hour</div>
+          <div class="peptide-detail">Typical Dose: 50-100 mcg</div>
+          <div class="peptide-detail">Frequency: 1-3x daily</div>
+        </div>
+        
+        <div class="peptide-card">
+          <div class="peptide-name">BPC-157</div>
+          <div class="peptide-detail">Half-Life: 5-6 hours (localized)</div>
+          <div class="peptide-detail">Peak: 1-2 hours</div>
+          <div class="peptide-detail">Typical Dose: 10-20 mcg</div>
+          <div class="peptide-detail">Frequency: 1-2x daily</div>
+        </div>
+        
+        <div class="peptide-card">
+          <div class="peptide-name">TB-500</div>
+          <div class="peptide-detail">Half-Life: 2 hours</div>
+          <div class="peptide-detail">Peak: 15-30 minutes</div>
+          <div class="peptide-detail">Typical Dose: 5-10 mg</div>
+          <div class="peptide-detail">Frequency: 2-3x weekly</div>
+        </div>
+        
+        <div class="peptide-card">
+          <div class="peptide-name">Semaglutide</div>
+          <div class="peptide-detail">Half-Life: 7 days</div>
+          <div class="peptide-detail">Peak: 24-48 hours</div>
+          <div class="peptide-detail">Typical Dose: 0.5-2 mg</div>
+          <div class="peptide-detail">Frequency: 1x weekly</div>
+        </div>
+        
+        <div class="peptide-card">
+          <div class="peptide-name">MK-677</div>
+          <div class="peptide-detail">Half-Life: 4-6 hours</div>
+          <div class="peptide-detail">Peak: 1-2 hours</div>
+          <div class="peptide-detail">Typical Dose: 10-25 mg</div>
+          <div class="peptide-detail">Frequency: 1-2x daily (oral)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    const peptideData = {
+      ipamorelin: { halfLife: 2, peakTime: 0.75, name: 'Ipamorelin' },
+      'cjc-dac': { halfLife: 156, peakTime: 5, name: 'CJC-1295 (with DAC)' },
+      'cjc-nodac': { halfLife: 1, peakTime: 0.5, name: 'CJC-1295 (without DAC)' },
+      ghrp6: { halfLife: 0.75, peakTime: 0.75, name: 'GHRP-6' },
+      ghrp2: { halfLife: 0.5, peakTime: 0.5, name: 'GHRP-2' },
+      hexarelin: { halfLife: 0.75, peakTime: 0.5, name: 'Hexarelin' },
+      bpc157: { halfLife: 5.5, peakTime: 1.5, name: 'BPC-157' },
+      tb500: { halfLife: 2, peakTime: 0.5, name: 'TB-500' },
+      semaglutide: { halfLife: 168, peakTime: 36, name: 'Semaglutide' },
+      mk677: { halfLife: 5, peakTime: 1.5, name: 'MK-677' }
+    };
+    
+    function updatePeptide() {
+      const peptide = document.getElementById('peptide').value;
+      const customInput = document.getElementById('customInput');
+      if (peptide === 'custom') {
+        customInput.style.display = 'block';
+      } else {
+        customInput.style.display = 'none';
+      }
+    }
+    
+    function calculate() {
+      const peptideSelect = document.getElementById('peptide').value;
+      let halfLife, peakTime, peptideName;
+      
+      if (peptideSelect === 'custom') {
+        halfLife = parseFloat(document.getElementById('customHalfLife').value);
+        peakTime = parseFloat(document.getElementById('customPeakTime').value);
+        peptideName = 'Custom Peptide';
+        if (!halfLife || !peakTime) {
+          alert('Please enter half-life and peak time for custom peptide');
+          return;
+        }
+      } else if (peptideSelect === '') {
+        alert('Please select a peptide');
+        return;
+      } else {
+        const data = peptideData[peptideSelect];
+        halfLife = data.halfLife;
+        peakTime = data.peakTime;
+        peptideName = data.name;
+      }
+      
+      const dose = parseFloat(document.getElementById('dose').value);
+      if (!dose) {
+        alert('Please enter a dose');
+        return;
+      }
+      
+      const injectionTime = document.getElementById('injectionTime').value;
+      const [hours, minutes] = injectionTime.split(':').map(Number);
+      
+      // Calculate elimination times
+      const t50 = halfLife;
+      const t25 = halfLife * 2;
+      const t125 = halfLife * 3;
+      const tClear = halfLife * 5; // Approximately clinically undetectable
+      
+      // Peak time
+      const peakTimeMinutes = peakTime * 60;
+      const peakHours = Math.floor(peakTime);
+      const peakMins = Math.round((peakTime - peakHours) * 60);
+      
+      // Format times
+      const formatTime = (offsetHours) => {
+        let h = hours + Math.floor(offsetHours);
+        let m = minutes + Math.round((offsetHours % 1) * 60);
+        if (m >= 60) { m -= 60; h += 1; }
+        if (h >= 24) h -= 24;
+        return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+      };
+      
+      const peakFormatted = formatTime(peakTime);
+      const t50Formatted = formatTime(t50);
+      const t25Formatted = formatTime(t25);
+      const t125Formatted = formatTime(t125);
+      const tClearFormatted = formatTime(tClear);
+      
+      // Build timeline visualization
+      const timepoints = [0, peakTime, t50, t25, t125];
+      const concentrations = timepoints.map(t => Math.pow(0.5, t / halfLife) * 100);
+      const maxConc = Math.max(...concentrations);
+      
+      let timelineHTML = '';
+      concentrations.forEach((conc, i) => {
+        const height = (conc / maxConc) * 100;
+        const label = ['0h', `Peak\n(${peakTime}h)`, `T50\n(${halfLife}h)`, `T25\n(${t25}h)`, `T125\n(${t125}h)`][i];
+        timelineHTML += `<div class="bar" style="height: ${height}%;"><span class="bar-label">${label}</span><span class="bar-value">${conc.toFixed(0)}%</span></div>`;
+      });
+      
+      // Build dosage advice
+      let advice = '';
+      if (halfLife < 1) {
+        advice = `<strong>${peptideName}</strong> has a short half-life. Recommend dosing 1-3 times daily for sustained effects. Allow at least 4-6 hours between doses to avoid accumulation.`;
+      } else if (halfLife >= 1 && halfLife < 8) {
+        advice = `<strong>${peptideName}</strong> has a moderate half-life. Can be dosed 1-2 times daily. Steady state reached in 3-5 days.`;
+      } else {
+        advice = `<strong>${peptideName}</strong> has a long half-life. Dosing 1-2 times weekly is typical. Steady state reached in 2-4 weeks. Accumulation possible with frequent dosing.`;
+      }
+      
+      // Update results
+      document.getElementById('resultHalfLife').textContent = halfLife.toFixed(1);
+      document.getElementById('resultPeakConc').textContent = `${dose} mcg (Cmax at ${peakFormatted})`;
+      document.getElementById('resultPeakTime').textContent = peakFormatted;
+      document.getElementById('resultT50').textContent = t50Formatted;
+      document.getElementById('resultT25').textContent = t25Formatted;
+      document.getElementById('resultT125').textContent = t125Formatted;
+      document.getElementById('resultTClear').textContent = tClearFormatted;
+      document.getElementById('dosageAdvice').innerHTML = advice;
+      document.getElementById('timeline').innerHTML = timelineHTML;
+      
+      document.getElementById('results').classList.add('active');
+      document.querySelector('.results').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Allow Enter key
+    document.getElementById('dose').addEventListener('keypress', e => e.key === 'Enter' && calculate());
+  </script>
+</body>
+</html>
