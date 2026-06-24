@@ -34,6 +34,27 @@ a{color:inherit}
   font-size:27px;
   letter-spacing:.08em;
 }
+.brand-logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  color:#050505;
+  transition:opacity .2s;
+}
+.brand-logo:hover{opacity:.7}
+.logo{
+  width:32px;
+  height:32px;
+  color:#050505;
+  flex-shrink:0;
+}
+.brand-text{
+  font-family:"EB Garamond",serif;
+  font-size:16px;
+  letter-spacing:.08em;
+  font-weight:600;
+}
 .main-nav{
   display:flex;
   gap:42px;
@@ -424,6 +445,9 @@ footer{
 @media(max-width:900px){
   .site-header{position:relative;padding:0 22px;height:64px}
   .brand{font-size:20px}
+  .brand-logo{gap:8px}
+  .logo{width:28px;height:28px}
+  .brand-text{font-size:14px}
   .main-nav{display:none}
   .mobile-menu-btn{display:block}
   .hero,.standard,.inventory-preview,.catalog-hero,footer{grid-template-columns:1fr}
@@ -442,6 +466,9 @@ footer{
 @media(max-width:767px){
   .site-header{height:60px;padding:0 16px;position:relative}
   .brand{font-size:18px;letter-spacing:.06em}
+  .brand-logo{gap:6px}
+  .logo{width:24px;height:24px}
+  .brand-text{font-size:12px;letter-spacing:.04em}
   .main-nav{display:none}
   .hero{grid-template-columns:1fr;min-height:auto}
   .hero-copy{padding:50px 16px 30px}
@@ -504,6 +531,9 @@ footer{
   body{font-size:14px}
   .site-header{height:56px;padding:0 12px}
   .brand{font-size:16px;letter-spacing:.04em}
+  .brand-logo{gap:4px}
+  .logo{width:20px;height:20px}
+  .brand-text{font-size:11px;letter-spacing:.02em}
   .hero-copy{padding:40px 12px 24px}
   .hero-image{min-height:240px}
   h1{font-size:clamp(28px,6vw,36px);margin-bottom:16px;line-height:1.1}
