@@ -1,0 +1,26 @@
+User-agent: *
+Allow: /
+Allow: /catalog.html
+Allow: /blog.html
+Allow: /blog-post.html
+Allow: /sitemap.xml
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+
+Sitemap: https://auralabsbio.co/sitemap.xml
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+
+# OpenAI/Claude crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
