@@ -300,7 +300,37 @@ h1{
   color:#e5e5e5;
 }
 .standard-image{display: none;}
-/* OLD: .category-preview, .category-grid, .category-card — replaced by new catalog design */
+.category-preview{
+  padding:70px 58px;
+  text-align:center;
+  background:var(--bg);
+}
+.category-grid{
+  max-width:1138px;
+  margin:34px auto 36px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+.category-card{
+  border:1px solid var(--line);
+  background:#fbfaf7;
+  padding:22px;
+  text-align:left;
+}
+.category-card h3{
+  font-family:"EB Garamond",Georgia,serif;
+  font-size:25px;
+  letter-spacing:-.035em;
+  line-height:1.05;
+  margin-bottom:16px;
+}
+.category-card p{
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.45;
+  margin:0;
+}
 .inventory-preview{
   padding:60px 58px 48px;
   background:var(--bg2);
