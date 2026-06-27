@@ -73,12 +73,13 @@
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(90deg,
-    rgba(5, 5, 5, 0.97) 0%,
-    rgba(5, 5, 5, 0.97) 42%,
-    rgba(5, 5, 5, 0.70) 62%,
-    rgba(5, 5, 5, 0.90) 100%
-  );
+  background:
+    linear-gradient(90deg,
+      rgba(5, 5, 5, 0.88) 0%,
+      rgba(5, 5, 5, 0.64) 34%,
+      rgba(5, 5, 5, 0.34) 62%,
+      rgba(5, 5, 5, 0.82) 100%
+    );
 }
 
 .compound-row img {
@@ -90,7 +91,7 @@
   display: block;
   object-fit: cover;
   object-position: center;
-  filter: brightness(0.45) contrast(1.1) saturate(0.9);
+  filter: brightness(0.68) contrast(1.1) saturate(0.9);
   transform: none;
 }
 
