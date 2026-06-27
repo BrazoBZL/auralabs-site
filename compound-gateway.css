@@ -288,3 +288,24 @@
     transform: translateX(3px);
   }
 }
+
+/* DIAGNOSTIC: element outlines */
+.compound-row h3 {
+  outline: 3px solid red !important;
+  background: rgba(255,0,0,.25) !important;
+}
+
+.compound-row-number {
+  outline: 3px solid blue !important;
+  background: rgba(0,0,255,.25) !important;
+}
+
+.compound-row-count {
+  outline: 3px solid green !important;
+  background: rgba(0,255,0,.25) !important;
+}
+
+.compound-row-arrow {
+  outline: 3px solid yellow !important;
+  background: rgba(255,255,0,.25) !important;
+}
