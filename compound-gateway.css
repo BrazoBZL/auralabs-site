@@ -93,15 +93,11 @@
   pointer-events: none;
 }
 
-.compound-row-number,
-.compound-row h3,
-.compound-row-count,
-.compound-row-arrow {
+.compound-row-number {
   position: relative;
   z-index: 2;
-}
-
-.compound-row-number {
+  grid-column: 1;
+  grid-row: 1;
   font-family: Inter, sans-serif;
   font-size: 12px;
   letter-spacing: 0.2em;
@@ -111,6 +107,10 @@
 }
 
 .compound-row h3 {
+  position: relative;
+  z-index: 2;
+  grid-column: 2;
+  grid-row: 1;
   font-family: "EB Garamond", serif;
   font-size: clamp(36px, 4.2vw, 64px);
   line-height: 0.94;
@@ -122,6 +122,10 @@
 }
 
 .compound-row-count {
+  position: relative;
+  z-index: 2;
+  grid-column: 3;
+  grid-row: 1;
   font-family: Inter, sans-serif;
   font-size: 12px;
   letter-spacing: 0.16em;
@@ -132,6 +136,10 @@
 }
 
 .compound-row-arrow {
+  position: relative;
+  z-index: 2;
+  grid-column: 4;
+  grid-row: 1;
   font-family: Inter, sans-serif;
   font-size: 32px;
   letter-spacing: 0.1em;
@@ -275,3 +283,4 @@
     );
   }
 }
+
