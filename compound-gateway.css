@@ -1,15 +1,16 @@
-/* Compound Gateway — Editorial Category Archive */
+/* Compound Gateway — Clean Editorial Row Catalog */
 
 .compound-gateway {
   background: #050505;
   color: #f4efe6;
-  padding: 72px 0 0;
+  padding: 96px 0 0;
+  overflow: hidden;
 }
 
 .compound-gateway-intro {
   max-width: 1180px;
-  margin: 0 auto 24px;
-  padding: 28px 48px;
+  margin: 0 auto 18px;
+  padding: 18px 48px 10px;
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
   gap: 40px;
@@ -22,13 +23,13 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: rgba(244, 239, 230, 0.58);
-  margin: 0 0 16px 0;
+  margin: 0;
 }
 
 .compound-gateway-intro h2 {
-  font-family: "EB Garamond", serif;
-  font-size: clamp(48px, 5.2vw, 84px);
-  line-height: 0.93;
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: clamp(44px, 4.8vw, 76px);
+  line-height: 0.94;
   font-weight: 400;
   letter-spacing: -0.045em;
   margin: 0;
@@ -36,161 +37,177 @@
 }
 
 .compound-gateway-description {
-  max-width: 1180px;
-  margin: 0 auto 32px;
+  max-width: 620px;
+  margin: 0 auto 26px;
   padding: 0 48px;
   font-family: Inter, sans-serif;
   font-size: 15px;
-  line-height: 1.8;
+  line-height: 1.65;
   color: rgba(244, 239, 230, 0.68);
-  max-width: 620px;
 }
 
 .compound-rows {
-  border-top: 1px solid rgba(244, 239, 230, 0.12);
-  margin-top: 0;
+  border-top: 1px solid rgba(244, 239, 230, 0.14);
 }
 
 .compound-row {
   position: relative;
-  min-height: 160px;
-  height: 160px;
-  display: grid;
-  grid-template-columns: 140px 1fr 200px 80px;
-  align-items: center;
-  padding: 0 48px;
+  isolation: isolate;
+  contain: paint;
   overflow: hidden;
+  min-height: 158px;
+  height: 158px;
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr) 178px 58px;
+  align-items: center;
+  gap: 0;
+  padding: 0 48px;
   text-decoration: none;
   color: #f4efe6;
-  border-bottom: 1px solid rgba(244, 239, 230, 0.12);
-  transition: all 300ms ease;
+  border-bottom: 1px solid rgba(244, 239, 230, 0.14);
+}
+
+.compound-row::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg,
+      rgba(5, 5, 5, 0.88) 0%,
+      rgba(5, 5, 5, 0.64) 34%,
+      rgba(5, 5, 5, 0.34) 62%,
+      rgba(5, 5, 5, 0.82) 100%
+    );
 }
 
 .compound-row img {
   position: absolute;
   inset: 0;
+  z-index: 0;
   width: 100%;
   height: 100%;
+  display: block;
   object-fit: cover;
-  object-position: center center;
-  z-index: 0;
-  filter: brightness(0.68) contrast(1.1) saturate(0.88);
-  transform: scale(1);
-  transition: transform 900ms ease, filter 900ms ease;
+  object-position: center;
+  filter: brightness(0.68) contrast(1.1) saturate(0.9);
+  transform: none;
 }
 
-.compound-row-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    90deg,
-    rgba(5, 5, 5, 0.86) 0%,
-    rgba(5, 5, 5, 0.58) 36%,
-    rgba(5, 5, 5, 0.32) 64%,
-    rgba(5, 5, 5, 0.78) 100%
-  );
-  pointer-events: none;
+.compound-row-number,
+.compound-row h3,
+.compound-row-count,
+.compound-row-arrow {
+  position: relative;
+  z-index: 2;
+  grid-row: 1;
+  min-width: 0;
+  opacity: 1;
+  filter: none;
+  text-shadow: none;
+  mix-blend-mode: normal;
+  transform: none;
 }
 
 .compound-row-number {
-  position: relative;
-  z-index: 2;
   grid-column: 1;
-  grid-row: 1;
   font-family: Inter, sans-serif;
   font-size: 12px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(244, 239, 230, 0.62);
+  color: rgba(244, 239, 230, 0.64);
   font-weight: 600;
 }
 
 .compound-row h3 {
-  position: relative;
-  z-index: 2;
   grid-column: 2;
-  grid-row: 1;
-  font-family: "EB Garamond", serif;
-  font-size: clamp(36px, 4.2vw, 64px);
-  line-height: 0.94;
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: clamp(34px, 3.4vw, 54px);
+  line-height: 0.96;
   font-weight: 400;
-  letter-spacing: -0.048em;
+  letter-spacing: -0.045em;
   margin: 0;
   color: #f4efe6;
-  max-width: 500px;
+  max-width: 520px;
+  display: block;
 }
 
 .compound-row-count {
-  position: relative;
-  z-index: 2;
   grid-column: 3;
-  grid-row: 1;
+  justify-self: end;
   font-family: Inter, sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: rgba(244, 239, 230, 0.74);
   font-weight: 500;
-  justify-self: end;
+  white-space: nowrap;
 }
 
 .compound-row-arrow {
-  position: relative;
-  z-index: 2;
   grid-column: 4;
-  grid-row: 1;
+  justify-self: end;
   font-family: Inter, sans-serif;
-  font-size: 32px;
-  letter-spacing: 0.1em;
+  font-size: 28px;
+  line-height: 1;
   color: rgba(244, 239, 230, 0.86);
   font-weight: 300;
-  justify-self: end;
-  transform: translateX(0);
-  transition: transform 500ms ease;
 }
 
 .compound-row:hover img {
-  transform: scale(1.048);
-  filter: brightness(0.76) contrast(1.14) saturate(0.92);
+  filter: brightness(0.76) contrast(1.14) saturate(0.94);
 }
 
 .compound-row:hover .compound-row-arrow {
-  transform: translateX(10px);
+  transform: translateX(6px);
 }
 
 /* ====== TABLET RESPONSIVE ====== */
 
 @media (max-width: 1000px) {
+  .compound-gateway {
+    padding: 72px 0 0;
+  }
+
   .compound-gateway-intro {
     grid-template-columns: 1fr;
     gap: 24px;
-    padding: 20px 32px;
-    margin-bottom: 20px;
+    padding: 14px 32px 8px;
+    margin-bottom: 8px;
   }
 
   .compound-gateway-intro h2 {
-    font-size: clamp(42px, 6vw, 68px);
+    font-size: clamp(38px, 5.2vw, 62px);
   }
 
   .compound-gateway-description {
     padding: 0 32px;
-    margin-bottom: 24px;
+    margin: 0 auto 18px;
+    font-size: 14px;
   }
 
   .compound-row {
-    min-height: 155px;
-    height: 155px;
-    grid-template-columns: 100px 1fr 160px 60px;
+    min-height: 152px;
+    height: 152px;
+    grid-template-columns: 80px minmax(0, 1fr) 160px 50px;
     padding: 0 32px;
   }
 
   .compound-row h3 {
-    font-size: clamp(32px, 4.5vw, 52px);
+    font-size: clamp(30px, 3.8vw, 48px);
   }
 
   .compound-row-number {
     font-size: 11px;
+  }
+
+  .compound-row-count {
+    font-size: 10px;
+  }
+
+  .compound-row-arrow {
+    font-size: 24px;
   }
 }
 
@@ -198,41 +215,43 @@
 
 @media (max-width: 680px) {
   .compound-gateway {
-    padding-top: 56px;
+    padding: 56px 0 0;
   }
 
   .compound-gateway-intro {
-    padding: 16px 22px;
-    margin-bottom: 16px;
+    padding: 12px 20px 6px;
+    margin: 0 auto 12px;
   }
 
   .compound-gateway-intro h2 {
-    font-size: clamp(38px, 9vw, 52px);
-    line-height: 0.95;
+    font-size: clamp(32px, 7vw, 48px);
+    line-height: 0.96;
   }
 
   .compound-gateway-description {
-    padding: 0 22px;
-    margin-bottom: 20px;
-    font-size: 14px;
-  }
-
-  .compound-rows {
-    margin-top: 0;
+    padding: 0 20px;
+    margin: 0 auto 16px;
+    font-size: 13px;
+    line-height: 1.6;
   }
 
   .compound-row {
     min-height: 280px;
+    height: auto;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto auto;
-    gap: 12px;
-    padding: 28px 22px;
+    gap: 10px;
+    padding: 24px 20px;
     align-items: start;
   }
 
   .compound-row img {
-    filter: brightness(0.52) contrast(1.2) saturate(0.9);
+    display: none;
+  }
+
+  .compound-row::after {
+    display: none;
   }
 
   .compound-row-number {
@@ -244,43 +263,28 @@
   .compound-row h3 {
     grid-column: 1;
     grid-row: 2;
-    font-size: clamp(24px, 7.5vw, 38px);
+    font-size: clamp(22px, 6vw, 36px);
     line-height: 1;
-    margin-top: 10px;
+    margin: 6px 0 0 0;
   }
 
   .compound-row-count {
     grid-column: 1;
     grid-row: 3;
     justify-self: start;
-    font-size: 10px;
-    margin-top: 8px;
+    font-size: 9px;
+    margin: 6px 0 0 0;
   }
 
   .compound-row-arrow {
-    position: absolute;
-    right: 22px;
-    top: 28px;
-    font-size: 28px;
-    transform: translateX(0);
-  }
-
-  .compound-row:hover img {
-    transform: scale(1.02);
-    filter: brightness(0.62) contrast(1.24) saturate(0.95);
+    grid-column: 1;
+    grid-row: 4;
+    justify-self: start;
+    font-size: 24px;
+    margin: 6px 0 0 0;
   }
 
   .compound-row:hover .compound-row-arrow {
-    transform: translateX(4px);
-  }
-
-  .compound-row-overlay {
-    background: linear-gradient(
-      180deg,
-      rgba(5, 5, 5, 0.2) 0%,
-      rgba(5, 5, 5, 0.4) 40%,
-      rgba(5, 5, 5, 0.7) 100%
-    );
+    transform: translateX(3px);
   }
 }
-
