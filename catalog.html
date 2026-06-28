@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aura Labs — Catalog</title>
+  <title>Aura Labs — Compounds</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="compound-gateway.css?v=clean-row-1" />
+  <link rel="stylesheet" href="compound-gateway-v2.css" />
 </head>
 <body>
 
-<!-- SITE HEADER -->
+<!-- SITE HEADER — reused exactly -->
 <header class="site-header">
   <a href="index.html" class="brand">AURA LABS<span>RESEARCH MATERIALS</span></a>
   <nav>
-    <a href="catalog.html">Compounds</a>
+    <a href="catalog-v2.html">Compounds</a>
     <a href="quality.html">Quality</a>
     <a href="inquiry.html">Inquiry</a>
     <a href="about.html">About</a>
@@ -29,7 +29,7 @@
 </header>
 
 <nav class="mobile-menu" id="mobileMenu">
-  <a href="catalog.html">Compounds</a>
+  <a href="catalog-v2.html">Compounds</a>
   <a href="quality.html">Quality</a>
   <a href="inquiry.html">Inquiry</a>
   <a href="about.html">About</a>
@@ -37,120 +37,151 @@
   <a href="cart.html">Cart</a>
 </nav>
 
-<!-- COMPOUND CATALOG GATEWAY SECTION -->
-<section class="compound-gateway">
-  
-  <div class="compound-gateway-intro">
-    <div>
-      <p class="eyebrow">Compound Archive</p>
+<!-- CATALOG V2 -->
+<main class="catalog-v2">
+
+  <div class="catalog-v2__intro">
+    <div class="catalog-v2__intro-left">
+      <p class="catalog-v2__eyebrow">Compound Archive</p>
     </div>
-    <div>
-      <h2>Research compounds organized for clarity.</h2>
+    <div class="catalog-v2__intro-right">
+      <h2 class="catalog-v2__heading">Research compounds organized for clarity.</h2>
+      <p class="catalog-v2__desc">Explore Aura Labs categories by research focus. Each archive leads to a focused compound index with availability, documentation, and inquiry paths.</p>
     </div>
   </div>
 
-  <div>
-    <p class="compound-gateway-description">
-      Explore Aura Labs categories by research focus. Each archive leads to
-      a focused compound index with availability, documentation, and inquiry paths.
-    </p>
-  </div>
+  <ol class="catalog-v2__list">
 
-  <div class="compound-rows">
+    <li class="catalog-v2__item">
+      <div class="catalog-v2__media">
+        <img src="assets/categories/v2/weight-management.jpg" alt="" loading="lazy" decoding="async">
+      </div>
+      <div class="catalog-v2__overlay"></div>
+      <a class="catalog-v2__content" href="weight-management.html">
+        <span class="catalog-v2__num">01</span>
+        <h3 class="catalog-v2__title">Weight Management &amp;<br>Metabolic Research</h3>
+        <span class="catalog-v2__count">50 Compounds</span>
+        <span class="catalog-v2__arrow">→</span>
+      </a>
+    </li>
 
-    <a class="compound-row" href="weight-management.html">
-      <img src="assets/categories/weight-management.jpg" alt="Analytical scale with powder formulation">
-      <span class="compound-row-number">01</span>
-      <h3>Weight Management &<br>Metabolic Research</h3>
-      <span class="compound-row-count">50 Compounds</span>
-      <span class="compound-row-arrow">→</span>
-    </a>
+    <li class="catalog-v2__item">
+      <div class="catalog-v2__media">
+        <img src="assets/categories/v2/recovery-regenerative.jpg" alt="" loading="lazy" decoding="async">
+      </div>
+      <div class="catalog-v2__overlay"></div>
+      <a class="catalog-v2__content" href="recovery-regenerative.html">
+        <span class="catalog-v2__num">02</span>
+        <h3 class="catalog-v2__title">Recovery &amp;<br>Regenerative Research</h3>
+        <span class="catalog-v2__count">13 Compounds</span>
+        <span class="catalog-v2__arrow">→</span>
+      </a>
+    </li>
 
-    <a class="compound-row" href="recovery-regenerative.html">
-      <img src="assets/categories/recovery-regenerative.jpg" alt="Petri dish with botanical tissue">
-      <span class="compound-row-number">02</span>
-      <h3>Recovery &<br>Regenerative Research</h3>
-      <span class="compound-row-count">13 Compounds</span>
-      <span class="compound-row-arrow">→</span>
-    </a>
+    <li class="catalog-v2__item">
+      <div class="catalog-v2__media">
+        <img src="assets/categories/v2/cognitive-neuro.jpg" alt="" loading="lazy" decoding="async">
+      </div>
+      <div class="catalog-v2__overlay"></div>
+      <a class="catalog-v2__content" href="cognitive-neuro.html">
+        <span class="catalog-v2__num">03</span>
+        <h3 class="catalog-v2__title">Cognitive &amp;<br>Neuro Research</h3>
+        <span class="catalog-v2__count">15 Compounds</span>
+        <span class="catalog-v2__arrow">→</span>
+      </a>
+    </li>
 
-    <a class="compound-row" href="cognitive-neuro.html">
-      <img src="assets/categories/cognitive-neuro.jpg" alt="Glass brain sculpture with refraction">
-      <span class="compound-row-number">03</span>
-      <h3>Cognitive &<br>Neuro Research</h3>
-      <span class="compound-row-count">15 Compounds</span>
-      <span class="compound-row-arrow">→</span>
-    </a>
+    <li class="catalog-v2__item">
+      <div class="catalog-v2__media">
+        <img src="assets/categories/v2/growth-hormone.jpg" alt="" loading="lazy" decoding="async">
+      </div>
+      <div class="catalog-v2__overlay"></div>
+      <a class="catalog-v2__content" href="growth-hormone.html">
+        <span class="catalog-v2__num">04</span>
+        <h3 class="catalog-v2__title">Growth Hormone &amp;<br>Secretagogues</h3>
+        <span class="catalog-v2__count">19 Compounds</span>
+        <span class="catalog-v2__arrow">→</span>
+      </a>
+    </li>
 
-    <a class="compound-row" href="growth-hormone.html">
-      <img src="assets/categories/growth-hormone.jpg" alt="Graduated cylinder and pipette with measurement markings">
-      <span class="compound-row-number">04</span>
-      <h3>Growth Hormone &<br>Secretagogues</h3>
-      <span class="compound-row-count">19 Compounds</span>
-      <span class="compound-row-arrow">→</span>
-    </a>
+    <li class="catalog-v2__item">
+      <div class="catalog-v2__media">
+        <img src="assets/categories/v2/copper-peptides.jpg" alt="" loading="lazy" decoding="async">
+      </div>
+      <div class="catalog-v2__overlay"></div>
+      <a class="catalog-v2__content" href="copper-peptides.html">
+        <span class="catalog-v2__num">05</span>
+        <h3 class="catalog-v2__title">Copper Peptides &amp;<br>Aesthetic Research</h3>
+        <span class="catalog-v2__count">6 Compounds</span>
+        <span class="catalog-v2__arrow">→</span>
+      </a>
+    </li>
 
-    <a class="compound-row" href="copper-peptides.html">
-      <img src="assets/categories/copper-peptides.jpg" alt="Warm copper molecular material and surface">
-      <span class="compound-row-number">05</span>
-      <h3>Copper Peptides &<br>Aesthetic Research</h3>
-      <span class="compound-row-count">6 Compounds</span>
-      <span class="compound-row-arrow">→</span>
-    </a>
+    <li class="catalog-v2__item">
+      <div class="catalog-v2__media">
+        <img src="assets/categories/v2/longevity-bioregulators.jpg" alt="" loading="lazy" decoding="async">
+      </div>
+      <div class="catalog-v2__overlay"></div>
+      <a class="catalog-v2__content" href="longevity-bioregulators.html">
+        <span class="catalog-v2__num">06</span>
+        <h3 class="catalog-v2__title">Longevity &amp;<br>Bioregulators</h3>
+        <span class="catalog-v2__count">7 Compounds</span>
+        <span class="catalog-v2__arrow">→</span>
+      </a>
+    </li>
 
-    <a class="compound-row" href="longevity-bioregulators.html">
-      <img src="assets/categories/longevity-bioregulators.jpg" alt="Hourglass and preserved botanical on stone">
-      <span class="compound-row-number">06</span>
-      <h3>Longevity &<br>Bioregulators</h3>
-      <span class="compound-row-count">7 Compounds</span>
-      <span class="compound-row-arrow">→</span>
-    </a>
+    <li class="catalog-v2__item">
+      <div class="catalog-v2__media">
+        <img src="assets/categories/v2/advanced-research.jpg" alt="" loading="lazy" decoding="async">
+      </div>
+      <div class="catalog-v2__overlay"></div>
+      <a class="catalog-v2__content" href="advanced-research.html">
+        <span class="catalog-v2__num">07</span>
+        <h3 class="catalog-v2__title">Advanced Research<br>Compounds</h3>
+        <span class="catalog-v2__count">9 Compounds</span>
+        <span class="catalog-v2__arrow">→</span>
+      </a>
+    </li>
 
-    <a class="compound-row" href="advanced-research.html">
-      <img src="assets/categories/advanced-research.jpg" alt="Crystals and diffraction patterns">
-      <span class="compound-row-number">07</span>
-      <h3>Advanced Research<br>Compounds</h3>
-      <span class="compound-row-count">9 Compounds</span>
-      <span class="compound-row-arrow">→</span>
-    </a>
+    <li class="catalog-v2__item">
+      <div class="catalog-v2__media">
+        <img src="assets/categories/v2/hormone-support.jpg" alt="" loading="lazy" decoding="async">
+      </div>
+      <div class="catalog-v2__overlay"></div>
+      <a class="catalog-v2__content" href="hormone-support.html">
+        <span class="catalog-v2__num">08</span>
+        <h3 class="catalog-v2__title">Hormone Support<br>Research</h3>
+        <span class="catalog-v2__count">12 Compounds</span>
+        <span class="catalog-v2__arrow">→</span>
+      </a>
+    </li>
 
-    <a class="compound-row" href="hormone-support.html">
-      <img src="assets/categories/hormone-support.jpg" alt="Precision balance with calibration weights">
-      <span class="compound-row-number">08</span>
-      <h3>Hormone Support<br>Research</h3>
-      <span class="compound-row-count">12 Compounds</span>
-      <span class="compound-row-arrow">→</span>
-    </a>
+  </ol>
 
-  </div>
+</main>
 
-</section>
-
-<script src="script.js"></script>
 <script>
   const menuBtn = document.getElementById('mobileMenuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
-  
-  if(menuBtn) {
+  if (menuBtn) {
     menuBtn.addEventListener('click', () => {
       menuBtn.classList.toggle('active');
       mobileMenu.classList.toggle('active');
     });
-    
     mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         menuBtn.classList.remove('active');
         mobileMenu.classList.remove('active');
       });
     });
-    
     document.addEventListener('click', (e) => {
-      if(!e.target.closest('.site-header') && !e.target.closest('.mobile-menu')) {
+      if (!e.target.closest('.site-header') && !e.target.closest('.mobile-menu')) {
         menuBtn.classList.remove('active');
         mobileMenu.classList.remove('active');
       }
     });
   }
 </script>
+
 </body>
 </html>
