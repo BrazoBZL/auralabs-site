@@ -4,10 +4,16 @@
    overlay owns gradient, a owns content + interaction.
    ============================================================ */
 
-/* ── HEADER — match homepage cream background ── */
+/* ── HEADER — match homepage cream background + dark text ── */
 
 .site-header {
   background: var(--bg); /* #F8F6F1 — same as homepage */
+  color: var(--ink);     /* #111111 — match homepage text */
+}
+
+.site-header .brand,
+.site-header .main-nav a {
+  color: var(--ink);
 }
 
 /* ── PAGE CONTAINER ── */
