@@ -29,6 +29,7 @@
   color: var(--ink);
   padding-top: 72px; /* header is position:absolute on desktop — clear it */
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* ── HEADER FIX — tablet/mobile header switches to position:relative ── */
@@ -88,9 +89,12 @@
   padding: 0;
   background: #050505; /* dark zone — rows only */
   border-top: 1px solid rgba(17, 17, 17, 0.12);
+  position: relative;
+  left: 50%;
+  right: 50%;
   width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 
 /* ── ROW ITEM — owns layout, image layer, overlay layer ── */
