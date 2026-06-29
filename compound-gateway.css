@@ -16,6 +16,12 @@
   color: var(--ink);
 }
 
+@media (max-width: 900px) {
+  .site-header .main-nav {
+    display: none; /* hamburger only on mobile/tablet */
+  }
+}
+
 /* ── PAGE CONTAINER ── */
 
 .catalog-v2 {
