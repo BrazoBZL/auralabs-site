@@ -92,14 +92,11 @@
   overflow: hidden;    /* clips media to row bounds */
 }
 
-/* ── MEDIA LAYER — right 55% of row, image is row background not a thumbnail ── */
+/* ── MEDIA LAYER — full-width row background, image is the canvas ── */
 
 .catalog-v2__media {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 58%;   /* occupies right ~58% of the row */
+  inset: 0;
   z-index: 0;
 }
 
@@ -111,7 +108,7 @@
   object-position: center;
 }
 
-/* ── OVERLAY LAYER — long dissolve from full-dark left into transparent right ── */
+/* ── OVERLAY LAYER — gradient creates readability, image remains visible beneath ── */
 
 .catalog-v2__overlay {
   position: absolute;
@@ -119,11 +116,11 @@
   z-index: 1;
   background: linear-gradient(
     90deg,
-    #050505 0%,          /* solid dark — left text zone */
-    #050505 36%,         /* hold dark through number + title */
-    rgba(5, 5, 5, 0.85) 48%,
-    rgba(5, 5, 5, 0.40) 62%,
-    rgba(5, 5, 5, 0.10) 78%,
+    rgba(5, 5, 5, 0.96) 0%,
+    rgba(5, 5, 5, 0.90) 18%,
+    rgba(5, 5, 5, 0.72) 34%,
+    rgba(5, 5, 5, 0.40) 48%,
+    rgba(5, 5, 5, 0.12) 62%,
     rgba(5, 5, 5, 0.00) 100%
   );
   pointer-events: none;
