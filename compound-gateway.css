@@ -112,7 +112,6 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transform: scale(0.78);
   transition: transform 600ms ease;
 }
 
@@ -124,11 +123,11 @@
   z-index: 1;
   background: linear-gradient(
     90deg,
-    rgba(5, 5, 5, 0.96) 0%,
-    rgba(5, 5, 5, 0.90) 18%,
-    rgba(5, 5, 5, 0.72) 34%,
-    rgba(5, 5, 5, 0.40) 48%,
-    rgba(5, 5, 5, 0.12) 62%,
+    rgba(5, 5, 5, 0.82) 0%,
+    rgba(5, 5, 5, 0.70) 20%,
+    rgba(5, 5, 5, 0.45) 36%,
+    rgba(5, 5, 5, 0.18) 52%,
+    rgba(5, 5, 5, 0.04) 68%,
     rgba(5, 5, 5, 0.00) 100%
   );
   pointer-events: none;
