@@ -75,14 +75,13 @@
   overflow: hidden;
 }
 
-/* ── MEDIA LAYER — background-image per row for zoom control ── */
+/* ── MEDIA LAYER ── */
 
 .catalog-v2__media {
   position: absolute;
   inset: 0;
   z-index: 0;
   background-repeat: no-repeat;
-  background-position: center;
   background-size: cover;
 }
 
@@ -90,46 +89,54 @@
   display: none;
 }
 
-/* ── PER-ROW IMAGE + ZOOM ── */
+/* ── PER-ROW: image + individual crop position ── */
 
+/* Row 01 — Weight Management */
 .catalog-v2__item:nth-child(1) .catalog-v2__media {
   background-image: url('assets/categories/v2/weight-management.jpg');
-  background-size: cover;
+  background-position: center 50%;
 }
 
+/* Row 02 — Recovery & Regenerative */
 .catalog-v2__item:nth-child(2) .catalog-v2__media {
   background-image: url('assets/categories/v2/recovery-regenerative.jpg');
-  background-size: cover;
+  background-position: center 50%;
 }
 
+/* Row 03 — Cognitive & Neuro */
 .catalog-v2__item:nth-child(3) .catalog-v2__media {
   background-image: url('assets/categories/v2/cognitive-neuro.jpg');
-  background-size: cover;
+  background-position: center 50%;
 }
 
+/* Row 04 — Growth Hormone */
 .catalog-v2__item:nth-child(4) .catalog-v2__media {
   background-image: url('assets/categories/v2/growth-hormone.jpg');
-  background-size: cover;
+  background-position: center 50%;
 }
 
+/* Row 05 — Copper Peptides */
 .catalog-v2__item:nth-child(5) .catalog-v2__media {
   background-image: url('assets/categories/v2/copper-peptides.jpg');
-  background-size: cover;
+  background-position: center 50%;
 }
 
+/* Row 06 — Longevity & Bioregulators */
 .catalog-v2__item:nth-child(6) .catalog-v2__media {
   background-image: url('assets/categories/v2/longevity-bioregulators.jpg');
-  background-size: cover;
+  background-position: center 50%;
 }
 
+/* Row 07 — Advanced Research */
 .catalog-v2__item:nth-child(7) .catalog-v2__media {
   background-image: url('assets/categories/v2/advanced-research.jpg');
-  background-size: cover;
+  background-position: center 50%;
 }
 
+/* Row 08 — Hormone Support */
 .catalog-v2__item:nth-child(8) .catalog-v2__media {
   background-image: url('assets/categories/v2/hormone-support.jpg');
-  background-size: cover;
+  background-position: center 50%;
 }
 
 /* ── OVERLAY — dark left for text readability, open center ── */
