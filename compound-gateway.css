@@ -70,7 +70,7 @@
 
 .catalog-v2__item {
   position: relative;
-  height: 140px;
+  height: 160px;
   border-bottom: 1px solid rgba(244, 239, 230, 0.12);
   overflow: hidden;
   background: #050505;
@@ -83,7 +83,7 @@
   inset: 0;
   z-index: 0;
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: cover;
 }
 
 .catalog-v2__media img {
@@ -92,52 +92,52 @@
 
 /* ── PER-ROW: image + individual crop position ── */
 
-/* Row 01 — Weight Management */
+/* Row 01 — Weight Management: powder bowl, subject upper-center */
 .catalog-v2__item:nth-child(1) .catalog-v2__media {
   background-image: url('assets/categories/v2/weight-management.jpg');
-  background-position: center 50%;
+  background-position: center 35%;
 }
 
-/* Row 02 — Recovery & Regenerative */
+/* Row 02 — Recovery & Regenerative: moss/petri, subject lower-center */
 .catalog-v2__item:nth-child(2) .catalog-v2__media {
   background-image: url('assets/categories/v2/recovery-regenerative.jpg');
-  background-position: center 50%;
+  background-position: center 60%;
 }
 
-/* Row 03 — Cognitive & Neuro */
+/* Row 03 — Cognitive & Neuro: glass brain, dead center */
 .catalog-v2__item:nth-child(3) .catalog-v2__media {
   background-image: url('assets/categories/v2/cognitive-neuro.jpg');
   background-position: center 50%;
 }
 
-/* Row 04 — Growth Hormone */
+/* Row 04 — Growth Hormone: beakers/dropper, mid center */
 .catalog-v2__item:nth-child(4) .catalog-v2__media {
   background-image: url('assets/categories/v2/growth-hormone.jpg');
   background-position: center 50%;
 }
 
-/* Row 05 — Copper Peptides */
+/* Row 05 — Copper Peptides: molecule, dead center */
 .catalog-v2__item:nth-child(5) .catalog-v2__media {
   background-image: url('assets/categories/v2/copper-peptides.jpg');
   background-position: center 50%;
 }
 
-/* Row 06 — Longevity & Bioregulators */
+/* Row 06 — Longevity: hourglass, slightly low */
 .catalog-v2__item:nth-child(6) .catalog-v2__media {
   background-image: url('assets/categories/v2/longevity-bioregulators.jpg');
-  background-position: center 50%;
+  background-position: center 60%;
 }
 
-/* Row 07 — Advanced Research */
+/* Row 07 — Advanced Research: crystals, slightly high */
 .catalog-v2__item:nth-child(7) .catalog-v2__media {
   background-image: url('assets/categories/v2/advanced-research.jpg');
-  background-position: center 50%;
+  background-position: center 40%;
 }
 
-/* Row 08 — Hormone Support */
+/* Row 08 — Hormone Support: brass scales, slightly low */
 .catalog-v2__item:nth-child(8) .catalog-v2__media {
   background-image: url('assets/categories/v2/hormone-support.jpg');
-  background-position: center 50%;
+  background-position: center 65%;
 }
 
 /* ── OVERLAY — dark left for text readability, open center ── */
@@ -165,7 +165,7 @@
   display: grid;
   grid-template-columns: 88px 1fr auto 56px;
   align-items: center;
-  height: 140px;
+  height: 160px;
   padding: 0 48px;
   text-decoration: none;
   color: #f4efe6;
