@@ -4,32 +4,13 @@
    overlay owns gradient, a owns content + interaction.
    ============================================================ */
 
-/* ── HEADER — match homepage cream background + dark text ── */
-
-.site-header {
-  background: var(--bg); /* #F8F6F1 — same as homepage */
-  color: var(--ink);     /* #111111 — match homepage text */
-}
-
-.site-header .brand,
-.site-header .main-nav a {
-  color: var(--ink);
-}
-
-@media (max-width: 900px) {
-  .site-header .main-nav {
-    display: none; /* hamburger only on mobile/tablet */
-  }
-}
-
 /* ── PAGE CONTAINER ── */
 
 .catalog-v2 {
-  background: var(--bg); /* cream — intro inherits this */
-  color: var(--ink);
+  background: #050505;
+  color: #f4efe6;
   padding-top: 72px; /* header is position:absolute on desktop — clear it */
   min-height: 100vh;
-  overflow-x: hidden;
 }
 
 /* ── HEADER FIX — tablet/mobile header switches to position:relative ── */
@@ -48,9 +29,9 @@
   grid-template-columns: 0.8fr 1.2fr;
   gap: 40px;
   align-items: end;
+  max-width: 1180px;
+  margin: 0 auto;
   padding: 28px 48px 22px;
-  background: var(--bg);
-  color: var(--ink);
 }
 
 .catalog-v2__eyebrow {
@@ -58,7 +39,7 @@
   font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: rgba(244, 239, 230, 0.52);
   margin: 0;
 }
 
@@ -69,14 +50,14 @@
   font-weight: 400;
   letter-spacing: -0.045em;
   margin: 0 0 16px;
-  color: var(--ink);
+  color: #f4efe6;
 }
 
 .catalog-v2__desc {
   font-family: Inter, sans-serif;
   font-size: 15px;
   line-height: 1.6;
-  color: var(--muted);
+  color: rgba(244, 239, 230, 0.62);
   margin: 0;
   max-width: 520px;
 }
@@ -87,26 +68,19 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  background: #050505; /* dark zone — rows only */
-  border-top: 1px solid rgba(17, 17, 17, 0.12);
-  position: relative;
-  left: 50%;
-  right: 50%;
-  width: 100vw;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  border-top: 1px solid rgba(244, 239, 230, 0.12);
 }
 
 /* ── ROW ITEM — owns layout, image layer, overlay layer ── */
 
 .catalog-v2__item {
   position: relative;  /* establishes stacking context for media + overlay */
-  height: 180px;
+  height: 260px;
   border-bottom: 1px solid rgba(244, 239, 230, 0.12);
   overflow: hidden;    /* clips media to row bounds */
 }
 
-/* ── MEDIA LAYER — full-width row background, image is the canvas ── */
+/* ── MEDIA LAYER — presentation only, fills row ── */
 
 .catalog-v2__media {
   position: absolute;
@@ -119,11 +93,10 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
-  transition: transform 600ms ease;
+  object-position: center; /* clean images — center crop */
 }
 
-/* ── OVERLAY LAYER — gradient creates readability, image remains visible beneath ── */
+/* ── OVERLAY LAYER — gradient, presentation only ── */
 
 .catalog-v2__overlay {
   position: absolute;
@@ -131,12 +104,10 @@
   z-index: 1;
   background: linear-gradient(
     90deg,
-    rgba(5, 5, 5, 0.82) 0%,
-    rgba(5, 5, 5, 0.70) 20%,
-    rgba(5, 5, 5, 0.45) 36%,
-    rgba(5, 5, 5, 0.18) 52%,
-    rgba(5, 5, 5, 0.04) 68%,
-    rgba(5, 5, 5, 0.00) 100%
+    rgba(5, 5, 5, 0.92) 0%,
+    rgba(5, 5, 5, 0.72) 38%,
+    rgba(5, 5, 5, 0.38) 62%,
+    rgba(5, 5, 5, 0.86) 100%
   );
   pointer-events: none;
 }
@@ -148,9 +119,9 @@
   z-index: 2;
   display: grid;
   grid-template-columns: 88px 1fr auto 56px;
-  grid-template-rows: 180px; /* exact row height — content cannot exceed this */
+  grid-template-rows: 260px; /* exact row height — content cannot exceed this */
   align-items: center;
-  height: 180px;
+  height: 260px;
   overflow: hidden; /* clips any text that would bleed outside */
   padding: 0 48px;
   text-decoration: none;
@@ -169,17 +140,6 @@
   text-transform: uppercase;
   color: rgba(244, 239, 230, 0.58);
   font-weight: 600;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.catalog-v2__num::after {
-  content: '—';
-  font-size: 10px;
-  letter-spacing: 0;
-  color: rgba(244, 239, 230, 0.38);
-  font-weight: 300;
 }
 
 .catalog-v2__title {
@@ -225,13 +185,14 @@
 
 /* ── HOVER — row highlight + arrow nudge ── */
 
-.catalog-v2__item:hover .catalog-v2__media img {
-  transform: scale(1.03);
-  transition: transform 600ms ease;
-}
-
-.catalog-v2__media img {
-  transition: transform 600ms ease;
+.catalog-v2__item:hover .catalog-v2__overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(5, 5, 5, 0.88) 0%,
+    rgba(5, 5, 5, 0.64) 38%,
+    rgba(5, 5, 5, 0.30) 62%,
+    rgba(5, 5, 5, 0.82) 100%
+  );
 }
 
 .catalog-v2__item:hover .catalog-v2__arrow {
@@ -253,12 +214,11 @@
   }
 
   .catalog-v2__item {
-    height: 165px;
+    height: 220px;
   }
 
   .catalog-v2__content {
     grid-template-columns: 72px 1fr auto 44px;
-    grid-template-rows: 165px;
     padding: 0 32px;
   }
 
@@ -292,12 +252,11 @@
   }
 
   .catalog-v2__item {
-    height: 130px;
+    height: 180px;
   }
 
   .catalog-v2__content {
     grid-template-columns: 44px 1fr auto 32px;
-    grid-template-rows: 130px;
     padding: 0 20px;
   }
 
