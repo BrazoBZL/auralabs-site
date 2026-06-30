@@ -82,62 +82,57 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
+
+/* ── IMAGE — full row, edge to edge ── */
 
 .catalog-v2__media img {
-  display: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* ── PER-ROW: image + individual crop position ── */
+/* ── PER-ROW: individual object-position only ── */
 
-/* Row 01 — Weight Management: powder bowl, subject upper-center */
-.catalog-v2__item:nth-child(1) .catalog-v2__media {
-  background-image: url('assets/categories/v2/weight-management.jpg');
-  background-position: center 35%;
+/* Row 01 — Weight Management */
+.catalog-v2__item:nth-child(1) .catalog-v2__media img {
+  object-position: center 35%;
 }
 
-/* Row 02 — Recovery & Regenerative: moss/petri, subject lower-center */
-.catalog-v2__item:nth-child(2) .catalog-v2__media {
-  background-image: url('assets/categories/v2/recovery-regenerative.jpg');
-  background-position: center 60%;
+/* Row 02 — Recovery & Regenerative */
+.catalog-v2__item:nth-child(2) .catalog-v2__media img {
+  object-position: center 60%;
 }
 
-/* Row 03 — Cognitive & Neuro: glass brain, dead center */
-.catalog-v2__item:nth-child(3) .catalog-v2__media {
-  background-image: url('assets/categories/v2/cognitive-neuro.jpg');
-  background-position: center 50%;
+/* Row 03 — Cognitive & Neuro */
+.catalog-v2__item:nth-child(3) .catalog-v2__media img {
+  object-position: center 50%;
 }
 
-/* Row 04 — Growth Hormone: beakers/dropper, mid center */
-.catalog-v2__item:nth-child(4) .catalog-v2__media {
-  background-image: url('assets/categories/v2/growth-hormone.jpg');
-  background-position: center 50%;
+/* Row 04 — Growth Hormone */
+.catalog-v2__item:nth-child(4) .catalog-v2__media img {
+  object-position: center 50%;
 }
 
-/* Row 05 — Copper Peptides: molecule, dead center */
-.catalog-v2__item:nth-child(5) .catalog-v2__media {
-  background-image: url('assets/categories/v2/copper-peptides.jpg');
-  background-position: center 50%;
+/* Row 05 — Copper Peptides */
+.catalog-v2__item:nth-child(5) .catalog-v2__media img {
+  object-position: center 50%;
 }
 
-/* Row 06 — Longevity: hourglass, slightly low */
-.catalog-v2__item:nth-child(6) .catalog-v2__media {
-  background-image: url('assets/categories/v2/longevity-bioregulators.jpg');
-  background-position: center 60%;
+/* Row 06 — Longevity & Bioregulators */
+.catalog-v2__item:nth-child(6) .catalog-v2__media img {
+  object-position: center 60%;
 }
 
-/* Row 07 — Advanced Research: crystals, slightly high */
-.catalog-v2__item:nth-child(7) .catalog-v2__media {
-  background-image: url('assets/categories/v2/advanced-research.jpg');
-  background-position: center 40%;
+/* Row 07 — Advanced Research */
+.catalog-v2__item:nth-child(7) .catalog-v2__media img {
+  object-position: center 40%;
 }
 
-/* Row 08 — Hormone Support: brass scales, slightly low */
-.catalog-v2__item:nth-child(8) .catalog-v2__media {
-  background-image: url('assets/categories/v2/hormone-support.jpg');
-  background-position: center 65%;
+/* Row 08 — Hormone Support */
+.catalog-v2__item:nth-child(8) .catalog-v2__media img {
+  object-position: center 65%;
 }
 
 /* ── OVERLAY — dark left for text readability, open center ── */
