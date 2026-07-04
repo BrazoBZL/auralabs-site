@@ -11,7 +11,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://auralabsbio.co/compounds.html" />
 <meta property="og:image" content="https://auralabsbio.co/assets/categories/compounds/hero.jpg" />
-<link rel="canonical" href="https://auralabsbio.co/compounds.html" />
+<link rel="canonical" href="https://auralabsbio.co/catalog.html" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -151,7 +151,7 @@ body { background: var(--ls); margin: 0; }
 .c-mobile-nav a:last-child { border-bottom: none; }
 
 /* ─── HERO ───────────────────────────────────────────────────────── */
-.c-hero {
+.aura-hero {
   position: relative;
   height: 72vh;
   min-height: 500px;
@@ -160,7 +160,7 @@ body { background: var(--ls); margin: 0; }
   overflow: hidden;
 }
 
-.c-hero__content {
+.aura-hero-content {
   position: absolute;
   inset: 0;
   z-index: 2;
@@ -172,7 +172,7 @@ body { background: var(--ls); margin: 0; }
   height: 100%;
 }
 
-.c-hero__eyebrow {
+.aura-hero-eyebrow {
   font-family: Inter, sans-serif;
   font-size: 10px;
   font-weight: 700;
@@ -183,7 +183,7 @@ body { background: var(--ls); margin: 0; }
   opacity: 0.6;
 }
 
-.c-hero__h1 {
+.aura-hero-title {
   font-family: "EB Garamond", Georgia, serif;
   font-size: clamp(42px, 5.2vw, 74px);
   font-weight: 500;
@@ -193,7 +193,7 @@ body { background: var(--ls); margin: 0; }
   margin: 0 0 20px 0;
 }
 
-.c-hero__sub {
+.aura-hero-sub {
   font-family: Inter, sans-serif;
   font-size: 13px;
   line-height: 1.65;
@@ -203,7 +203,7 @@ body { background: var(--ls); margin: 0; }
   max-width: 340px;
 }
 
-.c-hero__btn {
+.aura-hero-btn {
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -219,8 +219,8 @@ body { background: var(--ls); margin: 0; }
   transition: opacity 0.25s;
   align-self: flex-start;
 }
-.c-hero__btn:hover { opacity: 0.75; }
-.c-hero__btn::after { content: '→'; }
+.aura-hero-btn:hover { opacity: 0.75; }
+.aura-hero-btn::after { content: '→'; }
 
 /* ─── CATEGORY GRID ──────────────────────────────────────────────── */
 .c-grid {
@@ -647,7 +647,7 @@ body { background: var(--ls); margin: 0; }
 @media (max-width: 1100px) {
   .c-header__nav { gap: 24px; }
   .c-header { padding: 0 32px; }
-  .c-hero__content { padding: 0 48px; }
+  .aura-hero-content { padding: 0 48px; }
   .c-philosophy__text { padding: 60px 48px; }
   .c-newsletter { padding: 60px 48px; }
   .c-footer { padding: 52px 48px 36px; }
@@ -660,8 +660,8 @@ body { background: var(--ls); margin: 0; }
   .c-header__right { display: none; }
   .c-header__mobile-btn { display: block; }
 
-  .c-hero { height: 80vw; min-height: 380px; }
-  .c-hero__content { padding: 0 32px; max-width: 80%; }
+  .aura-hero { height: 80vw; min-height: 380px; }
+  .aura-hero-content { padding: 0 32px; max-width: 80%; }
 
   .c-grid { grid-template-columns: repeat(2, 1fr); }
   .c-tile { aspect-ratio: 3/4; }
@@ -685,8 +685,8 @@ body { background: var(--ls); margin: 0; }
 
 @media (max-width: 520px) {
   .c-header { padding: 0 20px; }
-  .c-hero { height: 110vw; min-height: 360px; max-height: 600px; }
-  .c-hero__content { padding: 0 20px; max-width: 100%; }
+  .aura-hero { height: 110vw; min-height: 360px; max-height: 600px; }
+  .aura-hero-content { padding: 0 20px; max-width: 100%; }
   .c-grid { grid-template-columns: 1fr 1fr; }
   .c-tile__desc { display: none; }
   .c-philosophy__text { padding: 44px 20px; }
@@ -753,12 +753,12 @@ body { background: var(--ls); margin: 0; }
 <main>
 
   <!-- Hero -->
-  <section class="c-hero" style="background-image:url('assets/categories/compounds/hero.jpg');background-size:cover;background-position:center 35%;">
-    <div class="c-hero__content">
-      <p class="c-hero__eyebrow">Compounds</p>
-      <h1 class="c-hero__h1">Precision compounds.<br>Purpose defined.</h1>
-      <p class="c-hero__sub">Advanced research compounds for human potential.<br>Backed by science. Guided by integrity.</p>
-      <a href="#categories" class="c-hero__btn">Explore Compounds</a>
+  <section class="aura-hero" style="background-image:url('assets/categories/compounds/hero.jpg');background-size:cover;background-position:center 35%;">
+    <div class="aura-hero-content">
+      <p class="aura-hero-eyebrow">Compounds</p>
+      <h1 class="aura-hero-title">Precision compounds.<br>Purpose defined.</h1>
+      <p class="aura-hero-sub">Advanced research compounds for human potential.<br>Backed by science. Guided by integrity.</p>
+      <a href="#categories" class="aura-hero-btn">Explore Compounds</a>
     </div>
   </section>
 
@@ -1003,7 +1003,7 @@ if (mobileBtn && mobileNav) {
     }
   });
 }
-document.querySelector('.c-hero__btn')?.addEventListener('click', (e) => {
+document.querySelector('.aura-hero-btn')?.addEventListener('click', (e) => {
   e.preventDefault();
   document.getElementById('categories')?.scrollIntoView({ behavior: 'smooth' });
 });
