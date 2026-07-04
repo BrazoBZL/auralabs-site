@@ -241,11 +241,13 @@ body { background: var(--ls); margin: 0; }
 
 .c-tile {
   position: relative;
-  aspect-ratio: 3/4;
+  height: 52vw;
+  max-height: 600px;
+  min-height: 340px;
   overflow: hidden;
   display: block;
   text-decoration: none;
-  border: 0.5px solid rgba(244,239,231,0.3);
+  border: 0.5px solid rgba(10,10,10,0.15);
 }
 
 .c-tile__img {
@@ -871,13 +873,13 @@ body { background: var(--ls); margin: 0; }
   <!-- Philosophy -->
   <section class="c-philosophy">
     <div class="c-philosophy__text">
-      <p class="c-philosophy__label">Our Philosophy</p>
+      <p class="c-philosophy__label">Research Philosophy</p>
       <h2 class="c-philosophy__h2">Evidence first.<br>Always.</h2>
-      <p class="c-philosophy__body">We develop every compound through rigorous science and third-party validation so you can make informed decisions about your health.</p>
+      <p class="c-philosophy__body">Every Aura Labs category is organized around a clear research intent: purity, traceability, and disciplined compound selection. The catalog is designed to guide researchers by biological pathway instead of overwhelming them with a generic product grid.</p>
       <a href="#" class="c-philosophy__link">Learn More About Our Philosophy</a>
     </div>
-    <div class="c-philosophy__img">
-      <img src="assets/aura-standard-full.jpg" alt="Aura Labs research laboratory — precision instruments and clean workspace" loading="lazy" />
+    <div class="c-philosophy__img" style="min-height:440px;">
+      <img src="assets/categories/compounds/advanced-research.jpg" alt="Aura Labs precision research environment" loading="lazy" />
     </div>
   </section>
 
@@ -895,11 +897,7 @@ body { background: var(--ls); margin: 0; }
     <div class="c-trust__item">
       <svg class="c-trust__icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
         <rect x="4" y="8" width="28" height="20" rx="2" />
-        <path d="M4 14 h28" />
-        <path d="M12 8 v6 M24 8 v6" />
-        <circle cx="12" cy="21" r="1.5" fill="currentColor" />
-        <circle cx="18" cy="21" r="1.5" fill="currentColor" />
-        <circle cx="24" cy="21" r="1.5" fill="currentColor" />
+        <path d="M4 14 h28" /><path d="M12 8 v6 M24 8 v6" />
       </svg>
       <div class="c-trust__content">
         <p class="c-trust__title">USA Synthesis</p>
@@ -928,6 +926,8 @@ body { background: var(--ls); margin: 0; }
       </div>
     </div>
   </section>
+
+
 
   <!-- Newsletter -->
   <section class="c-newsletter" id="contact">
