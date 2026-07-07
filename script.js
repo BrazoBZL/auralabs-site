@@ -4,13 +4,34 @@ async function loadCatalog(){
     const data = await res.json();
 
     const categoryGrid = document.getElementById('categoryGrid');
+    // Map category slugs to compounds page image paths and catalog.html query slugs
+    const categoryImageMap = {
+      'weight-management-metabolic-research':    { img: 'assets/categories/compounds/metabolic.jpg',        slug: 'metabolic' },
+      'recovery-regenerative-research':          { img: 'assets/categories/compounds/recovery.jpg',         slug: 'recovery' },
+      'growth-hormone-secretagogues':            { img: 'assets/categories/compounds/growth-hormone.jpg',   slug: 'growth-hormone' },
+      'cognitive-neuro-research':               { img: 'assets/categories/compounds/cognitive.jpg',         slug: 'cognitive' },
+      'copper-peptides-aesthetic-research':      { img: 'assets/categories/compounds/copper-peptides.jpg',  slug: 'copper-peptides' },
+      'longevity-bioregulators':                { img: 'assets/categories/compounds/longevity.jpg',         slug: 'longevity' },
+      'advanced-research-compounds':            { img: 'assets/categories/compounds/advanced-research.jpg', slug: 'advanced-research' },
+      'hormone-support':                        { img: 'assets/categories/compounds/hormone-support.jpg',   slug: 'hormone-support' },
+    };
+
     if(categoryGrid){
-      categoryGrid.innerHTML = data.categories.map(cat => `
-        <div class="category-card">
-          <h3>${cat.name.replace(' & ', '<br>& ')}</h3>
-          <p>${cat.count} research listings available.</p>
-        </div>
-      `).join('');
+      categoryGrid.innerHTML = data.categories.map(cat => {
+        const map = categoryImageMap[cat.slug] || {};
+        const img = map.img ? `<div class="category-image"><img src="${map.img}" alt="${cat.name}" loading="lazy"></div>` : '';
+        const href = map.slug ? `catalog.html?category=${map.slug}` : 'catalog.html';
+        return `
+          <a class="category-card" href="${href}">
+            ${img}
+            <div class="category-content">
+              <h2>${cat.name}</h2>
+              <p>${cat.count} research listings available.</p>
+              <span>Explore →</span>
+            </div>
+          </a>
+        `;
+      }).join('');
     }
 
     const filterBar = document.getElementById('filterBar');
