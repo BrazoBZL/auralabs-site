@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- ═══ TEMPLATE VARIABLE: Replace all {{...}} tokens per compound ═══ -->
+<title>{{COMPOUND_NAME}} — Research Compound | Aura Labs</title>
+<meta name="description" content="{{META_DESCRIPTION}}" />
+<meta name="keywords" content="{{META_KEYWORDS}}" />
+<meta name="robots" content="index, follow" />
+<meta property="og:title" content="{{COMPOUND_NAME}} | Aura Labs Research" />
+<meta property="og:description" content="{{META_DESCRIPTION}}" />
+<meta property="og:type" content="product" />
+<meta property="og:url" content="https://auralabsbio.co/compounds/{{COMPOUND_SLUG}}.html" />
+<meta property="og:image" content="https://auralabsbio.co/assets/compounds/{{COMPOUND_IMAGE}}" />
+<link rel="canonical" href="https://auralabsbio.co/compounds/{{COMPOUND_SLUG}}.html" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css" />
+<link rel="stylesheet" href="../compound-page.css" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{COMPOUND_NAME}}",
+  "description": "{{META_DESCRIPTION}}",
+  "brand": { "@type": "Brand", "name": "Aura Labs" },
+  "url": "https://auralabsbio.co/compounds/{{COMPOUND_SLUG}}.html",
+  "category": "{{CATEGORY}}",
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "USD",
+    "lowPrice": "{{PRICE_LOW}}",
+    "highPrice": "{{PRICE_HIGH}}",
+    "offerCount": "{{SKU_COUNT}}",
+    "availability": "https://schema.org/InStock",
+    "seller": { "@type": "Organization", "name": "Aura Labs" }
+  }
+}
+</script>
+</head>
+
+<body class="compound-page">
+
+<!-- ══════════════════════════════════════════════════
+     NAVIGATION — inherits from homepage exactly
+══════════════════════════════════════════════════ -->
+<header class="site-header site-header--light" id="site-header">
+  <a href="../index.html" class="brand-logo">
+    <svg class="logo" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M10 22L16 10L22 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M12 18H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <span class="brand-text">AURA LABS</span>
+  </a>
+  <nav class="main-nav">
+    <a href="../index.html">Home</a>
+    <a href="../catalog.html">Catalog</a>
+    <a href="../blog.html">Research</a>
+    <a href="../index.html#about">About</a>
+  </nav>
+  <button class="mobile-menu-btn" id="menuBtn" aria-label="Toggle menu">
+    <span class="hamburger"></span>
+  </button>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="../index.html">Home</a>
+  <a href="../catalog.html">Catalog</a>
+  <a href="../blog.html">Research</a>
+  <a href="../index.html#about">About</a>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 1 — EDITORIAL HERO
+══════════════════════════════════════════════════ -->
+<section class="cp-hero">
+  <div class="cp-hero__image">
+    <img
+      src="../assets/compounds/{{COMPOUND_IMAGE}}"
+      alt="{{COMPOUND_NAME}} research compound"
+      loading="eager"
+    />
+    <div class="cp-hero__image-overlay"></div>
+  </div>
+
+  <div class="cp-hero__content">
+    <div class="cp-hero__meta">
+      <span class="cp-eyebrow">{{CATEGORY}}</span>
+      <span class="cp-eyebrow-sep">·</span>
+      <span class="cp-eyebrow">{{COMPOUND_TYPE}}</span>
+    </div>
+
+    <h1 class="cp-hero__name">{{COMPOUND_NAME}}</h1>
+    <p class="cp-hero__classification">{{SCIENTIFIC_NAME}}</p>
+    <p class="cp-hero__description">{{SHORT_DESCRIPTION}}</p>
+
+    <div class="cp-purchase">
+      <!-- Strength Selector -->
+      <div class="cp-strength-selector">
+        <label class="cp-field-label">Strength</label>
+        <div class="cp-strength-options" id="strengthOptions">
+          <!-- JS renders from compound data -->
+        </div>
+      </div>
+
+      <!-- Price Display -->
+      <div class="cp-price-block">
+        <span class="cp-price" id="compoundPrice">$—</span>
+        <span class="cp-price-unit">per vial</span>
+      </div>
+
+      <!-- CTA -->
+      <div class="cp-cta-row">
+        <a href="mailto:orders@auralabsbio.co?subject=Order Inquiry — {{COMPOUND_NAME}}" class="btn btn-primary cp-btn-order">
+          Request Quote
+        </a>
+        <a href="../catalog.html" class="text-link cp-btn-back">
+          Back to Catalog <span>→</span>
+        </a>
+      </div>
+
+      <p class="cp-disclaimer">For research and laboratory use only. Not for human consumption.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 2 — QUICK RESEARCH FACTS
+══════════════════════════════════════════════════ -->
+<section class="cp-section cp-facts">
+  <div class="cp-section__inner">
+    <h2 class="cp-section-label">Research Specifications</h2>
+    <div class="cp-facts__grid" id="factsGrid">
+      <!-- Populated by JS from compound data -->
+      <!-- Static fallback: -->
+      <div class="cp-fact-card">
+        <span class="cp-fact-card__key">Category</span>
+        <span class="cp-fact-card__val" data-fact="category">{{CATEGORY}}</span>
+      </div>
+      <div class="cp-fact-card">
+        <span class="cp-fact-card__key">Compound Type</span>
+        <span class="cp-fact-card__val" data-fact="compoundType">{{COMPOUND_TYPE}}</span>
+      </div>
+      <div class="cp-fact-card">
+        <span class="cp-fact-card__key">CAS Number</span>
+        <span class="cp-fact-card__val" data-fact="casNumber">{{CAS_NUMBER}}</span>
+      </div>
+      <div class="cp-fact-card">
+        <span class="cp-fact-card__key">Molecular Formula</span>
+        <span class="cp-fact-card__val" data-fact="molecularFormula">{{MOLECULAR_FORMULA}}</span>
+      </div>
+      <div class="cp-fact-card">
+        <span class="cp-fact-card__key">Molecular Weight</span>
+        <span class="cp-fact-card__val" data-fact="molecularWeight">{{MOLECULAR_WEIGHT}}</span>
+      </div>
+      <div class="cp-fact-card">
+        <span class="cp-fact-card__key">Sequence Length</span>
+        <span class="cp-fact-card__val" data-fact="sequenceLength">{{SEQUENCE_LENGTH}}</span>
+      </div>
+      <div class="cp-fact-card">
+        <span class="cp-fact-card__key">Purity</span>
+        <span class="cp-fact-card__val" data-fact="purity">≥99% by HPLC</span>
+      </div>
+      <div class="cp-fact-card">
+        <span class="cp-fact-card__key">Appearance</span>
+        <span class="cp-fact-card__val" data-fact="appearance">White lyophilized powder</span>
+      </div>
+      <div class="cp-fact-card">
+        <span class="cp-fact-card__key">Storage</span>
+        <span class="cp-fact-card__val" data-fact="storage">−20°C, away from light</span>
+      </div>
+      <div class="cp-fact-card">
+        <span class="cp-fact-card__key">Reconstitution</span>
+        <span class="cp-fact-card__val" data-fact="reconstitution">{{RECONSTITUTION}}</span>
+      </div>
+      <div class="cp-fact-card">
+        <span class="cp-fact-card__key">Stability</span>
+        <span class="cp-fact-card__val" data-fact="stability">{{STABILITY}}</span>
+      </div>
+      <div class="cp-fact-card">
+        <span class="cp-fact-card__key">COA</span>
+        <span class="cp-fact-card__val cp-fact-card__val--highlight">Available upon request</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 3 — OVERVIEW
+══════════════════════════════════════════════════ -->
+<section class="cp-section cp-overview">
+  <div class="cp-section__inner cp-section__inner--narrow">
+    <h2 class="cp-section-label">Overview</h2>
+    <div class="cp-editorial-text">
+      {{OVERVIEW_HTML}}
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 4 — MECHANISM OF ACTION
+══════════════════════════════════════════════════ -->
+<section class="cp-section cp-mechanism cp-section--alt">
+  <div class="cp-section__inner">
+    <h2 class="cp-section-label">Mechanism of Action</h2>
+    <div class="cp-mechanism__layout">
+      <div class="cp-mechanism__text cp-editorial-text">
+        {{MECHANISM_HTML}}
+      </div>
+      <div class="cp-mechanism__pathway">
+        <div class="cp-pathway-card">
+          <div class="cp-pathway-card__header">Primary Pathways</div>
+          <ul class="cp-pathway-list" id="pathwayList">
+            <!-- Populated per compound -->
+            {{PATHWAY_ITEMS_HTML}}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 5 — AREAS OF RESEARCH
+══════════════════════════════════════════════════ -->
+<section class="cp-section cp-research-areas">
+  <div class="cp-section__inner">
+    <h2 class="cp-section-label">Areas of Research</h2>
+    <p class="cp-section-sub">Published literature has investigated this compound in the following contexts.</p>
+    <div class="cp-research-grid" id="researchAreasGrid">
+      <!-- Template card — repeated per area -->
+      {{RESEARCH_AREAS_HTML}}
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 6 — COMMON RESEARCH STACKS
+══════════════════════════════════════════════════ -->
+<section class="cp-section cp-stacks cp-section--alt">
+  <div class="cp-section__inner">
+    <h2 class="cp-section-label">Common Research Stacks</h2>
+    <p class="cp-section-sub">Compounds researchers frequently evaluate in parallel with {{COMPOUND_NAME}}.</p>
+    <div class="cp-stacks-grid" id="stacksGrid">
+      {{STACKS_HTML}}
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 7 — RESEARCH CONSIDERATIONS
+══════════════════════════════════════════════════ -->
+<section class="cp-section cp-considerations">
+  <div class="cp-section__inner cp-section__inner--narrow">
+    <h2 class="cp-section-label">Research Considerations</h2>
+    <p class="cp-section-sub">Compounds with overlapping mechanisms or research objectives.</p>
+    <div class="cp-considerations-grid" id="considerationsGrid">
+      {{CONSIDERATIONS_HTML}}
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 8 — EVIDENCE AT A GLANCE
+══════════════════════════════════════════════════ -->
+<section class="cp-section cp-evidence cp-section--alt">
+  <div class="cp-section__inner">
+    <h2 class="cp-section-label">Evidence at a Glance</h2>
+    <p class="cp-section-sub">A summary of the types of research that have investigated {{COMPOUND_NAME}}. This does not constitute a claim of efficacy or safety.</p>
+    <div class="cp-evidence-grid" id="evidenceGrid">
+      {{EVIDENCE_HTML}}
+    </div>
+    <p class="cp-evidence-note">All research summaries reference published peer-reviewed literature. Aura Labs makes no efficacy claims. All compounds are sold for laboratory research purposes only.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 9 — RELATED COMPOUNDS
+══════════════════════════════════════════════════ -->
+<section class="cp-section cp-related">
+  <div class="cp-section__inner">
+    <h2 class="cp-section-label">Related Compounds</h2>
+    <div class="cp-related-grid" id="relatedGrid">
+      {{RELATED_HTML}}
+    </div>
+    <div class="cp-related-cta">
+      <a href="../catalog.html" class="btn btn-primary">View Full Catalog</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 10 — DOCUMENTATION
+══════════════════════════════════════════════════ -->
+<section class="cp-section cp-docs">
+  <div class="cp-section__inner">
+    <h2 class="cp-section-label">Documentation</h2>
+    <div class="cp-docs-grid">
+      {{DOCS_HTML}}
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 11 — STORAGE & RECONSTITUTION
+══════════════════════════════════════════════════ -->
+<section class="cp-section cp-storage cp-section--alt">
+  <div class="cp-section__inner">
+    <h2 class="cp-section-label">Storage &amp; Reconstitution</h2>
+    <div class="cp-storage-layout">
+      <div class="cp-storage-block">
+        <div class="cp-storage-block__label">Storage Conditions</div>
+        <div class="cp-storage-block__content">
+          {{STORAGE_CONDITIONS_HTML}}
+        </div>
+      </div>
+      <div class="cp-storage-block">
+        <div class="cp-storage-block__label">Reconstitution Overview</div>
+        <ol class="cp-storage-steps">
+          {{RECONSTITUTION_STEPS_HTML}}
+        </ol>
+        <div class="cp-storage-disclaimer">
+          The reconstitution guidance above is provided for informational purposes related to laboratory handling. It does not constitute a protocol recommendation.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 12 — FAQ
+══════════════════════════════════════════════════ -->
+<section class="cp-section cp-faq">
+  <div class="cp-section__inner cp-section__inner--narrow">
+    <h2 class="cp-section-label">Frequently Asked Questions</h2>
+    <ul class="cp-faq-list" id="faqList">
+      {{FAQ_HTML}}
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 13 — SCIENTIFIC REFERENCES
+══════════════════════════════════════════════════ -->
+<section class="cp-section cp-references cp-section--alt">
+  <div class="cp-section__inner cp-section__inner--narrow">
+    <h2 class="cp-section-label">Scientific References</h2>
+    <p class="cp-section-sub">Selected peer-reviewed publications from the published literature on {{COMPOUND_NAME}}.</p>
+    <ol class="cp-refs-list">
+      {{REFERENCES_HTML}}
+    </ol>
+    <p class="cp-refs-note">References are provided for informational purposes only and represent a selection of published literature. This is not a comprehensive literature review. Aura Labs does not endorse or represent the conclusions of any cited study. All compounds are sold for research and laboratory use only.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     FOOTER — inherits from homepage exactly
+══════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="../index.html" class="brand-logo footer-brand-logo">
+        <svg class="logo" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M10 22L16 10L22 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 18H20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-text">AURA LABS</span>
+      </a>
+      <p class="footer-mission">Research-grade compounds synthesized with institutional standards. Transparent documentation. Verified purity.</p>
+    </div>
+    <div>
+      <h3>Research</h3>
+      <ul>
+        <li><a href="../catalog.html">Catalog</a></li>
+        <li><a href="../blog.html">Research Library</a></li>
+        <li><a href="../tools/half-life-calculator.html">Half-Life Calculator</a></li>
+        <li><a href="../tools/dosage-calculator.html">Dosage Calculator</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Company</h3>
+      <ul>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#quality">Quality Standards</a></li>
+        <li><a href="mailto:hello@auralabsbio.co">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Legal</h3>
+      <p class="footer-legal">All compounds are sold strictly for research and laboratory use only. Not for human consumption. Not for diagnostic or therapeutic purposes. For use by qualified researchers only.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Aura Labs. All rights reserved.</p>
+    <p>auralabsbio.co</p>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════════ -->
+<script>
+// ── Mobile nav (same as homepage) ─────────────────
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+if (menuBtn) {
+  menuBtn.addEventListener('click', () => {
+    menuBtn.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+  });
+}
+
+// ── Sticky header ─────────────────────────────────
+const header = document.getElementById('site-header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('site-header--scrolled', window.scrollY > 40);
+}, { passive: true });
+
+// ── Compound data ─────────────────────────────────
+// Each compound page defines window.COMPOUND_DATA before this script
+// or passes it via a separate data file.
+const data = window.COMPOUND_DATA || {};
+
+// ── Strength selector ─────────────────────────────
+if (data.skus && data.skus.length) {
+  const container = document.getElementById('strengthOptions');
+  const priceEl   = document.getElementById('compoundPrice');
+
+  data.skus.forEach((sku, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'cp-strength-btn' + (i === 0 ? ' cp-strength-btn--active' : '');
+    btn.textContent = sku.strength;
+    btn.dataset.price = sku.price;
+    btn.addEventListener('click', () => {
+      container.querySelectorAll('.cp-strength-btn').forEach(b => b.classList.remove('cp-strength-btn--active'));
+      btn.classList.add('cp-strength-btn--active');
+      priceEl.textContent = sku.price ? '$' + sku.price : 'Coming Soon';
+    });
+    container.appendChild(btn);
+  });
+
+  // Set initial price
+  priceEl.textContent = data.skus[0].price ? '$' + data.skus[0].price : 'Coming Soon';
+}
+
+// ── Scroll reveal ─────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('cp-revealed');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll(
+  '.cp-fact-card, .cp-research-card, .cp-stack-card, .cp-consideration-item, .cp-evidence-card, .cp-related-card, .cp-doc-card, .cp-faq-item, .cp-ref-item'
+).forEach(el => observer.observe(el));
+
+// ── FAQ accordion ──────────────────────────────────
+document.querySelectorAll('.cp-faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.cp-faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.cp-faq-item.open').forEach(openItem => {
+      openItem.classList.remove('open');
+      openItem.querySelector('.cp-faq-question').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+</script>
+
+</body>
+</html>

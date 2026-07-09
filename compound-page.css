@@ -1,0 +1,1062 @@
+/* ═══════════════════════════════════════════════════════════
+   AURA LABS — COMPOUND PAGE STYLESHEET
+   Inherits from styles.css. Do not duplicate base variables.
+   All compound pages import this file after styles.css.
+═══════════════════════════════════════════════════════════ */
+
+/* ── Compound page body reset ──────────────────────── */
+.compound-page {
+  background: var(--bg);
+}
+
+/* ── Header: transparent over hero, then light ─────── */
+.site-header--light {
+  background: transparent;
+}
+.site-header--light .brand-logo,
+.site-header--light .main-nav a,
+.site-header--light .hamburger,
+.site-header--light .hamburger::before,
+.site-header--light .hamburger::after {
+  color: #fff;
+}
+.site-header--scrolled {
+  position: fixed;
+  background: var(--bg) !important;
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 1px 12px rgba(0,0,0,.06);
+}
+.site-header--scrolled .brand-logo,
+.site-header--scrolled .main-nav a,
+.site-header--scrolled .hamburger,
+.site-header--scrolled .hamburger::before,
+.site-header--scrolled .hamburger::after {
+  color: var(--ink) !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 1 — EDITORIAL HERO
+═══════════════════════════════════════════════════ */
+.cp-hero {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #0f0f0f;
+  overflow: hidden;
+}
+
+.cp-hero__image {
+  position: relative;
+  grid-column: 1 / 3;
+  grid-row: 1;
+  min-height: 100vh;
+}
+.cp-hero__image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.55;
+}
+.cp-hero__image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    rgba(15,15,15,.88) 0%,
+    rgba(15,15,15,.62) 50%,
+    rgba(15,15,15,.22) 100%
+  );
+}
+
+.cp-hero__content {
+  position: relative;
+  z-index: 2;
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 120px 72px 80px;
+  max-width: 680px;
+}
+
+.cp-hero__meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.cp-eyebrow {
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba(255,255,255,.55);
+}
+.cp-eyebrow-sep {
+  color: rgba(255,255,255,.25);
+  font-size: 10px;
+}
+
+.cp-hero__name {
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: clamp(52px, 7vw, 96px);
+  font-weight: 500;
+  letter-spacing: -.04em;
+  line-height: .94;
+  color: #fff;
+  margin: 0 0 14px;
+}
+
+.cp-hero__classification {
+  font-family: "EB Garamond", serif;
+  font-size: 18px;
+  font-style: italic;
+  color: rgba(255,255,255,.48);
+  margin: 0 0 24px;
+  letter-spacing: .01em;
+}
+
+.cp-hero__description {
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(255,255,255,.75);
+  max-width: 480px;
+  margin: 0 0 48px;
+  font-weight: 400;
+}
+
+/* Purchase block */
+.cp-purchase {
+  border-top: 1px solid rgba(255,255,255,.15);
+  padding-top: 36px;
+}
+
+.cp-field-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba(255,255,255,.4);
+  margin-bottom: 12px;
+}
+
+.cp-strength-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.cp-strength-btn {
+  padding: 8px 18px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: transparent;
+  color: rgba(255,255,255,.7);
+  font-size: 12px;
+  letter-spacing: .1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s;
+  font-family: Inter, sans-serif;
+}
+.cp-strength-btn:hover {
+  border-color: rgba(255,255,255,.6);
+  color: #fff;
+}
+.cp-strength-btn--active {
+  background: #fff;
+  border-color: #fff;
+  color: #0f0f0f !important;
+}
+
+.cp-price-block {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.cp-price {
+  font-family: "EB Garamond", serif;
+  font-size: 42px;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: -.02em;
+}
+.cp-price-unit {
+  font-size: 12px;
+  color: rgba(255,255,255,.4);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.cp-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-bottom: 20px;
+}
+.cp-btn-order {
+  background: #fff;
+  color: #0f0f0f;
+  letter-spacing: .14em;
+  font-size: 11px;
+}
+.cp-btn-order:hover {
+  background: rgba(255,255,255,.88);
+}
+.cp-btn-back {
+  color: rgba(255,255,255,.55);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-decoration: none;
+  transition: color .2s;
+}
+.cp-btn-back:hover {
+  color: rgba(255,255,255,.9);
+}
+
+.cp-disclaimer {
+  font-size: 10px;
+  color: rgba(255,255,255,.28);
+  letter-spacing: .06em;
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════════════
+   SHARED SECTION STRUCTURE
+═══════════════════════════════════════════════════ */
+.cp-section {
+  padding: 96px 0;
+  border-bottom: 1px solid var(--line);
+}
+.cp-section--alt {
+  background: var(--bg2);
+}
+.cp-section__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 72px;
+}
+.cp-section__inner--narrow {
+  max-width: 820px;
+}
+
+.cp-section-label {
+  font-family: Inter, sans-serif;
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--muted);
+  margin: 0 0 48px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.cp-section-sub {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 640px;
+  margin: -32px 0 48px;
+  letter-spacing: .01em;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 2 — QUICK RESEARCH FACTS
+═══════════════════════════════════════════════════ */
+.cp-facts__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.cp-fact-card {
+  background: var(--bg);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.cp-fact-card.cp-revealed {
+  opacity: 1;
+  transform: none;
+}
+.cp-fact-card__key {
+  font-size: 9px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+}
+.cp-fact-card__val {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.cp-fact-card__val--highlight {
+  color: #1a6b2a;
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTIONS 3 & 4 — EDITORIAL TEXT
+═══════════════════════════════════════════════════ */
+.cp-editorial-text {
+  font-size: 17px;
+  line-height: 1.78;
+  color: var(--ink);
+  font-weight: 400;
+}
+.cp-editorial-text p {
+  margin-bottom: 1.4em;
+}
+.cp-editorial-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Mechanism layout */
+.cp-mechanism__layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 72px;
+  align-items: start;
+}
+
+.cp-pathway-card {
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+.cp-pathway-card__header {
+  padding: 18px 24px;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+}
+.cp-pathway-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.cp-pathway-list li {
+  padding: 14px 24px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  padding-left: 40px;
+}
+.cp-pathway-list li::before {
+  content: '';
+  position: absolute;
+  left: 22px;
+  top: 21px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+.cp-pathway-list li:last-child {
+  border-bottom: none;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 5 — AREAS OF RESEARCH
+═══════════════════════════════════════════════════ */
+.cp-research-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.cp-research-card {
+  border: 1px solid var(--line);
+  padding: 32px 28px;
+  background: var(--bg);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.cp-research-card.cp-revealed {
+  opacity: 1;
+  transform: none;
+}
+.cp-research-card__icon {
+  font-size: 22px;
+  margin-bottom: 18px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  color: var(--muted);
+}
+.cp-research-card__title {
+  font-size: 13px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.cp-research-card__body {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 6 — COMMON RESEARCH STACKS
+═══════════════════════════════════════════════════ */
+.cp-stacks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.cp-stack-card {
+  border: 1px solid var(--line);
+  background: var(--bg);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .5s ease, transform .5s ease;
+  overflow: hidden;
+}
+.cp-stack-card.cp-revealed {
+  opacity: 1;
+  transform: none;
+}
+.cp-stack-card__header {
+  padding: 22px 28px 18px;
+  border-bottom: 1px solid var(--line);
+}
+.cp-stack-card__compound {
+  font-family: "EB Garamond", serif;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.cp-stack-card__type {
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+}
+.cp-stack-card__body {
+  padding: 22px 28px;
+}
+.cp-stack-card__rationale {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+.cp-stack-card__link {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-weight: 800;
+  text-decoration: none;
+  color: var(--ink);
+  transition: opacity .2s;
+}
+.cp-stack-card__link:hover {
+  opacity: .5;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 7 — RESEARCH CONSIDERATIONS
+═══════════════════════════════════════════════════ */
+.cp-considerations-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--line);
+}
+
+.cp-consideration-item {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  border-bottom: 1px solid var(--line);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .4s ease, transform .4s ease;
+}
+.cp-consideration-item:last-child {
+  border-bottom: none;
+}
+.cp-consideration-item.cp-revealed {
+  opacity: 1;
+  transform: none;
+}
+.cp-consideration-item__compound {
+  padding: 28px 32px;
+  border-right: 1px solid var(--line);
+  background: var(--bg2);
+}
+.cp-consideration-item__name {
+  font-family: "EB Garamond", serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.cp-consideration-item__tag {
+  font-size: 9px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+}
+.cp-consideration-item__explanation {
+  padding: 28px 36px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 8 — EVIDENCE AT A GLANCE
+═══════════════════════════════════════════════════ */
+.cp-evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.cp-evidence-card {
+  border: 1px solid var(--line);
+  background: var(--bg);
+  padding: 32px 28px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.cp-evidence-card.cp-revealed {
+  opacity: 1;
+  transform: none;
+}
+.cp-evidence-card__type {
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cp-evidence-card__type::before {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+  flex-shrink: 0;
+}
+.cp-evidence-card--active .cp-evidence-card__type::before {
+  background: #1a6b2a;
+}
+.cp-evidence-card--active .cp-evidence-card__type {
+  color: #1a6b2a;
+}
+.cp-evidence-card--moderate .cp-evidence-card__type::before {
+  background: #8b6914;
+}
+.cp-evidence-card--moderate .cp-evidence-card__type {
+  color: #8b6914;
+}
+.cp-evidence-card__headline {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.cp-evidence-card__summary {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.cp-evidence-note {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.65;
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+  max-width: 680px;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 9 — RELATED COMPOUNDS
+═══════════════════════════════════════════════════ */
+.cp-related-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 56px;
+}
+
+.cp-related-card {
+  border: 1px solid var(--line);
+  background: var(--bg);
+  text-decoration: none;
+  color: inherit;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .5s ease, transform .5s ease, border-color .2s;
+}
+.cp-related-card.cp-revealed {
+  opacity: 1;
+  transform: none;
+}
+.cp-related-card:hover {
+  border-color: var(--ink);
+}
+.cp-related-card__image {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+.cp-related-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+.cp-related-card:hover .cp-related-card__image img {
+  transform: scale(1.04);
+}
+.cp-related-card__body {
+  padding: 20px 22px 22px;
+}
+.cp-related-card__category {
+  font-size: 9px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.cp-related-card__name {
+  font-family: "EB Garamond", serif;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.cp-related-card__price {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.cp-related-cta {
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .cp-facts__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .cp-research-grid,
+  .cp-stacks-grid,
+  .cp-evidence-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cp-related-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .cp-mechanism__layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .cp-docs-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .cp-docs-grid .cp-doc-card:nth-child(3) { border-right: none; }
+  .cp-docs-grid .cp-doc-card:nth-child(4) { border-top: 1px solid var(--line); }
+  .cp-docs-grid .cp-doc-card:nth-child(5) { border-top: 1px solid var(--line); }
+}
+
+@media (max-width: 768px) {
+  .cp-hero {
+    min-height: 100svh;
+  }
+  .cp-hero__content {
+    padding: 100px 24px 64px;
+    max-width: 100%;
+  }
+  .cp-hero__name {
+    font-size: clamp(40px, 11vw, 64px);
+  }
+  .cp-section {
+    padding: 64px 0;
+  }
+  .cp-section__inner {
+    padding: 0 24px;
+  }
+  .cp-facts__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cp-research-grid,
+  .cp-stacks-grid,
+  .cp-evidence-grid {
+    grid-template-columns: 1fr;
+  }
+  .cp-related-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cp-consideration-item {
+    grid-template-columns: 1fr;
+  }
+  .cp-consideration-item__compound {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .cp-strength-options {
+    flex-wrap: wrap;
+  }
+  .cp-docs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cp-docs-grid .cp-doc-card {
+    border-right: 1px solid var(--line);
+    border-top: 1px solid var(--line);
+  }
+  .cp-docs-grid .cp-doc-card:nth-child(1),
+  .cp-docs-grid .cp-doc-card:nth-child(2) { border-top: none; }
+  .cp-docs-grid .cp-doc-card:nth-child(2n) { border-right: none; }
+  .cp-storage-layout {
+    grid-template-columns: 1fr;
+  }
+  .cp-storage-block {
+    padding: 32px 24px;
+  }
+  .cp-faq-question { padding: 20px 24px; }
+  .cp-faq-answer { padding: 0 24px 20px; }
+  .cp-ref-item { grid-template-columns: 24px 1fr; }
+}
+
+@media (max-width: 480px) {
+  .cp-facts__grid {
+    grid-template-columns: 1fr;
+  }
+  .cp-related-grid {
+    grid-template-columns: 1fr;
+  }
+  .cp-cta-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 10 — DOCUMENTATION
+═══════════════════════════════════════════════════ */
+.cp-docs-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  border: 1px solid var(--line);
+}
+
+.cp-doc-card {
+  padding: 32px 24px;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .4s ease, transform .4s ease;
+}
+.cp-doc-card:last-child { border-right: none; }
+.cp-doc-card.cp-revealed { opacity: 1; transform: none; }
+
+.cp-doc-card__icon {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  flex-shrink: 0;
+}
+.cp-doc-card__title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.cp-doc-card__desc {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted);
+  flex: 1;
+}
+.cp-doc-card__action {
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--ink);
+  text-decoration: none;
+  transition: opacity .2s;
+  display: inline-block;
+  margin-top: 4px;
+}
+.cp-doc-card__action:hover { opacity: .5; }
+.cp-doc-card--available .cp-doc-card__title {
+  color: #1a6b2a;
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 11 — STORAGE & RECONSTITUTION
+═══════════════════════════════════════════════════ */
+.cp-storage-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.cp-storage-block {
+  background: var(--bg);
+  padding: 40px 44px;
+}
+.cp-storage-block__label {
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+.cp-storage-block__content {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.cp-storage-block__content strong {
+  display: block;
+  font-family: "EB Garamond", serif;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  margin-bottom: 8px;
+}
+.cp-storage-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: storage-step;
+}
+.cp-storage-steps li {
+  counter-increment: storage-step;
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.cp-storage-steps li:last-child { border-bottom: none; }
+.cp-storage-steps li::before {
+  content: counter(storage-step);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: .08em;
+  padding-top: 3px;
+}
+.cp-storage-disclaimer {
+  margin-top: 32px;
+  padding: 20px 24px;
+  border: 1px solid var(--line);
+  background: var(--bg2);
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION 12 — FAQ
+═══════════════════════════════════════════════════ */
+.cp-faq-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+}
+.cp-faq-item {
+  border-bottom: 1px solid var(--line);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .4s ease, transform .4s ease;
+}
+.cp-faq-item:last-child { border-bottom: none; }
+.cp-faq-item.cp-revealed { opacity: 1; transform: none; }
+
+.cp-faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 24px 32px;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  font-family: Inter, sans-serif;
+  line-height: 1.4;
+  transition: background .2s;
+}
+.cp-faq-question:hover { background: var(--bg2); }
+.cp-faq-toggle {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--muted);
+  transition: transform .25s;
+}
+.cp-faq-item.open .cp-faq-toggle { transform: rotate(45deg); }
+.cp-faq-answer {
+  display: none;
+  padding: 0 32px 24px;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 720px;
+}
+.cp-faq-item.open .cp-faq-answer { display: block; }
+
+/* ═══════════════════════════════════════════════════
+   SECTION 13 — SCIENTIFIC REFERENCES
+═══════════════════════════════════════════════════ */
+.cp-refs-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.cp-ref-item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .4s ease, transform .4s ease;
+}
+.cp-ref-item.cp-revealed { opacity: 1; transform: none; }
+.cp-ref-num {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: .1em;
+  padding-top: 4px;
+}
+.cp-ref-body {}
+.cp-ref-citation {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.cp-ref-citation em {
+  font-style: italic;
+  color: var(--muted);
+}
+.cp-ref-link {
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .2s;
+}
+.cp-ref-link:hover { color: var(--ink); }
+.cp-refs-note {
+  margin-top: 32px;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.65;
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+}
+
+/* ─ Stagger reveal delays ─────────────────────────── */
+.cp-fact-card:nth-child(2) { transition-delay: .06s }
+.cp-fact-card:nth-child(3) { transition-delay: .12s }
+.cp-fact-card:nth-child(4) { transition-delay: .18s }
+.cp-fact-card:nth-child(5) { transition-delay: .24s }
+.cp-fact-card:nth-child(6) { transition-delay: .30s }
+.cp-fact-card:nth-child(7) { transition-delay: .36s }
+.cp-fact-card:nth-child(8) { transition-delay: .42s }
+
+.cp-research-card:nth-child(2) { transition-delay: .08s }
+.cp-research-card:nth-child(3) { transition-delay: .16s }
+.cp-research-card:nth-child(4) { transition-delay: .24s }
+.cp-research-card:nth-child(5) { transition-delay: .32s }
+.cp-research-card:nth-child(6) { transition-delay: .40s }
+
+.cp-stack-card:nth-child(2) { transition-delay: .08s }
+.cp-stack-card:nth-child(3) { transition-delay: .16s }
+
+.cp-evidence-card:nth-child(2) { transition-delay: .08s }
+.cp-evidence-card:nth-child(3) { transition-delay: .16s }
+.cp-evidence-card:nth-child(4) { transition-delay: .24s }
+.cp-evidence-card:nth-child(5) { transition-delay: .32s }
+.cp-evidence-card:nth-child(6) { transition-delay: .40s }
+
+.cp-related-card:nth-child(2) { transition-delay: .06s }
+.cp-related-card:nth-child(3) { transition-delay: .12s }
+.cp-related-card:nth-child(4) { transition-delay: .18s }
