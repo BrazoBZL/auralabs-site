@@ -14,3 +14,11 @@ test*.backup
 node_modules/
 .env
 *.log
+
+# Pricing Engine — protect internal data
+# Generated PDFs and HTML intermediates stay local
+pricing/output/
+pricing/templates/
+pricing/_*.html
+# MasterPricing.xlsx contains supplier costs and margins — DO NOT commit
+pricing/MasterPricing.xlsx
